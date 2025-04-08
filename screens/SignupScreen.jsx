@@ -3,10 +3,8 @@ import Colors from "../utils/Colors";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   Image,
 } from "react-native";
 
@@ -41,7 +39,7 @@ const SignupScreen = () => {
   
 
   const handleSignup = () => {
-    Alert.alert("Login", `Email or Phone: ${emailOrPhone}\nPassword: ${password}`);
+    navigation.navigate('VerifyOTP');
   };
 
   return (

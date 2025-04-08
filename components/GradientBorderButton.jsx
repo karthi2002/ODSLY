@@ -6,10 +6,10 @@ import { Ionicons } from '@expo/vector-icons';
 const GradientBorderButton = ({
   title,
   onPress,
-  gradientColors = ['#029EFE', '#6945E2', '#E9098E'], // Default gradient colors
-  backgroundColor = '#000A34', // Default background color
-  textColor = '#FFFFFF', // Default text color
-  iconName, // Optional icon (e.g., 'arrow-forward')
+  gradientColors = ['#029EFE', '#6945E2', '#E9098E'],
+  backgroundColor = '#000A34', 
+  textColor = '#FFFFFF', 
+  iconName, 
   disabled = false,
   style,
 }) => {

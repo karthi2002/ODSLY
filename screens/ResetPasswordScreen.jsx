@@ -1,26 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../utils/Colors";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
   View,
   Text,
+  TextInput,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
 
 import Logo from "../layouts/Logo";
-import TextInputField from "../components/TextInputField";
 import GradientButton from "../components/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
+import PasswordInputField from "../components/PasswordInputField";
 
 
-const ForgotScreen = () => {
-  const [emailOrPhone, setEmailOrPhone] = useState("");
-  const navigation = useNavigation();
+const ResetPasswordScreen = () => {
 
-  const handleForgot = () => {
-    navigation.navigate('ResetPassword')
+     const [password, setPassword] = useState("");
+      const [confirmPassword, setConfirmPassword] = useState("");
+      const [error, setError]= useState("")
+      const navigation = useNavigation();
+    
+      useEffect(() => {
+        if (confirmPassword.length > 0 && password !== confirmPassword) {
+          setError("Passwords do not match");
+        } else {
+          setError("");
+        }
+      }, [password, confirmPassword]);
+
+  const handleResetPassword = () => {
+    navigation.navigate('Login')
   };
 
   return (
@@ -28,19 +40,30 @@ const ForgotScreen = () => {
       
       <Logo />
 
-      <View style={styles.forgotBox}>
-        <Text style={styles.title}>Forgot password?</Text>
-        <Text style={styles.subTitle}>Please verify the OTP sent to your email / Phone Number</Text>
+      <View style={styles.resetPasswordBox}>
+        <Text style={styles.title}>Reset password?</Text>
+        <Text style={styles.subTitle}>Create a New Password</Text>
 
-        <TextInputField
-        label="Email or Phone Number"
-        value={emailOrPhone}
-        setValue={setEmailOrPhone}
-        pattern="^(\d{10}|[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+)$"
-        errorMessage="This Email ID / Phone Number is not registered"
+        <PasswordInputField
+        label="Password"
+        value={password}
+        setValue={setPassword}
+        isPassword={true}
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        errorMessage="Incorrect Password"
       />
 
-        <GradientButton label="Reset Password" onPress={handleForgot} arrowEnable={true} />
+    <PasswordInputField
+        label="Confirm Password"
+        value={confirmPassword}
+        setValue={setConfirmPassword}
+        isPassword={true}
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        errorMessage={error}
+      />
+
+
+        <GradientButton label="Reset Password" onPress={handleResetPassword} arrowEnable={true} />
 
         <TouchableOpacity>
             <View style={styles.backContainer}>
@@ -64,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  forgotBox: {
+  resetPasswordBox: {
     backgroundColor: Colors.secondary,
     borderRadius: 10,
     paddingVertical: 30,
@@ -106,4 +129,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ForgotScreen;
+export default ResetPasswordScreen;
