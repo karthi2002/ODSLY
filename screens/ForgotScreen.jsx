@@ -1,0 +1,112 @@
+import React, { useState } from "react";
+import Colors from "../utils/Colors";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Image,
+} from "react-native";
+
+import Logo from "../layouts/Logo";
+import TextInputField from "../components/TextInputField";
+import GradientButton from "../components/GradientButton";
+import Copyright from "../layouts/Copyright";
+import { useNavigation } from '@react-navigation/native';
+
+
+const ForgotScreen = () => {
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const navigation = useNavigation();
+
+  const handleForgot = () => {
+    Alert.alert("Login", `Email or Phone: ${emailOrPhone}`);
+  };
+
+  return (
+    <View style={styles.container}>
+      
+      <Logo />
+
+      <View style={styles.forgotBox}>
+        <Text style={styles.title}>Forgot password?</Text>
+        <Text style={styles.subTitle}>Please verify the OTP sent to your email / Phone Number</Text>
+
+        <TextInputField
+        label="Email or Phone Number"
+        value={emailOrPhone}
+        setValue={setEmailOrPhone}
+        pattern="^(\d{10}|[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+)$"
+        errorMessage="This Email ID / Phone Number is not registered"
+      />
+
+        <GradientButton label="Reset Password" onPress={handleForgot} arrowEnable={true} />
+
+        <TouchableOpacity>
+            <View style={styles.backContainer}>
+                <MaterialCommunityIcons name="arrow-left" size={18} color={Colors.primary} />
+                <Text style={styles.back} onPress={() => navigation.goBack()}>Back</Text>
+            </View>
+        </TouchableOpacity>
+
+      </View>
+
+      <Copyright />
+
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  forgotBox: {
+    backgroundColor: Colors.secondary,
+    borderRadius: 10,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    marginTop: 30,
+    width: "85%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 26,
+    marginBottom: 30,
+    color: Colors.background,
+    fontWeight: "bold",
+  },
+  subTitle :{
+    fontSize: 16,
+    marginTop: -20,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: Colors.text,
+    fontFamily: "500"
+  },
+  backContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap:10,
+    marginTop: 20
+  },
+  back :{
+    color: Colors.background,
+    fontSize: 18,
+    fontWeight: "600",
+    textDecorationLine: 'underline',
+    marginTop: 2
+  }
+});
+
+export default ForgotScreen;

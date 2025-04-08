@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../utils/Colors";
 import {
   View,
@@ -21,12 +21,26 @@ import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
 
-const LoginScreen = () => {
+const SignupScreen = () => {
+  
+  const [fullName, setFullName] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError]= useState("")
   const navigation = useNavigation();
 
-  const handleLogin = () => {
+  useEffect(() => {
+    if (confirmPassword.length > 0 && password !== confirmPassword) {
+      setError("Passwords do not match");
+    } else {
+      setError("");
+    }
+  }, [password, confirmPassword]);
+  
+  
+
+  const handleSignup = () => {
     Alert.alert("Login", `Email or Phone: ${emailOrPhone}\nPassword: ${password}`);
   };
 
@@ -35,8 +49,16 @@ const LoginScreen = () => {
       
       <Logo />
 
-      <View style={styles.loginBox}>
-        <Text style={styles.title}>Login!</Text>
+      <View style={styles.signupBox}>
+        <Text style={styles.title}>Sign Up!</Text>
+
+        <TextInputField
+        label="Full name"
+        value={fullName}
+        setValue={setFullName}
+        pattern="[A-Za-z]+"
+        errorMessage="Invalid"
+      />
 
         <TextInputField
         label="Email or Phone Number"
@@ -55,15 +77,19 @@ const LoginScreen = () => {
         errorMessage="Incorrect Password"
       />
 
-        <View style={styles.forgotContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
-            <Text style={styles.link}>Forgot password?</Text>
-          </TouchableOpacity>
-        </View>
+    <PasswordInputField
+        label="Confirm Password"
+        value={confirmPassword}
+        setValue={setConfirmPassword}
+        isPassword={true}
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        errorMessage={error}
+      />
 
-        <GradientButton label="Login" onPress={handleLogin} arrowEnable={true} />
 
-        <LineText name="Login With" />
+        <GradientButton label="Continue" onPress={handleSignup} arrowEnable={true} />
+
+        <LineText name="Continue with" />
 
         <View style={styles.authContainer}>
           <TouchableOpacity>
@@ -76,12 +102,11 @@ const LoginScreen = () => {
 
         <LineText name="OR" />
 
-        <Text style={styles.dontaccount}>Don't have a Account?</Text>
+        <Text style={styles.alreadyaccount}>Already have a Account?</Text>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={styles.singup}>Sign Up</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.login}>Login</Text>
         </TouchableOpacity>
-        
       </View>
 
       <Copyright />
@@ -97,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  loginBox: {
+  signupBox: {
     backgroundColor: Colors.secondary,
     borderRadius: 10,
     paddingVertical: 30,
@@ -115,19 +140,6 @@ const styles = StyleSheet.create({
     color: Colors.background,
     fontWeight: "bold",
   },
-  forgotContainer: {
-    width: '100%',
-    alignItems: 'flex-end',
-  },
-  link: {
-    color: Colors.primary,
-    marginBottom: 20,
-    fontSize: 16,
-    fontWeight: 600,
-    color: Colors.background,
-    textDecorationLine: "underline",
-    textAlign: "right",
-  },
   authContainer: {
     display: "flex",
     flexDirection: "row",
@@ -143,12 +155,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
   },
-  dontaccount: {
+  alreadyaccount: {
     color: Colors.text,
     fontSize: 16,
     fontWeight: 400,
   },
-  singup :{
+  login :{
     color: Colors.background,
     fontSize: 18,
     fontWeight: 600,
@@ -157,4 +169,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default SignupScreen;
