@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
       color: colors.secondary,
       fontSize: 42,
       fontWeight: "bold",
+      // fontFamily: 'Snasm'
     }
   });
 
