@@ -25,7 +25,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    navigation.navigate('SetupProfile')
+    navigation.navigate('VerifyOTP');
   };
 
   return (

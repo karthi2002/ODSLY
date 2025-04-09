@@ -23,7 +23,7 @@ const [error, setError] = useState(false);
 
 const handleResetPassword = () => {
   if (otp === '123456') {
-    navigation.navigate('Login');
+    navigation.navigate('Success');
   } else {
     setError(true);
   }

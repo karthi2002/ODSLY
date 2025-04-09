@@ -10,6 +10,7 @@ import ForgotScreen from './screens/ForgotScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import VerifyOTPScreen from './screens/VerifyOTPScreen';
 import ProfileSetupScreen from './screens/ProfileSetupScreen';
+import SuccessScreen from './screens/SuccessScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name="Auth" component={AuthScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="Success" component={SuccessScreen} />
         <Stack.Screen name="Forgot" component={ForgotScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
         <Stack.Screen name="VerifyOTP" component={VerifyOTPScreen} />

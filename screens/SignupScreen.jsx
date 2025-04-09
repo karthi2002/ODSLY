@@ -39,7 +39,7 @@ const SignupScreen = () => {
   
 
   const handleSignup = () => {
-    navigation.navigate('VerifyOTP');
+    navigation.navigate('SetupProfile');
   };
 
   return (
