@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
     alignItems: "center",
   },
   title: {

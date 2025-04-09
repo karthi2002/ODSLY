@@ -26,12 +26,11 @@ const OptionsFlatList = ({ data, selectedItems, onSelect }) => {
           <GradientBorderButton
             title={item}
             onPress={() => handleSelect(item)}
+            showBorderGradient={false}
             backgroundColor={Colors.secondary}
-            style={[
-              styles.buttonStyle,
-              selectedItems.includes(item) && styles.selectedButton,
-            ]}
-            text={Colors.primary}
+            textColor= {Colors.primary}
+            showTextGradient={true}
+            disabled={false}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -48,18 +47,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 15,
+    marginBottom: 30,
     color: Colors.text,
     textAlign: 'left',
   },
   listContainer: {
     width: '100%',
-  },
-  buttonStyle: {
-    minWidth: '100%',
-  },
-  selectedButton: {
-    borderColor: 'green',
   },
 });
 

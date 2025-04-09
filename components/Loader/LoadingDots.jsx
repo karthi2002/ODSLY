@@ -58,10 +58,12 @@ const LoadingDots = ({ text = "Loading..." }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    padding: 20,
-  },
+ container: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 20,
+},
   dotsContainer: {
     flexDirection: 'row',
     marginBottom: 10,
