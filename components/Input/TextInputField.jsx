@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-import Colors from '../utils/Colors';
+import Colors from '../../utils/Colors';
 
 const TextInputField = ({
   label,

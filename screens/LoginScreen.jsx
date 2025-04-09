@@ -13,10 +13,10 @@ import {
 import Google from "../assets/icons/google.png";
 import Apple from "../assets/icons/apple.png";
 import Logo from "../layouts/Logo";
-import TextInputField from "../components/TextInputField";
-import PasswordInputField from "../components/PasswordInputField";
+import TextInputField from "../components/Input/TextInputField";
+import PasswordInputField from "../components/Input/PasswordInputField";
 import LineText from "../layouts/LineText";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/Button/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 

@@ -12,8 +12,8 @@ import {
 } from "react-native";
 
 import Logo from "../layouts/Logo";
-import TextInputField from "../components/TextInputField";
-import GradientButton from "../components/GradientButton";
+import TextInputField from "../components/Input/TextInputField";
+import GradientButton from "../components/Button/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
