@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 80
+    paddingVertical: 50
   },
   loginBox: {
     backgroundColor: Colors.secondary,
@@ -104,8 +104,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: "85%",
     flex: 1,
-    display: "flex",
-    flexDirection: "column",
     alignItems: "center",
   },
   title: {

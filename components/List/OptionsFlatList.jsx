@@ -31,6 +31,7 @@ const OptionsFlatList = ({ data, selectedItems, onSelect }) => {
             textColor= {Colors.primary}
             showTextGradient={true}
             disabled={false}
+            paddingVertical={5}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 30,
+    marginBottom: 20,
     color: Colors.text,
     textAlign: 'left',
   },

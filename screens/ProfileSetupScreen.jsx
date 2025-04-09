@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 80,
+    paddingVertical: 50,
   },
   containerBox: {
     backgroundColor: Colors.secondary,

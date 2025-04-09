@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 80
+    paddingVertical: 50
   },
   resetPasswordBox: {
     backgroundColor: Colors.secondary,

@@ -19,6 +19,7 @@ const GradientBorderButton = ({
   borderGradientColors = ['#029EFE', '#6945E2', '#E9098E'],
   borderColor,
   backgroundColor,
+  paddingVertical,
   textColor,
   showTextGradient,
   textGradientColors = ['#029EFE', '#E9098E'],
@@ -26,7 +27,7 @@ const GradientBorderButton = ({
   style,
 }) => {
   const borderContent = (
-    <View style={[styles.innerButton, { backgroundColor }]}>
+    <View style={[styles.innerButton, { backgroundColor, paddingVertical }]}>
       <View style={styles.content}>
         
         {showTextGradient ? (

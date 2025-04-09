@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient'; 
 import Colors from '../../utils/Colors';
 
 const StepWizard = ({
   steps = 3,
   currentStep = 1,
-  activeColor = '#029EFE',
+  activeColors = ['#029EFE', '#6945E2', '#E9098E'], 
   inactiveColor = Colors.LightGray,
-  stepHeight = 12,
-  stepSpacing = 8,
+  stepHeight = 8,
+  stepSpacing = 12,
   showStepNumber = false,
   style,
 }) => {
@@ -25,16 +26,27 @@ const StepWizard = ({
               { marginRight: index !== steps - 1 ? stepSpacing : 0 },
             ]}
           >
-            <View
-              style={[
-                styles.step,
-                {
-                  backgroundColor: isActive ? activeColor : inactiveColor,
+            {isActive ? (
+              <LinearGradient
+                colors={activeColors}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={{
                   height: stepHeight,
+                  width: '100%',
                   borderRadius: stepHeight / 2,
-                },
-              ]}
-            />
+                }}
+              />
+            ) : (
+              <View
+                style={{
+                  height: stepHeight,
+                  width: '100%',
+                  borderRadius: stepHeight / 2,
+                  backgroundColor: inactiveColor,
+                }}
+              />
+            )}
             {showStepNumber && (
               <Text style={styles.stepNumber}>{index + 1}</Text>
             )}
@@ -53,9 +65,6 @@ const styles = StyleSheet.create({
   stepWrapper: {
     flex: 1,
     alignItems: 'center',
-  },
-  step: {
-    width: '100%',
   },
   stepNumber: {
     position: 'absolute',

@@ -44,7 +44,7 @@ const SignupScreen = () => {
 
   return (
     <View style={styles.container}>
-      
+
       <Logo />
 
       <View style={styles.signupBox}>
@@ -107,6 +107,7 @@ const SignupScreen = () => {
         </TouchableOpacity>
       </View>
 
+
       <Copyright />
 
     </View>
@@ -119,13 +120,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 80
+    paddingVertical: 50
   },
   signupBox: {
     backgroundColor: Colors.secondary,
     borderRadius: 10,
-    paddingVertical: 30,
-    paddingHorizontal: 20,
+    padding: 20,
     marginTop: 30,
     width: "85%",
     alignItems: "center",

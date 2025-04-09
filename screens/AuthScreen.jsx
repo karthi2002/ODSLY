@@ -27,6 +27,7 @@ export default function AuthScreen() {
           textColor={Colors.secondary}
           showTextGradient={false}
           disabled={false}
+          paddingVertical={12}
         />
       </View>
     </View>

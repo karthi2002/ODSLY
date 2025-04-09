@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 80
+    paddingVertical: 50
   },
   verifyOTPBox: {
     backgroundColor: Colors.secondary,
