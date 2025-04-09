@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
-import Colors from '../utils/Colors';
+import Colors from '../../utils/Colors';
 
 const PasswordInputField = ({
   label,

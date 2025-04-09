@@ -7,8 +7,8 @@ const GradientBorderButton = ({
   title,
   onPress,
   gradientColors = ['#029EFE', '#6945E2', '#E9098E'],
-  backgroundColor = '#000A34', 
-  textColor = '#FFFFFF', 
+  backgroundColor, 
+  textColor, 
   iconName, 
   disabled = false,
   style,
@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   gradientBorder: {
-    padding: 2, // Border thickness
+    padding: 2,
     borderRadius: 8,
   },
   innerButton: {
     paddingVertical: 12,
     paddingHorizontal: 24,
-    borderRadius: 6, // Slightly smaller than gradientBorder
+    borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   icon: {
-    marginRight: 8, // Space between icon and text
+    marginRight: 8, 
   },
   disabled: {
     opacity: 0.6,

@@ -9,8 +9,8 @@ import {
 } from "react-native";
 
 import Logo from "../layouts/Logo";
-import TextInputField from "../components/TextInputField";
-import GradientButton from "../components/GradientButton";
+import TextInputField from "../components/Input/TextInputField";
+import GradientButton from "../components/Button/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 80
   },
   forgotBox: {
     backgroundColor: Colors.secondary,
@@ -71,10 +72,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 30,
     width: "85%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
+    flex: 1, 
   },
   title: {
     fontSize: 26,

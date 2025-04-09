@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-import Colors from '../utils/Colors';
+import Colors from '../../utils/Colors';
 
 const TextInputField = ({
   label,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     width: '100%',
-    margin: 10,
+    marginVertical: 10,
   },
   label: {
     position: 'absolute',

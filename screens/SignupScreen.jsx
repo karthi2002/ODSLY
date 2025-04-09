@@ -11,10 +11,10 @@ import {
 import Google from "../assets/icons/google.png";
 import Apple from "../assets/icons/apple.png";
 import Logo from "../layouts/Logo";
-import TextInputField from "../components/TextInputField";
-import PasswordInputField from "../components/PasswordInputField";
+import TextInputField from "../components/Input/TextInputField";
+import PasswordInputField from "../components/Input/PasswordInputField";
 import LineText from "../layouts/LineText";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/Button/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 80
   },
   signupBox: {
     backgroundColor: Colors.secondary,
@@ -127,10 +128,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 30,
     width: "85%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
+    flex: 1
   },
   title: {
     fontSize: 26,

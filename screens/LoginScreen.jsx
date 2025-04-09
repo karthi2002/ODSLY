@@ -11,10 +11,10 @@ import {
 import Google from "../assets/icons/google.png";
 import Apple from "../assets/icons/apple.png";
 import Logo from "../layouts/Logo";
-import TextInputField from "../components/TextInputField";
-import PasswordInputField from "../components/PasswordInputField";
+import TextInputField from "../components/Input/TextInputField";
+import PasswordInputField from "../components/Input/PasswordInputField";
 import LineText from "../layouts/LineText";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/Button/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
@@ -25,7 +25,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-   
+    navigation.navigate('SetupProfile')
   };
 
   return (
@@ -94,17 +94,19 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 80
   },
   loginBox: {
     backgroundColor: Colors.secondary,
     borderRadius: 10,
-    paddingVertical: 30,
     paddingHorizontal: 20,
+    paddingVertical: 30,
     marginTop: 30,
     width: "85%",
+    flex: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   title: {

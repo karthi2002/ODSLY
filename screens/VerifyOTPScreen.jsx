@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import OTPTextInput from 'react-native-otp-textinput';
 import Logo from "../layouts/Logo";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/Button/GradientButton";
 import Copyright from "../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 80
   },
   verifyOTPBox: {
     backgroundColor: Colors.secondary,
@@ -109,10 +110,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 30,
     width: "85%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
+    flex: 1,
   },
   title: {
     fontSize: 26,
