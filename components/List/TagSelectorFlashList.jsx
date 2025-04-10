@@ -1,88 +1,89 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
+import React from "react";
+import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import Colors from "../../utils/Colors";
 
-const TagSelectorFlashList = ({
-  data,
-  onSelect,
-  selectedTags = [],
-  numColumns = 2,
-  tagStyle = {},
-  selectedTagStyle = {},
-  textStyle = {},
-  selectedTextStyle = {},
-}) => {
-  const handleSelect = (item) => {
-    const updatedSelection = selectedTags.includes(item)
-      ? selectedTags.filter((tag) => tag !== item)
-      : [...selectedTags, item];
-    onSelect(updatedSelection);
+const sportsList = [
+  "Cricket 🏏",
+  "Soccer ⚽",
+  "Badminton 🏸",
+  "Judo 🥋",
+  "Basketball 🏀",
+  "Golf ⛳",
+  "Tennis 🎾",
+  "Baseball ⚾",
+  "Rugby 🏉",
+  "Hockey 🏒",
+];
+
+const TagSelectorFlashList = ({ selectedTags, setSelectedTags }) => {
+  const toggleTag = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
   };
 
   const renderItem = ({ item }) => {
     const isSelected = selectedTags.includes(item);
-
     return (
-      <TouchableOpacity
+      <Pressable
+        onPress={() => toggleTag(item)}
         style={[
           styles.tag,
-          tagStyle,
-          isSelected && [styles.selectedTag, selectedTagStyle],
+          { backgroundColor: isSelected ? Colors.primary : Colors.lightGray },
         ]}
-        onPress={() => handleSelect(item)}
       >
         <Text
-          style={[
-            styles.tagText,
-            textStyle,
-            isSelected && [styles.selectedTagText, selectedTextStyle],
-          ]}
+          style={{
+            color: isSelected ? "#fff" : Colors.text,
+            fontWeight: "500",
+            textAlign: "center",
+          }}
         >
           {item}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   return (
-    <FlashList
-      data={data}
-      estimatedItemSize={80}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => `${item}-${index}`}
-      numColumns={numColumns}
-      contentContainerStyle={styles.listContainer}
-    />
+    <View style={styles.container}>
+      <Text style={styles.heading}>Select your favourite Sports</Text>
+      <FlatList
+        data={sportsList}
+        renderItem={renderItem}
+        keyExtractor={(item) => item}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
+        contentContainerStyle={{ gap: 10 }}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
+  container: {
+    width: "100%",
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingTop: 10,
+  },
+  heading: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Colors.background,
+    marginBottom: 15,
+    textAlign: "center",
   },
   tag: {
-    paddingVertical: 10,
     paddingHorizontal: 16,
-    margin: 8,
+    paddingVertical: 8,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#D0D5DD',
-    backgroundColor: '#F7F8FA',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  selectedTag: {
-    backgroundColor: '#E0E7FF',
-    borderColor: '#4F46E5',
-  },
-  tagText: {
-    fontSize: 14,
-    color: '#1F2937',
-  },
-  selectedTagText: {
-    color: '#4F46E5',
-    fontWeight: '600',
+    marginRight: 10,
+    marginBottom: 10,
+    borderWidth: 1.5, 
+    borderColor: Colors.blue, 
+    backgroundColor: "transparent", 
   },
 });
 
