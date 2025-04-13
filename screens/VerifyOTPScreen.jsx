@@ -78,7 +78,7 @@ const handleResetPassword = () => {
             </View>
         </View>
 
-        <GradientButton label="Reset Password" onPress={handleResetPassword} arrowEnable={true} />
+        <GradientButton label="Verify OTP" onPress={handleResetPassword} arrowEnable={true} />
 
         <TouchableOpacity>
             <View style={styles.backContainer}>

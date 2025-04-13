@@ -3,37 +3,39 @@ import { FlatList, View, StyleSheet, Text } from 'react-native';
 import GradientBorderButton from '../Button/GradientBorderButton';
 import Colors from '../../utils/Colors';
 
-const OptionsFlatList = ({ data, selectedItems, onSelect }) => {
+const OptionsFlatList = ({ data, selectedItem, onSelect }) => {
   const handleSelect = (item) => {
-    const isSelected = selectedItems.includes(item);
-    if (isSelected) {
-      onSelect(selectedItems.filter((i) => i !== item));
+    if (selectedItem === item) {
+      onSelect(null);
     } else {
-      onSelect([...selectedItems, item]);
+      onSelect(item); 
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Select your Betting Preferences</Text>
+      <Text style={styles.text}>Select your Betting Preference</Text>
 
       <FlatList
         data={data}
         keyExtractor={(item) => item}
         contentContainerStyle={styles.listContainer}
         ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-        renderItem={({ item }) => (
-          <GradientBorderButton
-            title={item}
-            onPress={() => handleSelect(item)}
-            showBorderGradient={false}
-            backgroundColor={Colors.secondary}
-            textColor= {Colors.primary}
-            showTextGradient={true}
-            disabled={false}
-            paddingVertical={5}
-          />
-        )}
+        renderItem={({ item }) => {
+          const isSelected = selectedItem === item;
+          return (
+            <GradientBorderButton
+              title={item}
+              onPress={() => handleSelect(item)}
+              showBorderGradient={isSelected}
+              backgroundColor={isSelected ? Colors.blue : Colors.secondary}
+              textColor={isSelected ? Colors.secondary : Colors.primary}
+              showTextGradient={!isSelected}
+              disabled={false}
+              paddingVertical={8}
+            />
+          );
+        }}
         showsVerticalScrollIndicator={false}
       />
     </View>

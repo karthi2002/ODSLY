@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import GradientButton from '../components/Button/GradientButton'; // Update path if needed
+import GradientButton from '../components/Button/GradientButton'; 
+import GreenTick from '../assets/images/green-tick.gif';
 
 const SuccessScreen = ({ navigation }) => {
-  const handleLogin = () => {
-    navigation.navigate('Dashboard');
+  
+  const handleSuccess = () => {
+    navigation.navigate('MainTab');
   };
 
   return (
@@ -13,7 +15,7 @@ const SuccessScreen = ({ navigation }) => {
       <Text style={styles.subText}>Your Profile has been{'\n'}successfully created!</Text>
 
       <Image
-        source={require('../assets/images/green-tick.gif')} 
+        source={GreenTick} 
         style={styles.gif}
         resizeMode="contain"
       />
@@ -22,7 +24,7 @@ const SuccessScreen = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <GradientButton
           label="Go to Dashboard"
-          onPress={handleLogin}
+          onPress={handleSuccess}
           arrowEnable={true}
         />
       </View>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
   },
   successText: {
     fontSize: 30,
-    fontWeight: '900',
+    fontWeight: '800',
     color: '#0F1333',
     marginBottom: 20,
   },

@@ -5,7 +5,8 @@ const Colors = {
     error: '#DC143C',
     background: '#000A34',
     text: '#667085',
-    LightGray: '#CCCCCC'
+    LightGray: '#CCCCCC',
+    blue: '#1D7FD6'
   };
   
 export default Colors;

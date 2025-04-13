@@ -17,7 +17,7 @@ const ProfileSetupScreen = () => {
   const [stepIndex, setStepIndex] = useState(0);
   const [profile, setProfile] = useState({ username: "", image: null });
   const [selectedSports, setSelectedSports] = useState([]);
-  const [preferences, setPreferences] = useState([]);
+  const [preferences, setPreferences] = useState(null);
 
   const handleNext = () => {
     if (stepIndex < steps.length - 1) {
@@ -41,7 +41,18 @@ const ProfileSetupScreen = () => {
       case 1:
         return (
           <TagSelectorFlashList
-            tags={["Football", "Tennis", "Basketball", "Cricket"]}
+            data = {[
+              "Cricket 🏏",
+              "Soccer ⚽",
+              "Badminton 🏸",
+              "Judo 🥋",
+              "Basketball 🏀",
+              "Golf ⛳",
+              "Tennis 🎾",
+              "Baseball ⚾",
+              "Rugby 🏉",
+              "Hockey 🏒",
+            ]}
             selectedTags={selectedSports}
             setSelectedTags={setSelectedSports}
           />
@@ -55,7 +66,7 @@ const ProfileSetupScreen = () => {
               "Live Betting",
               "Odds Comparison",
             ]}
-            selectedItems={preferences}
+            selectedItem={preferences}
             onSelect={setPreferences}
           />
         );

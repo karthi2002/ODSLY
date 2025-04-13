@@ -2,20 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import Colors from "../../utils/Colors";
 
-const sportsList = [
-  "Cricket 🏏",
-  "Soccer ⚽",
-  "Badminton 🏸",
-  "Judo 🥋",
-  "Basketball 🏀",
-  "Golf ⛳",
-  "Tennis 🎾",
-  "Baseball ⚾",
-  "Rugby 🏉",
-  "Hockey 🏒",
-];
 
-const TagSelectorFlashList = ({ selectedTags, setSelectedTags }) => {
+
+const TagSelectorFlashList = ({data, selectedTags, setSelectedTags }) => {
   const toggleTag = (tag) => {
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
@@ -31,12 +20,13 @@ const TagSelectorFlashList = ({ selectedTags, setSelectedTags }) => {
         onPress={() => toggleTag(item)}
         style={[
           styles.tag,
-          { backgroundColor: isSelected ? Colors.primary : Colors.lightGray },
+          { backgroundColor: isSelected ? Colors.blue : Colors.LightGray },
         ]}
       >
         <Text
           style={{
-            color: isSelected ? "#fff" : Colors.text,
+            color: isSelected ? Colors.secondary : Colors.primary,
+            fontSize: 16,
             fontWeight: "500",
             textAlign: "center",
           }}
@@ -51,11 +41,11 @@ const TagSelectorFlashList = ({ selectedTags, setSelectedTags }) => {
     <View style={styles.container}>
       <Text style={styles.heading}>Select your favourite Sports</Text>
       <FlatList
-        data={sportsList}
+        data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item}
         numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        columnWrapperStyle={{ justifyContent: "start" }}
         contentContainerStyle={{ gap: 10 }}
       />
     </View>
@@ -65,24 +55,23 @@ const TagSelectorFlashList = ({ selectedTags, setSelectedTags }) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingHorizontal: 10,
-    paddingTop: 10,
+    paddingVertical: 20,
   },
   heading: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: Colors.background,
-    marginBottom: 15,
-    textAlign: "center",
+    fontWeight: '600',
+    marginBottom: 20,
+    color: Colors.text,
+    textAlign: 'left',
   },
   tag: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 20,
     marginRight: 10,
     marginBottom: 10,
-    borderWidth: 1.5, 
-    borderColor: Colors.blue, 
+    borderWidth: 1, 
+    borderColor: Colors.text,
     backgroundColor: "transparent", 
   },
 });
