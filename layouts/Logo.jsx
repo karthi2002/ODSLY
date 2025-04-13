@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import colors from "../utils/Colors";
+import Colors from "../utils/Colors";
 import LogoImg from '../assets/icons/Logo.png'
 
 const Logo = () => {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
       height: 50,
     },
     logoText: {
-      color: colors.secondary,
+      color: Colors.secondary,
       fontSize: 42,
       fontWeight: "bold",
       // fontFamily: 'Snasm'

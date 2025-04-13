@@ -1,100 +1,148 @@
-import React from 'react';
-import { View, Text, Platform } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { LinearGradient } from 'expo-linear-gradient';  
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-vector-icons/Ionicons";
+import { Text, View, Platform } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import MaskedView from "@react-native-masked-view/masked-view";
 
-import HomeScreen from '../screens/HomeScreen';
-import LiveScreen from '../screens/LiveScreen';
-import InsightsScreen from '../screens/InsightsScreen';
-import CommunityScreen from '../screens/CommunityScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreen from "../screens/HomeScreen";
+import LiveScreen from "../screens/LiveScreen";
+import InsightsScreen from "../screens/InsightsScreen";
+import CommunityScreen from "../screens/CommunityScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import Colors from "../utils/Colors";
 
 const Tab = createBottomTabNavigator();
 
 export default function MainTab() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarStyle: {
-          backgroundColor: '#131417',
-          borderTopWidth: 0,
-          height: 60,
+          backgroundColor: "#131417",
+          height: 80,
         },
-        tabBarShowLabel: true,
-        tabBarLabelStyle: {
-          fontSize: 12,
-          marginBottom: 4,
-        },
-        headerShown: false,
         tabBarIcon: ({ focused }) => {
-          let iconName = '';
-          let label = '';
+          let iconName;
+          let label;
 
           switch (route.name) {
-            case 'Home':
-              iconName = 'home-outline';
-              label = 'Home';
+            case "Home":
+              iconName = "home-outline";
+              label = "Home";
               break;
-            case 'Live':
-              iconName = 'tv-outline';
-              label = 'Live';
+            case "Live":
+              iconName = "tv-outline";
+              label = "Live";
               break;
-            case 'Insights':
-              iconName = 'bar-chart-outline';
-              label = 'Insights';
+            case "Insights":
+              iconName = "bar-chart-outline";
+              label = "Insights";
               break;
-            case 'Community':
-              iconName = 'people-outline';
-              label = 'Community';
+            case "Community":
+              iconName = "people-outline";
+              label = "Community";
               break;
-            case 'Profile':
-              iconName = 'person-outline';
-              label = 'Profile';
-              break;
-            default:
+            case "Profile":
+              iconName = "person-outline";
+              label = "Profile";
               break;
           }
 
-          const gradientColors = focused
-            ? ['#00f7ff', '#00ffae']
-            : ['#aaa', '#aaa'];
+          const gradientColors = ["#029EFE", "#6945E2", "#E9098E"];
 
           return (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-              {Platform.OS === 'android' || Platform.OS === 'ios' ? (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "flex-start",
+                width: 70,
+                paddingTop: focused ? 10 : 14,
+              }}
+            >
+              {/* Top Gradient Border */}
+              {focused && (
                 <LinearGradient
                   colors={gradientColors}
                   start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={{ padding: 6, borderRadius: 20 }}
-                >
-                  <Icon name={iconName} size={22} color="#fff" />
-                </LinearGradient>
-              ) : (
-                <View
+                  end={{ x: 1, y: 0 }}
                   style={{
-                    padding: 6,
-                    borderRadius: 20,
-                    backgroundColor: focused ? '#00f7ff' : '#aaa',
+                    height: 3,
+                    width: "100%",
+                    borderRadius: 2,
+                    marginBottom: 6,
+                  }}
+                />
+              )}
+
+              {/* Gradient Icon */}
+              {focused ? (
+                <MaskedView
+                  maskElement={
+                    <Icon
+                      name={iconName}
+                      size={26}
+                      color="black"
+                      style={{ backgroundColor: "transparent" }}
+                    />
+                  }
+                >
+                  <LinearGradient
+                    colors={gradientColors}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={{ height: 26, width: 26 }}
+                  />
+                </MaskedView>
+              ) : (
+                <Icon name={iconName} size={26} color={Colors.text} />
+              )}
+
+              {/* Gradient Text */}
+              {focused ? (
+                <MaskedView
+                  maskElement={
+                    <Text
+                      numberOfLines={1}
+                      style={{
+                        fontSize: 11,
+                        marginTop: 2,
+                        textAlign: "center",
+                        width: "100%",
+                        color: "black",
+                        backgroundColor: "transparent",
+                      }}
+                    >
+                      {label}
+                    </Text>
+                  }
+                >
+                  <LinearGradient
+                    colors={gradientColors}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={{ height: 14, width: 70 }}
+                  />
+                </MaskedView>
+              ) : (
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    color: Colors.text,
+                    fontSize: 11,
+                    marginTop: 2,
+                    textAlign: "center",
+                    width: "100%",
                   }}
                 >
-                  <Icon name={iconName} size={22} color="#fff" />
-                </View>
+                  {label}
+                </Text>
               )}
-              <Text
-                style={{
-                  color: focused ? '#00f7ff' : '#aaa',
-                  fontSize: 11,
-                  marginTop: 2,
-                }}
-              >
-                {label}
-              </Text>
             </View>
           );
         },
+        tabBarShowLabel: false,
+        headerShown: false,
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />

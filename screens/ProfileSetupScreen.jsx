@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import Colors from "../utils/Colors";
-
+import { useNavigation } from "@react-navigation/native";
 import StepWizard from "../components/Form/StepWizard";
 import ProfileUploader from "../components/Form/ProfileUploader";
 import TagSelectorFlashList from "../components/List/TagSelectorFlashList";
@@ -14,6 +14,7 @@ import Copyright from "../layouts/Copyright";
 const steps = ["Profile", "Sports", "Betting", "Finish"];
 
 const ProfileSetupScreen = () => {
+  const navigation = useNavigation();
   const [stepIndex, setStepIndex] = useState(0);
   const [profile, setProfile] = useState({ username: "", image: null });
   const [selectedSports, setSelectedSports] = useState([]);
@@ -26,6 +27,15 @@ const ProfileSetupScreen = () => {
       Alert.alert("Profile setup complete!");
     }
   };
+
+  useEffect(() => {
+    if (stepIndex === 3) {
+      const timer = setTimeout(() => {
+        navigation.navigate("Success"); 
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [stepIndex]);
 
   const renderStepContent = () => {
     switch (stepIndex) {
