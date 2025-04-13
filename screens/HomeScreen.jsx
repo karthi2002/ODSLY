@@ -1,10 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import Header from "../layouts/Header";
+import Colors from "../utils/Colors";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to ODSLY Dashboard</Text>
+      <Header />
+      <View style={styles.content}>
+        <Text style={{ color: "#000", fontSize: 18 }}>Home Screen Content</Text>
+      </View>
     </View>
   );
 }
@@ -12,12 +17,10 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f1123',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: Colors.secondary,
   },
-  text: {
-    color: '#fff',
-    fontSize: 20,
+  content: {
+    paddingTop: 60,
+    paddingHorizontal: 20,
   },
 });
