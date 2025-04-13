@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import Logo from "./Logo"; // Your logo component
+import Logo from "./Logo"; 
 import Colors from "../utils/Colors";
 
 const Header = () => {

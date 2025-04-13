@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Colors from '../utils/Colors'
 
 import HomeScreen from '../screens/HomeScreen';
-// import LiveScreen from '../screens/LiveScreen';
-// import InsightsScreen from '../screens/InsightsScreen';
-// import CommunityScreen from '../screens/CommunityScreen';
-// import ProfileScreen from '../screens/ProfileScreen';
+import LiveScreen from '../screens/LiveScreen';
+import InsightsScreen from '../screens/InsightsScreen';
+import CommunityScreen from '../screens/CommunityScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ export default function MainTab() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarStyle: {
-          backgroundColor: '#1a1a2e',
+          backgroundColor: Colors.background,
           borderTopWidth: 0,
           height: 60,
         },
@@ -37,10 +38,10 @@ export default function MainTab() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      {/* <Tab.Screen name="Live" component={LiveScreen} />
+      <Tab.Screen name="Live" component={LiveScreen} />
       <Tab.Screen name="Insights" component={InsightsScreen} />
       <Tab.Screen name="Community" component={CommunityScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} /> */}
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
