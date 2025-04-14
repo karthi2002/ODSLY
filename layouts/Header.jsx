@@ -1,11 +1,14 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import LogoImg from "../assets/icons/Logo.png";
 import Colors from "../utils/Colors";
 
 const Header = () => {
+  
+  const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -13,7 +16,7 @@ const Header = () => {
         <Text style={styles.logoText}>ODSLY</Text>
       </View>
       <View style={styles.iconsContainer}>
-        <TouchableOpacity style={styles.icon}>
+        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={22} color={Colors.secondary} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.icon}>

@@ -1,22 +1,27 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AuthStack from './navigations/AuthStack';
 import MainTab from './navigations/MainTab';
+import NotificationScreen from './screens/NotificationScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="AuthStack" component={AuthStack} />
-          <Stack.Screen name="MainTab" component={MainTab} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <SafeAreaProvider> {/* ✅ This wraps the whole app */}
+      <SafeAreaView style={styles.safeArea} edges={['top', 'bottom', 'left', 'right']}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="AuthStack" component={AuthStack} />
+            <Stack.Screen name="MainTab" component={MainTab} />
+            <Stack.Screen name="Notification" component={NotificationScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
