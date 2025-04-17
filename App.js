@@ -6,7 +6,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AuthStack from './navigations/AuthStack';
 import MainTab from './navigations/MainTab';
 import NotificationScreen from './screens/NotificationScreen';
-import ProfileScreen from './screens/profile/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +18,6 @@ export default function App() {
             <Stack.Screen name="AuthStack" component={AuthStack} />
             <Stack.Screen name="MainTab" component={MainTab} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
 
           </Stack.Navigator>
         </NavigationContainer>
