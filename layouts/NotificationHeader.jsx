@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     shadowColor: Colors.primary,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
+    elevation:10
   },
   NotifyContainer: {
     flexDirection: "row",

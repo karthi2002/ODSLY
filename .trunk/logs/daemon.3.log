@@ -1,0 +1,762 @@
+[2025-04-17 11:45:52.253] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:45:52.271] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:02.322] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:02.322] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:09.357] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:09.358] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:17.326] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:17.326] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:18.935] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:18.935] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:28.404] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:28.404] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:34.553] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:46:34.553] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:47:51.566] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:47:51.566] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:01.101] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:01.101] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:02.521] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:02.521] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:03.205] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:03.205] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:04.470] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:04.470] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:08.612] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:08.612] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:19.391] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:19.391] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:35.982] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:48:35.982] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:07.619] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:07.619] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:20.003] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:20.003] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:31.795] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:31.795] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:39.599] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:39.599] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:58.942] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:49:58.942] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:50:05.298] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:50:05.299] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:50:06.106] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:50:06.107] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:50:48.142] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:50:48.142] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:03.324] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:03.324] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:05.316] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:05.316] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:06.615] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:06.615] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:13.632] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:13.632] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:17.422] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:17.422] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:20.916] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:20.916] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:23.778] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:23.778] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:30.875] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:30.875] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:38.799] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:38.799] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:43.569] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:43.569] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:50.550] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 11:51:50.550] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:43:57.469] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:43:57.469] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:43:59.477] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:43:59.477] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:44:00.901] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:44:00.901] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:45:30.264] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:45:30.264] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:45:43.563] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:45:43.563] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:45:51.390] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:45:51.390] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 12:58:13.688] [global] [info] [runner.cc:154] Executing action trunk-upgrade-available.schedule.1h
+[2025-04-17 12:58:13.703] [global] [info] [runner.cc:154] Executing action trunk-single-player-auto-upgrade.schedule.24h+1h
+[2025-04-17 12:58:13.711] [global] [info] [runner.cc:154] Executing action trunk-whoami.schedule.24h+1h
+[2025-04-17 12:58:14.361] [global] [info] [grpc.cc:22] RX:virtual grpc::Status trunk::cli::UpgradeService::GetAvailableUpgrades(grpc::ServerContext *, const upgrade::proto::v1::GetAvailableUpgradesRequest *, grpc::ServerWriter<upgrade::proto::v1::GetAvailableUpgradesResponse> *)
+[2025-04-17 12:58:14.365] [global] [info] [cli_upgrade.cc:85] Checking for latest trunk prod version...
+[2025-04-17 12:58:14.368] [global] [info] [plugin_upgrade.cc:71] Querying latest version for plugin trunk
+[2025-04-17 12:58:15.566] [global] [info] [cli_upgrade.cc:92] Successfully fetched latest trunk 1.22.12 version: prod
+[2025-04-17 12:58:16.053] [global] [info] [release.cc:138] Retrieved 6 linter-version pairs from ReleaseVersionService
+[2025-04-17 12:58:16.325] [global] [info] [linter.cc:1791] Found config in plugin repo at C:\Users\madha\AppData\Local\trunk\plugins\https---github-com-trunk-io-plugins\v1.6.8-4ebadccd80b22638\linters\yamllint\.yamllint.yaml
+[2025-04-17 12:58:18.625] [global] [info] [grpc.cc:27] TX:virtual grpc::Status trunk::cli::UpgradeService::GetAvailableUpgrades(grpc::ServerContext *, const upgrade::proto::v1::GetAvailableUpgradesRequest *, grpc::ServerWriter<upgrade::proto::v1::GetAvailableUpgradesResponse> *) status=OK
+[2025-04-17 12:58:19.928] [global] [info] [notification_manager.cc:37] Writing to D:\box\ODSLY\ODSLY\.trunk\notifications\trunk-upgrade.yaml
+[2025-04-17 13:06:48.141] [global] [info] [runner.cc:154] Executing action trunk-upgrade-available.schedule.1h
+[2025-04-17 13:06:48.627] [global] [info] [grpc.cc:22] RX:virtual grpc::Status trunk::cli::UpgradeService::GetAvailableUpgrades(grpc::ServerContext *, const upgrade::proto::v1::GetAvailableUpgradesRequest *, grpc::ServerWriter<upgrade::proto::v1::GetAvailableUpgradesResponse> *)
+[2025-04-17 13:06:48.630] [global] [info] [cli_upgrade.cc:85] Checking for latest trunk prod version...
+[2025-04-17 13:06:48.632] [global] [info] [plugin_upgrade.cc:71] Querying latest version for plugin trunk
+[2025-04-17 13:06:49.863] [global] [info] [cli_upgrade.cc:92] Successfully fetched latest trunk 1.22.12 version: prod
+[2025-04-17 13:06:50.390] [global] [info] [release.cc:138] Retrieved 6 linter-version pairs from ReleaseVersionService
+[2025-04-17 13:06:50.691] [global] [info] [linter.cc:1791] Found config in plugin repo at C:\Users\madha\AppData\Local\trunk\plugins\https---github-com-trunk-io-plugins\v1.6.8-4ebadccd80b22638\linters\yamllint\.yamllint.yaml
+[2025-04-17 13:06:52.498] [global] [info] [grpc.cc:27] TX:virtual grpc::Status trunk::cli::UpgradeService::GetAvailableUpgrades(grpc::ServerContext *, const upgrade::proto::v1::GetAvailableUpgradesRequest *, grpc::ServerWriter<upgrade::proto::v1::GetAvailableUpgradesResponse> *) status=OK
+[2025-04-17 13:06:54.030] [global] [info] [notification_manager.cc:37] Writing to D:\box\ODSLY\ODSLY\.trunk\notifications\trunk-upgrade.yaml
+[2025-04-17 13:12:08.859] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:08.860] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:10.336] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:10.336] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:11.152] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:11.152] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:12.351] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:12.351] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:32.270] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:32.271] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:56.655] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:56.655] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:56.838] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:app.json:HEAD] running linter (cache-key:d4788c087b31d5d50da2a7a4231e3fa7)
+[2025-04-17 13:12:57.350] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:57.351] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:58.903] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:12:58.903] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:13:03.581] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:app.json:HEAD] Linter ran in 6739ms
+[2025-04-17 13:13:04.089] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:13:04.089] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:13:05.436] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:13:05.436] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:14:35.503] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:14:35.504] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:14:36.728] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:14:36.728] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:00.904] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:00.904] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:00.987] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:app.json:HEAD] running linter (cache-key:8f761129722b9a754f2c7aaf0e971895)
+[2025-04-17 13:15:01.499] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:01.499] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:02.715] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:02.715] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:03.154] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:app.json:HEAD] Linter ran in 2165ms
+[2025-04-17 13:15:03.664] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:03.665] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:04.757] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:04.757] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:07.898] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:07.898] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:20.313] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:20.314] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:21.677] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:21.677] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:22.815] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:22.815] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:24.020] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:24.020] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:27.516] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:15:27.516] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:18.775] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:18.775] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:52.177] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:52.177] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:55.253] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:55.253] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:59.785] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:16:59.786] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:18.123] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:18.123] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:40.333] [global] [info] [service.cc:108] CLI version change; do not run file-triggered actions
+[2025-04-17 13:17:40.335] [global] [info] [service.cc:36] CLI version change; do not update tools
+[2025-04-17 13:17:40.354] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:40.430] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:40.538] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.538] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.541] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.546] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.868] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:40.868] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:40.869] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.869] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.871] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:40.872] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:17:44.294] [global] [info] [service.cc:118] Notifications config has not changed
+[2025-04-17 13:17:44.329] [global] [info] [service.cc:49] Tools config updated; updating tools
+[2025-04-17 13:17:44.367] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:44.367] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:44.637] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:44.637] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:44.666] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:.trunk\.gitignore:HEAD], removing from cache
+[2025-04-17 13:17:44.666] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:.trunk\.gitignore:HEAD] running linter (cache-key:bb5a4dd8a81271d6854b225b9a56f89a)
+[2025-04-17 13:17:44.667] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:.trunk\trunk.yaml:HEAD] running linter (cache-key:85dc5d558e5d0e9d21cbe7c23f79a745)
+[2025-04-17 13:17:44.668] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:app.json:HEAD] already cached, not running linter
+[2025-04-17 13:17:44.669] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:package-lock.json:HEAD] running linter (cache-key:9064e5cfe9e016d38da2735544484fc3)
+[2025-04-17 13:17:44.670] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:package.json:HEAD] running linter (cache-key:b557f554c4fbf057c78fa62bb8af9af9)
+[2025-04-17 13:17:45.187] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:45.188] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:45.666] [global] [info] [grpc.cc:22] RX:virtual grpc::Status trunk::cli::UpgradeService::GetAvailableUpgrades(grpc::ServerContext *, const upgrade::proto::v1::GetAvailableUpgradesRequest *, grpc::ServerWriter<upgrade::proto::v1::GetAvailableUpgradesResponse> *)
+[2025-04-17 13:17:45.670] [global] [info] [cli_upgrade.cc:85] Checking for latest trunk prod version...
+[2025-04-17 13:17:45.672] [global] [info] [plugin_upgrade.cc:71] Querying latest version for plugin trunk
+[2025-04-17 13:17:46.476] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:46.477] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:47.061] [global] [info] [cli_upgrade.cc:92] Successfully fetched latest trunk 1.22.12 version: prod
+[2025-04-17 13:17:47.340] [global] [info] [release.cc:138] Retrieved 6 linter-version pairs from ReleaseVersionService
+[2025-04-17 13:17:47.604] [global] [info] [linter.cc:1791] Found config in plugin repo at C:\Users\madha\AppData\Local\trunk\plugins\https---github-com-trunk-io-plugins\v1.6.8-4ebadccd80b22638\linters\yamllint\.yamllint.yaml
+[2025-04-17 13:17:48.910] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:.trunk\.gitignore... (5 files):HEAD] Linter ran in 4230ms
+[2025-04-17 13:17:49.427] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:49.428] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:50.541] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:50.542] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:50.583] [global] [info] [grpc.cc:27] TX:virtual grpc::Status trunk::cli::UpgradeService::GetAvailableUpgrades(grpc::ServerContext *, const upgrade::proto::v1::GetAvailableUpgradesRequest *, grpc::ServerWriter<upgrade::proto::v1::GetAvailableUpgradesResponse> *) status=OK
+[2025-04-17 13:17:51.641] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:17:51.641] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:17:52.108] [global] [info] [notification_manager.cc:37] Writing to D:\box\ODSLY\ODSLY\.trunk\notifications\trunk-upgrade.yaml
+[2025-04-17 13:18:22.935] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:22.937] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:24.193] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:24.193] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:25.391] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:25.391] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:26.513] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:26.514] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:28.005] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:28.006] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:37.249] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:37.251] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:44.833] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:44.833] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:46.090] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:46.091] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:51.143] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:51.144] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:52.240] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:52.241] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:18:55.733] [global] [info] [git_source_control.cc:517] Computing merge base between 327f4451021ab4839c17b13dd26989f41a0b771b and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:18:55.733] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:14.694] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:14.729] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:15.802] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:15.803] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:23.064] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:23.066] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:24.333] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:24.334] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:25.378] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:25.378] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:25.533] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:App.js:HEAD] running linter (cache-key:9325bea12f9df54faed9e3014e319ce6)
+[2025-04-17 13:19:25.534] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:assets\fonts\Snasm.ttf:HEAD] running linter (cache-key:17372b23bdba0d9778f4422aaa3bd002)
+[2025-04-17 13:19:25.534] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:assets\images\banner.png:HEAD] running linter (cache-key:14ba156a5a6b340fba5b66bd99892f52)
+[2025-04-17 13:19:25.534] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:assets\images\green-tick.gif:HEAD] running linter (cache-key:c8ca24f5ef63b457be7ca8d8be5a7465)
+[2025-04-17 13:19:25.545] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:components\Button\GradientBorderButton.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.546] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Button\GradientBorderButton.jsx:HEAD] running linter (cache-key:5d7f0d8ddc684d2085d733f7e195949a)
+[2025-04-17 13:19:25.546] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Button\GradientButton.jsx:HEAD] running linter (cache-key:2f79f19da8cb4a67b6f056788aa98e73)
+[2025-04-17 13:19:25.546] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Button\GradientText.jsx:HEAD] running linter (cache-key:13b825e6dc0412538f17a10041dc817b)
+[2025-04-17 13:19:25.546] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Card\BetCard.jsx:HEAD] running linter (cache-key:52270c07962603b7cbb00f3cfb13f48d)
+[2025-04-17 13:19:25.546] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Card\MessageCard.jsx:HEAD] running linter (cache-key:abed893db91a612960d13bf030a603d9)
+[2025-04-17 13:19:25.546] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Card\SubscriptionCard.jsx:HEAD] running linter (cache-key:0f5b3a96dd04cdd10e2d8365156170e3)
+[2025-04-17 13:19:25.547] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Form\ProfileUploader.jsx:HEAD] running linter (cache-key:8977a0acd5beada34a284c19c11557f4)
+[2025-04-17 13:19:25.548] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Form\StepWizard.jsx:HEAD] running linter (cache-key:8111968d48743d0277f54e7073a1c788)
+[2025-04-17 13:19:25.563] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:components\Input\PasswordInputField.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.564] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Input\PasswordInputField.jsx:HEAD] running linter (cache-key:8fff7c44b435573846a255fb6e60c621)
+[2025-04-17 13:19:25.564] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Input\TextInputField.jsx:HEAD] running linter (cache-key:34722765bb33936b972505e3298552f4)
+[2025-04-17 13:19:25.565] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\List\OptionsFlatList.jsx:HEAD] running linter (cache-key:6ab599baa4f7889ac643b14a7b1d9b5f)
+[2025-04-17 13:19:25.580] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:components\List\TagSelectorFlashList.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.580] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\List\TagSelectorFlashList.jsx:HEAD] running linter (cache-key:4ea496305b4623b2d4b08b381a397860)
+[2025-04-17 13:19:25.581] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:components\Loader\LoadingDots.jsx:HEAD] running linter (cache-key:c069a2d33cc2c1b4f4b862ebba24f3d7)
+[2025-04-17 13:19:25.581] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:index.js:HEAD] running linter (cache-key:3747c198a512de6b7b5e4a703abe34ac)
+[2025-04-17 13:19:25.583] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:json\NotificationData.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.583] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:json\NotificationData.jsx:HEAD] running linter (cache-key:6b6a9ff3772d58d47bbaecc1a2acca83)
+[2025-04-17 13:19:25.583] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:json\data.jsx:HEAD] running linter (cache-key:40d4f06ddfa174476de11fb62897ec09)
+[2025-04-17 13:19:25.583] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:layouts\Header.jsx:HEAD] running linter (cache-key:2bac9b38754dacf9f3bf12550fb175ec)
+[2025-04-17 13:19:25.595] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:layouts\LineGradient.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.595] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:layouts\LineGradient.jsx:HEAD] running linter (cache-key:0c40d6ab907688d65d82eaed59724910)
+[2025-04-17 13:19:25.611] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:layouts\Logo.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.612] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:layouts\Logo.jsx:HEAD] running linter (cache-key:7296e2646571c800ac01cda5d3c81810)
+[2025-04-17 13:19:25.626] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:layouts\NotificationHeader.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.627] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:layouts\NotificationHeader.jsx:HEAD] running linter (cache-key:96c7d56db267983ecf371829beac6fdf)
+[2025-04-17 13:19:25.638] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:navigations\AuthStack.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.639] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:navigations\AuthStack.jsx:HEAD] running linter (cache-key:e845ed707ec83641798217d705ec6ae6)
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:939] Unable to deserialize [monitor] [trufflehog:lint:navigations\MainTab.jsx:HEAD], removing from cache
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:navigations\MainTab.jsx:HEAD] running linter (cache-key:25d448d1a55f49e95aef4884dfcf249e)
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:package-lock.json:HEAD] running linter (cache-key:56732811d0724e8702577132a5938326)
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:package.json:HEAD] running linter (cache-key:56deecd17a00f710bc5c7d6a31349acd)
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:react-native.config.js:HEAD] running linter (cache-key:e3f67fe20e89b9f085a752ec5eb18c64)
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\AuthScreen.jsx:HEAD] running linter (cache-key:0f9e689f7531d9971802f588739e0901)
+[2025-04-17 13:19:25.653] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\CommunityScreen.jsx:HEAD] running linter (cache-key:4a4eacce511f4d293b0c829892fcb6e5)
+[2025-04-17 13:19:25.654] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\ForgotScreen.jsx:HEAD] running linter (cache-key:5c619fbbfb22fa65a3983aa8c7ad10de)
+[2025-04-17 13:19:25.654] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\HomeScreen.jsx:HEAD] running linter (cache-key:76c2606eea3f2b824bcc820322b5be86)
+[2025-04-17 13:19:25.654] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\InsightsScreen.jsx:HEAD] running linter (cache-key:160d92c4730657a88cc0081091ebe986)
+[2025-04-17 13:19:25.654] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\LiveScreen.jsx:HEAD] running linter (cache-key:082945e7c3ffb930de20a32218a4869a)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\LoginScreen.jsx:HEAD] running linter (cache-key:f03b5d6df7be74af34b980986198c612)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\NotificationScreen.jsx:HEAD] running linter (cache-key:2b8e65926b0500855c55b3e790e405ea)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\ProfileScreen.jsx:HEAD] running linter (cache-key:aad7fe85255173bf737a5e49cc97d024)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\ProfileSetupScreen.jsx:HEAD] running linter (cache-key:728e2a457168562544cf2b23057e83a7)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\ResetPasswordScreen.jsx:HEAD] running linter (cache-key:d82bccdb3041712f90e416310ae5cbc1)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\SignupScreen.jsx:HEAD] running linter (cache-key:667e60378f316f0059e55b956e99e380)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\SplashScreen.jsx:HEAD] running linter (cache-key:1488f48604ea34b1ebd12524ec29d937)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\SuccessScreen.jsx:HEAD] running linter (cache-key:b83e2db7e59a634f5b01ade52af38ec8)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\VerifyOTPScreen.jsx:HEAD] running linter (cache-key:cb32df721abbdc8c36f9a2b1bfd11cc5)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:styles\RadioButton.jsx:HEAD] running linter (cache-key:88a4cfcb1577f35b771667b8f7cc9f27)
+[2025-04-17 13:19:25.655] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:utils\Colors.jsx:HEAD] running linter (cache-key:8dc4a4607a287fe42fcf25f108e2ab49)
+[2025-04-17 13:19:26.672] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:26.672] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:27.570] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:27.570] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:27.913] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:App.js... (46 files):HEAD] Linter ran in 2136ms
+[2025-04-17 13:19:28.429] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:28.430] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:32.773] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:32.773] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:39.979] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:39.981] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:19:55.172] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:19:55.173] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:20:01.347] [global] [info] [git_source_control.cc:517] Computing merge base between 87ca3dd0321f0465b5946f3cba718822d87db683 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:01.347] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 327f4451021ab4839c17b13dd26989f41a0b771b
+[2025-04-17 13:20:11.943] [global] [info] [service.cc:108] CLI version change; do not run file-triggered actions
+[2025-04-17 13:20:11.944] [global] [info] [service.cc:36] CLI version change; do not update tools
+[2025-04-17 13:20:11.948] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:11.948] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:11.974] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:11.974] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:11.974] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:11.974] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:12.485] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:12.485] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:12.488] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:12.488] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:12.488] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:12.489] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:13.195] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:13.195] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:13.196] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:13.196] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:13.197] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:13.197] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:20.955] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:20.955] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:20.956] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:20.956] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:20.957] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:20.958] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:25.714] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:25.714] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:20:25.715] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:25.715] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:25.716] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:20:25.716] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:08.643] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:08.643] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:08.645] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:08.645] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:08.646] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:08.646] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:09.900] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:09.900] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:09.902] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:09.902] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:09.903] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:09.904] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:22.978] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:22.978] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:22.979] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:22.979] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:22.980] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:22.981] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:25.454] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:25.454] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:25.455] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:25.455] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:25.455] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:25.456] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:26.834] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:26.834] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:26.836] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:26.836] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:26.838] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:26.840] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:27.644] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:27.644] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:27.649] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:27.649] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:27.653] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:27.658] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:28.906] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:28.906] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:21:28.906] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:28.906] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:28.907] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:21:28.907] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:22:16.734] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:22:16.734] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:22:16.735] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:22:16.735] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:22:16.736] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:22:16.736] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:06.520] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:23:06.520] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:23:06.521] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:06.521] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:06.522] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:06.522] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:29.270] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:23:29.270] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:23:29.271] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:29.271] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:29.271] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:29.272] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:39.536] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:23:39.536] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:23:39.537] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:39.537] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:39.537] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:23:39.538] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:27.853] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:27.853] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:27.854] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:27.854] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:27.855] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:27.855] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.291] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:29.291] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:29.292] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.292] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.292] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.292] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.975] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:29.976] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:29.984] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.984] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.986] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:29.994] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:31.254] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:31.254] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:24:31.256] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:31.256] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:31.257] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:24:31.257] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:26:52.714] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:26:52.714] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:26:52.715] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:26:52.715] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:26:52.716] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:26:52.716] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:30.167] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:30.167] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:30.170] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:30.170] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:30.173] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:30.176] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:31.857] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:31.857] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:31.860] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:31.861] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:31.862] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:31.863] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:32.584] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:32.584] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:32.585] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:32.585] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:32.585] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:32.585] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:33.864] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:33.864] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:27:33.865] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:33.865] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:33.865] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:27:33.866] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:01.241] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:01.241] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:01.244] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:01.245] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:01.246] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:01.250] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:02.744] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:02.744] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:02.749] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:02.749] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:02.751] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:02.755] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:03.643] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:03.643] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:03.645] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:03.645] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:03.647] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:03.649] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:04.894] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:04.894] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:04.898] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:04.899] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:04.903] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:04.906] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:07.470] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:07.470] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:32:07.472] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:07.472] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:07.472] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:32:07.473] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:22.925] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:34:22.925] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:34:22.925] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:22.925] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:22.926] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:22.926] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:52.264] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:34:52.264] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:34:52.265] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:52.265] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:52.266] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:34:52.266] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:36.076] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:36.076] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:36.081] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:36.081] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:36.085] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:36.087] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:37.589] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:37.590] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:37.591] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:37.591] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:37.592] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:37.593] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:38.304] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:38.304] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:38.309] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:38.310] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:38.313] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:38.315] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:39.745] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:39.745] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:35:39.749] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:39.749] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:39.752] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:35:39.755] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:33.830] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:33.830] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:33.833] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:33.833] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:33.835] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:33.836] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:35.295] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:35.295] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:35.299] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:35.299] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:35.301] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:35.303] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:36.082] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:36.082] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:36.083] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:36.083] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:36.085] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:36.086] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:37.418] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:37.418] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:41:37.422] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:37.422] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:37.425] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:41:37.429] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:04.292] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:42:04.292] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:42:04.329] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:04.329] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:04.330] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:04.331] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:05.026] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:42:05.026] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:42:05.065] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:05.065] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:05.067] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:05.067] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:44.222] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:42:44.222] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:42:44.228] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:44.228] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:44.236] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:42:44.244] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:13.634] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:13.634] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:13.640] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:13.642] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:13.647] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:13.649] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.096] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:15.096] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:15.100] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.101] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.102] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.104] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.959] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:15.959] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:15.964] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.964] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.966] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:15.967] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:23.638] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:23.638] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:23.642] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:23.642] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:23.642] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:23.642] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:28.647] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:28.647] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:28.650] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:28.650] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:28.651] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:28.651] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:29.873] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:29.873] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:46:29.875] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:29.875] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:29.875] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:46:29.876] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:33.597] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:47:33.597] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:47:33.598] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:33.598] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:33.598] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:33.598] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:34.839] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:47:34.839] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:47:34.841] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:34.842] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:34.842] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:47:34.842] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:10.176] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:10.177] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:10.183] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:10.183] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:10.184] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:10.186] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:11.415] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:11.415] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:11.415] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:11.415] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:11.416] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:11.416] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:19.311] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:19.311] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:19.313] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:19.313] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:19.314] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:19.314] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:26.209] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:26.209] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:26.212] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:26.212] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:26.213] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:26.213] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:29.011] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:29.011] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:29.014] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:29.014] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:29.014] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:29.015] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:30.803] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:30.804] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:30.805] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:30.805] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:30.807] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:30.808] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:32.448] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:32.448] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:48:32.450] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:32.450] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:32.451] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:48:32.451] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:16.195] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:49:16.195] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:49:16.200] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:16.200] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:16.202] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:16.202] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:18.205] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:49:18.206] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:49:18.208] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:18.208] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:18.209] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:18.209] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:19.535] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:49:19.535] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:49:19.537] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:19.538] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:19.538] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:49:19.539] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:18.416] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:18.417] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:18.424] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:18.424] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:18.425] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:18.426] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:19.857] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:19.857] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:19.863] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:19.863] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:19.865] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:19.867] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:20.569] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:20.569] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:20.570] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:20.571] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:20.572] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:20.573] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:21.855] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:21.855] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:52:21.857] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:21.857] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:21.858] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:52:21.859] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:20.719] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:20.719] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:20.720] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:20.720] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:20.721] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:20.722] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.133] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:22.133] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:22.134] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.134] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.134] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.134] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.788] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:22.788] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:22.790] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.790] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.791] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:22.792] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:24.151] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:24.151] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:55:24.155] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:24.155] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:24.155] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:55:24.156] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:22.987] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:22.987] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:22.989] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:22.990] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:22.991] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:22.992] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:24.412] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:24.412] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:24.414] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:24.414] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:24.415] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:24.416] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:25.350] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:25.350] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:25.358] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:25.358] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:25.361] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:25.363] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:26.534] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:26.534] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 13:58:26.536] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:26.536] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:26.536] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 13:58:26.537] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:25.557] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 14:01:25.557] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 14:01:25.564] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:25.564] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:25.564] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:25.565] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:26.976] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 14:01:26.976] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 14:01:26.978] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:26.978] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:26.980] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:26.982] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed
+[2025-04-17 14:01:27.735] [global] [info] [git_source_control.cc:517] Computing merge base between cba0046884cfe918639268c38470d93cd16e4a52 and cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 14:01:27.736] [global] [info] [git_source_control.cc:519] Resolved divergent commit as cba0046884cfe918639268c38470d93cd16e4a52
+[2025-04-17 14:01:27.740] [global] [info] [app_context.cc:410] TryGetTrunkConfigPb failed

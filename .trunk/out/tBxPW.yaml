@@ -1,0 +1,25 @@
+trunk_cli_version: 1.22.12
+title: osv-scanner exited with exit_code=127
+report:
+  - osv-scanner exited with exit_code=127
+  - linter:
+      command: |
+        'C:\Users\madha\AppData\Local\trunk\tools\osv-scanner\2.0.1-ed37554d768ac63d823ce07697cbbddd\osv-scanner.exe' --lockfile=package-lock.json --format json
+      stdin_path: (none)
+      run_from: D:\box\ODSLY\ODSLY\
+      timeout: 10m
+      rerun: (cd D:\box\ODSLY\ODSLY\; env -i 'PATH=C:\Users\madha\AppData\Local\trunk\tools\osv-scanner\2.0.1-ed37554d768ac63d823ce07697cbbddd;C:/Users/madha/AppData/Local/trunk/tools/git-bash/2.40.1-da0c3e1526d36e62bf43d06ec46c5052/bin;C:/Users/madha/AppData/Local/trunk/tools/git-bash/2.40.1-da0c3e1526d36e62bf43d06ec46c5052/usr/bin;C:\Users\madha\AppData\Local\trunk\tools\osv-scanner\2.0.1-ed37554d768ac63d823ce07697cbbddd;C:\Users\madha\AppData\Local\trunk\tools\git-bash\2.40.1-da0c3e1526d36e62bf43d06ec46c5052/bin;C:\Users\madha\AppData\Local\trunk\tools\git-bash\2.40.1-da0c3e1526d36e62bf43d06ec46c5052/usr/bin;E:\anacon;E:\anacon\Library\mingw-w64\bin;E:\anacon\Library\usr\bin;E:\anacon\Library\bin;E:\anacon\Scripts;E:\anacon\bin;C:\Program Files\Python312\Scripts;C:\Program Files\Python312;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.5\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.5\libnvvp;C:\Program Files\Java\jdk-17\bin;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\MinGW\bin;C:\Users\madha\GlassFish_Server\bin;C:\Program Files\Git\cmd;C:\Users\madha\.cargo;C:\Users\madha\AppData\Local\Programs\Python\Python312\Lib\site-packages\webdriver_manager;D:\PostgreSQL\lib;D:\PostgreSQL\bin;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\MongoDB\Server\7.0\bin;C:\Program Files\NVIDIA Corporation\Nsight Compute 2024.2.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\150\Tools\Binn;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Program Files\CMake\bin;C:\Users\madha\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Graphviz\bin;E:\anacon;E:\anacon\Scripts;E:\anacon\condabin;C:\Program Files\Pandoc;D:\apktool;C:\Users\madha\.cargo\bin;C:\Users\madha\AppData\Local\Microsoft\WindowsApps;C:\Users\madha\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\madha\AppData\Local\GitHubDesktop\bin;C:\Users\madha\AppData\Local\JetBrains\Toolbox\scripts;C:\Users\madha\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;D:\apktool;.;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps' 'C:\Users\madha\AppData\Local\trunk\tools\osv-scanner\2.0.1-ed37554d768ac63d823ce07697cbbddd\osv-scanner.exe' --lockfile=package-lock.json --format json)
+      affects_cache:
+        []
+      direct_configs:
+        []
+      exit_status: exited
+      exit_code: 127
+      stdout: (none)
+      stderr: |
+        Scanned D:\box\ODSLY\ODSLY\package-lock.json file and found 822 packages
+        error when retrieving vulns: max retries exceeded: attempt 4: request failed: Post "https://api.osv.dev/v1/querybatch": dial tcp: lookup api.osv.dev: no such host
+        max retries exceeded: attempt 4: request failed: Post "https://api.osv.dev/v1/querybatch": dial tcp: lookup api.osv.dev: no such host
+
+    parser: |
+      (none)

@@ -1,0 +1,15 @@
+action_id: trunk-upgrade-available
+date: 2025-04-17 09:36:48
+run: trunk upgrade --notify --allow-daemon-start=false
+run_from: ""
+trigger: schedule 1h
+result:
+  exit_code: 1
+  out: ""
+  err: Exception occurred while executing 'trunk-upgrade-available'. See .trunk\out\W4kgl.yaml for details.
+  error_path: D:\box\ODSLY\ODSLY\.trunk\out\W4kgl.yaml
+timestamp: 1744882608
+full_timestamp:
+  nanos: 159586000
+  seconds: 1744882608
+trunk_version: 1.22.12
