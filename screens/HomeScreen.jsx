@@ -22,7 +22,6 @@ import {
 } from "../json/data";
 import BetCard from "../components/Card/BetCard";
 import GradientButton from "../components/Button/GradientButton";
-import { FontDisplay } from "expo-font";
 import { SubscriptionCard } from "../components/Card/SubscriptionCard";
 import { LineGradient } from "../layouts/LineGradient";
 
@@ -30,7 +29,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Header />
+
       <ScrollView style={styles.content} contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
+        
         <GradientText text="Welcome back, Zack!" style={{ fontSize: 25 }} />
 
         <View style={styles.statsGrid}>

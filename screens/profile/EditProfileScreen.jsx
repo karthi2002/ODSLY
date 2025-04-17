@@ -30,6 +30,7 @@ const EditProfile = ({ username, setUsername, email, setEmail }) => {
 
   return (
     <View style={styles.container}>
+          <CustomHeader title={"Edit Profile"} />
       {/* Row for profile image + username welcome */}
     <View style={styles.content}>
     <View style={styles.row}>
@@ -90,10 +91,8 @@ const styles = StyleSheet.create({
         backgroundColor:Colors.background,
     },
     content: {
-    alignItems: 'stretch',
-    paddingVertical: 20,
-    gap: 10,
-    margin: 20,
+    paddingTop: 60,
+    paddingHorizontal: 20,
     backgroundColor: Colors.background,
   },
   row: {
