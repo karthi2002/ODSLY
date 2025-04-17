@@ -19,7 +19,7 @@ const Header = () => {
         <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={22} color={Colors.secondary} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.icon}>
+        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Profile')}>
           <Ionicons name="person" size={22} color={Colors.secondary} />
         </TouchableOpacity>
       </View>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     zIndex: 100,
     elevation: 4,
-    shadowColor: Colors.primary,
+    shadowColor: Colors.secondary,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
   },

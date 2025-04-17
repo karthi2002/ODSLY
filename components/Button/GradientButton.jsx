@@ -17,7 +17,7 @@ const GradientButton = ({ label, onPress, arrowEnable, style }) => {
         end={{ x: 1, y: 0 }}
         style={[styles.button, style]}
       >
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <Text style={styles.text}>{label}</Text>
             {arrowEnable && ( <FontAwesome6 name="arrow-right-long" size={18} color={Colors.secondary} /> )}
         </View>

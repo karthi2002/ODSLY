@@ -9,8 +9,8 @@ import HomeScreen from "../screens/HomeScreen";
 import LiveScreen from "../screens/LiveScreen";
 import InsightsScreen from "../screens/InsightsScreen";
 import CommunityScreen from "../screens/CommunityScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 import Colors from "../utils/Colors";
+import ProfileScreen from "../screens/profile/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
