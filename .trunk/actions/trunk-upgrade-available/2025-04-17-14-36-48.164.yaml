@@ -1,0 +1,15 @@
+action_id: trunk-upgrade-available
+date: 2025-04-17 14:36:48
+run: trunk upgrade --notify --allow-daemon-start=false
+run_from: ""
+trigger: schedule 1h
+result:
+  exit_code: 1
+  out: ""
+  err: Exception occurred while executing 'trunk-upgrade-available'. See .trunk\out\SEyMq.yaml for details.
+  error_path: D:\box\ODSLY\ODSLY\.trunk\out\SEyMq.yaml
+timestamp: 1744900608
+full_timestamp:
+  nanos: 164203000
+  seconds: 1744900608
+trunk_version: 1.22.12

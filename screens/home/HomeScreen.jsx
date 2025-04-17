@@ -6,12 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Header from "../layouts/Header";
-import Colors from "../utils/Colors";
+import Header from "../../layouts/Header";
+import Colors from "../../utils/Colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { GradientText } from "../components/Button/GradientText";
+import { GradientText } from "../../components/Button/GradientText";
 import { LinearGradient } from "expo-linear-gradient";
-import RadioButton from "../styles/RadioButton";
+import RadioButton from "../../styles/RadioButton";
 import {
   statsData,
   activeBets,
@@ -19,11 +19,11 @@ import {
   BettingInsights,
   CommunityHighlights,
   activeSubscriptions,
-} from "../json/data";
-import BetCard from "../components/Card/BetCard";
-import GradientButton from "../components/Button/GradientButton";
-import { SubscriptionCard } from "../components/Card/SubscriptionCard";
-import { LineGradient } from "../layouts/LineGradient";
+} from "../../json/data";
+import BetCard from "../../components/Card/BetCard";
+import GradientButton from "../../components/Button/GradientButton";
+import { SubscriptionCard } from "../../components/Card/SubscriptionCard";
+import { LineGradient } from "../../layouts/LineGradient";
 
 export default function HomeScreen() {
   return (

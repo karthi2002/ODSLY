@@ -5,11 +5,11 @@ import { Text, View, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 
-import HomeScreen from "../screens/HomeScreen";
-import LiveScreen from "../screens/LiveScreen";
-import InsightsScreen from "../screens/InsightsScreen";
-import CommunityScreen from "../screens/CommunityScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import HomeScreen from "../screens/home/HomeScreen";
+import LiveScreen from "../screens/live/LiveScreen";
+import InsightsScreen from "../screens/insights/InsightsScreen";
+import CommunityScreen from "../screens/community/CommunityScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
 import Colors from "../utils/Colors";
 
 const Tab = createBottomTabNavigator();

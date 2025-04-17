@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Header from "../layouts/Header";
-import Colors from "../utils/Colors";
+import Header from "../../layouts/Header";
+import Colors from "../../utils/Colors";
 
 export default function CommunityScreen() {
   return (
