@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaProvider> {/* ✅ This wraps the whole app */}
+    <SafeAreaProvider>
       <SafeAreaView style={styles.safeArea} edges={['top', 'bottom', 'left', 'right']}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>

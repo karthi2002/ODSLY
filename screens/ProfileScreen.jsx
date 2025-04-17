@@ -3,12 +3,12 @@ import { View, Text, StyleSheet } from "react-native";
 import Header from "../layouts/Header";
 import Colors from "../utils/Colors";
 import EditProfile from "./profile/EditProfile";
-import ProfileHeader from "../layouts/ProfileHeader";
+import CustomHeader from "../layouts/CustomHeader";
 
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <ProfileHeader />
+      <CustomHeader title={"Edit Profile"} />
       <EditProfile />
     </View>
   );

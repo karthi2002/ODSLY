@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, View, Text, StyleSheet } from "react-native";
-import NotificationHeader from "../layouts/NotificationHeader";
+import CustomHeader from "../layouts/CustomHeader";
 import MessageCard from "../components/Card/MessageCard";
 import Colors from "../utils/Colors";
 import { olderMessages, unreadMessages } from "../json/NotificationData";
@@ -8,7 +8,7 @@ import { olderMessages, unreadMessages } from "../json/NotificationData";
 export default function InsightsScreen() {
   return (
     <View style={styles.container}>
-      <NotificationHeader />
+      <CustomHeader title={"Notifications"} />
 
       <ScrollView style={styles.content} contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false} >
         <Text style={styles.sectionTitle}>Unread</Text>
