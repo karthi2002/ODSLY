@@ -8,6 +8,7 @@ const TextInputField = ({
   setValue,
   pattern,
   errorMessage,
+  style
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState('');
@@ -24,11 +25,11 @@ const TextInputField = ({
   return (
     <View style={styles.container}>
       {(isFocused || value) && (
-        <Text style={styles.label}>{label}</Text>
+        <Text style={[styles.label, style]}>{label}</Text>
       )}
 
       <TextInput
-        style={[styles.input, isFocused && styles.inputFocused]}
+        style={[styles.input, isFocused && styles.inputFocused, style]}
         placeholder={isFocused ? '' : label}
         value={value}
         onChangeText={(text) => {
@@ -37,6 +38,7 @@ const TextInputField = ({
         }}
         onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
+
       />
       {error && value ? (
         <Text style={styles.errorText}>{error}</Text>

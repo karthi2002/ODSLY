@@ -5,16 +5,19 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import ProfileTextInputField from '../../components/Input/ProfileTextInputField';
-import ProfileEmailInputField from '../../components/Input/ProfileEmailInputField';
-import MaskedView from '@react-native-masked-view/masked-view';
-import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../utils/Colors';
+import CustomHeader from '../../layouts/CustomHeader';
+import TextInputField from '../../components/Input/TextInputField';
+import GradientButton from '../../components/Button/GradientButton';
+import GradientField from '../../components/Input/GradientField';
+import GradientToggle from '../../components/Input/GradientToggle';
 
-const EditProfile = ({ username, setUsername, email, setEmail }) => {
+const EditProfile = () => {
+  const [username, setUsername] = useState(" ")
+  const [email, setEmail] = useState(" ")
   const [imageUri, setImageUri] = useState(null);
 
   const handleImagePick = async () => {
@@ -30,109 +33,65 @@ const EditProfile = ({ username, setUsername, email, setEmail }) => {
 
   return (
     <View style={styles.container}>
-          <CustomHeader title={"Edit Profile"} />
+        <CustomHeader title={"Edit Profile"} />
       {/* Row for profile image + username welcome */}
-    <View style={styles.content}>
-    <View style={styles.row}>
-        <TouchableOpacity style={styles.imageWrapper} onPress={handleImagePick}>
-          {imageUri ? (
-            <Image source={{ uri: imageUri }} style={styles.profileImage} />
-          ) : (
-            <Ionicons name="person" size={60} color={Colors.secondary} />
-          )}
-        </TouchableOpacity>
-
-        <View style={styles.textWrapper}>
-          <Text style={styles.welcomeText}>Welcome, {username || 'User'}!</Text>
-
-          <TouchableOpacity onPress={handleImagePick}>
-            <MaskedView maskElement={<Text style={styles.uploadText}>Upload Profile Picture</Text>}>
-              <LinearGradient
-                colors={['#029EFE', '#6945E2', '#E9098E']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
-                <Text style={[styles.uploadText, { opacity: 0 }]}>Upload Profile Picture</Text>
-              </LinearGradient>
-            </MaskedView>
-          </TouchableOpacity>
-        </View>
-      </View>
-
+    <ScrollView
+            style={styles.content}
+            contentContainerStyle={{ paddingBottom: 100 }}
+            showsVerticalScrollIndicator={false} >
+    
       {/* Username and Email Input Fields */}
       <View>
-        <ProfileTextInputField
+        <TextInputField
           label="Username"
           value={username}
           setValue={setUsername}
           pattern="^[a-zA-Z0-9_]{3,15}$"
           errorMessage="Username must be 3-15 characters (letters, numbers, or _)"
+          style={{backgroundColor: Colors.background, borderColor: Colors.secondary , color: Colors.secondary}}
         />
 
-        <Text style={styles.subText}>*Change username to check if it is available</Text>
+        <Text style={styles.subText}>Change username to check if it is available</Text>
 
-        <ProfileEmailInputField
+        <TextInputField
           label="Email"
           value={email}
           setValue={setEmail}
           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           errorMessage="Please enter a valid email address"
+          style={{backgroundColor: Colors.background, borderColor: Colors.secondary , color: Colors.secondary}}
         />
       </View>
 
-    </View>
+      <GradientField label="FanDuel" status showIcons="double" />
+      <GradientField label="Drafting" showIcons="external" />
+      <GradientToggle label="Bet status changes" style={{backgroundColor: '#1E2A5C'}} />
+
+
+      <GradientButton
+        label="Save Changes"
+        onPress={() => handleNavigate(item.route)}
+        arrowEnable={false}
+      />
+
+    </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:Colors.background,
-    },
-    content: {
-    paddingTop: 60,
-    paddingHorizontal: 20,
+  container: {
+    flex: 1,
     backgroundColor: Colors.background,
   },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-    gap: 15,
-    width: '100%',
-  },
-  imageWrapper: {
-    borderWidth: 2,
-    borderColor: Colors.secondary,
-    borderRadius: 60,
-    padding: 12,
-  },
-  profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-  },
-  textWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  welcomeText: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.secondary,
-    marginBottom: 5,
-  },
-  uploadText: {
-    fontSize: 18,
-    fontWeight: '500',
-    textAlign: 'left',
+  content: {
+    paddingTop: 80,
+    paddingHorizontal: 15,
   },
   subText: {
     fontSize: 12,
-    color: 'gray',
-    fontStyle: 'italic',
+    color: Colors.secondary,
+    marginBottom: 25
   },
 });
 
