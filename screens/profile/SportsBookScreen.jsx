@@ -52,9 +52,8 @@ const SportsBookScreen = () => {
 
       <GradientButton
         label="Save Changes"
-        onPress={() => handleNavigate(item.route)}
-        arrowEnable={true}
-        style={{ width: 40, gap: 7, paddingVertical: 5 }}
+        onPress={() => {}}
+        arrowEnable={false}
       />
       </ScrollView>
     </View>
