@@ -12,8 +12,6 @@ import Colors from '../../utils/Colors';
 import CustomHeader from '../../layouts/CustomHeader';
 import TextInputField from '../../components/Input/TextInputField';
 import GradientButton from '../../components/Button/GradientButton';
-import GradientField from '../../components/Input/GradientField';
-import GradientToggle from '../../components/Input/GradientToggle';
 
 const EditProfile = () => {
   const [username, setUsername] = useState(" ")
@@ -62,11 +60,6 @@ const EditProfile = () => {
           style={{backgroundColor: Colors.background, borderColor: Colors.secondary , color: Colors.secondary}}
         />
       </View>
-
-      <GradientField label="FanDuel" status showIcons="double" />
-      <GradientField label="Drafting" showIcons="external" />
-      
-      <GradientToggle label="Bet status changes" style={{backgroundColor: '#1E2A5C'}} />
 
 
       <GradientButton
