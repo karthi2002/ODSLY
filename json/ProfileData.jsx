@@ -5,11 +5,10 @@ export const profileData = {
       avatarUrl: "https://randomuser.me/api/portraits/men/75.jpg",
       upgrade: {
         label: "Upgrade Now",
-        action: "Upgrade" 
+        route: "Upgrade" 
       },
     },
     profileNavigation: [
-        { label: "Upgrade Now", icon: "", route: "Upgrade" },
         { label: "Edit Profile", icon: "person", route: "EditProfile" },
         { label: "Sportsbook Account", icon: "wallet", route: "SportsbookAccount" },
         { label: "Betting Preferences", icon: "options", route: "BettingPreferences" },
@@ -19,4 +18,8 @@ export const profileData = {
         { label: "Logout", icon: "log-out", route: "AuthStack" }
       ]
   };
+
+
+
+  
   

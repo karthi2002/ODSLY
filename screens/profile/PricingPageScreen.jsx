@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,92 +6,138 @@ import {
   StyleSheet,
   FlatList,
   ScrollView,
-} from 'react-native';
-import CustomHeader from '../../layouts/CustomHeader';
-import Colors from '../../utils/Colors';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import GradientButton from '../../components/Button/GradientButton';
+} from "react-native";
+import CustomHeader from "../../layouts/CustomHeader";
+import Colors from "../../utils/Colors";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import GradientButton from "../../components/Button/GradientButton";
+import GradientBorderButton from "../../components/Button/GradientBorderButton";
 
 // Define the pricing plans
 const plans = [
   {
-    id: 'free',
-    name: 'Free',
-    price: '--',
-    features: ['Bet Tracking', 'Community Engagement and Educational Content', 'Limited AI Insights','Preview Access to Leaderboards'],
+    id: "free",
+    name: "Free",
+    price: "--",
+    features: [
+      "Bet Tracking",
+      "Community Engagement and Educational Content",
+      "Limited AI Insights",
+      "Preview Access to Leaderboards",
+    ],
   },
   {
-    id: 'premium',
-    name: 'Premium',
-    price: '~$15',
-    features: ['5 Team Members', '2500+ UI Blocks', '50 GB Cloud Storage', 'Individual Email Account'],
+    id: "premium",
+    name: "Premium",
+    price: "~$15",
+    features: [
+      "5 Team Members",
+      "2500+ UI Blocks",
+      "50 GB Cloud Storage",
+      "Individual Email Account",
+    ],
   },
   {
-    id: 'platinum',
-    name: 'Platinum',
-    price: '~$22',
-    features: ['Unlimited Team Members', '5000+ UI Blocks', '200 GB Cloud Storage', 'Individual Email Account', 'Premium Support'],
+    id: "platinum",
+    name: "Platinum",
+    price: "~$22",
+    features: [
+      "Unlimited Team Members",
+      "5000+ UI Blocks",
+      "200 GB Cloud Storage",
+      "Individual Email Account",
+      "Premium Support",
+    ],
   },
 ];
 
 const PricingPlans = () => {
-  const [selectedPlanId, setSelectedPlanId] = useState('free');
-  const selectedPlan = plans.find(plan => plan.id === selectedPlanId);
+  const [selectedPlanId, setSelectedPlanId] = useState("free");
+  const selectedPlan = plans.find((plan) => plan.id === selectedPlanId);
 
   return (
     <View style={styles.container}>
-      <CustomHeader title={"Upgrade"}/>
-        <ScrollView
-            style={styles.content}
-            contentContainerStyle={{ paddingBottom: 100 }}
-            showsVerticalScrollIndicator={false}
-          >
-      <View style={styles.plansRow}>
-        {plans.map((plan) => {
-          const isSelected = plan.id === selectedPlanId;
-          const isPaidPlan = plan.id !== 'free';
-          return (
-            <TouchableOpacity
-              key={plan.id}
-              style={[styles.planContainer, isSelected && styles.selectedPlanContainer]}
-              onPress={() => setSelectedPlanId(plan.id)}
-            >
-              {isSelected && <Text style={styles.selectedTag}>SELECTED</Text>}
-              <Text style={styles.planName}>{plan.name}</Text>
-              <Text style={styles.planPrice}>{plan.price}</Text>
-              {isPaidPlan && <Text style={styles.paidPlan}>per month</Text>}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      <CustomHeader title={"Upgrade"} />
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.plansRow}>
+          {plans.map((plan) => {
+            const isSelected = plan.id === selectedPlanId;
+            const isPaidPlan = plan.id !== "free";
+            return (
+              <TouchableOpacity
+                key={plan.id}
+                style={[
+                  styles.planContainer,
+                  isSelected && styles.selectedPlanContainer,
+                ]}
+                onPress={() => setSelectedPlanId(plan.id)}
+              >
+                {isSelected && <Text style={styles.selectedTag}>SELECTED</Text>}
+                <Text style={styles.planName}>{plan.name}</Text>
+                <Text style={styles.planPrice}>{plan.price}</Text>
+                {isPaidPlan && <Text style={styles.paidPlan}>per month</Text>}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
 
-      <View style={styles.featuresContainer}>
-        <Text style={styles.featuresTitle}>Features included :</Text>
-        <FlatList
-          data={selectedPlan.features}
-          keyExtractor={(item, index) => `${selectedPlan.id}-feature-${index}`}
-          renderItem={({ item }) => (
-            <Text style={styles.featureItem}> <AntDesign name="checkcircleo" size={24} color="white" >{item}</AntDesign></Text>
-          )}
+        <View style={styles.featuresContainer}>
+          <Text style={styles.featuresTitle}>Features included:</Text>
+          <FlatList
+            data={selectedPlan.features}
+            keyExtractor={(item, index) =>
+              `${selectedPlan.id}-feature-${index}`
+            }
+            renderItem={({ item }) => (
+              <View style={styles.featurePoint}>
+                <AntDesign name="checkcircleo" size={22} color="white" />
+                <Text style={styles.featureItem}> {item}</Text>
+              </View>
+            )}
+          />
+        </View>
+
+        {selectedPlanId === "free" ? (
+          <GradientBorderButton
+          title="Your Current Plan"
+          onPress={() => {}}
+          showBorderGradient={false}
+          backgroundColor={Colors.LightGray}
+          borderColor={Colors.background}
+          textColor={Colors.secondary}
+          showTextGradient={false}
+          disabled={false}
+          paddingVertical={12}
         />
-      </View>
-    </ScrollView>
+        ) : (
+          <GradientButton
+            label="Upgrade Now"
+            onPress={() => {}}
+            arrowEnable={true}
+          />
+        )}
+
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.background,
-      },
-      content: {
-        paddingTop: 80,
-        paddingHorizontal: 1,
-      },
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
+  content: {
+    paddingTop: 80,
+    paddingHorizontal: 2,
+  },
   plansRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 16,
   },
   planContainer: {
@@ -101,52 +147,60 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: Colors.LightGray,
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: Colors.secondary,
-    height:160,
+    height: 160,
   },
   selectedPlanContainer: {
     borderColor: Colors.orange,
     borderWidth: 6,
   },
   selectedTag: {
-    position: 'absolute',
-    top: -15,
+    position: "absolute",
+    top: -14,
     backgroundColor: Colors.orange,
-    paddingHorizontal: 8,
+    paddingHorizontal: 5,
     paddingVertical: 2,
     borderRadius: 50,
-    fontWeight: 'bold',
+    fontSize: 12,
+    fontWeight: "600",
   },
   planName: {
-    marginTop:28,
+    marginTop: 28,
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   planPrice: {
     fontSize: 16,
-    fontWeight:'bold',
+    fontWeight: "bold",
     marginTop: 18,
   },
   paidPlan: {
     fontSize: 12,
-    color:Colors.LightGray,
+    color: Colors.secondary / 40,
     marginTop: 1,
   },
   featuresContainer: {
-    marginTop: 24,
+    marginTop: 40,
+    marginHorizontal: 15,
   },
   featuresTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 8,
-    color:Colors.secondary,
+    fontSize: 20,
+    fontWeight: "500",
+    marginBottom: 25,
+    color: Colors.secondary,
+  },
+  featurePoint: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 10,
   },
   featureItem: {
-    fontSize: 14,
-    fontWeight:'400',
-    color:Colors.secondary,
-    marginBottom: 4,
+    fontSize: 18,
+    fontWeight: "400",
+    textAlign: "start",
+    color: Colors.secondary,
   },
 });
 

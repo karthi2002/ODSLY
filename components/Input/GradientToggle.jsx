@@ -23,7 +23,6 @@ const GradientToggle = ({ label, initial = false, style }) => {
           ios_backgroundColor="#FFFFFF"
           onValueChange={toggleSwitch}
           value={isEnabled}
-          style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
         />
       </View>
     </LinearGradient>
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
   innerBox: {
     backgroundColor: Colors.background, 
    borderRadius: 10,
-    paddingVertical: 10,
+    paddingVertical: 0,
     paddingHorizontal: 8,
     flexDirection: "row",
     justifyContent: "space-between",
