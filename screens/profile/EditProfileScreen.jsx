@@ -65,6 +65,7 @@ const EditProfile = () => {
 
       <GradientField label="FanDuel" status showIcons="double" />
       <GradientField label="Drafting" showIcons="external" />
+      
       <GradientToggle label="Bet status changes" style={{backgroundColor: '#1E2A5C'}} />
 
 

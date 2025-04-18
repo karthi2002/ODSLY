@@ -19,7 +19,7 @@ const Header = () => {
         <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={22} color={Colors.secondary} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Profile')}>
+        <TouchableOpacity style={styles.icon} >
           <Ionicons name="person" size={22} color={Colors.secondary} />
         </TouchableOpacity>
       </View>
