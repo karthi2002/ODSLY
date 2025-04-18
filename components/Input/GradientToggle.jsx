@@ -1,32 +1,38 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Colors from "../../utils/Colors"; 
+import Colors from "../../utils/Colors";
 
-const GradientToggle = ({ label, initial = false, style }) => {
+const GradientToggle = ({ label, initial = false, style, borderColor }) => {
   const [isEnabled, setIsEnabled] = useState(initial);
 
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => setIsEnabled((previous) => !previous);
+
+  // If borderColor is provided, use solid View instead of LinearGradient
+  const Wrapper = borderColor ? View : LinearGradient;
+  const wrapperProps = borderColor
+    ? { style: [styles.solidBorder, { borderColor }, style] }
+    : {
+        colors: ["#029EFE", "#6945E2", "#E9098E"],
+        start: { x: 0, y: 0 },
+        end: { x: 1, y: 1 },
+        style: [styles.gradientBorder, style],
+      };
 
   return (
-    <LinearGradient
-      colors={["#029EFE", "#6945E2", "#E9098E"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.gradientBorder}
-    >
-      <View style={[styles.innerBox, style]}>
+    <Wrapper {...wrapperProps}>
+      <View style={styles.innerBox}>
         <Text style={styles.label}>{label}</Text>
         <Switch
           trackColor={{ false: "#FFFFFF", true: "#44A7FF" }}
-          thumbColor={isEnabled ? "#1E2A5C" : "#1E2A5C"}
+          thumbColor="#1E2A5C"
           ios_backgroundColor="#FFFFFF"
           onValueChange={toggleSwitch}
           value={isEnabled}
           style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
         />
       </View>
-    </LinearGradient>
+    </Wrapper>
   );
 };
 
@@ -37,9 +43,16 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     width: "100%",
   },
+  solidBorder: {
+    borderWidth: 2,
+    borderRadius: 12,
+    padding: 2,
+    marginVertical: 6,
+    width: "100%",
+  },
   innerBox: {
-    backgroundColor: Colors.background, 
-   borderRadius: 10,
+    backgroundColor: Colors.background,
+    borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 8,
     flexDirection: "row",

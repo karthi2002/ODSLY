@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // or any icon lib you use
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+  Dimensions,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../utils/Colors';
+
+const screenHeight = Dimensions.get('window').height;
 
 const DropdownField = ({
   label,
@@ -15,10 +25,7 @@ const DropdownField = ({
 
   return (
     <View style={styles.container}>
-      
-    
-    <Text style={[styles.label, style]}>{label}</Text>
-      
+      <Text style={[styles.label, style]}>{label}</Text>
 
       <TouchableOpacity
         onPress={() => setVisible(true)}
@@ -28,41 +35,43 @@ const DropdownField = ({
         onBlur={() => setIsFocused(false)}
       >
         <Text style={[styles.text, !value && styles.placeholderText]}>
-    {value || 'Select'}
-  </Text>
+          {value || 'Select'}
+        </Text>
         <Ionicons name="chevron-down" size={20} color={Colors.secondary} />
       </TouchableOpacity>
 
       <Modal
         transparent
-        animationType="fade"
+        animationType="slide"
         visible={visible}
         onRequestClose={() => setVisible(false)}
       >
-        <TouchableOpacity
-          style={styles.modalOverlay}
-          activeOpacity={1}
-          onPressOut={() => setVisible(false)}
-        >
-          <View style={styles.modalContainer}>
-            <FlatList
-              data={options}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.option}
-                  onPress={() => {
-                    setValue(item);
-                    setVisible(false);
-                    setIsFocused(true);
-                  }}
-                >
-                  <Text style={styles.optionText}>{item}</Text>
-                </TouchableOpacity>
-              )}
-            />
+        <View style={styles.fullscreenModal}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Select {label}</Text>
+            <TouchableOpacity onPress={() => setVisible(false)}>
+              <Ionicons name="close" size={28} color={Colors.secondary} />
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+
+          <FlatList
+            data={options}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.option}
+                onPress={() => {
+                  setValue(item);
+                  setVisible(false);
+                  setIsFocused(true);
+                }}
+              >
+                <Text style={styles.optionText}>{item}</Text>
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={{ paddingBottom: 100 }}
+          />
+        </View>
       </Modal>
     </View>
   );
@@ -102,25 +111,34 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.secondary,
   },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#00000080',
+  placeholderText: {
+    color: Colors.secondary + '99',
   },
-  modalContainer: {
+  fullscreenModal: {
+    flex: 1,
     backgroundColor: Colors.background,
-    marginHorizontal: 40,
-    borderRadius: 10,
-    paddingVertical: 10,
-    maxHeight: 250,
+    paddingHorizontal: 20,
+    paddingTop: 60,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.secondary,
   },
   option: {
-    padding: 15,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.secondary + '22',
   },
   optionText: {
     fontSize: 16,
     color: Colors.secondary,
-    fontWeight: '400'
   },
 });
 

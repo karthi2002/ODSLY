@@ -12,6 +12,7 @@ import SportsBookScreen from './screens/profile/SportsBookScreen.jsx'
 import BettingPreferenceScreen from './screens/profile/BettingPreferenceScreen';
 import NotificationSettingScreen from './screens/profile/NotificationSettingScreen';
 import PrivacyScreen from './screens/profile/PrivacyScreen';
+import AppPreferenceScreen from './screens/profile/AppPreferenceScreen.jsx';
 
 
 const Stack = createNativeStackNavigator();
@@ -31,10 +32,9 @@ export default function App() {
             <Stack.Screen name="BettingPreferences" component={BettingPreferenceScreen} />
             <Stack.Screen name="NotificationSetting" component={NotificationSettingScreen} />
             <Stack.Screen name="PrivacySecurity" component={PrivacyScreen} />
-
+            <Stack.Screen name="AppPreferences" component={AppPreferenceScreen} />
 
             
-
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
