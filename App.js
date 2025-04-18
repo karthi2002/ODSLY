@@ -10,6 +10,7 @@ import EditProfileScreen from './screens/profile/EditProfileScreen';
 import PricingPageScreen from './screens/profile/PricingPageScreen';
 import BettingPreferenceScreen from './screens/profile/BettingPreferenceScreen';
 import NotificationSettingScreen from './screens/profile/NotificationSettingScreen';
+import PrivacyScreen from './screens/profile/PrivacyScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,8 @@ export default function App() {
             <Stack.Screen name="Upgrade" component={PricingPageScreen} />
             <Stack.Screen name="BettingPreferences" component={BettingPreferenceScreen} />
             <Stack.Screen name="NotificationSetting" component={NotificationSettingScreen} />
+            <Stack.Screen name="PrivacySecurity" component={PrivacyScreen} />
+
 
             
 

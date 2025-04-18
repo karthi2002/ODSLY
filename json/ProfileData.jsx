@@ -19,7 +19,16 @@ export const profileData = {
       ]
   };
 
-
-
-  
-  
+export const notificationSettings = [
+  { "label": "Bet status changes" },
+  { "label": "Game milestones" },
+  { "label": "Odds shifts or closing line" },
+  { "label": "Community & Social Engagement" },
+  { "label": "Bet Result Alerts" },
+  { "label": "Live Progress Updates" },
+  { "label": "Odds Movement" },
+  { "label": "Cash-Out Opportunities" },
+  { "label": "Live Game & Event Notifications" },
+  { "label": "AI Insights & Analytics" },
+  { "label": "System & Account Notifications" }
+]
