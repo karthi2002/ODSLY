@@ -7,6 +7,7 @@ import AuthStack from './navigations/AuthStack';
 import MainTab from './navigations/MainTab';
 import NotificationScreen from './screens/NotificationScreen';
 import EditProfileScreen from './screens/profile/EditProfileScreen';
+import PricingPlans from './screens/profile/PricingPageScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
             <Stack.Screen name="MainTab" component={MainTab} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+            <Stack.Screen name='Upgrade' component={PricingPlans} />
 
           </Stack.Navigator>
         </NavigationContainer>

@@ -1,0 +1,538 @@
+[2025-04-18 08:18:09.549] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:3cf2be50d53232e53769b7e9463f5aa0)
+[2025-04-18 08:18:10.067] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:18:10.067] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:18:11.602] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2043ms
+[2025-04-18 08:18:11.603] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\m1rjtnw\screens, message: Directory not empty
+[2025-04-18 08:18:11.606] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\m1rjtnw, message: Directory not empty
+[2025-04-18 08:18:11.606] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\m1rjtnw, message: Directory not empty
+[2025-04-18 08:18:11.606] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\m1rjtnw\screens, message: Permission denied
+[2025-04-18 08:18:11.606] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\m1rjtnw\screens, message: Permission denied
+[2025-04-18 08:18:11.606] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\m1rjtnw, message: Directory not empty
+[2025-04-18 08:18:12.116] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:18:12.116] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:19:09.004] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:19:09.005] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:19:14.239] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:19:14.239] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:07.696] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:07.696] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:07.749] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:7d05d380f3326e20ef131aa9c382b147)
+[2025-04-18 08:20:08.266] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:08.266] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:09.532] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:09.532] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:10.115] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2362ms
+[2025-04-18 08:20:10.116] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4v6wst3\screens, message: Directory not empty
+[2025-04-18 08:20:10.116] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4v6wst3, message: Directory not empty
+[2025-04-18 08:20:10.117] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4v6wst3, message: Directory not empty
+[2025-04-18 08:20:10.636] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:10.636] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:13.391] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:13.391] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:13.501] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:d884793aed0bf6a355f63f590e8117eb)
+[2025-04-18 08:20:14.013] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:14.013] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:14.730] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:14.730] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:15.541] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2033ms
+[2025-04-18 08:20:15.542] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am\screens, message: Directory not empty
+[2025-04-18 08:20:15.542] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am, message: Directory not empty
+[2025-04-18 08:20:15.542] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am\screens\profile, message: Permission denied
+[2025-04-18 08:20:15.542] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am\screens\profile, message: Permission denied
+[2025-04-18 08:20:15.543] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am, message: Directory not empty
+[2025-04-18 08:20:15.543] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am\screens, message: Permission denied
+[2025-04-18 08:20:15.543] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am\screens, message: Permission denied
+[2025-04-18 08:20:15.543] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nc1n5am, message: Directory not empty
+[2025-04-18 08:20:16.057] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:16.058] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:19.922] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:19.923] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:22.104] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:22.105] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:22.179] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] already cached, not running linter
+[2025-04-18 08:20:25.148] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:25.149] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:40.662] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:40.662] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:40.757] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:72bd827daad714e962a04566e5e139cf)
+[2025-04-18 08:20:41.292] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:41.292] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:42.514] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:42.514] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:42.914] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2140ms
+[2025-04-18 08:20:42.915] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4dbslau\screens, message: Directory not empty
+[2025-04-18 08:20:42.915] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4dbslau, message: Directory not empty
+[2025-04-18 08:20:42.916] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4dbslau, message: Directory not empty
+[2025-04-18 08:20:42.916] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4dbslau\screens, message: Permission denied
+[2025-04-18 08:20:42.916] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4dbslau\screens, message: Permission denied
+[2025-04-18 08:20:42.917] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\4dbslau, message: Directory not empty
+[2025-04-18 08:20:43.420] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:43.420] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:47.722] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:47.723] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:50.483] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:50.484] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:50.556] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:efe69ad0b6c91d4cf8bffa9c3178ab2d)
+[2025-04-18 08:20:51.082] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:51.082] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:52.711] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2149ms
+[2025-04-18 08:20:52.712] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx\screens, message: Directory not empty
+[2025-04-18 08:20:52.712] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx, message: Directory not empty
+[2025-04-18 08:20:52.712] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx\screens\profile, message: Permission denied
+[2025-04-18 08:20:52.712] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx\screens\profile, message: Permission denied
+[2025-04-18 08:20:52.712] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx\screens, message: Directory not empty
+[2025-04-18 08:20:52.713] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx, message: Directory not empty
+[2025-04-18 08:20:52.713] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cyih5kx, message: Directory not empty
+[2025-04-18 08:20:53.224] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:53.224] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:58.098] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:20:58.098] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:02.947] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:02.947] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:05.712] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:05.712] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:06.346] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:06.346] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:06.430] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] already cached, not running linter
+[2025-04-18 08:21:07.612] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:07.612] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:13.431] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:13.431] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:13.507] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:26c15012fdcfd09016ddbf0ffbba42a4)
+[2025-04-18 08:21:14.024] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:14.024] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:15.278] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:15.278] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:15.589] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2079ms
+[2025-04-18 08:21:15.589] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5\screens, message: Directory not empty
+[2025-04-18 08:21:15.589] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5, message: Directory not empty
+[2025-04-18 08:21:15.589] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5\screens\profile, message: Permission denied
+[2025-04-18 08:21:15.589] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5\screens\profile, message: Permission denied
+[2025-04-18 08:21:15.590] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5, message: Directory not empty
+[2025-04-18 08:21:15.590] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5\screens, message: Permission denied
+[2025-04-18 08:21:15.590] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5\screens, message: Permission denied
+[2025-04-18 08:21:15.590] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\qmc5eq5, message: Directory not empty
+[2025-04-18 08:21:16.556] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:16.556] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:16.610] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] already cached, not running linter
+[2025-04-18 08:21:20.481] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:20.481] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:36.356] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:36.356] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:36.445] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:1da3c0a924d5d4999b01d050422b3cb4)
+[2025-04-18 08:21:36.960] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:36.960] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:38.249] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:38.249] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:38.568] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2114ms
+[2025-04-18 08:21:38.569] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\z243wmz\screens, message: Directory not empty
+[2025-04-18 08:21:38.570] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\z243wmz, message: Directory not empty
+[2025-04-18 08:21:38.570] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\z243wmz\screens\profile, message: Permission denied
+[2025-04-18 08:21:38.570] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\z243wmz\screens\profile, message: Permission denied
+[2025-04-18 08:21:38.570] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\z243wmz\screens, message: Directory not empty
+[2025-04-18 08:21:38.570] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\z243wmz, message: Directory not empty
+[2025-04-18 08:21:39.084] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:39.084] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:43.466] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:43.466] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:46.355] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:46.355] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:46.434] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:6542626fd71cdf8cb6f614f66d66df1d)
+[2025-04-18 08:21:46.957] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:46.957] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:48.469] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2030ms
+[2025-04-18 08:21:48.470] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\mu2iibu\screens, message: Directory not empty
+[2025-04-18 08:21:48.470] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\mu2iibu, message: Directory not empty
+[2025-04-18 08:21:48.978] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:48.978] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:53.878] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:21:53.878] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:06.941] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:06.941] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:07.067] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:c9680f33d181964a5040cc38d85dfdfa)
+[2025-04-18 08:22:07.605] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:07.605] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:08.809] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:08.809] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:09.081] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 1997ms
+[2025-04-18 08:22:09.082] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\g4msv3h\screens, message: Directory not empty
+[2025-04-18 08:22:09.082] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\g4msv3h, message: Directory not empty
+[2025-04-18 08:22:09.082] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\g4msv3h, message: Directory not empty
+[2025-04-18 08:22:09.082] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\g4msv3h\screens, message: Permission denied
+[2025-04-18 08:22:09.083] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\g4msv3h\screens, message: Permission denied
+[2025-04-18 08:22:09.083] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\g4msv3h, message: Directory not empty
+[2025-04-18 08:22:09.597] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:09.597] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:13.993] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:13.993] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:22.181] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:22.181] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:22.296] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:b4b8099e6de0cbce9b5087bf7232a6ed)
+[2025-04-18 08:22:22.826] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:22.826] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:24.125] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:24.125] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:24.371] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2063ms
+[2025-04-18 08:22:24.372] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\aqyrore\screens, message: Directory not empty
+[2025-04-18 08:22:24.372] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\aqyrore, message: Directory not empty
+[2025-04-18 08:22:24.373] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\aqyrore, message: Directory not empty
+[2025-04-18 08:22:24.373] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\aqyrore\screens, message: No such file or directory
+[2025-04-18 08:22:24.877] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:24.877] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:29.388] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:29.388] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:29.444] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:53d0a21f7502593522b938e86f467cfc)
+[2025-04-18 08:22:29.962] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:29.962] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:31.418] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 1970ms
+[2025-04-18 08:22:31.419] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\oluzxi1\screens, message: Directory not empty
+[2025-04-18 08:22:31.419] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\oluzxi1, message: Directory not empty
+[2025-04-18 08:22:31.419] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\oluzxi1, message: Directory not empty
+[2025-04-18 08:22:31.419] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\oluzxi1\screens, message: Permission denied
+[2025-04-18 08:22:31.419] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\oluzxi1\screens, message: Permission denied
+[2025-04-18 08:22:31.420] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\oluzxi1, message: Directory not empty
+[2025-04-18 08:22:31.928] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:31.928] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:34.505] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:22:34.505] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:29.903] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:29.903] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:30.007] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:2c7ca3c1f25aa6f3e514451e5e6467d6)
+[2025-04-18 08:23:30.533] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:30.533] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:31.743] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:31.743] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:32.025] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2008ms
+[2025-04-18 08:23:32.026] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\1i3zmpv\screens, message: Directory not empty
+[2025-04-18 08:23:32.026] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\1i3zmpv, message: Directory not empty
+[2025-04-18 08:23:32.027] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\1i3zmpv, message: Directory not empty
+[2025-04-18 08:23:32.535] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:32.535] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:34.602] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:34.602] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:34.711] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:e789fa3d0ba398e96a3c602a996e3d5c)
+[2025-04-18 08:23:35.249] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:35.249] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:36.858] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2136ms
+[2025-04-18 08:23:36.859] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\tklji3f\screens, message: Directory not empty
+[2025-04-18 08:23:36.859] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\tklji3f, message: Directory not empty
+[2025-04-18 08:23:36.860] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\tklji3f, message: Directory not empty
+[2025-04-18 08:23:36.860] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\tklji3f\screens, message: Permission denied
+[2025-04-18 08:23:36.860] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\tklji3f\screens, message: Permission denied
+[2025-04-18 08:23:36.860] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\tklji3f, message: Directory not empty
+[2025-04-18 08:23:37.368] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:23:37.368] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:04.392] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:04.392] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:05.914] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:05.915] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:08.124] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:08.124] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:25.392] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:25.392] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:25.498] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:7e7456878996dcf4012c77680da77811)
+[2025-04-18 08:24:26.008] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:26.009] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:27.280] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:27.280] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:27.640] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2134ms
+[2025-04-18 08:24:27.641] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\f5u6yzv\screens, message: Directory not empty
+[2025-04-18 08:24:27.641] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\f5u6yzv, message: Directory not empty
+[2025-04-18 08:24:27.641] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\f5u6yzv, message: Directory not empty
+[2025-04-18 08:24:27.641] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\f5u6yzv\screens, message: Permission denied
+[2025-04-18 08:24:28.148] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:28.148] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:39.045] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:24:39.045] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:02.069] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:02.069] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:02.181] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:45d6f34ef8166eef12136103b7f2e1a2)
+[2025-04-18 08:25:02.708] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:02.708] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:03.930] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:03.930] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:04.259] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2067ms
+[2025-04-18 08:25:04.260] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\am4jin6\screens, message: Directory not empty
+[2025-04-18 08:25:04.260] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\am4jin6, message: Directory not empty
+[2025-04-18 08:25:04.261] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\am4jin6, message: Directory not empty
+[2025-04-18 08:25:04.261] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\am4jin6\screens, message: Permission denied
+[2025-04-18 08:25:04.261] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\am4jin6\screens, message: Permission denied
+[2025-04-18 08:25:04.764] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:04.764] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:09.135] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:25:09.136] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:39.188] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:39.188] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:39.257] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:efb01c5285fd842bcdb346c8da094277)
+[2025-04-18 08:26:39.761] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:39.761] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:41.018] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:41.018] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:41.484] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2224ms
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens, message: Directory not empty
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb, message: Directory not empty
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens\profile, message: Permission denied
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens\profile, message: Permission denied
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens, message: Directory not empty
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb, message: Directory not empty
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens\profile, message: Permission denied
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens\profile, message: Permission denied
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb\screens, message: Directory not empty
+[2025-04-18 08:26:41.485] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nhbhkcb, message: Directory not empty
+[2025-04-18 08:26:41.998] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:41.998] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:46.232] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:46.233] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:54.034] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:54.034] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:54.136] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:310a64dcc5e82f8cf11775cacd5cc069)
+[2025-04-18 08:26:54.655] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:54.655] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:55.963] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:55.963] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:56.208] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2063ms
+[2025-04-18 08:26:56.209] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4\screens, message: Directory not empty
+[2025-04-18 08:26:56.209] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4, message: Directory not empty
+[2025-04-18 08:26:56.209] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4\screens\profile, message: Permission denied
+[2025-04-18 08:26:56.210] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4\screens\profile, message: Permission denied
+[2025-04-18 08:26:56.210] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4\screens, message: Directory not empty
+[2025-04-18 08:26:56.210] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4, message: Directory not empty
+[2025-04-18 08:26:56.210] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\raw5wr4, message: Directory not empty
+[2025-04-18 08:26:56.711] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:26:56.711] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:13.600] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:13.600] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:15.676] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:15.676] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:22.634] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:22.634] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:22.747] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:ad745e6df63209a7141418bd2f4c65f8)
+[2025-04-18 08:27:23.268] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:23.268] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:24.536] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:24.536] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:24.966] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2215ms
+[2025-04-18 08:27:24.967] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xpgdkmi\screens, message: Directory not empty
+[2025-04-18 08:27:24.968] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xpgdkmi, message: Directory not empty
+[2025-04-18 08:27:25.480] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:25.480] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:43.453] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:27:43.453] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:30:15.840] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:30:15.840] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:30:17.752] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:30:17.752] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:33:17.888] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:33:17.888] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:33:20.023] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:33:20.023] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:36:20.205] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:36:20.205] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:36:22.245] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:36:22.245] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:39:22.423] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:39:22.423] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:39:24.399] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:39:24.400] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:24.527] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:24.527] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:28.049] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:28.049] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:59.033] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:59.033] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:42:59.079] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] already cached, not running linter
+[2025-04-18 08:43:00.316] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:43:00.316] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:09.331] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:09.331] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:09.458] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:2509b77fdc79767053f1bddf8f0b78d2)
+[2025-04-18 08:44:10.000] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:10.000] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:11.294] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:11.294] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:11.903] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2425ms
+[2025-04-18 08:44:11.904] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od\screens, message: Directory not empty
+[2025-04-18 08:44:11.904] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od, message: Directory not empty
+[2025-04-18 08:44:11.904] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od\screens\profile, message: Permission denied
+[2025-04-18 08:44:11.904] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od\screens\profile, message: Permission denied
+[2025-04-18 08:44:11.904] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od\screens, message: Directory not empty
+[2025-04-18 08:44:11.904] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od, message: Directory not empty
+[2025-04-18 08:44:11.905] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\ua1r6od, message: Directory not empty
+[2025-04-18 08:44:12.408] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:12.408] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:16.504] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:16.505] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:42.740] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:42.740] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:42.829] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:a5095892b3fca633a489eb7ebdc67b1b)
+[2025-04-18 08:44:43.347] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:43.347] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:44.589] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:44.589] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:45.149] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2317ms
+[2025-04-18 08:44:45.150] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nn1cvws\screens, message: Directory not empty
+[2025-04-18 08:44:45.150] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nn1cvws, message: Directory not empty
+[2025-04-18 08:44:45.151] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\nn1cvws, message: Directory not empty
+[2025-04-18 08:44:45.662] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:45.662] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:49.772] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:44:49.773] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:13.022] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:13.022] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:13.134] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:303e8811ca2ea79ad3e4f531b696200f)
+[2025-04-18 08:45:13.670] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:13.670] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:14.879] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:14.879] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:15.260] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2116ms
+[2025-04-18 08:45:15.261] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p\screens, message: Directory not empty
+[2025-04-18 08:45:15.261] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p, message: Directory not empty
+[2025-04-18 08:45:15.262] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p\screens\profile, message: Permission denied
+[2025-04-18 08:45:15.262] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p\screens\profile, message: Permission denied
+[2025-04-18 08:45:15.262] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p, message: Directory not empty
+[2025-04-18 08:45:15.262] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p\screens, message: Permission denied
+[2025-04-18 08:45:15.262] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\xdc2b3p\screens, message: Permission denied
+[2025-04-18 08:45:15.774] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:15.774] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:20.079] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:20.079] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:21.047] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:21.047] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:21.155] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:0423cc9a4030c6fbbe5639bcccac6cdc)
+[2025-04-18 08:45:21.680] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:21.680] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:23.271] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2104ms
+[2025-04-18 08:45:23.272] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\r4rcupp\screens, message: Directory not empty
+[2025-04-18 08:45:23.272] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\r4rcupp, message: Directory not empty
+[2025-04-18 08:45:23.272] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\r4rcupp, message: Directory not empty
+[2025-04-18 08:45:23.781] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:23.781] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:25.267] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:25.267] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:28.201] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:28.201] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:30.228] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:30.228] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:38.585] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:38.585] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:38.690] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:f7c2ea153ad68b9eb4330470414f81ac)
+[2025-04-18 08:45:39.209] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:39.210] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:40.449] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:40.449] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:41.054] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2361ms
+[2025-04-18 08:45:41.055] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q, message: Directory not empty
+[2025-04-18 08:45:41.055] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q\screens, message: Permission denied
+[2025-04-18 08:45:41.055] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q\screens, message: Permission denied
+[2025-04-18 08:45:41.055] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q, message: Directory not empty
+[2025-04-18 08:45:41.055] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q\screens, message: Permission denied
+[2025-04-18 08:45:41.055] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q\screens, message: Permission denied
+[2025-04-18 08:45:41.056] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\a5y334q, message: Directory not empty
+[2025-04-18 08:45:41.564] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:41.564] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:45.734] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:45.734] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:45.829] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:26e8ae1d09afe204e8080622894e34b8)
+[2025-04-18 08:45:46.348] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:46.348] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:47.900] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2066ms
+[2025-04-18 08:45:47.901] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cjv1kvh\screens, message: Directory not empty
+[2025-04-18 08:45:47.901] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cjv1kvh, message: Directory not empty
+[2025-04-18 08:45:47.902] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cjv1kvh\screens\profile, message: Permission denied
+[2025-04-18 08:45:47.902] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cjv1kvh, message: Directory not empty
+[2025-04-18 08:45:47.902] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\cjv1kvh\screens, message: Permission denied
+[2025-04-18 08:45:48.414] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:48.414] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:50.832] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:50.832] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:53.064] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:53.065] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:53.114] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] already cached, not running linter
+[2025-04-18 08:45:56.009] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:45:56.009] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:17.083] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:17.083] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:17.142] [global] [info] [cache.cc:934] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] already cached, not running linter
+[2025-04-18 08:46:18.327] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:18.327] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:23.710] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:23.710] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:23.796] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:6291694bb17eab7d79ee2518fa7f2e4f)
+[2025-04-18 08:46:24.314] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:24.314] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:25.553] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:25.553] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:25.988] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2188ms
+[2025-04-18 08:46:25.989] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\snmmgnf, message: Directory not empty
+[2025-04-18 08:46:25.990] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\snmmgnf\screens, message: Permission denied
+[2025-04-18 08:46:26.507] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:26.507] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:30.766] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:30.766] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:33.451] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:33.451] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:33.553] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:aa7391a4d17aba1caa4e1d4880fd406d)
+[2025-04-18 08:46:34.068] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:34.068] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:35.654] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2093ms
+[2025-04-18 08:46:35.654] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\yqv4asg\screens, message: Directory not empty
+[2025-04-18 08:46:35.654] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\yqv4asg, message: Directory not empty
+[2025-04-18 08:46:35.654] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\yqv4asg\screens\profile, message: Permission denied
+[2025-04-18 08:46:35.655] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\yqv4asg, message: Directory not empty
+[2025-04-18 08:46:35.655] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\yqv4asg\screens, message: No such file or directory
+[2025-04-18 08:46:36.167] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:46:36.168] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:47:13.898] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:47:13.898] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:30.385] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:30.385] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:32.419] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:32.419] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:58.223] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:58.223] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:58.340] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:ea26fb64a9e0f6c792f73bf4c5faa2ff)
+[2025-04-18 08:48:58.857] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:48:58.857] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:49:00.156] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:49:00.156] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:49:00.618] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2269ms
+[2025-04-18 08:49:00.619] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\b4c51ac\screens, message: Directory not empty
+[2025-04-18 08:49:00.619] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\b4c51ac, message: Directory not empty
+[2025-04-18 08:49:00.619] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\b4c51ac, message: Directory not empty
+[2025-04-18 08:49:00.619] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\b4c51ac\screens, message: Permission denied
+[2025-04-18 08:49:00.619] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\b4c51ac\screens, message: Permission denied
+[2025-04-18 08:49:00.619] [global] [info] [auto_delete_dir.cc:25] Error cleaning up auto delete directory: D:\box\ODSLY\ODSLY\.trunk\tmp\trunk\b4c51ac, message: Directory not empty
+[2025-04-18 08:49:01.132] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:49:01.132] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:49:05.371] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:49:05.371] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:51:35.821] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:51:35.821] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:51:37.900] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:51:37.901] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:52:30.646] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:52:30.646] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:53:50.091] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:53:50.091] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:38.035] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:38.035] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:40.114] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:40.114] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:43.792] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:43.792] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:55.375] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:55.375] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:55.468] [global] [info] [cache.cc:974] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] running linter (cache-key:9329e324324267a0e72e1bcd2ed146c6)
+[2025-04-18 08:54:55.981] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:55.981] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:57.277] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:57.277] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:58.199] [global] [info] [cache.cc:1117] [monitor] [trufflehog:lint:screens\profile\PricingPageScreen.jsx:HEAD] Linter ran in 2729ms
+[2025-04-18 08:54:58.706] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:54:58.706] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:55:00.941] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:55:00.941] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:55:02.529] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:55:02.529] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:55:47.092] [global] [info] [git_source_control.cc:517] Computing merge base between 4bce6aa6fa99ca3363f1798c2036eddce3686c9d and 4bce6aa6fa99ca3363f1798c2036eddce3686c9d
+[2025-04-18 08:55:47.093] [global] [info] [git_source_control.cc:519] Resolved divergent commit as 4bce6aa6fa99ca3363f1798c2036eddce3686c9d

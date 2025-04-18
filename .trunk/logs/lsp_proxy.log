@@ -18,3 +18,10 @@
 [04-17 11:15:25] [client.cc:19] GRPC Failed (error code INTERNAL): Filesystem error: in create_hard_link: improper link ["d:\box\odsly\odsly\.gitignore"] ["c:\users\madha\appdata\local\temp\trunk\gtt31qz\.gitignore"]
 [04-17 11:15:25] [server.cc:56] User exception in the request_worker thread: Filesystem error: in create_hard_link: improper link ["d:\box\odsly\odsly\.gitignore"] ["c:\users\madha\appdata\local\temp\trunk\gtt31qz\.gitignore"]
 [04-17 11:15:25] [shared_server_context.hh:130] Message processing failed: Filesystem error: in create_hard_link: improper link ["d:\box\odsly\odsly\.gitignore"] ["c:\users\madha\appdata\local\temp\trunk\gtt31qz\.gitignore"]: {"id":2,"jsonrpc":"2.0","method":"textDocument/codeAction","params":{"context":{"diagnostics":[],"triggerKind":2},"range":{"end":{"character":32,"line":6},"start":{"character":4,"line":6}},"textDocument":{"uri":"file:///d%3A/box/ODSLY/ODSLY/app.json"}}}
+[04-17 21:39:44] [login.cc:52] GetUserRequest failed with status 16: No session provided 
+[04-17 21:39:45] [client.cc:19] GRPC Failed (error code INTERNAL): Can not detect upstream commit
+[04-17 21:39:46] [client.cc:19] GRPC Failed (error code INTERNAL): Can not detect upstream commit
+[04-17 21:39:51] [submission_buffer.cc:180] diagnostics buffer 0: Submission failed: Can not detect upstream commit
+[04-17 21:39:51] [shared_server_context.hh:132] Message processing failed: Can not detect upstream commit
+[04-17 21:39:51] [submission_buffer.cc:180] diagnostics buffer 1: Submission failed: Can not detect upstream commit
+[04-17 21:39:51] [shared_server_context.hh:132] Message processing failed: Can not detect upstream commit

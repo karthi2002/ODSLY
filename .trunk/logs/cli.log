@@ -24,3 +24,5 @@ title: Internal trunk error occurred. Please report this issue to us @ https://s
 report:
   - "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:127.0.0.1:48375: WSAGetOverlappedResult: Connection refused (No connection could be made because the target machine actively refused it.\r\n -- 10061)"
 [04-17 12:58:19] [login.cc:52] GetUserRequest failed with status 16: No session provided 
+[04-17 21:39:33] [client.cc:330] prettier - .trunk\trunk.yaml
+[04-17 22:44:50] [login.cc:52] GetUserRequest failed with status 16: No session provided 

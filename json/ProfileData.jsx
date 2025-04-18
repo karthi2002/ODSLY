@@ -6,9 +6,10 @@ export const profileData = {
       upgrade: {
         label: "Upgrade Now",
         action: "Upgrade" 
-      }
+      },
     },
     profileNavigation: [
+        { label: "Upgrade Now", icon: "", route: "Upgrade" },
         { label: "Edit Profile", icon: "person", route: "EditProfile" },
         { label: "Sportsbook Account", icon: "wallet", route: "SportsbookAccount" },
         { label: "Betting Preferences", icon: "options", route: "BettingPreferences" },
