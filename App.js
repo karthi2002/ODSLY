@@ -8,6 +8,9 @@ import MainTab from './navigations/MainTab';
 import NotificationScreen from './screens/NotificationScreen';
 import EditProfileScreen from './screens/profile/EditProfileScreen';
 import PricingPageScreen from './screens/profile/PricingPageScreen';
+import BettingPreferenceScreen from './screens/profile/BettingPreferenceScreen';
+import NotificationSettingScreen from './screens/profile/NotificationSettingScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +24,11 @@ export default function App() {
             <Stack.Screen name="MainTab" component={MainTab} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-            <Stack.Screen name='Upgrade' component={PricingPageScreen} />
+            <Stack.Screen name="Upgrade" component={PricingPageScreen} />
+            <Stack.Screen name="BettingPreferences" component={BettingPreferenceScreen} />
+            <Stack.Screen name="NotificationSetting" component={NotificationSettingScreen} />
+
+            
 
           </Stack.Navigator>
         </NavigationContainer>

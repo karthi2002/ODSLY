@@ -65,6 +65,9 @@ const ProfileSetupScreen = () => {
             ]}
             selectedTags={selectedSports}
             setSelectedTags={setSelectedSports}
+            title={"Select your favourite Sports"}
+            column={2}
+            gap={10}
           />
         );
       case 2:

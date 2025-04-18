@@ -4,7 +4,7 @@ import Colors from "../../utils/Colors";
 
 
 
-const TagSelectorFlashList = ({data, selectedTags, setSelectedTags }) => {
+const TagSelectorFlashList = ({data, selectedTags, setSelectedTags, title, style, column, gap }) => {
   const toggleTag = (tag) => {
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
@@ -39,12 +39,12 @@ const TagSelectorFlashList = ({data, selectedTags, setSelectedTags }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Select your favourite Sports</Text>
+      <Text style={[styles.heading, style]}>{title}</Text>
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item}
-        numColumns={2}
+        numColumns={column}
         columnWrapperStyle={{ justifyContent: "start" }}
         contentContainerStyle={{ gap: 10 }}
       />
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   tag: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 20,
     marginRight: 10,

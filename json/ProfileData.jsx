@@ -12,7 +12,7 @@ export const profileData = {
         { label: "Edit Profile", icon: "person", route: "EditProfile" },
         { label: "Sportsbook Account", icon: "wallet", route: "SportsbookAccount" },
         { label: "Betting Preferences", icon: "options", route: "BettingPreferences" },
-        { label: "Notifications Settings", icon: "notifications", route: "Notification" },
+        { label: "Notifications Settings", icon: "notifications", route: "NotificationSetting" },
         { label: "App Preferences", icon: "settings", route: "AppPreferences" },
         { label: "Privacy & Security", icon: "lock-closed", route: "PrivacySecurity" },
         { label: "Logout", icon: "log-out", route: "AuthStack" }
