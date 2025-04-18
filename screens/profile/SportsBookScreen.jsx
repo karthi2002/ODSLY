@@ -50,7 +50,12 @@ const SportsBookScreen = () => {
       ))}
       </View>
 
-       
+      <GradientButton
+        label="Save Changes"
+        onPress={() => handleNavigate(item.route)}
+        arrowEnable={true}
+        style={{ width: 40, gap: 7, paddingVertical: 5 }}
+      />
       </ScrollView>
     </View>
   );
@@ -64,6 +69,11 @@ const styles = StyleSheet.create({
   content: {
     paddingTop: 80,
     paddingHorizontal: 15,
+  },
+  bookName:{
+    fontSize:20,
+    fontWeight:"bold",
+    color:Colors.secondary,
   },
 });
 
