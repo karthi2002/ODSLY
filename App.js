@@ -3,16 +3,12 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
 import AuthStack from './navigations/AuthStack';
 import MainTab from './navigations/MainTab';
-import NotificationScreen from './screens/NotificationScreen';
-import EditProfileScreen from './screens/profile/EditProfileScreen';
-import PricingPageScreen from './screens/profile/PricingPageScreen';
-import SportsBookScreen from './screens/profile/SportsBookScreen.jsx'
-import BettingPreferenceScreen from './screens/profile/BettingPreferenceScreen';
-import NotificationSettingScreen from './screens/profile/NotificationSettingScreen';
-import PrivacyScreen from './screens/profile/PrivacyScreen';
-import AppPreferenceScreen from './screens/profile/AppPreferenceScreen.jsx';
+import ProfileStack from './navigations/ProfileStack';
+import NotificationScreen from './screens/NotificationScreen.jsx'
+
 
 
 const Stack = createNativeStackNavigator();
@@ -23,18 +19,10 @@ export default function App() {
       <SafeAreaView style={styles.safeArea} edges={['top', 'bottom', 'left', 'right']}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="AuthStack" component={AuthStack} />
+            <Stack.Screen name="Auth" component={AuthStack} />
             <Stack.Screen name="MainTab" component={MainTab} />
+            <Stack.Screen name="ProfileStack" component={ProfileStack} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
-            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-            <Stack.Screen name='SportsbookAccount' component={SportsBookScreen} />
-            <Stack.Screen name="Upgrade" component={PricingPageScreen} />
-            <Stack.Screen name="BettingPreferences" component={BettingPreferenceScreen} />
-            <Stack.Screen name="NotificationSetting" component={NotificationSettingScreen} />
-            <Stack.Screen name="PrivacySecurity" component={PrivacyScreen} />
-            <Stack.Screen name="AppPreferences" component={AppPreferenceScreen} />
-
-            
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
@@ -45,6 +33,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#131417'
+    backgroundColor: '#131417',
   },
 });

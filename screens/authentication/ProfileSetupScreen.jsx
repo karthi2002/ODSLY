@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
-import Colors from "../utils/Colors";
+import Colors from "../../utils/Colors";
 import { useNavigation } from "@react-navigation/native";
-import StepWizard from "../components/Form/StepWizard";
-import ProfileUploader from "../components/Form/ProfileUploader";
-import TagSelectorFlashList from "../components/List/TagSelectorFlashList";
-import OptionsFlatList from "../components/List/OptionsFlatList";
-import LoadingDots from "../components/Loader/LoadingDots";
-import GradientButton from "../components/Button/GradientButton";
-import Logo from "../layouts/Logo";
-import Copyright from "../layouts/Copyright";
+import StepWizard from "../../components/Form/StepWizard";
+import ProfileUploader from "../../components/Form/ProfileUploader";
+import TagSelectorFlashList from "../../components/List/TagSelectorFlashList";
+import OptionsFlatList from "../../components/List/OptionsFlatList";
+import LoadingDots from "../../components/Loader/LoadingDots";
+import GradientButton from "../../components/Button/GradientButton";
+import Logo from "../../layouts/Logo";
+import Copyright from "../../layouts/Copyright";
 
 const steps = ["Profile", "Sports", "Betting", "Finish"];
 

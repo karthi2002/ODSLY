@@ -8,7 +8,7 @@ import Colors from "../utils/Colors";
 const Header = () => {
   
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>

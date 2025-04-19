@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import GradientButton from '../components/Button/GradientButton'; 
-import GreenTick from '../assets/images/green-tick.gif';
+import GradientButton from '../../components/Button/GradientButton'; 
+import GreenTick from '../../assets/images/green-tick.gif';
 
 const SuccessScreen = ({ navigation }) => {
   

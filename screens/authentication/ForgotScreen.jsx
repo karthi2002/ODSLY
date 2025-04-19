@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Colors from "../utils/Colors";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
   View,
@@ -8,11 +7,12 @@ import {
   StyleSheet,
 } from "react-native";
 
-import Logo from "../layouts/Logo";
-import TextInputField from "../components/Input/TextInputField";
-import GradientButton from "../components/Button/GradientButton";
-import Copyright from "../layouts/Copyright";
+import Logo from "../../layouts/Logo";
+import TextInputField from "../../components/Input/TextInputField";
+import GradientButton from "../../components/Button/GradientButton";
+import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
+import Colors from "../../utils/Colors";
 
 
 const ForgotScreen = () => {

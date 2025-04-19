@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Colors from "../utils/Colors";
+import Colors from "../../utils/Colors";
 import {
   View,
   Text,
@@ -8,14 +8,14 @@ import {
   Image,
 } from "react-native";
 
-import Google from "../assets/icons/google.png";
-import Apple from "../assets/icons/apple.png";
-import Logo from "../layouts/Logo";
-import TextInputField from "../components/Input/TextInputField";
-import PasswordInputField from "../components/Input/PasswordInputField";
-import LineText from "../layouts/LineText";
-import GradientButton from "../components/Button/GradientButton";
-import Copyright from "../layouts/Copyright";
+import Google from "../../assets/icons/google.png";
+import Apple from "../../assets/icons/apple.png";
+import Logo from "../../layouts/Logo";
+import TextInputField from "../../components/Input/TextInputField";
+import PasswordInputField from "../../components/Input/PasswordInputField";
+import LineText from "../../layouts/LineText";
+import GradientButton from "../../components/Button/GradientButton";
+import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Colors from "../utils/Colors";
+import Colors from "../../utils/Colors";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
   View,
@@ -9,11 +9,11 @@ import {
   StyleSheet,
 } from "react-native";
 
-import Logo from "../layouts/Logo";
-import GradientButton from "../components/Button/GradientButton";
-import Copyright from "../layouts/Copyright";
+import Logo from "../../layouts/Logo";
+import GradientButton from "../../components/Button/GradientButton";
+import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
-import PasswordInputField from "../components/Input/PasswordInputField";
+import PasswordInputField from "../../components/Input/PasswordInputField";
 
 
 const ResetPasswordScreen = () => {

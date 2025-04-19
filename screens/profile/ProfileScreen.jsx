@@ -28,7 +28,7 @@ const ProfileScreen = () => {
         routes: [{ name: "AuthStack" }],
       });
     } else {
-      navigation.navigate(route);
+      navigation.navigate("ProfileStack", { screen: route });
     }
   };
 
