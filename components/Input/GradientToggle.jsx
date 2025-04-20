@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
+import { View, Text, StyleSheet, Switch, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../../utils/Colors";
 
@@ -8,7 +8,6 @@ const GradientToggle = ({ label, initial = false, style, borderColor }) => {
 
   const toggleSwitch = () => setIsEnabled((previous) => !previous);
 
-  // If borderColor is provided, use solid View instead of LinearGradient
   const Wrapper = borderColor ? View : LinearGradient;
   const wrapperProps = borderColor
     ? { style: [styles.solidBorder, { borderColor }, style] }
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
   innerBox: {
     backgroundColor: Colors.background,
     borderRadius: 10,
-    paddingVertical: 10,
+    paddingVertical: Platform.OS === "ios" ? 10 : 0, // Conditional padding based on platform
     paddingHorizontal: 8,
     flexDirection: "row",
     justifyContent: "space-between",

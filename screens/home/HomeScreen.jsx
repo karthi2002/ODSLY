@@ -32,7 +32,7 @@ export default function HomeScreen() {
 
       <ScrollView style={styles.content} contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
         
-        <GradientText text="Welcome back, Zack!" style={{ fontSize: 25 }} />
+        <GradientText text="Welcome back, Zack!" style={{ fontSize: 20 }} />
 
         <View style={styles.statsGrid}>
           {statsData.map((item, index) => (

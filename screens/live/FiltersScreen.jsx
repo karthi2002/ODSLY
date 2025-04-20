@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, CheckBox } from 'react-native';
 
-const Filters = ({ navigation }) => {
+const FiltersScreen = ({ navigation }) => {
   const [sportsbookFilters, setSportsbookFilters] = useState({
     fanDuel: false,
     drafting: false,
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Filters;
+export default FiltersScreen;

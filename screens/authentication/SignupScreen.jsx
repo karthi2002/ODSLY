@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 import Google from "../../assets/icons/google.png";
@@ -18,9 +21,7 @@ import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
-
 const SignupScreen = () => {
-  
   const [fullName, setFullName] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -35,82 +36,84 @@ const SignupScreen = () => {
       setError("");
     }
   }, [password, confirmPassword]);
-  
-  
 
   const handleSignup = () => {
     navigation.navigate('VerifyOTP');
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Logo />
 
-      <Logo />
+        <View style={styles.signupBox}>
+          <Text style={styles.title}>Sign Up!</Text>
 
-      <View style={styles.signupBox}>
-        <Text style={styles.title}>Sign Up!</Text>
+          <TextInputField
+            label="Full name"
+            value={fullName}
+            setValue={setFullName}
+            pattern="[A-Za-z]+"
+            errorMessage="Invalid"
+          />
 
-        <TextInputField
-        label="Full name"
-        value={fullName}
-        setValue={setFullName}
-        pattern="[A-Za-z]+"
-        errorMessage="Invalid"
-      />
+          <TextInputField
+            label="Email or Phone Number"
+            value={emailOrPhone}
+            setValue={setEmailOrPhone}
+            pattern="^(\d{10}|[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+)$"
+            errorMessage="Invalid"
+          />
 
-        <TextInputField
-        label="Email or Phone Number"
-        value={emailOrPhone}
-        setValue={setEmailOrPhone}
-        pattern="^(\d{10}|[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+)$"
-        errorMessage="Invalid"
-      />
+          <PasswordInputField
+            label="Password"
+            value={password}
+            setValue={setPassword}
+            isPassword={true}
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            errorMessage="Incorrect Password"
+          />
 
-      <PasswordInputField
-        label="Password"
-        value={password}
-        setValue={setPassword}
-        isPassword={true}
-        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-        errorMessage="Incorrect Password"
-      />
+          <PasswordInputField
+            label="Confirm Password"
+            value={confirmPassword}
+            setValue={setConfirmPassword}
+            isPassword={true}
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            errorMessage={error}
+          />
 
-    <PasswordInputField
-        label="Confirm Password"
-        value={confirmPassword}
-        setValue={setConfirmPassword}
-        isPassword={true}
-        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-        errorMessage={error}
-      />
+          <GradientButton label="Continue" onPress={handleSignup} arrowEnable={true} />
 
+          <LineText name="Continue with" />
 
-        <GradientButton label="Continue" onPress={handleSignup} arrowEnable={true} />
+          <View style={styles.authContainer}>
+            <TouchableOpacity>
+              <Image style={styles.authLogo} source={Google} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image style={styles.authLogo} source={Apple} />
+            </TouchableOpacity>
+          </View>
 
-        <LineText name="Continue with" />
+          <LineText name="OR" />
 
-        <View style={styles.authContainer}>
-          <TouchableOpacity>
-            <Image style={styles.authLogo} source={Google} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.authLogo} source={Apple} />
+          <Text style={styles.alreadyaccount}>Already have an Account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.login}>Login</Text>
           </TouchableOpacity>
         </View>
 
-        <LineText name="OR" />
-
-        <Text style={styles.alreadyaccount}>Already have a Account?</Text>
-
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.login}>Login</Text>
-        </TouchableOpacity>
-      </View>
-
-
-      <Copyright />
-
-    </View>
+        <Copyright />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -118,9 +121,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-    justifyContent: "center",
+  },
+  scrollContent: {
+    flexGrow: 1,
     alignItems: "center",
-    paddingVertical: 50
+    paddingVertical: 50,
   },
   signupBox: {
     backgroundColor: Colors.secondary,
@@ -129,7 +134,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: "85%",
     alignItems: "center",
-    flex: 1
   },
   title: {
     fontSize: 26,
@@ -138,10 +142,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   authContainer: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    gap: 20,
+    columnGap: 20,
+    marginVertical: 10,
   },
   authLogo: {
     width: 40,
@@ -155,15 +159,15 @@ const styles = StyleSheet.create({
   alreadyaccount: {
     color: Colors.text,
     fontSize: 16,
-    fontWeight: 400,
+    fontWeight: "400",
   },
-  login :{
+  login: {
     color: Colors.background,
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: "600",
     textDecorationLine: 'underline',
-    marginTop: 2
-  }
+    marginTop: 2,
+  },
 });
 
 export default SignupScreen;

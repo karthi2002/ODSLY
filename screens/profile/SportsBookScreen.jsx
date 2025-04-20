@@ -71,9 +71,13 @@ const styles = StyleSheet.create({
   },
   bookName:{
     fontSize:20,
+    marginBottom: 10,
     fontWeight:"bold",
     color:Colors.secondary,
   },
+  bookType:{
+    marginBottom: 20,
+  }
 });
 
 export default SportsBookScreen;

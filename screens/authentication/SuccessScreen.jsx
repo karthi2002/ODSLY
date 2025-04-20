@@ -1,26 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import GradientButton from '../../components/Button/GradientButton'; 
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  SafeAreaView,
+} from 'react-native';
+import GradientButton from '../../components/Button/GradientButton';
 import GreenTick from '../../assets/images/green-tick.gif';
+import Colors from '../../utils/Colors';
+
+const { width, height } = Dimensions.get('window');
 
 const SuccessScreen = ({ navigation }) => {
-  
   const handleSuccess = () => {
     navigation.navigate('MainTab');
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.successText}>SUCCESS!</Text>
-      <Text style={styles.subText}>Your Profile has been{'\n'}successfully created!</Text>
+      <Text style={styles.subText}>
+        Your Profile has been{'\n'}successfully created!
+      </Text>
 
-      <Image
-        source={GreenTick} 
-        style={styles.gif}
-        resizeMode="contain"
-      />
+      <Image source={GreenTick} style={styles.gif} resizeMode="contain" />
 
- 
       <View style={styles.buttonContainer}>
         <GradientButton
           label="Go to Dashboard"
@@ -28,42 +34,39 @@ const SuccessScreen = ({ navigation }) => {
           arrowEnable={true}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default SuccessScreen;
 
-const { width } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.secondary,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: width * 0.05,
   },
   successText: {
-    fontSize: 30,
+    fontSize: width * 0.08, 
     fontWeight: '800',
-    color: '#0F1333',
-    marginBottom: 20,
+    color: Colors.primary,
+    marginBottom: height * 0.02,
   },
   subText: {
-    fontSize: 22,
+    fontSize: width * 0.05,
     fontWeight: '700',
     color: '#555',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: height * 0.04,
   },
   gif: {
-    width: 300,
-    height: 300,
-    marginBottom: 30,
+    width: width * 0.7,
+    height: width * 0.7,
+    marginBottom: height * 0.04,
   },
   buttonContainer: {
-    width: width * 0.8,
     marginTop: 10,
   },
 });

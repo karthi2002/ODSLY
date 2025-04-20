@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const CreateBet = () => {
+const CreateBetScreen = () => {
   const [sportsbookAccount, setSportsbookAccount] = useState('');
   const [event, setEvent] = useState('');
   const [betType, setBetType] = useState('');
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateBet;
+export default CreateBetScreen;

@@ -6,6 +6,10 @@ import Banner from "../../assets/images/banner.png";
 import GradientButton from "../../components/Button/GradientButton";
 import Colors from "../../utils/Colors";
 import GradientBorderButton from "../../components/Button/GradientBorderButton";
+import { Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
+
 export default function AuthScreen() {
   const navigation = useNavigation();
 
@@ -35,19 +39,20 @@ export default function AuthScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 80
-  },
   illustration: {
-    width: 300,
-    height: 250,
-    resizeMode: "contain",
-    marginTop: 80,
-  },
+  width: width * 0.8,
+  height: height * 0.3, 
+  resizeMode: "contain",
+  marginTop: height * 0.05,
+},
+container: {
+  flex: 1,
+  backgroundColor: Colors.background,
+  alignItems: "center",
+  justifyContent: "center",
+  paddingVertical: height * 0.1,
+},
+
   buttonContainer: {
     display: 'flex',
     flexDirection: 'column',

@@ -8,6 +8,7 @@ import AuthStack from './navigations/AuthStack';
 import MainTab from './navigations/MainTab';
 import ProfileStack from './navigations/ProfileStack';
 import NotificationScreen from './screens/NotificationScreen.jsx'
+import LiveStack from './navigations/LiveStack.jsx';
 
 
 
@@ -22,6 +23,7 @@ export default function App() {
             <Stack.Screen name="Auth" component={AuthStack} />
             <Stack.Screen name="MainTab" component={MainTab} />
             <Stack.Screen name="ProfileStack" component={ProfileStack} />
+            <Stack.Screen name="LiveStack" component={LiveStack} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
           </Stack.Navigator>
         </NavigationContainer>

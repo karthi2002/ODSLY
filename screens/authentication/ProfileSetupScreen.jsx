@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import Colors from "../../utils/Colors";
 import { useNavigation } from "@react-navigation/native";
 import StepWizard from "../../components/Form/StepWizard";
@@ -31,7 +41,7 @@ const ProfileSetupScreen = () => {
   useEffect(() => {
     if (stepIndex === 3) {
       const timer = setTimeout(() => {
-        navigation.navigate("Success"); 
+        navigation.navigate("Success");
       }, 2000);
       return () => clearTimeout(timer);
     }
@@ -51,7 +61,7 @@ const ProfileSetupScreen = () => {
       case 1:
         return (
           <TagSelectorFlashList
-            data = {[
+            data={[
               "Cricket 🏏",
               "Soccer ⚽",
               "Badminton 🏸",
@@ -89,41 +99,57 @@ const ProfileSetupScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Logo />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.container}>
+            <Logo />
 
-      <View style={styles.containerBox}>
-        <Text style={styles.heading}>Set up your Profile</Text>
-        <Text style={styles.subText}>
-          You will be able to change it any time
-        </Text>
+            <View style={styles.containerBox}>
+              <Text style={styles.heading}>Set up your Profile</Text>
+              <Text style={styles.subText}>
+                You will be able to change it any time
+              </Text>
 
-        <StepWizard currentStep={stepIndex} totalSteps={steps.length} />
+              <StepWizard currentStep={stepIndex} totalSteps={steps.length} />
 
-        <View style={styles.contentBox}>{renderStepContent()}</View>
+              <View style={styles.contentBox}>{renderStepContent()}</View>
 
-        {stepIndex < steps.length - 1 && (
-          <View style={{ marginTop: 20 }}>
-            <GradientButton
-              label="Next"
-              onPress={handleNext}
-              arrowEnable={true}
-            />
+              {stepIndex < steps.length - 1 && (
+                <View style={{ marginTop: 20 }}>
+                  <GradientButton
+                    label="Next"
+                    onPress={handleNext}
+                    arrowEnable={true}
+                  />
+                </View>
+              )}
+            </View>
+
+            <Copyright />
           </View>
-        )}
-      </View>
-      <Copyright />
-    </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 50,
+    paddingVertical: 30,
   },
   containerBox: {
     backgroundColor: Colors.secondary,
@@ -131,9 +157,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
     marginTop: 30,
-    width: "85%",
+    width: "90%",
     alignItems: "center",
-    flex: 1,
+    flexGrow: 1,
   },
   heading: {
     fontSize: 26,

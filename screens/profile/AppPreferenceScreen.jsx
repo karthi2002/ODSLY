@@ -46,6 +46,7 @@ const AppPreferenceScreen = () => {
           label="Dark Mode"
           initial={true}
           borderColor={Colors.secondary}
+          style={{borderWidth: 1}}
         />
 
         <DropdownField
