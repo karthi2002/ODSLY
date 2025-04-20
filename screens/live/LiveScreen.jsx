@@ -40,7 +40,7 @@ export default function LiveScreen() {
               placeholder="Search Bets"
               placeholderTextColor={Colors.text}
             />
-            <TouchableOpacity style={styles.filterButton} onPress={() => navigation.navigate("LiveFilter")}>
+            <TouchableOpacity style={styles.filterButton} onPress={() => navigation.navigate("LiveStack", { screen: 'LiveFilter' })} >
               <LinearGradient
                 colors={['#029EFE', '#6945E2', '#E9098E']}
                 style={styles.filterGradient}
@@ -82,7 +82,7 @@ export default function LiveScreen() {
       {/* Fixed Button for Adding New Bet */}
       <TouchableOpacity
         style={styles.fixedButton}
-        onPress={() => navigation.navigate("LiveNewBet")}
+        onPress={() =>  navigation.navigate("LiveNewBet", { screen: 'LiveFilter' })}
       >
         <LinearGradient
           colors={['#029EFE', '#6945E2', '#E9098E']}
