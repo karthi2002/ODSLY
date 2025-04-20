@@ -127,13 +127,14 @@ const EditProfileScreen = () => {
               borderColor: Colors.secondary,
             }}
           />
-        </ScrollView>
-
-          <GradientButton
+            <GradientButton
             label="Save Changes"
             onPress={handleSaveChanges}
             arrowEnable={false}
           />
+        </ScrollView>
+
+        
 
       </View>
     </KeyboardAvoidingView>

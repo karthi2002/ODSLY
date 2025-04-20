@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
         <View style={styles.container}>
           <Text style={styles.sectionTitle}>Active Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {activeBets.map((bet, index) => (
               <BetCard key={index} data={bet} type="active" />
             ))}
@@ -76,7 +76,7 @@ export default function HomeScreen() {
           <LineGradient />
 
           <Text style={styles.sectionTitle}>Live Game Watchlist</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {liveWatchlist.map((bet, index) => (
               <BetCard key={index} data={bet} type="watchlist" />
             ))}

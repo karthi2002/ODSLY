@@ -15,8 +15,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { activeBets, liveWatchlist } from "../../json/data";
 import BetCard from "../../components/Card/BetCard";
 import { LineGradient } from "../../layouts/LineGradient";
-import Icon from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
+import Icon from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 import GradientButton from "../../components/Button/GradientButton";
 
 export default function LiveScreen() {
@@ -31,8 +31,10 @@ export default function LiveScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.topSection}>
-          
-          <GradientText style={{ fontSize: 20 }} text="Placing & Tracking Bets" />
+          <GradientText
+            style={{ fontSize: 20 }}
+            text="Placing & Tracking Bets"
+          />
 
           <View style={styles.searchRow}>
             <TextInput
@@ -40,9 +42,14 @@ export default function LiveScreen() {
               placeholder="Search Bets"
               placeholderTextColor={Colors.text}
             />
-            <TouchableOpacity style={styles.filterButton} onPress={() => navigation.navigate("LiveStack", { screen: 'LiveFilter' })} >
+            <TouchableOpacity
+              style={styles.filterButton}
+              onPress={() =>
+                navigation.navigate("LiveStack", { screen: "LiveFilter" })
+              }
+            >
               <LinearGradient
-                colors={['#029EFE', '#6945E2', '#E9098E']}
+                colors={["#029EFE", "#6945E2", "#E9098E"]}
                 style={styles.filterGradient}
               >
                 <Feather name="filter" size={20} color={Colors.secondary} />
@@ -55,12 +62,11 @@ export default function LiveScreen() {
             onPress={() => {}}
             arrowEnable={true}
           />
-
         </View>
 
         <View>
           <Text style={styles.sectionTitle}>Active Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {Array.isArray(activeBets) &&
               activeBets.map((bet, index) => (
                 <BetCard key={index} data={bet} type="active" />
@@ -70,7 +76,7 @@ export default function LiveScreen() {
           <LineGradient />
 
           <Text style={styles.sectionTitle}>Live Games</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {Array.isArray(liveWatchlist) &&
               liveWatchlist.map((bet, index) => (
                 <BetCard key={index} data={bet} type="watchlist" />
@@ -82,18 +88,26 @@ export default function LiveScreen() {
       {/* Fixed Button for Adding New Bet */}
       <TouchableOpacity
         style={styles.fixedButton}
-        onPress={() =>  navigation.navigate("LiveNewBet", { screen: 'LiveFilter' })}
+        onPress={() =>
+          navigation.navigate("LiveStack", {
+            screen: "LiveNewBet",
+          })
+        }
       >
         <LinearGradient
-          colors={['#029EFE', '#6945E2', '#E9098E']}
+          colors={["#029EFE", "#6945E2", "#E9098E"]}
           locations={[0, 0.37, 1]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={styles.fixedButtonGradient}
         >
-            <Icon name="pluscircle" size={20} color={Colors.secondary} style={{ marginRight: 8 }} />  
-            <Text style={styles.fixedButtonText}>Add New Bets
-           </Text>
+          <Icon
+            name="pluscircle"
+            size={20}
+            color={Colors.secondary}
+            style={{ marginRight: 8 }}
+          />
+          <Text style={styles.fixedButtonText}>Add New Bets</Text>
         </LinearGradient>
       </TouchableOpacity>
     </View>
@@ -115,7 +129,7 @@ const styles = StyleSheet.create({
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     gap: 10,
     marginBottom: 10,
     marginTop: 20,
@@ -146,19 +160,19 @@ const styles = StyleSheet.create({
   },
   fixedButton: {
     position: "absolute",
-    bottom: 15, 
-    right: -30,  
+    bottom: 15,
+    right: -30,
     alignItems: "center",
     zIndex: 10,
   },
   fixedButtonGradient: {
-    flexDirection: "row", 
-    justifyContent: "flex-end", 
+    flexDirection: "row",
+    justifyContent: "flex-end",
     paddingVertical: 15,
     paddingHorizontal: 5,
     borderRadius: 30,
     alignItems: "center",
-    width: '62%', 
+    width: "62%",
   },
   fixedButtonText: {
     color: Colors.secondary,

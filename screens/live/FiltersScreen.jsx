@@ -1,155 +1,131 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, CheckBox } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Colors from "../../utils/Colors";
+import GradientButton from "../../components/Button/GradientButton";
+import CustomHeader from "../../layouts/CustomHeader";
+import GradientCheckbox from "../../components/Input/GradientCheckbox";
+import { sportsbookFilter, DFSFilter } from "../../json/Filters";
+import GradientBorderButton from "../../components/Button/GradientBorderButton";
 
-const FiltersScreen = ({ navigation }) => {
-  const [sportsbookFilters, setSportsbookFilters] = useState({
-    fanDuel: false,
-    drafting: false,
-    bet365: false,
-    metMgm: false,
-    fanatics: false,
-    espnBet: false,
-    caesarsSportsbook: false,
-    hardRockBet: false,
-  });
+const { width } = Dimensions.get("window");
 
-  const [dfsFilters, setDfsFilters] = useState({
-    prizePicks: false,
-    underdog: false,
-    sleeper: false,
-    chalkboard: false,
-    dabble: false,
-  });
+const FiltersScreen = () => {
+  const navigation = useNavigation();
 
-  const handleClear = () => {
-    setSportsbookFilters({
-      fanDuel: false,
-      drafting: false,
-      bet365: false,
-      metMgm: false,
-      fanatics: false,
-      espnBet: false,
-      caesarsSportsbook: false,
-      hardRockBet: false,
-    });
-    setDfsFilters({
-      prizePicks: false,
-      underdog: false,
-      sleeper: false,
-      chalkboard: false,
-      dabble: false,
-    });
+  const [sportsbookSelections, setSportsbookSelections] = useState(
+    sportsbookFilter.map((item) => ({ ...item }))
+  );
+  
+  const [dfsSelections, setDfsSelections] = useState(
+    DFSFilter.map((item) => ({ ...item }))
+  );
+  
+
+  const toggleSelection = (type, index) => {
+    const updateSelections = (data) =>
+      data.map((item, i) =>
+        i === index ? { ...item, selected: !item.selected } : item
+      );
+
+    if (type === "sportsbook") {
+      setSportsbookSelections(updateSelections(sportsbookSelections));
+    } else {
+      setDfsSelections(updateSelections(dfsSelections));
+    }
   };
 
-  const handleApply = () => {
-    // Handle apply logic here
-    navigation.goBack();
+  const clearSelections = () => {
+    setSportsbookSelections(sportsbookSelections.map((item) => ({ ...item, selected: false })));
+    setDfsSelections(dfsSelections.map((item) => ({ ...item, selected: false })));
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
-        <Text style={styles.backText}>←</Text>
-      </TouchableOpacity>
-      <Text style={styles.title}>Filters</Text>
+    <View style={styles.container}>
+      <CustomHeader title={"Filters"} />
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Sportsbook Account</Text>
-        {Object.keys(sportsbookFilters).map((key) => (
-          <View key={key} style={styles.checkboxContainer}>
-            <CheckBox
-              value={sportsbookFilters[key]}
-              onValueChange={(value) => setSportsbookFilters({ ...sportsbookFilters, [key]: value })}
-              tintColors={{ true: '#a3bffa', false: '#a3bffa' }}
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.bookType}>
+          <Text style={styles.bookName}>Sportsbook Account</Text>
+          {sportsbookSelections.map((account, index) => (
+            <GradientCheckbox
+              key={index}
+              label={account.label}
+              checked={account.selected}
+              onToggle={() => toggleSelection("sportsbook", index)}
             />
-            <Text style={styles.checkboxLabel}>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Text>
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>DFS</Text>
-        {Object.keys(dfsFilters).map((key) => (
-          <View key={key} style={styles.checkboxContainer}>
-            <CheckBox
-              value={dfsFilters[key]}
-              onValueChange={(value) => setDfsFilters({ ...dfsFilters, [key]: value })}
-              tintColors={{ true: '#a3bffa', false: '#a3bffa' }}
+        <View style={styles.bookType}>
+          <Text style={styles.bookName}>DFS</Text>
+          {dfsSelections.map((account, index) => (
+            <GradientCheckbox
+              key={index}
+              label={account.label}
+              checked={account.selected}
+              onToggle={() => toggleSelection("dfs", index)}
             />
-            <Text style={styles.checkboxLabel}>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Text>
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.button, styles.clearButton]} onPress={handleClear}>
-          <Text style={styles.buttonText}>Clear</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.applyButton]} onPress={handleApply}>
-          <Text style={styles.buttonText}>Apply</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+        <View style={styles.buttonContainer}>
+          <GradientBorderButton
+            title="Clear"
+            onPress={clearSelections}
+            showBorderGradient={true}
+            backgroundColor={Colors.background}
+            textColor={Colors.secondary}
+            showTextGradient={false}
+            disabled={false}
+            paddingVertical={12}
+            style={{ width: "48%" }}
+          />
+          <GradientButton
+            label="Apply"
+            onPress={() => {}}
+            arrowEnable={false}
+            style={{ width: "100%" }}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1f3c',
-    padding: 20,
+    backgroundColor: Colors.background,
   },
-  back: {
+  content: {
+    paddingTop: 80,
+    paddingHorizontal: 15,
+  },
+  bookName: {
+    fontSize: 20,
     marginBottom: 20,
+    fontWeight: "600",
+    color: Colors.secondary,
   },
-  backText: {
-    fontSize: 24,
-    color: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    color: '#fff',
+  bookType: {
     marginBottom: 20,
-    textAlign: 'center',
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    color: '#a3bffa',
-    marginBottom: 10,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  checkboxLabel: {
-    color: '#fff',
-    fontSize: 16,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 5,
     marginTop: 20,
-  },
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    width: '48%',
-    alignItems: 'center',
-  },
-  clearButton: {
-    backgroundColor: '#00ccff',
-  },
-  applyButton: {
-    backgroundColor: '#ff00ff',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
   },
 });
 

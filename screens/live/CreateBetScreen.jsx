@@ -1,94 +1,94 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { ScrollView, View, Text, StyleSheet } from "react-native";
+import DropdownField from "../../components/Input/DropdownField";
+import DollarInputField from "../../components/Input/DollarInputField";
+import Colors from "../../utils/Colors";
+import CustomHeader from "../../layouts/CustomHeader";
+import GradientButton from "../../components/Button/GradientButton";
 
-const CreateBetScreen = () => {
-  const [sportsbookAccount, setSportsbookAccount] = useState('');
-  const [event, setEvent] = useState('');
-  const [betType, setBetType] = useState('');
-  const [odds, setOdds] = useState('');
-  const [wager, setWager] = useState('');
-  const [payout, setPayout] = useState('');
+export default function CreateBetScreen() {
+  const [selectedAccount, setSelectedAccount] = useState("");
+  const [selectedEvent, setSelectedEvent] = useState("");
+  const [selectedBetType, setSelectedBetType] = useState("");
 
-  const handleCreateBet = () => {
-
-    console.log({
-      sportsbookAccount,
-      event,
-      betType,
-      odds,
-      wager,
-      payout,
-    });
-  };
+  const [odd, setOdd] = useState("");
+  const [wager, setWager] = useState("");
+  const [payout, setPayout] = useState("");
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Create Bet</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Sportsbook Account"
-        value={sportsbookAccount}
-        onChangeText={setSportsbookAccount}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Event"
-        value={event}
-        onChangeText={setEvent}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Bet Type"
-        value={betType}
-        onChangeText={setBetType}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Odds"
-        value={odds}
-        onChangeText={setOdds}
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Wager"
-        value={wager}
-        onChangeText={setWager}
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Payout"
-        value={payout}
-        onChangeText={setPayout}
-        keyboardType="numeric"
-      />
-      <Button title="Create Bet" onPress={handleCreateBet} color="#00C4FF" />
+      <CustomHeader title={"Create Bet"} />
+
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <DropdownField
+          label="Sportsbook Account"
+          value={selectedAccount}
+          setValue={setSelectedAccount}
+          options={["Account 1", "Account 2", "Account 3"]}
+        />
+
+        <DropdownField
+          label="Event"
+          value={selectedEvent}
+          setValue={setSelectedEvent}
+          options={["Event A", "Event B", "Event C"]}
+        />
+
+        <DropdownField
+          label="Bet type"
+          value={selectedBetType}
+          setValue={setSelectedBetType}
+          options={["Single", "Multiple", "System", "Live", "Specials"]}
+        />
+
+        <DollarInputField
+          label="Odd"
+          value={odd}
+          setValue={setOdd}
+          placeholder="Enter Amount"
+          pattern="^\d+(\.\d{1,2})?$"
+          errorMessage="Enter a valid amount"
+        />
+
+        <DollarInputField
+          label="Wager"
+          value={wager}
+          setValue={setWager}
+          placeholder="Enter Amount"
+          pattern="^\d+(\.\d{1,2})?$"
+          errorMessage="Enter a valid amount"
+        />
+
+        <DollarInputField
+          label="Payout"
+          value={payout}
+          setValue={setPayout}
+          placeholder="Enter Amount"
+          pattern="^\d+(\.\d{1,2})?$"
+          errorMessage="Enter a valid amount"
+        />
+
+<GradientButton
+          label="Create Bet"
+          onPress={() => {}}
+          arrowEnable={false}
+        />
+      </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A2A44',
-    padding: 20,
+    backgroundColor: Colors.background,
   },
-  header: {
-    fontSize: 24,
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: '#FFFFFF',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    color: '#FFFFFF',
+  content: {
+    paddingTop: 80,
+    paddingHorizontal: 15,
   },
 });
-
-export default CreateBetScreen;
