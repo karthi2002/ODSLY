@@ -19,19 +19,26 @@ import {
   BettingInsights,
   CommunityHighlights,
   activeSubscriptions,
+  upcomingBets,
 } from "../../json/data";
 import BetCard from "../../components/Card/BetCard";
+// import UpcomingBetCard from "../../components/Card/UpcomingBetCard";
 import GradientButton from "../../components/Button/GradientButton";
 import { SubscriptionCard } from "../../components/Card/SubscriptionCard";
 import { LineGradient } from "../../layouts/LineGradient";
+
+// ... imports stay the same
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Header />
 
-      <ScrollView style={styles.content} contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
-        
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
         <GradientText text="Welcome back, Zack!" style={{ fontSize: 20 }} />
 
         <View style={styles.statsGrid}>
@@ -65,20 +72,22 @@ export default function HomeScreen() {
 
         <LineGradient />
 
-        <View style={styles.container}>
+        <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Active Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {activeBets.map((bet, index) => (
               <BetCard key={index} data={bet} type="active" />
             ))}
           </ScrollView>
+        </View>
 
-          <LineGradient />
+        <LineGradient />
 
+        <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Live Game Watchlist</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {liveWatchlist.map((bet, index) => (
-              <BetCard key={index} data={bet} type="watchlist" />
+              <BetCard key={index} data={bet} type="live" />
             ))}
           </ScrollView>
         </View>
@@ -115,9 +124,19 @@ export default function HomeScreen() {
 
         <LineGradient />
 
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Upcoming Bets</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {upcomingBets.map((bet, index) => (
+              <BetCard key={index} data={bet} type={"upcoming"}/>
+            ))}
+          </ScrollView>
+        </View>
+
+        <LineGradient />
+
         <View>
           <Text style={styles.sectionTitle}>Community Highlights</Text>
-
           <View style={styles.betCard}>
             {CommunityHighlights.map((item) => (
               <LinearGradient
@@ -142,7 +161,6 @@ export default function HomeScreen() {
 
         <View>
           <Text style={styles.sectionTitle}>Subscription</Text>
-
           {activeSubscriptions.map((plan) => (
             <SubscriptionCard key={plan.id} plan={plan} />
           ))}
@@ -156,6 +174,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+  },
+  sectionContainer: {
+    backgroundColor: Colors.background,
+    marginTop: 20,
+    marginBottom: 10,
   },
   content: {
     paddingTop: 80,
@@ -209,10 +232,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
   },
-  container: {
-    backgroundColor: Colors.background,
-    flex: 1,
-  },
   sectionTitle: {
     color: Colors.secondary,
     fontSize: 18,
@@ -261,3 +280,4 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+

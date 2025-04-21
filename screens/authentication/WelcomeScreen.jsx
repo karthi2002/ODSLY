@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+import {
   View,
   Text,
   StyleSheet,
@@ -15,9 +20,8 @@ import StepWizard from "../../components/Form/StepWizard";
 import Colors from "../../utils/Colors";
 import FootBallImage from "../../assets/images/american-football.png";
 import one from "../../assets/images/one.png";
-import onee from "../../assets/images/onee.png";
 import two from "../../assets/images/two.png";
-import twoo from "../../assets/images/twoo.png";
+
 
 const { width } = Dimensions.get("window");
 
@@ -56,7 +60,6 @@ const WelcomeScreen = () => {
             </View>
             <View style={styles.imageWrapper}>
               <Image source={one} style={styles.primaryImg} />
-              <Image source={onee} style={styles.secondaryImg} />
             </View>
           </View>
         );
@@ -71,7 +74,6 @@ const WelcomeScreen = () => {
             </View>
             <View style={styles.imageWrapper}>
               <Image source={two} style={styles.primaryImg} />
-              <Image source={twoo} style={styles.secondaryImg} />
             </View>
           </View>
         );
@@ -92,8 +94,11 @@ const WelcomeScreen = () => {
       </View>
 
       <View style={styles.mainContent}>
+        <View style={styles.mainContainer}>
         {renderStepContent()}
         <StepWizard currentStep={stepIndex} steps={steps} />
+        </View>
+
       </View>
 
       {stepIndex <= steps - 1 && (
@@ -112,73 +117,77 @@ const styles = StyleSheet.create({
   },
   topBar: {
     alignItems: "flex-end",
+    padding: wp("5%"),
+    zIndex: 10,
   },
-  skipbtn:{
-    width:100,
-    justifyContent:"center",
+  skipbtn: {
+    width: wp("20%"),
+    justifyContent: "center",
   },
   mainContent: {
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
+
   },
+mainContainer: {
+  flex: 1,
+  width: "100%",
+  justifyContent: "space-between",
+  paddingBottom: hp("3%"),
+  zIndex: 1,
+},
   image: {
     flex: 1,
     width: "100%",
     justifyContent: "center",
-    paddingTop: 50,
     alignItems: "center",
+    paddingTop: hp("1%"),
   },
-  textWrapper: {
-    alignItems: "center",
-    marginBottom: 20,
-    paddingHorizontal: 20,
-  },
+textWrapper: {
+  alignItems: "center",
+  marginBottom: hp("3%"),
+},
   title: {
-    fontSize: 24,
+    fontSize: wp("6%"),
     fontWeight: "bold",
     color: Colors.secondary,
     textTransform: "uppercase",
   },
   secondtitle: {
-    fontSize: 24,
+    fontSize: wp("6%"),
     fontWeight: "bold",
     color: Colors.secondary,
     textTransform: "uppercase",
-    marginBottom: 10,
+    marginBottom: hp("1%"),
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: wp("4.5%"),
     color: Colors.LightGray,
     textAlign: "center",
   },
-  imageWrapper: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    gap: 10,
-    marginTop: 30,
-  },
-  primaryImg: {
-    width: 150,
-    height: 250,
-    resizeMode: "contain",
-  },
-  secondaryImg: {
-    width: 150,
-    height: 250,
-    resizeMode: "contain",
-  },
-  content: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
+imageWrapper: {
+  marginTop: hp("1%"),
+  alignItems: "center",
+},
+primaryImg: {
+  width: wp("100%"),
+  height: hp("60%"),
+  resizeMode: "contain",
+},
+content: {
+  flex: 1,
+  justifyContent: "flex-start",
+  paddingTop: hp("6%"),
+  paddingHorizontal: wp("5%"),
+},
   bottom: {
-    paddingVertical: 10,
+    paddingVertical: hp("2%"),
     alignItems: "center",
     justifyContent: "center",
+    top:hp("-5%"),
   },
 });
+
 
 export default WelcomeScreen;

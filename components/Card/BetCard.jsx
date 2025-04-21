@@ -36,7 +36,7 @@ const BetCard = ({ data, type }) => {
             <TouchableOpacity><GradientText text="Watch Live" style={{ fontSize: 16 }} /></TouchableOpacity>
           </View>
         </>
-      ) : (
+      ) : type === "live" ? (
         <>
           <RowItem label="Teams:" value={data.teams} />
           <RowItem label="Score:" value={data.score} />
@@ -49,10 +49,24 @@ const BetCard = ({ data, type }) => {
             <TouchableOpacity><GradientText text="View Stats" style={{ fontSize: 16 }} /></TouchableOpacity>
           </View>
         </>
+      ) : (
+        // Upcoming
+        <>
+          <RowItem label="Match:" value={data.match} />
+          <RowItem label="Bet:" value={data.bet} />
+          <RowItem label="Odds:" value={data.odds} />
+          <RowItem label="Time:" value={data.time} />
+          <RowItem label="Countdown:" value={data.countdown} />
+          <LineGradient style={{ marginVertical: 10 }} />
+          <TouchableOpacity style={{ alignItems: "center" }}>
+            <GradientText text="Edit Bet" style={{ fontSize: 16 }} />
+          </TouchableOpacity>
+        </>
       )}
     </LinearGradient>
   );
 };
+
 
 const styles = StyleSheet.create({
   betCard: {

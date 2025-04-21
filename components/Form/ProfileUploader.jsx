@@ -8,11 +8,10 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import TextInputField from '../Input/TextInputField'; 
+import TextInputField from '../Input/TextInputField';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../utils/Colors';
-
 
 const ProfileUploader = ({ username, setUsername }) => {
   const [imageUri, setImageUri] = React.useState(null);
@@ -28,10 +27,11 @@ const ProfileUploader = ({ username, setUsername }) => {
     }
   };
 
+  const handleImageRemove = () => setImageUri(null);
+
   return (
     <View style={styles.container}>
-
-      {/* Row for profile image + username welcome */}
+      {/* Profile Row */}
       <View style={styles.row}>
         <TouchableOpacity style={styles.imageWrapper} onPress={handleImagePick}>
           {imageUri ? (
@@ -44,22 +44,33 @@ const ProfileUploader = ({ username, setUsername }) => {
         <View style={styles.textWrapper}>
           <Text style={styles.welcomeText}>Welcome, {username || 'User'}!</Text>
 
-          <TouchableOpacity onPress={handleImagePick}>
-            <MaskedView maskElement={<Text style={styles.uploadText}>Upload Profile Picture</Text>}>
-              <LinearGradient
-                colors={['#029EFE', '#6945E2', '#E9098E']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
-                <Text style={[styles.uploadText, { opacity: 0 }]}>Upload Profile Picture</Text>
-              </LinearGradient>
-            </MaskedView>
-          </TouchableOpacity>
+          {imageUri ? (
+            <View style={styles.actionRow}>
+              <TouchableOpacity onPress={handleImagePick}>
+                <GradientText text="Replace" />
+              </TouchableOpacity>
+              <Text style={styles.separator}>|</Text>
+              <TouchableOpacity onPress={handleImageRemove}>
+                <GradientText text="Delete" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity onPress={handleImagePick}>
+              <MaskedView maskElement={<Text style={styles.uploadText}>Upload Profile Picture</Text>}>
+                <LinearGradient
+                  colors={['#029EFE', '#6945E2', '#E9098E']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                >
+                  <Text style={[styles.uploadText, { opacity: 0 }]}>Upload Profile Picture</Text>
+                </LinearGradient>
+              </MaskedView>
+            </TouchableOpacity>
+          )}
         </View>
-
       </View>
 
-      {/* Username Input Field */}
+      {/* Username Input */}
       <View>
         <TextInputField
           label="Username"
@@ -72,10 +83,28 @@ const ProfileUploader = ({ username, setUsername }) => {
           *Unique username that will represent your identity
         </Text>
       </View>
-
     </View>
   );
 };
+
+// GradientText Component
+const GradientText = ({ text }) => (
+  <MaskedView
+    maskElement={
+      <View style={styles.maskContainer}>
+        <Text style={styles.actionText}>{text}</Text>
+      </View>
+    }
+  >
+    <LinearGradient
+      colors={["#029EFE", "#6945E2", "#E9098E"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+    >
+      <Text style={[styles.actionText, { opacity: 0 }]}>{text}</Text>
+    </LinearGradient>
+  </MaskedView>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -110,10 +139,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: Colors.primary,
-    marginBottom: 5
+    marginBottom: 5,
   },
-
-    uploadText: {
+  uploadText: {
     fontSize: 18,
     fontWeight: '500',
     textAlign: 'left',
@@ -121,9 +149,27 @@ const styles = StyleSheet.create({
   subText: {
     fontSize: 12,
     color: 'gray',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+  },
+  actionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 2,
+  },
+  separator: {
+    fontSize: 16,
+    color: Colors.primary,
+  },
+  maskContainer: {
+    backgroundColor: 'transparent',
+  },
+  actionText: {
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
+
 
 
 export default ProfileUploader;

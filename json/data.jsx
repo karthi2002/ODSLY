@@ -46,6 +46,24 @@ export const activeBets = [
   },
 ];
 
+export const upcomingBets = [
+  {
+    match: "49ers vs. Chiefs",
+    bet: "49ers ML",
+    odds: "+115",
+    time: "Tomorrow at 4:30 PM",
+    countdown: "23h 12m"
+  },
+  {
+    match: "49ers vs. Chiefs",
+    bet: "49ers ML",
+    odds: "+115",
+    time: "Tomorrow at 4:30 PM",
+    countdown: "23h 12m"
+  }
+];
+
+
 export const liveWatchlist = [
   {
     teams: "Lakers VS Suns",
