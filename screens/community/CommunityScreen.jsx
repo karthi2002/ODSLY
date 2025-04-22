@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: "row",
     justifyContent: 'center',
-    backgroundColor: "#1D1D3F",
+    backgroundColor: "#624FBB90",
     marginVertical: 15,
     borderRadius: 8,
   },
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     backgroundColor: Colors.secondary,
+    margin: 5
   },
   inactiveText: {
     color: Colors.secondary,
@@ -108,6 +109,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentBox: {
-    marginTop: 30,
+    marginTop: 20,
   }
 });
