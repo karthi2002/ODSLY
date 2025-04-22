@@ -33,16 +33,7 @@ export default function FeedScreen() {
         showsVerticalScrollIndicator={false}
       >
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Recent Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
-            {recentBet.map((bet, index) => (
-              <BetCard key={index} data={bet} type="recent" />
-            ))}
-          </ScrollView>
-        </View>
 
-        <LineGradient />
 
       </ScrollView>
     </View>
