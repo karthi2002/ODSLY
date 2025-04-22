@@ -7,9 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Colors from "../../utils/Colors";
-import { LineGradient } from "../../layouts/LineGradient";
-import { recentBet } from "../../json/RecentBetData";
-import BetCard from "../../components/Card/BetCard";
 
 export default function FeedScreen() {
   const handleAvatarPress = () => {
