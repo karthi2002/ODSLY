@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Colors from "../../utils/Colors";
+import { LineGradient } from "../../layouts/LineGradient";
+import { recentBet } from "../../json/RecentBetData";
+import BetCard from "../../components/Card/BetCard";
 
 export default function FeedScreen() {
 
@@ -18,6 +21,18 @@ export default function FeedScreen() {
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
+
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Recent Bets</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
+            {recentBet.map((bet, index) => (
+              <BetCard key={index} data={bet} type="recent" />
+            ))}
+          </ScrollView>
+        </View>
+
+        <LineGradient />
+
       </ScrollView>
     </View>
   );
@@ -28,8 +43,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
-  content: {
-    paddingTop: 80,
-    paddingHorizontal: 15,
+  sectionTitle: {
+    color: Colors.secondary,
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 20,
   },
 });
