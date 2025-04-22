@@ -10,18 +10,22 @@ import Colors from "../../utils/Colors";
 import { LineGradient } from "../../layouts/LineGradient";
 import Tag from "../../components/List/Tag";
 import UserPostCard from "../../components/Card/UserPostCard";
-
+import { otherPosts } from "../../json/PostData";
+import { useNavigation } from "@react-navigation/native";
 
 const tagsData = [
-  { label: "#NBAWinners", emoji: "🏀", selected: true },
+  { label: "#NBAWinners", emoji: "🏀", selected: false },
   { label: "#ParlayKings", emoji: "🔥", selected: false },
   { label: "#BigWins", emoji: "💰", selected: false },
-  { label: "#UnderdogBets", emoji: "⚽", selected: true },
+  { label: "#UnderdogBets", emoji: "⚽", selected: false },
 ];
 
 export default function FeedScreen() {
+
+  const navigation = useNavigation();
+
   const handleAvatarPress = () => {
-    console.log("Avatar clicked");
+    navigation.navigate("CommunityStack", { screen: "PostProfile" })
   };
 
   const handleLikePress = () => {
@@ -29,8 +33,16 @@ export default function FeedScreen() {
   };
 
   const handleCommentPress = () => {
-    console.log("Comment clicked");
+    navigation.navigate("CommunityStack", { screen: "PostComment" })
   };
+
+  const [tags, setTags] = useState(tagsData);
+
+const toggleTag = (index) => {
+  const updatedTags = [...tags];
+  updatedTags[index].selected = !updatedTags[index].selected;
+  setTags(updatedTags);
+};
 
 
   return (
@@ -40,39 +52,40 @@ export default function FeedScreen() {
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-      <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Trending Hashtags</Text>
-              <View style={styles.container}>
-                {tagsData.map((tag, index) => (
-                  <Tag
-                    key={index}
-                    label={tag.label}
-                    emoji={tag.emoji}
-                    selected={tag.selected}
-                  />
-                ))}
-            </View>
-            </View>
-            <LineGradient />
-
-            <View>
-            <Text style={styles.sectionTitle}>Trending Posts</Text>
-              <ScrollView  showsVerticalScrollIndicator={false} style={{ marginRight: -15 }} ><UserPostCard
-                user={{
-                  name: "Alex Johnson",
-                  avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-                }}
-                content="Exploring the new React Native features today! 🔥 Can't wait to integrate them into my projects. #reactnative #devlife"
-                hashtags={["#reactnative", "#devlife"]}
-                timeAgo="2h ago"
-                likeCount={10}
-                commentCount={4}
-                onAvatarPress={handleAvatarPress}
-                onLikePress={handleLikePress}
-                onCommentPress={handleCommentPress}
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Trending Hashtags</Text>
+          <View style={styles.container}>
+            {tagsData.map((tag, index) => (
+              <Tag
+                key={index}
+                label={tag.label}
+                emoji={tag.emoji}
+                selected={tag.selected}
+                onPress={() => toggleTag(index)}
               />
-              </ScrollView>
-            </View>
+            ))}
+          </View>
+        </View>
+
+        <LineGradient />
+
+        <View>
+          <Text style={styles.sectionTitle}>Trending Posts</Text>
+          {otherPosts.map((post) => (
+        <UserPostCard
+          key={post.id}
+          user={post.user}
+          content={post.content}
+          hashtags={post.hashtags}
+          timeAgo={post.timeAgo}
+          likeCount={post.likeCount}
+          commentCount={post.commentCount}
+          onAvatarPress={handleAvatarPress}
+          onLikePress={handleLikePress}
+          onCommentPress={handleCommentPress}
+        />
+      ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -88,5 +101,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 20,
+  },
+  container: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "start",
   },
 });

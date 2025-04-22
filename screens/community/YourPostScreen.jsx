@@ -11,6 +11,7 @@ import { LineGradient } from "../../layouts/LineGradient";
 import { recentBet } from "../../json/RecentBetData";
 import BetCard from "../../components/Card/BetCard";
 import UserPostCard from "../../components/Card/UserPostCard";
+import { yourPosts } from "../../json/PostData";
 
 export default function YourPostScreen() {
 
@@ -47,20 +48,21 @@ export default function YourPostScreen() {
 
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Your Posts</Text>
+        {yourPosts.map((post) => (
         <UserPostCard
-          user={{
-            name: "Alex Johnson",
-            avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-          }}
-          content="Exploring the new React Native features today! 🔥 Can't wait to integrate them into my projects."
-          hashtags={["#reactnative", "#devlife"]}
-          timeAgo="2h ago"
-          likeCount={10}
-          commentCount={4}
+          key={post.id}
+          user={post.user}
+          content={post.content}
+          hashtags={post.hashtags}
+          timeAgo={post.timeAgo}
+          likeCount={post.likeCount}
+          commentCount={post.commentCount}
           onAvatarPress={handleAvatarPress}
           onLikePress={handleLikePress}
           onCommentPress={handleCommentPress}
+          showDelete={true} 
         />
+      ))}
       </View>
       
       </ScrollView>

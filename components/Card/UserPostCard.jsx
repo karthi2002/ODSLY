@@ -10,6 +10,7 @@ import { FontAwesome, Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import Colors from "../../utils/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 const UserPostCard = ({
   user,
@@ -21,11 +22,12 @@ const UserPostCard = ({
   onAvatarPress,
   onLikePress,
   onCommentPress,
+  showDelete = false, 
 }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(likeCount);
   const [comments, setComments] = useState(commentCount);
-
+  
   const toggleLike = () => {
     const isNowLiked = !liked;
     setLiked(isNowLiked);
@@ -86,6 +88,7 @@ const UserPostCard = ({
         </View>
 
         {/* Actions */}
+        <View style={styles.actionContainer}>
         <View style={styles.actionsRow}>
           <TouchableOpacity style={styles.action} onPress={toggleLike}>
             {renderHeartIcon()}
@@ -96,6 +99,13 @@ const UserPostCard = ({
             <Text style={styles.actionText}>{comments}</Text>
           </TouchableOpacity>
         </View>
+        {showDelete && (
+            <TouchableOpacity style={styles.action}>
+              <FontAwesome name="trash-o" size={20} color={Colors.secondary} />
+            </TouchableOpacity>
+          )}
+        </View>
+
       </View>
 
     </LinearGradient>
@@ -158,7 +168,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginRight: 12,
   },
+  actionContainer: {
+    flexDirection: 'row',
+  },
   actionsRow: {
+    flex: 1,
     flexDirection: "row",
     gap: 20,
   },

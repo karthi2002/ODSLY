@@ -1,24 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const Tag = ({ label, emoji, selected }) => {
+const Tag = ({ label, emoji, selected, onPress }) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
       style={[
         styles.tag,
-        { backgroundColor: selected ? "#D6E6FF" : "#F2F2F2" }, // you can adjust this
+        { backgroundColor: selected ? "#D6E6FF" : "#F2F2F2" },
       ]}
     >
       <Text style={styles.text}>
-        {emoji} <Text style={{ fontWeight: "600" }}>{label}</Text>
+        {emoji} <Text style={styles.label}>{label}</Text>
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   tag: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 25,
     margin: 6,
@@ -27,8 +29,11 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   text: {
-    fontSize: 14,
-    color: "#0F172A", // dark navy
+    fontSize: 16,
+    color: "#0F172A",
+  },
+  label: {
+    fontWeight: "500",
   },
 });
 

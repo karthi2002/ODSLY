@@ -8,9 +8,8 @@ const Stack = createNativeStackNavigator();
 export default function LiveStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="LiveFilter" component={FiltersScreen} />
-      <Stack.Screen name="LiveNewBet" component={CreateBetScreen} />
-
+    <Stack.Screen name="LiveFilter" component={FiltersScreen} />
+    <Stack.Screen name="LiveNewBet" component={CreateBetScreen} />
     </Stack.Navigator>
   );
 }
