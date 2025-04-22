@@ -141,3 +141,11 @@ export const activeSubscriptions = [
     isActive: true
   },
 ];
+
+export const tagsData = [
+  { label: "#NBAWinners", emoji: "🏀", selected: true },
+  { label: "#ParlayKings", emoji: "🔥", selected: false },
+  { label: "#BigWins", emoji: "💰", selected: false },
+  { label: "#UnderdogBets", emoji: "⚽", selected: true },
+];
+
