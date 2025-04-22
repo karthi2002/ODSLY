@@ -14,6 +14,17 @@ import UserPostCard from "../../components/Card/UserPostCard";
 
 export default function YourPostScreen() {
 
+  const handleAvatarPress = () => {
+    console.log("Avatar clicked");
+  };
+
+  const handleLikePress = () => {
+    console.log("Post liked/unliked");
+  };
+
+  const handleCommentPress = () => {
+    console.log("Comment clicked");
+  };
 
   return (
     <View style={styles.container}>
@@ -22,7 +33,7 @@ export default function YourPostScreen() {
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-      </ScrollView>
+
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Recent Bets</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
@@ -36,12 +47,12 @@ export default function YourPostScreen() {
 
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Your Posts</Text>
-        <ScrollView  showsVerticalScrollIndicator={false} style={{ marginRight: -15 }} ><UserPostCard
+        <UserPostCard
           user={{
             name: "Alex Johnson",
             avatar: "https://randomuser.me/api/portraits/men/32.jpg",
           }}
-          content="Exploring the new React Native features today! 🔥 Can't wait to integrate them into my projects. #reactnative #devlife"
+          content="Exploring the new React Native features today! 🔥 Can't wait to integrate them into my projects."
           hashtags={["#reactnative", "#devlife"]}
           timeAgo="2h ago"
           likeCount={10}
@@ -50,8 +61,9 @@ export default function YourPostScreen() {
           onLikePress={handleLikePress}
           onCommentPress={handleCommentPress}
         />
-        </ScrollView>
       </View>
+      
+      </ScrollView>
     </View>
   );
 }

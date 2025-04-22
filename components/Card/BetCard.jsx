@@ -124,7 +124,7 @@ const BetCard = ({ data, type }) => {
                   <LineGradient style={{ marginVertical: 10 }} />
                 )}
                 
-                <Text style={[styles.highlight, getHighlightStyle(item.type)]}>
+                <Text style={styles.highlight}>
                   {item.type === "success" && "✅ "}
                   {item.type === "fail" && "❌ "}
                   {item.type === "info" && "📣 "}

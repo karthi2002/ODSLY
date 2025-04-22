@@ -51,7 +51,7 @@ const UserPostCard = ({
         />
       </MaskedView>
     ) : (
-      <FontAwesome name="heart" size={20} color={Colors.secondary} />
+      <FontAwesome name="heart-o" size={20} color={Colors.secondary} />
     );
 
   return (
@@ -92,20 +92,21 @@ const UserPostCard = ({
             <Text style={styles.actionText}>{likes}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.action} onPress={addComment}>
-            <Feather name="message-circle" size={20} color={Colors.secondary} />
+            <FontAwesome name="comment-o" size={20} color={Colors.secondary} />
             <Text style={styles.actionText}>{comments}</Text>
           </TouchableOpacity>
         </View>
       </View>
+
     </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   cardOuter: {
+    flex: 1,
     borderRadius: 16,
     padding: 2,
-    marginVertical: 10,
   },
   card: {
     backgroundColor: Colors.background,
@@ -115,44 +116,46 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 10,
     marginBottom: 12,
   },
   avatar: {
-    width: 38,
-    height: 38,
-    borderRadius: 999,
+    width: 35,
+    height: 35,
+    borderRadius: 50,
   },
   headerText: {
-    flexDirection:"row",
-    gap:200,
-    marginLeft: 10,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'space-between',
   },
   username: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "600",
     color: Colors.secondary,
   },
   timeAgo: {
-    fontSize: 12,
+    fontSize: 14,
     color: Colors.text,
     marginTop: 2,
   },
   content: {
     color: Colors.secondary,
     fontSize: 16,
-    marginBottom: 10,
+    fontWeight: "400",
+    marginBottom: 5,
     lineHeight: 22,
   },
   hashtagContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 1,
     marginBottom: 12,
   },
   hashtag: {
     color: Colors.secondary,
     fontWeight: "600",
-    fontSize: 15,
+    fontSize: 16,
     marginRight: 12,
   },
   actionsRow: {
@@ -166,7 +169,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     color: Colors.secondary,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "500",
   },
 });
