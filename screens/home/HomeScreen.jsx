@@ -22,12 +22,9 @@ import {
   upcomingBets,
 } from "../../json/data";
 import BetCard from "../../components/Card/BetCard";
-// import UpcomingBetCard from "../../components/Card/UpcomingBetCard";
 import GradientButton from "../../components/Button/GradientButton";
 import { SubscriptionCard } from "../../components/Card/SubscriptionCard";
 import { LineGradient } from "../../layouts/LineGradient";
-
-// ... imports stay the same
 
 export default function HomeScreen() {
   return (
@@ -74,7 +71,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Active Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {activeBets.map((bet, index) => (
               <BetCard key={index} data={bet} type="active" />
             ))}
@@ -85,7 +82,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Live Game Watchlist</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {liveWatchlist.map((bet, index) => (
               <BetCard key={index} data={bet} type="live" />
             ))}
@@ -126,7 +123,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Upcoming Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
             {upcomingBets.map((bet, index) => (
               <BetCard key={index} data={bet} type={"upcoming"}/>
             ))}

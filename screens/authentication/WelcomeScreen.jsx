@@ -172,7 +172,7 @@ imageWrapper: {
 },
 primaryImg: {
   width: wp("100%"),
-  height: hp("60%"),
+  height: hp("40%"),
   resizeMode: "contain",
 },
 content: {
