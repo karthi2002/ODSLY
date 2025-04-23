@@ -9,19 +9,21 @@ const StepWizard = ({
   activeColors = ['#029EFE', '#6945E2', '#E9098E'], 
   inactiveColor = Colors.LightGray,
   stepHeight = 8,
-  stepSpacing = 12,
+  stepSpacing = 18,
   showStepNumber = false,
+  paddingLeft = 40,
+  paddingRight = 40,
   style,
 }) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, { paddingLeft, paddingRight }, style]}>
       {Array.from({ length: steps }).map((_, index) => {
         const isActive = index < currentStep;
 
         return (
           <View
             key={index}
-            style={[
+            style={[ 
               styles.stepWrapper,
               { marginRight: index !== steps - 1 ? stepSpacing : 0 },
             ]}

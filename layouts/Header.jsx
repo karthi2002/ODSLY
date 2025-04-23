@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     shadowColor: Colors.secondary,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
+    marginBottom:10,
   },
   logoContainer: {
     display: "flex",
