@@ -10,7 +10,6 @@ import { FontAwesome, Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import Colors from "../../utils/Colors";
-import { useNavigation } from "@react-navigation/native";
 
 const UserPostCard = ({
   user,
@@ -22,12 +21,13 @@ const UserPostCard = ({
   onAvatarPress,
   onLikePress,
   onCommentPress,
-  showDelete = false, 
+  showDelete = false,
+  onDeletePress,
 }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(likeCount);
   const [comments, setComments] = useState(commentCount);
-  
+
   const toggleLike = () => {
     const isNowLiked = !liked;
     setLiked(isNowLiked);
@@ -89,25 +89,35 @@ const UserPostCard = ({
 
         {/* Actions */}
         <View style={styles.actionContainer}>
-        <View style={styles.actionsRow}>
-          <TouchableOpacity style={styles.action} onPress={toggleLike}>
-            {renderHeartIcon()}
-            <Text style={styles.actionText}>{likes}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.action} onPress={addComment}>
-            <FontAwesome name="comment-o" size={20} color={Colors.secondary} />
-            <Text style={styles.actionText}>{comments}</Text>
-          </TouchableOpacity>
-        </View>
-        {showDelete && (
-            <TouchableOpacity style={styles.action}>
-              <FontAwesome name="trash-o" size={20} color={Colors.secondary} />
+          <View style={styles.actionsRow}>
+            <TouchableOpacity style={styles.action} onPress={toggleLike}>
+              {renderHeartIcon()}
+              <Text style={styles.actionText}>{likes}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.action} onPress={addComment}>
+              <FontAwesome
+                name="comment-o"
+                size={20}
+                color={Colors.secondary}
+              />
+              <Text style={styles.actionText}>{comments}</Text>
+            </TouchableOpacity>
+          </View>
+
+          {showDelete && (
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={onDeletePress}
+            >
+              <FontAwesome
+                name="trash-o"
+                size={20}
+                color={Colors.secondary}
+              />
             </TouchableOpacity>
           )}
         </View>
-
       </View>
-
     </LinearGradient>
   );
 };
@@ -137,7 +147,7 @@ const styles = StyleSheet.create({
   headerText: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   username: {
     fontSize: 16,
@@ -169,10 +179,11 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   actionContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   actionsRow: {
-    flex: 1,
     flexDirection: "row",
     gap: 20,
   },
@@ -180,6 +191,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
+  },
+  deleteButton: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   actionText: {
     color: Colors.secondary,

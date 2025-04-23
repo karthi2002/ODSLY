@@ -51,4 +51,19 @@ export const yourPosts = [
       commentCount: 7,
     },
   ];
+
+  export const SinglePost = [
+    {
+      id: 1,
+      user: {
+        name: "Alex Johnson",
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      },
+      content: "Exploring the new React Native features today! 🔥 Can't wait to integrate them into my projects.",
+      hashtags: ["#reactnative", "#devlife"],
+      timeAgo: "2h ago",
+      likeCount: 10,
+      commentCount: 4,
+    },
+  ];
   
