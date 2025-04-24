@@ -8,38 +8,44 @@ import Colors from '../../utils/Colors';
 const screenWidth = Dimensions.get('window').width;
 
 const chartConfig = {
-  backgroundGradientFrom: '#1c1c5e',
-  backgroundGradientTo: '#1c1c5e',
+  backgroundColor: 'transparent',
   decimalPlaces: 0,
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  labelColor: () => '#fff',
-  barPercentage: 0.6,
-  fillShadowGradient: '#8E2DE2',
-  fillShadowGradientOpacity: 1,
+  labelColor: () => Colors.secondary,
+  yAxisInterval: 20,
+  barPercentage: 0.8,
   propsForBackgroundLines: {
-    stroke: '#444',
+    stroke: Colors.text, 
+    strokeDasharray: '',
+  },
+  propsForLabels: {
+    fontSize: 12, 
   },
 };
 
 const SuccessRateChart = () => {
-
-  console.log('📊 Chart Data:', successRateData.chart);
-
   return (
     <LinearGradient
-          colors={["#624FBB", "#200F3B"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }} style={styles.container}>
-      <Text style={styles.title}>{successRateData.title}</Text>
+      colors={["#624FBB", "#200F3B"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }} 
+      style={styles.container}
+    >
+      <Text style={styles.title}>🔍 Success Rate on Bet Types</Text>
       <BarChart
         data={successRateData.chart}
         width={screenWidth - 64}
-        height={220}
+        height={250}
         chartConfig={chartConfig}
         verticalLabelRotation={0}
         fromZero
-        showValuesOnTopOfBars
+        showValuesOnTopOfBars={true}
+        withInnerLines={true}
+        withHorizontalLabels={true}
         style={styles.chartStyle}
+        withCustomBarColorFromData={true}
+        flatColor={true}
+        segments={5} 
       />
     </LinearGradient>
   );
