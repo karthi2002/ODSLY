@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   sectionContainer: {
-    marginTop: 50,
+    marginTop: 30,
     flex: 1,
     backgroundColor: Colors.background,
   },

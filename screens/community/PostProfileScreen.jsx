@@ -14,7 +14,7 @@ import { otherPosts } from "../../json/PostData";
 import { useNavigation } from "@react-navigation/native";
 
 const PostProfileScreen = () => {
-  const navigation = useNavigation(); // ✅ Moved inside the component
+  const navigation = useNavigation(); 
 
   const handleAvatarPress = () => {
     navigation.navigate("CommunityStack", { screen: "PostProfile" });
@@ -57,6 +57,7 @@ const PostProfileScreen = () => {
               onAvatarPress={handleAvatarPress}
               onLikePress={handleLikePress}
               onCommentPress={handleCommentPress}
+              style={{marginBottom: 15}}
             />
           ))}
         </View>

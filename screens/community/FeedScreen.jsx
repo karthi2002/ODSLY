@@ -83,6 +83,7 @@ const toggleTag = (index) => {
           onAvatarPress={handleAvatarPress}
           onLikePress={handleLikePress}
           onCommentPress={handleCommentPress}
+          style={{marginBottom: 15}}
         />
       ))}
         </View>

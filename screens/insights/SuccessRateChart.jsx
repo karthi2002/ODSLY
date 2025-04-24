@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 import successRateData from '../../json/successRateData';
+import { LinearGradient } from 'expo-linear-gradient';
+import Colors from '../../utils/Colors';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -20,11 +22,14 @@ const chartConfig = {
 };
 
 const SuccessRateChart = () => {
-  // Debugging check – ensure data is received correctly
+
   console.log('📊 Chart Data:', successRateData.chart);
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+          colors={["#624FBB", "#200F3B"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }} style={styles.container}>
       <Text style={styles.title}>{successRateData.title}</Text>
       <BarChart
         data={successRateData.chart}
@@ -36,23 +41,25 @@ const SuccessRateChart = () => {
         showValuesOnTopOfBars
         style={styles.chartStyle}
       />
-    </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#11123f',
-    borderRadius: 16,
-    padding: 16,
-    marginHorizontal: 16,
-    marginVertical: 10,
-    alignItems: 'center',
+    padding: 15,
+    borderRadius: 12,
+    borderWidth: 1.5,
+    borderColor: "rgba(255, 255, 255, 0.5)",
+    alignItems: "center",
+    marginVertical: 15,
   },
   title: {
-    color: '#fff',
+    alignSelf: "flex-start",
     fontSize: 16,
-    marginBottom: 10,
+    fontWeight: "600",
+    color: Colors.secondary,
+    marginBottom: 15,
   },
   chartStyle: {
     borderRadius: 12,

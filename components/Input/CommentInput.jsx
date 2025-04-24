@@ -28,7 +28,7 @@ const CommentInput = ({ onPost }) => {
           value={comment}
           onChangeText={setComment}
           placeholder="Type your comment here..."
-          placeholderTextColor="#888"
+          placeholderTextColor={Colors.text}
           style={styles.input}
         />
 
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     paddingHorizontal: 12,
-    paddingVertical: 4,
+    paddingVertical: 8,
   },
   input: {
     flex: 1,
     paddingVertical: 8,
     paddingHorizontal: 12,
-    color: '#fff',
+    color: Colors.secondary,
     fontSize: 14,
   },
   gradientWrapper: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   postButton: {
-    paddingVertical: 6,
+    paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 20,
     justifyContent: 'center',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   postText: {
     fontWeight: '600',
-    color: '#fff',
+    color: Colors.secondary,
     fontSize: 14,
   },
   disabledButton: {

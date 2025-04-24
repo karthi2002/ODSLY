@@ -23,6 +23,7 @@ const UserPostCard = ({
   onCommentPress,
   showDelete = false,
   onDeletePress,
+  style
 }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(likeCount);
@@ -61,7 +62,7 @@ const UserPostCard = ({
       colors={["#029EFE", "#6945E2", "#E9098E"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={styles.cardOuter}
+      style={[styles.cardOuter, style]}
     >
       <View style={styles.card}>
         {/* Header */}

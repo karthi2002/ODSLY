@@ -1,6 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Svg, { G, Circle } from 'react-native-svg';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import Svg, { G, Circle } from "react-native-svg";
+import Colors from "../../utils/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function DonutChart() {
   const radius = 60;
@@ -14,9 +16,14 @@ export default function DonutChart() {
   const winStrokeDashoffset = circumference - (win / total) * circumference;
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={["#624FBB", "#200F3B"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.container}
+    >
       <Text style={styles.title}>🏆 Overall Win/Loss Record</Text>
-      
+
       <View style={styles.chartContainer}>
         <Svg width={center * 2} height={center * 2}>
           <G rotation="-90" origin={`${center}, ${center}`}>
@@ -25,7 +32,7 @@ export default function DonutChart() {
               cx={center}
               cy={center}
               r={radius}
-              stroke="#FF6E40"
+              stroke="#FE9494"
               strokeWidth={strokeWidth}
               fill="none"
             />
@@ -34,7 +41,7 @@ export default function DonutChart() {
               cx={center}
               cy={center}
               r={radius}
-              stroke="#00C853"
+              stroke="#01B574"
               strokeWidth={strokeWidth}
               strokeDasharray={`${circumference}`}
               strokeDashoffset={winStrokeDashoffset}
@@ -50,60 +57,62 @@ export default function DonutChart() {
       {/* Horizontal legend below the donut */}
       <View style={styles.legendRow}>
         <View style={styles.legendItem}>
-          <View style={[styles.colorBox, { backgroundColor: '#00C853' }]} />
-          <Text style={styles.legendText}>Win: {win}</Text>
+          <View style={[styles.colorBox, { backgroundColor: "#01B574" }]} />
+          <Text style={styles.legendText}>Win</Text>
         </View>
         <View style={styles.legendItem}>
-          <View style={[styles.colorBox, { backgroundColor: '#FF6E40' }]} />
-          <Text style={styles.legendText}>Lose: {lose}</Text>
+          <View style={[styles.colorBox, { backgroundColor: "#FE9494" }]} />
+          <Text style={styles.legendText}>Lose</Text>
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1E1B3A',
-    padding: 20,
+    padding: 15,
     borderRadius: 12,
-    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: "rgba(255, 255, 255, 0.5)",
+    alignItems: "center",
     marginVertical: 15,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FFF',
-    marginBottom: 20,
+    alignSelf: "flex-start",
+    fontSize: 16,
+    fontWeight: "600",
+    color: Colors.secondary,
+    marginBottom: 10,
   },
   chartContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   totalText: {
-    position: 'absolute',
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#FFF',
+    position: "absolute",
+    fontSize: 20,
+    fontWeight: "500",
+    color: Colors.secondary,
   },
   legendRow: {
-    flexDirection: 'row',
-    marginTop: 20,
-    justifyContent: 'center',
+    flexDirection: "row",
+    marginTop: 10,
+    justifyContent: "center",
+    gap: 20,
   },
   legendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
   },
   colorBox: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    marginRight: 8,
+    width: 15,
+    height: 15,
+    borderRadius: 10,
   },
   legendText: {
-    color: '#FFF',
+    color: Colors.secondary,
     fontSize: 16,
   },
 });

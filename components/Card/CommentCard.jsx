@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import Colors from "../../utils/Colors"; // Adjust the path if needed
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Colors from "../../utils/Colors";
 
 const CommentCard = ({ 
   avatar, 
@@ -28,8 +28,8 @@ const CommentCard = ({
       </View>
 
       {/* Right like button */}
-      <TouchableOpacity onPress={onLikePress}>
-        <FontAwesome name="thumbs-up" size={16} color="#888" />
+      <TouchableOpacity onPress={onLikePress} style={styles.likeContainer}>
+      <AntDesign name="like2" size={18} color={Colors.text} />
       </TouchableOpacity>
     </View>
   );
@@ -37,39 +37,42 @@ const CommentCard = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColor,
-    padding: 10,
+    backgroundColor: Colors.background,
+    padding: 5,
     borderRadius: 12,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginVertical: 6,
+    marginVertical: 8,
+    gap: 5
   },
   left: {
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
+    gap: 10
   },
   avatar: {
     width: 32,
     height: 32,
-    borderRadius: 16,
-    marginRight: 10,
+    borderRadius: 15,
+    alignSelf: 'start'
   },
   textWrapper: {
     flex: 1,
   },
   name: {
-    color: "white",
+    color: Colors.secondary,
     fontSize: 14,
-    fontWeight: "500",
+    fontWeight: "600",
   },
   textSection: {
     marginTop: 2,
   },
   textMessage: {
-    color: "white",
-    fontSize: 13,
+    color: Colors.secondary,
+    fontSize: 14,
+    fontWeight:'300',
     lineHeight: 18,
   },
   commentMeta: {
@@ -78,9 +81,13 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   metaText: {
-    color: "#999",
+    color: Colors.text,
     fontSize: 12,
   },
+  likeContainer: {
+    alignSelf: 'start',
+    marginTop: 5
+  }
 });
 
 export default CommentCard;

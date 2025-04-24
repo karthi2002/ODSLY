@@ -1,58 +1,54 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { communityComparisonData } from '../../json/communityComparisonData';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { communityComparisonData } from "../../json/communityComparisonData";
+import Colors from "../../utils/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 const CommunityComparisonComponent = () => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.header}>{communityComparisonData.header}</Text>
-            {communityComparisonData.insights.map((insight, index) => (
-                <View key={index} style={[styles.insightCard, { borderColor: insight.colorhead }]}>
-                    <View style={styles.insightContent}>
-                        <FontAwesome5 name={insight.iconhead} size={24} color={insight.colorhead} style={styles.icon} />
-                        <Text style={styles.title}>{insight.titlehead}</Text>
-                    </View>
-                </View>
-            ))}
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Compare with Community</Text>
+      {communityComparisonData.map((insight, index) => (
+        <LinearGradient
+          key={index}
+          colors={["#624FBB", "#200F3B"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.insightCard}
+        >
+          <View >
+            <Text style={styles.title}>{insight.titlehead}</Text>
+          </View>
+        </LinearGradient>
+      ))}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 16,
-        backgroundColor: '#1A237E',
-        borderRadius: 8,
-        margin: 16,
-    },
-    header: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#FFFFFF',
-        marginBottom: 16,
-    },
-    insightCard: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 2,
-        borderRadius: 8,
-        padding: 12,
-        marginBottom: 12,
-    },
-    insightContent: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    icon: {
-        marginRight: 12,
-    },
-    title: {
-        fontSize: 14,
-        color: '#FFFFFF',
-        flex: 1,
-        flexWrap: 'wrap',
-    },
+  container: {
+    flex: 1,
+  },
+  header: {
+    color: Colors.secondary,
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 20,
+  },
+  insightCard: {
+    borderWidth: 1.5,
+    borderColor: "rgba(255, 255, 255, 0.5)",
+    borderWidth: 2,
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 12,
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: Colors.secondary,
+  },
 });
 
 export default CommunityComparisonComponent;

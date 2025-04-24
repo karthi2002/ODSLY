@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; // use this if you are using Expo
-import Colors from '../../utils/Colors'; // Make sure your Colors has `text`, `background` etc.
+import { LinearGradient } from 'expo-linear-gradient'; 
+import Colors from '../../utils/Colors';
 
 const ProfileDisplay = ({ avatar, name, joinedDate }) => {
   return (
@@ -21,12 +21,11 @@ const ProfileDisplay = ({ avatar, name, joinedDate }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 30,
+    marginVertical: 20
   },
   avatarBorder: {
-    padding: 3,
-    borderRadius: 100,
+    padding: 2,
+    borderRadius: '50%',
   },
   avatar: {
     width: 120,
@@ -39,11 +38,11 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 20,
     fontWeight: '600',
-    color: Colors.text,
+    color: Colors.secondary,
   },
   joinedText: {
-    fontSize: 14,
-    color: '#ccc',
+    fontSize: 16,
+    color: Colors.text,
     marginTop: 4,
   },
 });

@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import Colors from "../../utils/Colors"; // adjust the path as needed
+import Colors from "../../utils/Colors"; 
 
 const CountLabel = ({ label, count, style, containerStyle }) => {
   return (
     <Text style={[styles.label, style]}>
-      {label.toUpperCase()}({count})
+      {label.toUpperCase()} ({count})
     </Text>
   );
 };

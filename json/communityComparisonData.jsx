@@ -1,23 +1,11 @@
-export const communityComparisonData = {
-    header: "Compare with Community",
-    insights: [
+export const communityComparisonData =  [
         {
-            titlehead: "YOU OUTPERFORM 65% OF OTHER BETTORS IN NFL SPREADS!",
-            contenthead: "",
-            iconhead: "trophy",
-            colorhead: "#FFD700"
+            titlehead: "🏆 You outperform 65% of other bettors in NFL spreads! ",
         },
         {
-            titlehead: "YOU’RE IN THE TOP 10% FOR NBA MONEYLINE BETS!",
-            contenthead: "",
-            iconhead: "fire-alt",
-            colorhead: "#FF4500"
+            titlehead: "🔥 You're in the top 10% for NBA moneyline bets! ",
         },
         {
-            titlehead: "70% OF BETTORS FARE BETTER THAN YOU ON SOCCER PARLAYS.",
-            contenthead: "",
-            iconhead: "exclamation-triangle",
-            colorhead: "#FF6D00"
+            titlehead: " 70% of bettors fare better than you on soccer parlays. ",
         }
     ]
-};

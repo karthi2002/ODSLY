@@ -12,11 +12,14 @@ import { recentBet } from "../../json/RecentBetData";
 import BetCard from "../../components/Card/BetCard";
 import UserPostCard from "../../components/Card/UserPostCard";
 import { yourPosts } from "../../json/PostData";
+import { useNavigation } from "@react-navigation/native";
 
 export default function YourPostScreen() {
 
+    const navigation = useNavigation();
+
   const handleAvatarPress = () => {
-    console.log("Avatar clicked");
+    navigation.navigate("CommunityStack", { screen: "PostProfile" })
   };
 
   const handleLikePress = () => {
@@ -24,7 +27,7 @@ export default function YourPostScreen() {
   };
 
   const handleCommentPress = () => {
-    console.log("Comment clicked");
+    navigation.navigate("CommunityStack", { screen: "PostComment" })
   };
 
   return (
@@ -61,6 +64,7 @@ export default function YourPostScreen() {
           onLikePress={handleLikePress}
           onCommentPress={handleCommentPress}
           showDelete={true} 
+          style={{marginBottom: 15}}
         />
       ))}
       </View>

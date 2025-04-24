@@ -1,71 +1,60 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { AIRecommendation } from '../../json/AIRecommendation.jsx';
+import { View, Text, StyleSheet } from 'react-native';
+import { insights } from '../../json/AIRecommendation.jsx';
+import { LinearGradient } from 'expo-linear-gradient';
+import Colors from '../../utils/Colors.jsx';
+import GradientButton from '../../components/Button/GradientButton.jsx';
 
 const AIrecommendationInsights = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>{AIRecommendation.header}</Text>
-            {AIRecommendation.insights.map((insight, index) => (
-                <View key={index} style={[styles.insightCard, { borderColor: insight.colorhead }]}>
-                    <View style={styles.insightContent}>
-                        <FontAwesome5 name={insight.iconhead} size={24} color={insight.colorhead} style={styles.icon} />
-                        <Text style={styles.title}>{insight.titlehead}</Text>
+            <Text style={styles.header}>🤖AI Driven Recommendations</Text>
+            {insights.map((insight, index) => (
+                <LinearGradient
+                    key={index}
+                    colors={["#029EFE", "#6945E2", "#E9098E"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.gradientBorder}
+                >
+                    <View style={styles.AiRecommendInner}>
+                        <Text style={styles.AiRecommendText}>{insight.titlehead}</Text>
                     </View>
-                </View>
+                </LinearGradient>
             ))}
-            <TouchableOpacity style={styles.viewMoreButton}>
-                <Text style={styles.viewMoreText}>VIEW MORE</Text>
-            </TouchableOpacity>
+            <GradientButton
+                label="View More"
+                onPress={() => {}}
+                arrowEnable={false}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
-        backgroundColor: '#1A237E',
-        borderRadius: 8,
-        margin: 16,
+        flex: 1,
     },
     header: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#FFFFFF',
-        marginBottom: 16,
+        color: Colors.secondary,
+        fontSize: 18,
+        fontWeight: "700",
+        marginBottom: 20,
     },
-    insightCard: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 2,
-        borderRadius: 8,
-        padding: 12,
-        marginBottom: 12,
+    gradientBorder: {
+        padding: 2,
+        borderRadius: 10,
+        marginVertical: 6,
     },
-    insightContent: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    AiRecommendInner: {
+        backgroundColor: Colors.background,
+        borderRadius: 10,
+        padding: 14,
     },
-    icon: {
-        marginRight: 12,
-    },
-    title: {
+    AiRecommendText: {
+        color: Colors.secondary,
         fontSize: 14,
-        color: '#FFFFFF',
-        flex: 1,
-        flexWrap: 'wrap',
-    },
-    viewMoreButton: {
-        backgroundColor: '#FF4081',
-        borderRadius: 20,
-        paddingVertical: 10,
-        alignItems: 'center',
-    },
-    viewMoreText: {
-        color: '#FFFFFF',
-        fontWeight: 'bold',
-        fontSize: 16,
+        fontWeight: "500",
     },
 });
 

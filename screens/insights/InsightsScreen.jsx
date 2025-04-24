@@ -9,6 +9,8 @@ import SuccessRateChart from './SuccessRateChart';
 import Colors from '../../utils/Colors';
 import AIrecommendationInsights from './AIrecommendationInsights';
 import CommunityComparisonComponent from './CommunityComparisonComponent';
+import { GradientText } from '../../components/Button/GradientText';
+import { LineGradient } from '../../layouts/LineGradient';
 
 const timeOptions = [
   { label: 'All Time', value: 'all_time' },
@@ -30,9 +32,11 @@ export default function InsightsScreen() {
   return (
     <View style={styles.container}>
       <Header />
-      <ScrollView style={{ flex: 1, backgroundColor: '#0b0b2a', padding: 16 }}>
-        <View style={styles.content}>
-          <Text style={styles.sectionTitle}>Insights</Text>
+      <ScrollView style={styles.content}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}>
+
+         <GradientText text="Insights" style={{ fontSize: 20 }} />
 
           <View style={styles.pickerContainer}>
             <Dropdown
@@ -61,13 +65,17 @@ export default function InsightsScreen() {
               onChange={item => setSelectedSport(item.value)}
             />
           </View>
+
           <WinLossRecord />
           <ROIComponent />
           <SuccessRateChart />
+          <LineGradient />
           <BettingBehavior />
+          <LineGradient />
           <AIrecommendationInsights />
+          <LineGradient />
           <CommunityComparisonComponent />
-        </View>
+          
       </ScrollView>
     </View>
   );
@@ -76,17 +84,17 @@ export default function InsightsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.secondary,
+    backgroundColor: Colors.background,
   },
   content: {
-    paddingTop: 60,
-    paddingHorizontal: 20,
+    paddingTop: 80,
+    paddingHorizontal: 15,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 10,
+    color: Colors.secondary,
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 20,
   },
   pickerContainer: {
     flexDirection: 'row',
