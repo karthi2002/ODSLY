@@ -21,6 +21,8 @@ import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
 
+import { handleGoogleSignup } from "../../services/signup/googleSignup";
+
 const SignupScreen = () => {
   const [fullName, setFullName] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -95,7 +97,7 @@ const SignupScreen = () => {
           <LineText name="Continue with" />
 
           <View style={styles.authContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleGoogleSignup}>
               <Image style={styles.authLogo} source={Google} />
             </TouchableOpacity>
             <TouchableOpacity>
