@@ -11,23 +11,19 @@ import OTPTextInput from 'react-native-otp-textinput';
 import Logo from "../../layouts/Logo";
 import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { handleVerifyOTP } from "../../services/signup/Signup";
 
 
 const VerifyOTPScreen = () => {
 
 const navigation = useNavigation();
+const route = useRoute();
 
 const [otp, setOtp] = useState('');
 const [error, setError] = useState(false);
 
-const handleResetPassword = () => {
-  if (otp === '123456') {
-    navigation.navigate('SetupProfile');
-  } else {
-    setError(true);
-  }
-};
+
 
   return (
     <View style={styles.container}>
@@ -72,13 +68,13 @@ const handleResetPassword = () => {
         <View style={styles.resendContainer}>
             <Text style={styles.resend}>Didn't receive OTP?</Text>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+                <TouchableOpacity onPress={() => {}}>
                 <Text style={styles.link}>Resend OTP</Text>
                 </TouchableOpacity>
             </View>
         </View>
 
-        <GradientButton label="Verify OTP" onPress={handleResetPassword} arrowEnable={true} />
+        <GradientButton label="Verify OTP" onPress={()=>handleVerifyOTP(otp, route.params.email, navigation, setError)} arrowEnable={true} />
 
         <TouchableOpacity>
             <View style={styles.backContainer}>

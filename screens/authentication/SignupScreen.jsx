@@ -20,8 +20,7 @@ import LineText from "../../layouts/LineText";
 import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
-import { handleGoogleSignup } from "../../services/signup/googleSignup";
-import axios from 'axios';
+import { handleSignup } from "../../services/signup/Signup";
 
 const SignupScreen = () => {
   const [fullName, setFullName] = useState("");
@@ -39,27 +38,7 @@ const SignupScreen = () => {
     }
   }, [password, confirmPassword]);
 
-  const handleSignup = async () => {
-    try {
-      const response = await axios.post('http://192.168.0.215:3000/api/v1/signup', {
-        fullName,
-        email: emailOrPhone,
-        password,
-      });
-      if (response.data.userExists) {
-        Alert.alert('User Already Exists', 'Redirecting to Sign In.');
-        navigation.navigate('SignIn', { email: emailOrPhone });
-      } else if (response.data.otpSent) {
-        Alert.alert('OTP Sent', 'Please check your email.');
-        navigation.navigate('VerifyOTP', { email: emailOrPhone });
-      } else {
-        Alert.alert('Error', 'Something went wrong. Please try again.');
-      }
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Signup Error', 'An error occurred. Please try again.');
-    }
-  };
+  
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -109,12 +88,12 @@ const SignupScreen = () => {
             errorMessage={error}
           />
 
-          <GradientButton label="Continue" onPress={handleSignup} arrowEnable={true} />
+          <GradientButton label="Continue" onPress={() => handleSignup(fullName, emailOrPhone, password, navigation)}  arrowEnable={true} />
 
           <LineText name="Continue with" />
 
           <View style={styles.authContainer}>
-            <TouchableOpacity onPress={handleGoogleSignup}>
+            <TouchableOpacity>
               <Image style={styles.authLogo} source={Google} />
             </TouchableOpacity>
             <TouchableOpacity>

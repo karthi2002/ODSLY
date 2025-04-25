@@ -20,6 +20,8 @@ import LoadingDots from "../../components/Loader/LoadingDots";
 import GradientButton from "../../components/Button/GradientButton";
 import Logo from "../../layouts/Logo";
 import Copyright from "../../layouts/Copyright";
+import { useRoute } from "@react-navigation/native";
+import axios from 'axios'; 
 
 const steps = ["Profile", "Sports", "Betting", "Finish"];
 
@@ -29,23 +31,43 @@ const ProfileSetupScreen = () => {
   const [profile, setProfile] = useState({ username: "", image: null });
   const [selectedSports, setSelectedSports] = useState([]);
   const [preferences, setPreferences] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const route = useRoute();
+  const { email } = route.params;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (stepIndex < steps.length - 1) {
       setStepIndex(stepIndex + 1);
     } else {
-      Alert.alert("Profile setup complete!");
+      // Final step: save profile data
+      try {
+        const profileData = {
+          email,
+          username: profile.username,
+          sports: selectedSports,
+          bettingPreference: preferences,
+        };
+
+        // Call the API to save profile data
+        setLoading(true);
+        const response = await axios.post('http://192.168.0.215:3000/api/v1/saveProfile', profileData);
+
+        if (response.status === 200) {
+          setTimeout(() => {
+            navigation.navigate("Success");
+          }, 2000);
+        } else {
+          throw new Error("Failed to save profile");
+        }
+
+      } catch (error) {
+        console.error("Failed to save profile:", error);
+        Alert.alert("Error", "Something went wrong while saving your profile.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
-
-  useEffect(() => {
-    if (stepIndex === 3) {
-      const timer = setTimeout(() => {
-        navigation.navigate("Success");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [stepIndex]);
 
   const renderStepContent = () => {
     switch (stepIndex) {
@@ -83,39 +105,30 @@ const ProfileSetupScreen = () => {
       case 2:
         return (
           <OptionsFlatList
-            data={[
-              "Single Bet",
-              "Accumulators",
-              "Live Betting",
-              "Odds Comparison",
-            ]}
+            data={["Single Bet", "Accumulators", "Live Betting", "Odds Comparison"]}
             selectedItem={preferences}
             onSelect={setPreferences}
           />
         );
       case 3:
-        return <LoadingDots text="Creating your Profile.." />;
+        return loading ? (
+          <LoadingDots text="Creating your Profile.." />
+        ) : (
+          <Text style={styles.subText}>Almost done, redirecting...</Text>
+        );
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContainer}
-          keyboardShouldPersistTaps="handled"
-        >
+        <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
           <View style={styles.container}>
             <Logo />
 
             <View style={styles.containerBox}>
               <Text style={styles.heading}>Set up your Profile</Text>
-              <Text style={styles.subText}>
-                You will be able to change it any time
-              </Text>
+              <Text style={styles.subText}>You will be able to change it any time</Text>
 
               <StepWizard currentStep={stepIndex} totalSteps={steps.length} />
 
@@ -123,11 +136,7 @@ const ProfileSetupScreen = () => {
 
               {stepIndex < steps.length - 1 && (
                 <View style={{ marginTop: 20 }}>
-                  <GradientButton
-                    label="Next"
-                    onPress={handleNext}
-                    arrowEnable={true}
-                  />
+                  <GradientButton label="Next" onPress={handleNext} arrowEnable={true} />
                 </View>
               )}
             </View>
