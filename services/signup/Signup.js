@@ -1,10 +1,11 @@
 import axios from "axios";
 import { Alert } from "react-native";
+import { BACKEND_URL } from "../../config/url";
 
 
 export const handleSignup = async (fullName, emailOrPhone, password, navigation) => {
   try {
-    const response = await axios.post('http://192.168.0.215:3000/api/v1/signup', {
+    const response = await axios.post(`${BACKEND_URL}/api/v1/signup`, {
       fullName,
       email: emailOrPhone,
       password,
@@ -28,7 +29,7 @@ export const handleSignup = async (fullName, emailOrPhone, password, navigation)
 
 export const handleVerifyOTP = async (otp, email, navigation, setError) => {
   try {
-    const response = await axios.post("http://192.168.0.215:3000/api/v1/verify-otp", {
+    const response = await axios.post(`${BACKEND_URL}/api/v1/verify-otp`, {
       email,
       otp,
     });

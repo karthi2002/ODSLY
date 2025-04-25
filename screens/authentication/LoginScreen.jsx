@@ -9,7 +9,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Dimensions
+  Dimensions,
 } from "react-native";
 
 import Google from "../../assets/icons/google.png";
@@ -20,18 +20,15 @@ import PasswordInputField from "../../components/Input/PasswordInputField";
 import LineText from "../../layouts/LineText";
 import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { handleLogin } from "../../services/signin/Login";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const LoginScreen = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-
-  const handleLogin = () => {
-    navigation.navigate('MainTab');
-  };
 
   return (
     <KeyboardAvoidingView
@@ -66,12 +63,16 @@ const LoginScreen = () => {
           />
 
           <View style={styles.forgotContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+            <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
               <Text style={styles.link}>Forgot password?</Text>
             </TouchableOpacity>
           </View>
 
-          <GradientButton label="Login" onPress={handleLogin} arrowEnable={true} />
+          <GradientButton
+            label="Login"
+            onPress={() => handleLogin(emailOrPhone, password, navigation)}
+            arrowEnable={true}
+          />
 
           <LineText name="Login With" />
 
@@ -88,7 +89,7 @@ const LoginScreen = () => {
 
           <Text style={styles.dontaccount}>Don't have an Account?</Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
             <Text style={styles.singup}>Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -126,8 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   forgotContainer: {
-    width: '100%',
-    alignItems: 'flex-end',
+    width: "100%",
+    alignItems: "flex-end",
   },
   link: {
     color: Colors.background,
@@ -162,9 +163,9 @@ const styles = StyleSheet.create({
     color: Colors.background,
     fontSize: 18,
     fontWeight: "600",
-    textDecorationLine: 'underline',
-    marginTop: 2
-  }
+    textDecorationLine: "underline",
+    marginTop: 2,
+  },
 });
 
 export default LoginScreen;
