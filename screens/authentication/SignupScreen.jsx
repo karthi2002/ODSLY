@@ -20,8 +20,8 @@ import LineText from "../../layouts/LineText";
 import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
 import { useNavigation } from '@react-navigation/native';
+import { handleGoogleSignup } from "../../services/Signup/googleSignup";
 
-import { handleGoogleSignup } from "../../services/signup/googleSignup";
 
 const SignupScreen = () => {
   const [fullName, setFullName] = useState("");
