@@ -70,7 +70,7 @@ const LoginScreen = () => {
 
           <GradientButton
             label="Login"
-            onPress={() => handleLogin(emailOrPhone, password, navigation)}
+            onPress={() => handleLogin({ emailOrPhone, password, navigation })}
             arrowEnable={true}
           />
 

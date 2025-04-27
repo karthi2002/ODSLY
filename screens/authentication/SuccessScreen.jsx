@@ -10,12 +10,15 @@ import {
 import GradientButton from '../../components/Button/GradientButton';
 import GreenTick from '../../assets/images/green-tick.gif';
 import Colors from '../../utils/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
 const SuccessScreen = ({ navigation }) => {
-  const handleSuccess = () => {
-    navigation.navigate('MainTab');
+  
+  const handleSuccess = async () => {
+    await AsyncStorage.setItem("userSession", JSON.stringify(data.user));
+    await AsyncStorage.setItem("authToken", data.token);
   };
 
   return (

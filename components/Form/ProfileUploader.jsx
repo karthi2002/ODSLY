@@ -1,20 +1,20 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import TextInputField from '../Input/TextInputField';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
 import Colors from '../../utils/Colors';
+
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dmpx9rrm4/image/upload'; 
+const CLOUDINARY_UPLOAD_PRESET = 'odsly';
 
 const ProfileUploader = ({ username, setUsername }) => {
   const [imageUri, setImageUri] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const [imageUrl, setImageUrl] = React.useState(null);
 
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -24,10 +24,45 @@ const ProfileUploader = ({ username, setUsername }) => {
 
     if (!result.canceled && result.assets?.[0]?.uri) {
       setImageUri(result.assets[0].uri);
+      uploadImageToCloudinary(result.assets[0].uri);
     }
   };
 
-  const handleImageRemove = () => setImageUri(null);
+  const handleImageRemove = () => {
+    setImageUri(null);
+    setImageUrl(null);
+  };
+
+  const uploadImageToCloudinary = async (uri) => {
+    try {
+      setLoading(true);
+      const data = new FormData();
+      data.append('file', {
+        uri,
+        type: 'image/jpeg', 
+        name: 'profile_picture.jpg',
+      });
+      data.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      const response = await axios.post(CLOUDINARY_URL, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        setImageUrl(response.data.secure_url);
+        Alert.alert('Image Upload', 'Profile picture uploaded successfully!');
+      } else {
+        throw new Error('Upload failed');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      Alert.alert('Error', 'Failed to upload image. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -169,7 +204,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
-
 
 export default ProfileUploader;

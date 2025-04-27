@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Ionicons } from "@expo/vector-icons";
@@ -21,12 +22,10 @@ import GradientButton from "../../components/Button/GradientButton";
 const ProfileScreen = () => {
   const navigation = useNavigation();
 
-  const handleNavigate = (route) => {
+  const handleNavigate = async (route) => {
     if (route === "AuthStack") {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "AuthStack" }],
-      });
+      await AsyncStorage.removeItem("userSession");
+      await AsyncStorage.removeItem("authToken");
     } else {
       navigation.navigate("ProfileStack", { screen: route });
     }

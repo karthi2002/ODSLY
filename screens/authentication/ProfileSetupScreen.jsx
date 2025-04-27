@@ -22,6 +22,8 @@ import Logo from "../../layouts/Logo";
 import Copyright from "../../layouts/Copyright";
 import { useRoute } from "@react-navigation/native";
 import axios from 'axios'; 
+import { BACKEND_URL } from "../../config/url";
+
 
 const steps = ["Profile", "Sports", "Betting", "Finish"];
 
@@ -35,39 +37,43 @@ const ProfileSetupScreen = () => {
   const route = useRoute();
   const { email } = route.params;
 
-  const handleNext = async () => {
-    if (stepIndex < steps.length - 1) {
-      setStepIndex(stepIndex + 1);
-    } else {
-      // Final step: save profile data
-      try {
-        const profileData = {
-          email,
-          username: profile.username,
-          sports: selectedSports,
-          bettingPreference: preferences,
-        };
-
-        // Call the API to save profile data
-        setLoading(true);
-        const response = await axios.post('http://192.168.0.215:3000/api/v1/saveProfile', profileData);
-
-        if (response.status === 200) {
-          setTimeout(() => {
-            navigation.navigate("Success");
-          }, 2000);
-        } else {
-          throw new Error("Failed to save profile");
-        }
-
-      } catch (error) {
-        console.error("Failed to save profile:", error);
-        Alert.alert("Error", "Something went wrong while saving your profile.");
-      } finally {
-        setLoading(false);
-      }
-    }
+  const handleNext = () => {
+    setStepIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1;
+      return nextIndex;
+    });
   };
+  
+  useEffect(() => {
+    if (stepIndex === 3) {
+      const saveProfile = async () => {
+        try {
+          const profileData = {
+            email,
+            username: profile.username,
+            sports: selectedSports,
+            bettingPreference: preferences,
+          };
+          setLoading(true);
+          const response = await axios.post(`${BACKEND_URL}/api/v1/saveProfile`, profileData);
+
+          if (response.status === 200) {
+            setTimeout(() => {
+              navigation.navigate("Success");
+            }, 2000);
+          } else {
+            throw new Error("Failed to save profile");
+          }
+        } catch (error) {
+          console.error("Failed to save profile:", error);
+          Alert.alert("Error", "Something went wrong while saving your profile.");
+        } finally {
+          setLoading(false);
+        }
+      };
+      saveProfile();
+    }
+  }, [stepIndex, email, profile.username, selectedSports, preferences, navigation]);
 
   const renderStepContent = () => {
     switch (stepIndex) {
@@ -111,11 +117,7 @@ const ProfileSetupScreen = () => {
           />
         );
       case 3:
-        return loading ? (
-          <LoadingDots text="Creating your Profile.." />
-        ) : (
-          <Text style={styles.subText}>Almost done, redirecting...</Text>
-        );
+        return loading ? <LoadingDots text="Creating your Profile.." /> : null;
     }
   };
 
@@ -134,7 +136,7 @@ const ProfileSetupScreen = () => {
 
               <View style={styles.contentBox}>{renderStepContent()}</View>
 
-              {stepIndex < steps.length - 1 && (
+              {stepIndex < steps.length - 1 && !loading && (
                 <View style={{ marginTop: 20 }}>
                   <GradientButton label="Next" onPress={handleNext} arrowEnable={true} />
                 </View>
