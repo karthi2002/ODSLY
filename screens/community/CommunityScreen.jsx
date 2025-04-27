@@ -13,8 +13,10 @@ import Colors from "../../utils/Colors";
 import FeedScreen from "./FeedScreen";
 import YourPostScreen from "./YourPostScreen";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CommunityScreen() {
+  const navigation = useNavigation(); 
 
   const [activeTab, setActiveTab] = useState("feed");
 
@@ -73,8 +75,8 @@ export default function CommunityScreen() {
       <TouchableOpacity
         style={styles.fixedButton}
         onPress={() =>
-          navigation.navigate("LiveStack", {
-            screen: "LiveNewBet",
+          navigation.navigate("CommunityStack", {
+            screen: "CreateNewPost",
           })
         }
       >
