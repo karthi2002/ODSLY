@@ -4,28 +4,34 @@
     "slug": "ODSLY1",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
+    "icon": "./assets/icons/Logo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "",
+      "image": "./assets/icons/Logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "./assets/icons/Logo.png"
+      "backgroundColor": "#000A34"
     },
     "ios": {
       "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "",
-        "backgroundColor": "./assets/icons/Logo.png"
-      }
+        "foregroundImage": "./assets/icons/Logo.png",
+        "backgroundColor": "#000A34"
+      },
+      "package": "com.karthi_2002.ODSLY1"
     },
     "web": {
       "favicon": ""
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5994f4bb-bad8-497c-943d-58f9e06e9652"
+      }
+    }
   }
 }
