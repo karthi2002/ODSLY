@@ -8,18 +8,22 @@ const TextInputField = ({
   setValue,
   pattern,
   errorMessage,
-  style
+  style,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState('');
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    if (pattern && !new RegExp(pattern).test(value)) {
+  const validateInput = (text) => {
+    if (pattern && !new RegExp(pattern).test(text)) {
       setError(errorMessage || 'Invalid input');
     } else {
       setError('');
     }
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    validateInput(value);
   };
 
   return (
@@ -34,15 +38,13 @@ const TextInputField = ({
         value={value}
         onChangeText={(text) => {
           setValue(text);
-          if (error) setError('');
+          validateInput(text);
+          if (error) setError(''); 
         }}
         onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
-
       />
-      {error && value ? (
-        <Text style={styles.errorText}>{error}</Text>
-      ) : null}
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </View>
   );
 };

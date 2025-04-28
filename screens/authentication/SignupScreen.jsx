@@ -19,7 +19,7 @@ import PasswordInputField from "../../components/Input/PasswordInputField";
 import LineText from "../../layouts/LineText";
 import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { handleSignup } from "../../services/signup/Signup";
 
 const SignupScreen = () => {
@@ -27,7 +27,7 @@ const SignupScreen = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError]= useState("")
+  const [error, setError] = useState("");
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -38,7 +38,6 @@ const SignupScreen = () => {
     }
   }, [password, confirmPassword]);
 
-  
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -76,7 +75,7 @@ const SignupScreen = () => {
             setValue={setPassword}
             isPassword={true}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-            errorMessage="Incorrect Password"
+            errorMessage="Invalid Password"
           />
 
           <PasswordInputField
@@ -88,7 +87,18 @@ const SignupScreen = () => {
             errorMessage={error}
           />
 
-          <GradientButton label="Continue" onPress={() => handleSignup(fullName, emailOrPhone, password, navigation)}  arrowEnable={true} />
+          <GradientButton
+            label="Continue"
+            onPress={() => {
+              if (password !== confirmPassword) {
+                setError("Passwords do not match.");
+              } else {
+                setError("");
+                handleSignup(fullName, emailOrPhone, password, navigation);
+              }
+            }}
+            arrowEnable={true}
+          />
 
           <LineText name="Continue with" />
 
@@ -104,7 +114,7 @@ const SignupScreen = () => {
           <LineText name="OR" />
 
           <Text style={styles.alreadyaccount}>Already have an Account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={styles.login}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -163,7 +173,7 @@ const styles = StyleSheet.create({
     color: Colors.background,
     fontSize: 18,
     fontWeight: "600",
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
     marginTop: 2,
   },
 });

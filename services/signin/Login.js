@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import { BACKEND_URL } from "../../config/url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const handleLogin = async ({ emailOrPhone, password, navigation }) => {
+export const handleLogin = async ({ emailOrPhone, password, navigation, setEmailError, setPasswordError, }) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/api/v1/login`, {
       emailOrPhone,
@@ -21,15 +21,14 @@ export const handleLogin = async ({ emailOrPhone, password, navigation }) => {
       }
     }
   } catch (error) {
-    console.log('Login Error:', error.response?.data);
+    setEmailError("");
+    setPasswordError("");
     if (error.response) {
-
       const { error: errMsg } = error.response.data;
-
       if (errMsg === "invalid_user") {
-        Alert.alert("Login Failed", "User does not exist");
+        setEmailError("Invalid");
       } else if (errMsg === "invalid_password") {
-        Alert.alert("Login Failed", "Incorrect password");
+        setPasswordError("Incorrect password");
       } else if (errMsg === "server_error") {
         Alert.alert("Login Failed", "Server error. Please try again later.");
       } else {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Colors from "../../utils/Colors";
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   View,
   Text,
@@ -12,32 +12,30 @@ import {
 import Logo from "../../layouts/Logo";
 import GradientButton from "../../components/Button/GradientButton";
 import Copyright from "../../layouts/Copyright";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from "@react-navigation/native";
 import PasswordInputField from "../../components/Input/PasswordInputField";
-
+import { handleResetPassword } from "../../services/forgotPassword/Forgot";
 
 const ResetPasswordScreen = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { email } = route.params;
 
-     const [password, setPassword] = useState("");
-      const [confirmPassword, setConfirmPassword] = useState("");
-      const [error, setError]= useState("")
-      const navigation = useNavigation();
-    
-      useEffect(() => {
-        if (confirmPassword.length > 0 && password !== confirmPassword) {
-          setError("Passwords do not match");
-        } else {
-          setError("");
-        }
-      }, [password, confirmPassword]);
 
-  const handleResetPassword = () => {
-    navigation.navigate('Login')
-  };
+  useEffect(() => {
+    if (confirmPassword.length > 0 && password !== confirmPassword) {
+      setError("Passwords do not match");
+    } else {
+      setError("");
+    }
+  }, [password, confirmPassword]);
+
 
   return (
     <View style={styles.container}>
-      
       <Logo />
 
       <View style={styles.resetPasswordBox}>
@@ -45,37 +43,53 @@ const ResetPasswordScreen = () => {
         <Text style={styles.subTitle}>Create a New Password</Text>
 
         <PasswordInputField
-        label="Password"
-        value={password}
-        setValue={setPassword}
-        isPassword={true}
-        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-        errorMessage="Incorrect Password"
-      />
+          label="Password"
+          value={password}
+          setValue={setPassword}
+          isPassword={true}
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+          errorMessage="Incorrect Password"
+        />
 
-    <PasswordInputField
-        label="Confirm Password"
-        value={confirmPassword}
-        setValue={setConfirmPassword}
-        isPassword={true}
-        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-        errorMessage={error}
-      />
+        <PasswordInputField
+          label="Confirm Password"
+          value={confirmPassword}
+          setValue={setConfirmPassword}
+          isPassword={true}
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+          errorMessage={error}
+        />
 
-
-        <GradientButton label="Reset Password" onPress={handleResetPassword} arrowEnable={true} />
+        <GradientButton
+          label="Reset Password"
+          onPress={() => {
+            console.log('hii');
+            handleResetPassword(
+              email,
+              password,
+              confirmPassword,
+              navigation,
+              setError
+            );
+          }}
+          arrowEnable={true}
+        />
 
         <TouchableOpacity>
-            <View style={styles.backContainer}>
-                <MaterialCommunityIcons name="arrow-left" size={18} color={Colors.primary} />
-                <Text style={styles.back} onPress={() => navigation.goBack()}>Back</Text>
-            </View>
+          <View style={styles.backContainer}>
+            <MaterialCommunityIcons
+              name="arrow-left"
+              size={18}
+              color={Colors.primary}
+            />
+            <Text style={styles.back} onPress={() => navigation.goBack()}>
+              Back
+            </Text>
+          </View>
         </TouchableOpacity>
-
       </View>
 
       <Copyright />
-
     </View>
   );
 };
@@ -86,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 50
+    paddingVertical: 50,
   },
   resetPasswordBox: {
     backgroundColor: Colors.secondary,
@@ -104,28 +118,28 @@ const styles = StyleSheet.create({
     color: Colors.background,
     fontWeight: "bold",
   },
-  subTitle :{
+  subTitle: {
     fontSize: 16,
     marginTop: -25,
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
     color: Colors.text,
-    fontFamily: "500"
+    fontFamily: "500",
   },
   backContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap:10,
-    marginTop: 20
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 20,
   },
-  back :{
+  back: {
     color: Colors.background,
     fontSize: 18,
     fontWeight: "600",
-    textDecorationLine: 'underline',
-    marginTop: 2
-  }
+    textDecorationLine: "underline",
+    marginTop: 2,
+  },
 });
 
 export default ResetPasswordScreen;

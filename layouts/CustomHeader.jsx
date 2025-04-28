@@ -11,10 +11,12 @@ const CustomHeader = ({ title, showPostButton = false, postButtonActive = false,
   return (
     <View style={styles.container}>
       <View style={styles.HeaderContainer}>
+      <View style={styles.leftContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <AntDesign name="arrowleft" size={30} color={Colors.secondary} />
         </TouchableOpacity>
         <Text style={styles.HeaderText}>{title}</Text>
+      </View>
         {showPostButton && (
           postButtonActive ? (
             <TouchableOpacity onPress={onPostPress}>
@@ -58,6 +60,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10
   },
   HeaderText: {
     color: Colors.secondary,

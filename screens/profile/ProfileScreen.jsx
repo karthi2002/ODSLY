@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -30,6 +30,26 @@ const ProfileScreen = () => {
       navigation.navigate("ProfileStack", { screen: route });
     }
   };
+
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const session = await AsyncStorage.getItem('userSession');
+        if (session) {
+          const user = JSON.parse(session);
+          setUsername(user.username || '');
+          setEmail(user.email || '');
+        }
+      } catch (error) {
+        console.log('Error loading user session:', error);
+      }
+    };
+
+    loadUserData();
+  }, []);
 
   const renderItem = ({ item }) => (
     <LinearGradient
@@ -79,8 +99,8 @@ const ProfileScreen = () => {
             style={styles.avatar}
           />
           <View>
-            <Text style={styles.name}>{profileData.profileCard.name}</Text>
-            <Text style={styles.email}>{profileData.profileCard.email}</Text>
+          <Text style={styles.name}>{username ? username : 'Loading...'}</Text>
+          <Text style={styles.email}>{email ? email : 'Loading...'}</Text>
           </View>
           </View>
           <LineGradient />

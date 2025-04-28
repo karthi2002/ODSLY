@@ -13,7 +13,7 @@ export const handleSignup = async (fullName, emailOrPhone, password, navigation)
 
     if (response.data.otpSent) {
       Alert.alert('OTP Sent', 'Please check your email.');
-      navigation.navigate('VerifyOTP', { email: emailOrPhone });
+      navigation.navigate('VerifyOTP', { email: emailOrPhone, flow: 'Signup' });
     } else {
       Alert.alert('Error', 'Something went wrong. Please try again.');
     }
@@ -21,22 +21,26 @@ export const handleSignup = async (fullName, emailOrPhone, password, navigation)
     if (error.response && error.response.status === 400 && error.response.data.userExists) {
       Alert.alert(error.response.data.message);
       navigation.navigate('SignIn', { email: emailOrPhone });
-    } else {
-      Alert.alert('An error occurred. Please try again.');
     }
   }
 };
 
-export const handleVerifyOTP = async (otp, email, navigation, setError) => {
+export const handleVerifyOTP = async (otp, email, navigation, setError, flow) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/api/v1/verify-otp`, {
       email,
       otp,
+      flow,
     });
 
     if (response.status === 200) {
-      Alert.alert('Verified');
-      navigation.navigate("Login");
+      if (flow === 'Forgot' && response.data.resetPassword) {
+        Alert.alert('OTP Verified', 'You can now reset your password.');
+        navigation.navigate('ResetPassword', { email });
+      } else {
+        Alert.alert('Verified');
+        navigation.navigate('Login');
+      }
     }
   } catch (error) {
     setError(true);

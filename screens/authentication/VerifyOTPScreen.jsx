@@ -19,7 +19,7 @@ const VerifyOTPScreen = () => {
 
 const navigation = useNavigation();
 const route = useRoute();
-
+const { flow } = route.params;
 const [otp, setOtp] = useState('');
 const [error, setError] = useState(false);
 
@@ -74,7 +74,7 @@ const [error, setError] = useState(false);
             </View>
         </View>
 
-        <GradientButton label="Verify OTP" onPress={()=>handleVerifyOTP(otp, route.params.email, navigation, setError)} arrowEnable={true} />
+        <GradientButton label="Verify OTP" onPress={()=>handleVerifyOTP(otp, route.params.email, navigation, setError, flow)} arrowEnable={true} />
 
         <TouchableOpacity>
             <View style={styles.backContainer}>

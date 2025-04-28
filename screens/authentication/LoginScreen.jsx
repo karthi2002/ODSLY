@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Colors from "../../utils/Colors";
 import {
   View,
@@ -28,6 +28,8 @@ const { width, height } = Dimensions.get("window");
 const LoginScreen = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
   const navigation = useNavigation();
 
   return (
@@ -50,7 +52,7 @@ const LoginScreen = () => {
             value={emailOrPhone}
             setValue={setEmailOrPhone}
             pattern="^(\d{10}|[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+)$"
-            errorMessage="Invalid"
+            errorMessage={emailError}
           />
 
           <PasswordInputField
@@ -59,7 +61,7 @@ const LoginScreen = () => {
             setValue={setPassword}
             isPassword={true}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-            errorMessage="Incorrect Password"
+            errorMessage={passwordError}
           />
 
           <View style={styles.forgotContainer}>
@@ -70,7 +72,15 @@ const LoginScreen = () => {
 
           <GradientButton
             label="Login"
-            onPress={() => handleLogin({ emailOrPhone, password, navigation })}
+            onPress={() =>
+              handleLogin({
+                emailOrPhone,
+                password,
+                navigation,
+                setEmailError,
+                setPasswordError,
+              })
+            }
             arrowEnable={true}
           />
 

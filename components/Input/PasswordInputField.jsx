@@ -15,18 +15,21 @@ const PasswordInputField = ({
   const [error, setError] = useState('');
   const [secureText, setSecureText] = useState(isPassword);
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    if (pattern && !new RegExp(pattern).test(value)) {
+  const validateInput = (text) => {
+    if (pattern && !new RegExp(pattern).test(text)) {
       setError(errorMessage || 'Invalid input');
     } else {
       setError('');
     }
   };
 
+  const handleBlur = () => {
+    setIsFocused(false);
+    validateInput(value);
+  };
+
   return (
     <View style={styles.container}>
-      
       {(isFocused || value) && (
         <Text style={styles.label}>{label}</Text>
       )}
@@ -38,7 +41,8 @@ const PasswordInputField = ({
           value={value}
           onChangeText={(text) => {
             setValue(text);
-            if (error) setError('');
+            validateInput(text);
+            if (error) setError(''); 
           }}
           secureTextEntry={secureText}
           onFocus={() => setIsFocused(true)}
