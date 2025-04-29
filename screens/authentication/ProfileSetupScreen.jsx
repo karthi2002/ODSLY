@@ -52,14 +52,16 @@ const ProfileSetupScreen = () => {
             email,
             username: profile.username,
             sports: selectedSports,
+            image: profile.image,
             bettingPreference: preferences,
           };
           setLoading(true);
           const response = await axios.post(`${BACKEND_URL}/api/v1/saveProfile`, profileData);
 
           if (response.status === 200) {
+
             setTimeout(() => {
-              navigation.navigate("Success");
+              navigation.navigate("Success", { data: response.data });
             }, 2000);
           } else {
             throw new Error("Failed to save profile");

@@ -14,7 +14,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
-const SuccessScreen = ({ navigation }) => {
+const SuccessScreen = ({ route  }) => {
+
+  const { data } = route.params;
   
   const handleSuccess = async () => {
     await AsyncStorage.setItem("userSession", JSON.stringify(data.user));

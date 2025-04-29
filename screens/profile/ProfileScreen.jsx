@@ -22,17 +22,9 @@ import GradientButton from "../../components/Button/GradientButton";
 const ProfileScreen = () => {
   const navigation = useNavigation();
 
-  const handleNavigate = async (route) => {
-    if (route === "AuthStack") {
-      await AsyncStorage.removeItem("userSession");
-      await AsyncStorage.removeItem("authToken");
-    } else {
-      navigation.navigate("ProfileStack", { screen: route });
-    }
-  };
-
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [userImage, setUserImage] = useState(null);
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -42,6 +34,7 @@ const ProfileScreen = () => {
           const user = JSON.parse(session);
           setUsername(user.username || '');
           setEmail(user.email || '');
+          setUserImage(user.image || null); 
         }
       } catch (error) {
         console.log('Error loading user session:', error);
@@ -50,6 +43,15 @@ const ProfileScreen = () => {
 
     loadUserData();
   }, []);
+
+  const handleNavigate = async (route) => {
+    if (route === "AuthStack") {
+      await AsyncStorage.removeItem("userSession");
+      await AsyncStorage.removeItem("authToken");
+    } else {
+      navigation.navigate("ProfileStack", { screen: route });
+    }
+  };
 
   const renderItem = ({ item }) => (
     <LinearGradient
@@ -93,17 +95,26 @@ const ProfileScreen = () => {
           end={{ x: 1, y: 0 }}
           style={styles.profileCard}
         >
-        <View style={styles.imageSection}>
-          <Image
-            source={{ uri: profileData.profileCard.avatarUrl }}
-            style={styles.avatar}
-          />
-          <View>
-          <Text style={styles.name}>{username ? username : 'Loading...'}</Text>
-          <Text style={styles.email}>{email ? email : 'Loading...'}</Text>
+          <View style={styles.imageSection}>
+            {userImage ? (
+              <Image
+                source={{ uri: userImage }}
+                style={styles.avatar}
+              />
+            ) : (
+              <Ionicons
+                name="person"
+                size={40}
+                color={Colors.secondary}
+                style={styles.avatar}
+              />
+            )}
+            <View>
+              <Text style={styles.name}>{username ? username : 'Loading...'}</Text>
+              <Text style={styles.email}>{email ? email : 'Loading...'}</Text>
+            </View>
           </View>
-          </View>
-          <LineGradient />
+          <LineGradient style={{marginVertical: 18}} />
           <TouchableOpacity
             style={styles.upgradeBtn}
             onPress={() =>
@@ -113,7 +124,7 @@ const ProfileScreen = () => {
             <Text style={styles.upgradeText}>
               {profileData.profileCard.upgrade.label}
             </Text>
-            <AntDesign name="rightcircle" size={24} color="#ffcc00"/>
+            <AntDesign name="rightcircle" size={24} color="#ffcc00" />
           </TouchableOpacity>
         </LinearGradient>
 
@@ -147,7 +158,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20
+    gap: 20,
   },
   avatar: {
     width: 60,
@@ -158,7 +169,7 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     fontSize: 18,
     fontWeight: "600",
-    marginBottom: 4
+    marginBottom: 4,
   },
   email: {
     color: Colors.secondary,
@@ -188,9 +199,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    borderWidth: 1,
     borderRadius: 50,
     padding: 8,
+    borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.5)",
     backgroundColor: "#3A3162",
   },

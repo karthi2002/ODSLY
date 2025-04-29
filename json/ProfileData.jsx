@@ -1,8 +1,5 @@
 export const profileData = {
     profileCard: {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      avatarUrl: "https://randomuser.me/api/portraits/men/75.jpg",
       upgrade: {
         label: "Upgrade Now",
         route: "Upgrade" 

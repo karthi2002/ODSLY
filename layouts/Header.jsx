@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import LogoImg from "../assets/icons/Logo.png";
 import Colors from "../utils/Colors";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Header = () => {
-  
   const navigation = useNavigation();
+  const [userImage, setUserImage] = useState(null);
+
+  useEffect(() => {
+    const loadUserImage = async () => {
+      try {
+        const session = await AsyncStorage.getItem('userSession');
+        if (session) {
+          const user = JSON.parse(session);
+          setUserImage(user.image);
+        }
+      } catch (error) {
+        console.log('Error loading user image:', error);
+      }
+    };
+
+    loadUserImage();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -19,8 +36,12 @@ const Header = () => {
         <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={22} color={Colors.secondary} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.icon} >
-          <Ionicons name="person" size={22} color={Colors.secondary} />
+        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Profile')}>
+          {userImage ? (
+            <Image source={{ uri: userImage }} style={styles.profileImage} />
+          ) : (
+            <Ionicons name="person" size={22} color={Colors.secondary} />
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -44,10 +65,9 @@ const styles = StyleSheet.create({
     shadowColor: Colors.secondary,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
-    marginBottom:10,
+    marginBottom: 10,
   },
   logoContainer: {
-    display: "flex",
     flexDirection: "row",
     gap: 10,
     alignItems: "center",
@@ -60,11 +80,10 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     fontSize: 36,
     fontWeight: "bold",
-    // fontFamily: 'Snasm'
   },
   iconsContainer: {
     flexDirection: 'row',
-    gap: 10, 
+    gap: 10,
   },
   icon: {
     width: 40,
@@ -75,6 +94,12 @@ const styles = StyleSheet.create({
     borderColor: Colors.secondary,
     alignItems: "center",
     justifyContent: "center",
+    overflow: 'hidden',
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
 });
 

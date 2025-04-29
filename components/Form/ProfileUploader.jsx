@@ -9,7 +9,7 @@ import axios from 'axios';
 import Colors from '../../utils/Colors';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dmpx9rrm4/image/upload'; 
-const CLOUDINARY_UPLOAD_PRESET = 'odsly';
+const CLOUDINARY_UPLOAD_PRESET = 'odsly_profile';
 
 const ProfileUploader = ({ username, setUsername }) => {
   const [imageUri, setImageUri] = React.useState(null);
@@ -36,20 +36,23 @@ const ProfileUploader = ({ username, setUsername }) => {
   const uploadImageToCloudinary = async (uri) => {
     try {
       setLoading(true);
-      const data = new FormData();
-      data.append('file', {
+      const uriParts = uri.split('.');
+      const fileType = uriParts[uriParts.length - 1];
+  
+      const formData = new FormData();
+      formData.append('file', {
         uri,
-        type: 'image/jpeg', 
-        name: 'profile_picture.jpg',
+        type: `image/${fileType}`,
+        name: `upload.${fileType}`,
       });
-      data.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-      const response = await axios.post(CLOUDINARY_URL, data, {
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  
+      const response = await axios.post(CLOUDINARY_URL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+  
       if (response.status === 200) {
         setImageUrl(response.data.secure_url);
         Alert.alert('Image Upload', 'Profile picture uploaded successfully!');
@@ -57,12 +60,12 @@ const ProfileUploader = ({ username, setUsername }) => {
         throw new Error('Upload failed');
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
       Alert.alert('Error', 'Failed to upload image. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -72,7 +75,7 @@ const ProfileUploader = ({ username, setUsername }) => {
           {imageUri ? (
             <Image source={{ uri: imageUri }} style={styles.profileImage} />
           ) : (
-            <Ionicons name="person" size={60} color={Colors.background} />
+            <Ionicons name="person" size={40} style={styles.iconImage} color={Colors.background} />
           )}
         </TouchableOpacity>
 
@@ -156,25 +159,30 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   imageWrapper: {
+    width: 65,
+    height: 65,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 2,
     borderColor: Colors.background,
-    borderRadius: 60,
-    padding: 12,
+    borderRadius: 50,
+    padding: 2
   },
   profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
+    width: 55,
+    height: 55,
+    borderRadius: 50,
   },
   textWrapper: {
     flex: 1,
     justifyContent: 'center',
   },
   welcomeText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '600',
     color: Colors.primary,
     marginBottom: 5,
+    numberOfLines: 1,
   },
   uploadText: {
     fontSize: 18,
