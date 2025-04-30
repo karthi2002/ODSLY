@@ -7,6 +7,8 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 import Colors from '../../utils/Colors';
+import { BACKEND_URL } from '../../config/url';
+
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dmpx9rrm4/image/upload'; 
 const CLOUDINARY_UPLOAD_PRESET = 'odsly_profile';
@@ -15,6 +17,9 @@ const ProfileUploader = ({ username, setUsername }) => {
   const [imageUri, setImageUri] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [imageUrl, setImageUrl] = React.useState(null);
+  const [usernameAvailable, setUsernameAvailable] = React.useState(null);
+const [typingTimeout, setTypingTimeout] = React.useState(null);
+
 
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -66,6 +71,17 @@ const ProfileUploader = ({ username, setUsername }) => {
     }
   };
   
+  const checkUsernameAvailability = async (name) => {
+    if (!name || name.length < 3) return;
+  
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/v1/check-user`, { username: name });
+      setUsernameAvailable(!response.data.exists);
+    } catch (err) {
+      console.error("Username check error:", err);
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -113,10 +129,28 @@ const ProfileUploader = ({ username, setUsername }) => {
         <TextInputField
           label="Username"
           value={username}
-          setValue={setUsername}
+          setValue={(val) => {
+            setUsername(val);
+            if (typingTimeout) clearTimeout(typingTimeout);
+            const timeout = setTimeout(() => {
+              checkUsernameAvailability(val);
+            }, 500); 
+            setTypingTimeout(timeout);
+          }}
           pattern="^[a-zA-Z0-9_]{3,15}$"
           errorMessage="Username must be 3-15 characters (letters, numbers, or _)"
         />
+        
+        {username.length >= 3 && (
+          <Text style={{ fontSize: 12, color: usernameAvailable === false ? 'red' : 'green' }}>
+            {usernameAvailable === false
+              ? 'Username is already taken'
+              : usernameAvailable === true
+              ? 'Username is available'
+              : ''}
+          </Text>
+        )}
+
         <Text style={styles.subText}>
           *Unique username that will represent your identity
         </Text>
