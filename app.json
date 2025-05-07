@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner":"madhankumar30",
     "name": "ODSLY1",
     "slug": "ODSLY1",
     "version": "1.0.0",
@@ -20,7 +21,7 @@
         "foregroundImage": "./assets/icons/Logo.png",
         "backgroundColor": "#000A34"
       },
-      "package": "com.karthi_2002.ODSLY1"
+      "package": "com.madhankumar30.ODSLY1"
     },
     "web": {
       "favicon": ""
