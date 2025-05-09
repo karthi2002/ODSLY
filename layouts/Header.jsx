@@ -4,27 +4,18 @@ import { useNavigation } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import LogoImg from "../assets/icons/Logo.png";
 import Colors from "../utils/Colors";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProfile } from "../redux/profile/profileActions";
 
 const Header = () => {
   const navigation = useNavigation();
-  const [userImage, setUserImage] = useState(null);
+  const dispatch = useDispatch();
+  
+  const { profile } = useSelector((state) => state.profile);
 
   useEffect(() => {
-    const loadUserImage = async () => {
-      try {
-        const session = await AsyncStorage.getItem('userSession');
-        if (session) {
-          const user = JSON.parse(session);
-          setUserImage(user.image);
-        }
-      } catch (error) {
-        console.log('Error loading user image:', error);
-      }
-    };
-
-    loadUserImage();
-  }, []);
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -37,8 +28,8 @@ const Header = () => {
           <Ionicons name="notifications" size={22} color={Colors.secondary} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Profile')}>
-          {userImage ? (
-            <Image source={{ uri: userImage }} style={styles.profileImage} />
+          {profile.image ? (
+            <Image source={{ uri: profile.image }} style={styles.profileImage} />
           ) : (
             <Ionicons name="person" size={22} color={Colors.secondary} />
           )}

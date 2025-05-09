@@ -13,13 +13,43 @@ import TextInputField from "../../components/Input/TextInputField";
 import GradientButton from "../../components/Button/GradientButton";
 import TagSelectorFlashList from "../../components/List/TagSelectorFlashList";
 import DropdownField from "../../components/Input/DropdownField";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserPreferences } from "../../redux/profile/profileActions";
 
-const betTypes = ["Single", "Multiple", "System", "Live", "Specials"];
+const betTypes = [
+  "Single Bet",
+  "Accumulators",
+  "Live Betting",
+  "Odds Comparison",
+];
 
 const BettingPrefereceScreen = () => {
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.profile.profile);
+
+  const [initialSports, setInitialSports] = useState(profile?.sports || []);
+  const [initialBet, setInitialBet] = useState(
+    profile?.bettingPreference || ""
+  );
+
   const [amount, setAmount] = useState(" ");
-  const [selectedSports, setSelectedSports] = useState([]);
-  const [selectedBet, setSelectedBet] = useState("");
+  const [selectedSports, setSelectedSports] = useState(profile?.sports || []);
+  const [selectedBet, setSelectedBet] = useState(
+    profile?.bettingPreference || ""
+  );
+
+  const hasChanges =
+    JSON.stringify(initialSports.sort()) !==
+      JSON.stringify(selectedSports.sort()) || initialBet !== selectedBet;
+
+  const handleSave = async () => {
+    if (!hasChanges) return;
+    await dispatch(
+      updateUserPreferences(profile.email, selectedSports, selectedBet)
+    );
+    setInitialSports([...selectedSports]);
+    setInitialBet(selectedBet);
+  };
 
   return (
     <View style={styles.container}>
@@ -57,14 +87,14 @@ const BettingPrefereceScreen = () => {
           data={[
             "Cricket 🏏",
             "Soccer ⚽",
-            "Judo 🥋",
             "Badminton 🏸",
+            "Judo 🥋",
+            "Basketball 🏀",
             "Golf ⛳",
             "Tennis 🎾",
             "Baseball ⚾",
             "Rugby 🏉",
             "Hockey 🏒",
-            "Basketball 🏀",
           ]}
           selectedTags={selectedSports}
           setSelectedTags={setSelectedSports}
@@ -76,8 +106,9 @@ const BettingPrefereceScreen = () => {
 
         <GradientButton
           label="Save Changes"
-          onPress={() => handleNavigate(item.route)}
+          onPress={handleSave}
           arrowEnable={false}
+          disabled={!hasChanges}
         />
       </ScrollView>
     </View>

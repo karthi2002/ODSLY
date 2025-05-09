@@ -1,41 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, View, Alert } from "react-native";
-import { useDispatch } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from "react-redux"; 
 import CustomHeader from "../../layouts/CustomHeader";
 import NewPostCard from "../../components/Card/NewPostCard";
 import Colors from "../../utils/Colors";
 import { addPost } from "../../redux/posts/postsActions";
+import { fetchProfile } from "../../redux/profile/profileActions";
 
 const CreatePostScreen = () => {
   const [postContent, setPostContent] = useState("");
-  const [username, setUsername] = useState("");
-  const [userImage, setUserImage] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const loadUserData = async () => {
-      try {
-        const session = await AsyncStorage.getItem("userSession");
-        if (session) {
-          const user = JSON.parse(session);
-          setUsername(user.username || "");
-          setUserImage(user.image || "https://example.com/default-avatar.jpg");
-        }
-      } catch (error) {
-        console.log("Error loading user session:", error);
-      }
-    };
+  const { profile } = useSelector((state) => state.profile);
 
-    loadUserData();
-  }, []);
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
   const handlePost = () => {
     if (!postContent.trim()) return;
 
     const postData = {
-      username,
-      userImage,
+      username: profile?.username, 
+      userImage: profile?.image || "https://example.com/default.jpg", 
       text: postContent,
       hashtags: extractHashtags(postContent),
     };
@@ -67,7 +54,7 @@ const CreatePostScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <NewPostCard
-          avatarUri={userImage || "https://example.com/default.jpg"}
+          avatarUri={profile?.image || "https://example.com/default.jpg"}
           content={postContent}
           onChangeContent={setPostContent}
         />

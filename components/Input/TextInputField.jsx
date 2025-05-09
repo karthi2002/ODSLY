@@ -16,7 +16,7 @@ const TextInputField = ({
 
   const validateInput = (text) => {
     if (pattern && text !== '' && !new RegExp(pattern).test(text)) {
-      setLocalError('Username must be 3-15 characters (letters, numbers, or _)');
+      setLocalError('Invaild');
     } else {
       setLocalError('');
     }

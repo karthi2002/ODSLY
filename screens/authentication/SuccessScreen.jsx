@@ -19,7 +19,7 @@ const SuccessScreen = ({ route  }) => {
   const { data } = route.params;
   
   const handleSuccess = async () => {
-    await AsyncStorage.setItem("userSession", JSON.stringify(data.user));
+    await AsyncStorage.setItem("userSession", JSON.stringify({ email: data.user.email }) );
     await AsyncStorage.setItem("authToken", data.token);
   };
 

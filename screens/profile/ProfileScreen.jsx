@@ -11,6 +11,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { LineGradient } from "../../layouts/LineGradient";
 import { LinearGradient } from "expo-linear-gradient";
@@ -18,31 +19,17 @@ import Colors from "../../utils/Colors";
 import Header from "../../layouts/Header";
 import { profileData } from "../../json/ProfileData";
 import GradientButton from "../../components/Button/GradientButton";
+import { fetchProfile } from "../../redux/profile/profileActions";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [userImage, setUserImage] = useState(null);
+  const dispatch = useDispatch();
+  const { profile, error } = useSelector((state) => state.profile);
 
   useEffect(() => {
-    const loadUserData = async () => {
-      try {
-        const session = await AsyncStorage.getItem('userSession');
-        if (session) {
-          const user = JSON.parse(session);
-          setUsername(user.username || '');
-          setEmail(user.email || '');
-          setUserImage(user.image || null); 
-        }
-      } catch (error) {
-        console.log('Error loading user session:', error);
-      }
-    };
-
-    loadUserData();
-  }, []);
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
   const handleNavigate = async (route) => {
     if (route === "AuthStack") {
@@ -96,22 +83,23 @@ const ProfileScreen = () => {
           style={styles.profileCard}
         >
           <View style={styles.imageSection}>
-            {userImage ? (
+            {profile.image ? (
               <Image
-                source={{ uri: userImage }}
+                source={{ uri: profile.image }}
                 style={styles.avatar}
               />
             ) : (
-              <Ionicons
-                name="person"
-                size={40}
-                color={Colors.secondary}
-                style={styles.avatar}
-              />
+              <View style={styles.avatar}>
+                <Ionicons
+                  name="person"
+                  size={32}
+                  color={Colors.secondary}
+                />
+              </View>
             )}
             <View>
-              <Text style={styles.name}>{username ? username : 'Loading...'}</Text>
-              <Text style={styles.email}>{email ? email : 'Loading...'}</Text>
+              <Text style={styles.name}>{profile.username ? profile.username : 'Loading...'}</Text>
+              <Text style={styles.email}>{profile.email ? profile.email : 'Loading...'}</Text>
             </View>
           </View>
           <LineGradient style={{marginVertical: 18}} />
@@ -161,9 +149,13 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+     width: 60,
+  height: 60,
+  borderWidth: 1,
+  borderColor: "rgba(255, 255, 255, 0.5)",
+  borderRadius: 30,
+  justifyContent: "center",
+  alignItems: "center",
   },
   name: {
     color: Colors.secondary,

@@ -11,13 +11,14 @@ export const handleLogin = async ({ emailOrPhone, password, navigation, setEmail
     });
 
     const data = response.data;
+    const { user, token, profileSetupRequired } = response.data;
 
     if (response.status === 200) {
-      if (data.profileSetupRequired) {
+      if (profileSetupRequired) {
         navigation.navigate("SetupProfile", { email: data.user.email });
       } else {
-        await AsyncStorage.setItem("userSession", JSON.stringify(data.user));
-        await AsyncStorage.setItem("authToken", data.token);
+        await AsyncStorage.setItem("userSession", JSON.stringify({ email: user.email }))
+        await AsyncStorage.setItem("authToken", token);
       }
     }
   } catch (error) {

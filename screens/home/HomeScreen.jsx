@@ -25,27 +25,17 @@ import BetCard from "../../components/Card/BetCard";
 import GradientButton from "../../components/Button/GradientButton";
 import { SubscriptionCard } from "../../components/Card/SubscriptionCard";
 import { LineGradient } from "../../layouts/LineGradient";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProfile } from "../../redux/profile/profileActions";
 
 export default function HomeScreen() {
 
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    const loadUserSession = async () => {
-      try {
-        const userSession = await AsyncStorage.getItem('userSession');
-        if (userSession !== null) {
-          const user = JSON.parse(userSession);
-          setUsername(user.username); 
-        }
-      } catch (error) {
-        console.log('Error loading user session:', error);
-      }
-    };
-
-    loadUserSession();
-  }, []);
+  const dispatch = useDispatch();
+    const { profile, error } = useSelector((state) => state.profile);
+  
+    useEffect(() => {
+      dispatch(fetchProfile());
+    }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -56,7 +46,7 @@ export default function HomeScreen() {
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-        <GradientText text={`Welcome back, ${username}!`} style={{ fontSize: 20 }} />
+        <GradientText text={`Welcome back, ${profile.username}!`} style={{ fontSize: 20 }} />
 
         <View style={styles.statsGrid}>
           {statsData.map((item, index) => (
