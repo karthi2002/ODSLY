@@ -2,8 +2,13 @@ import axios from "axios";
 import { Alert } from "react-native";
 import { BACKEND_URL } from "../../config/url";
 
-
-export const handleSignup = async (fullName, emailOrPhone, password, navigation) => {
+export const handleSignup = async (
+  fullName,
+  emailOrPhone,
+  password,
+  navigation,
+  { setFullNameError, setEmailError, setPasswordError, setConfirmPasswordError }
+) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/api/v1/signup`, {
       fullName,
@@ -18,12 +23,32 @@ export const handleSignup = async (fullName, emailOrPhone, password, navigation)
       Alert.alert('Error', 'Something went wrong. Please try again.');
     }
   } catch (error) {
-    if (error.response && error.response.status === 400 && error.response.data.userExists) {
-      Alert.alert(error.response.data.message);
-      navigation.navigate('SignIn', { email: emailOrPhone });
+    setFullNameError(null);
+    setEmailError(null);
+    setPasswordError(null);
+    setConfirmPasswordError(null);
+
+    if (error.response) {
+      const { userExists, message } = error.response.data;
+      if (error.response.status === 400 && userExists) {
+        setEmailError("Already registered");
+        navigation.navigate('SignIn', { email: emailOrPhone });
+      } else if (message === "Invalid full name") {
+        setFullNameError("Invalid full name format");
+        Alert.alert('Error', message);
+      } else if (message === "Invalid password") {
+        setPasswordError("Invalid password format");
+        Alert.alert('Error', message);
+      } else {
+        Alert.alert('Error', message || 'Something went wrong. Please try again.');
+      }
+    } else {
+      console.error("Signup error:", error.message);
+      Alert.alert('Error', 'Server not reachable');
     }
   }
 };
+
 
 export const handleVerifyOTP = async (otp, email, navigation, setError, flow) => {
   try {

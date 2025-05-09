@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -17,14 +17,43 @@ import GradientButton from "../../components/Button/GradientButton";
 import Colors from "../../utils/Colors";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
-
+import { Dimensions } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const { width, height } = Dimensions.get("window");
 
 const EditProfileScreen = () => {
   const [username, setUsername] = useState(" ");
   const [email, setEmail] = useState(" ");
-  const [imageUri, setImageUri] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+  const [originalUsername, setOriginalUsername] = useState("");
+  const [originalImage, setOriginalImage] = useState(null);
+  const [isChanged, setIsChanged] = useState(false);
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const session = await AsyncStorage.getItem("userSession");
+        if (session) {
+          const user = JSON.parse(session);
+          setUsername(user.username || "");
+          setEmail(user.email || "");
+          setUserImage(user.image || null);
+          setOriginalUsername(user.username || "");
+          setOriginalImage(user.image || null);
+        }
+      } catch (error) {
+        console.log("Error loading user session:", error);
+      }
+    };
+
+    loadUserData();
+  }, []);
+
+  useEffect(() => {
+    const hasChanges =
+      username !== originalUsername || userImage !== originalImage;
+    setIsChanged(hasChanges);
+  }, [username, userImage]);
 
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -33,12 +62,12 @@ const EditProfileScreen = () => {
     });
 
     if (!result.canceled && result.assets?.[0]?.uri) {
-      setImageUri(result.assets[0].uri);
+      setUserImage(result.assets[0].uri);
     }
   };
 
   const handleSaveChanges = () => {
-    console.log("Saving:", { username, email, imageUri });
+    console.log("Saving:", { username, email, userImage });
   };
 
   const GradientText = ({ text }) => (
@@ -76,8 +105,11 @@ const EditProfileScreen = () => {
               onPress={handleImagePick}
               style={styles.imageWrapper}
             >
-              {imageUri ? (
-                <Image source={{ uri: imageUri }} style={styles.profileImage} />
+              {userImage ? (
+                <Image
+                  source={{ uri: userImage }}
+                  style={styles.profileImage}
+                />
               ) : (
                 <Ionicons name="person" size={60} color={Colors.background} />
               )}
@@ -91,7 +123,7 @@ const EditProfileScreen = () => {
                   <GradientText text="Replace" />
                 </TouchableOpacity>
                 <Text style={styles.separator}>|</Text>
-                <TouchableOpacity onPress={() => setImageUri(null)}>
+                <TouchableOpacity onPress={() => setUserImage(null)}>
                   <GradientText text="Delete" />
                 </TouchableOpacity>
               </View>
@@ -103,7 +135,7 @@ const EditProfileScreen = () => {
             value={username}
             setValue={setUsername}
             pattern="^[a-zA-Z0-9_]{3,15}$"
-            errorMessage="Username must be 3-15 characters (letters, numbers, or _)"
+            errorMessage=""
             style={{
               color: Colors.secondary,
               backgroundColor: Colors.background,
@@ -120,22 +152,20 @@ const EditProfileScreen = () => {
             value={email}
             setValue={setEmail}
             pattern="^([^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+)$"
-            errorMessage="Invalid"
+            errorMessage=""
+            editable={false}
             style={{
               color: Colors.secondary,
               backgroundColor: Colors.background,
               borderColor: Colors.secondary,
             }}
           />
-            <GradientButton
+          <GradientButton
             label="Save Changes"
             onPress={handleSaveChanges}
-            arrowEnable={false}
+            disabled={!isChanged}
           />
         </ScrollView>
-
-        
-
       </View>
     </KeyboardAvoidingView>
   );
@@ -186,7 +216,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
     color: Colors.primary,
   },
   separator: {

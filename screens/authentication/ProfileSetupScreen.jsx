@@ -11,7 +11,7 @@ import {
   Keyboard,
 } from "react-native";
 import Colors from "../../utils/Colors";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import StepWizard from "../../components/Form/StepWizard";
 import ProfileUploader from "../../components/Form/ProfileUploader";
 import TagSelectorFlashList from "../../components/List/TagSelectorFlashList";
@@ -20,30 +20,30 @@ import LoadingDots from "../../components/Loader/LoadingDots";
 import GradientButton from "../../components/Button/GradientButton";
 import Logo from "../../layouts/Logo";
 import Copyright from "../../layouts/Copyright";
-import { useRoute } from "@react-navigation/native";
-import axios from 'axios'; 
+import axios from 'axios';
 import { BACKEND_URL } from "../../config/url";
-
 
 const steps = ["Profile", "Sports", "Betting", "Finish"];
 
 const ProfileSetupScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { email } = route.params;
   const [stepIndex, setStepIndex] = useState(0);
   const [profile, setProfile] = useState({ username: "", image: null });
   const [selectedSports, setSelectedSports] = useState([]);
   const [preferences, setPreferences] = useState(null);
   const [loading, setLoading] = useState(false);
-  const route = useRoute();
-  const { email } = route.params;
+  const [isUsernameValid, setIsUsernameValid] = useState(false);
 
   const handleNext = () => {
-    setStepIndex((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      return nextIndex;
-    });
+    if (stepIndex === 0 && !isUsernameValid) {
+      Alert.alert('Error', 'Please enter a valid and available username.');
+      return;
+    }
+    setStepIndex((prevIndex) => prevIndex + 1);
   };
-  
+
   useEffect(() => {
     if (stepIndex === 3) {
       const saveProfile = async () => {
@@ -59,7 +59,6 @@ const ProfileSetupScreen = () => {
           const response = await axios.post(`${BACKEND_URL}/api/v1/saveProfile`, profileData);
 
           if (response.status === 200) {
-
             setTimeout(() => {
               navigation.navigate("Success", { data: response.data });
             }, 2000);
@@ -68,7 +67,7 @@ const ProfileSetupScreen = () => {
           }
         } catch (error) {
           console.error("Failed to save profile:", error);
-          Alert.alert("Error", "Something went wrong while saving your profile.");
+          Alert.alert("Error", error.response?.data?.message || "Something went wrong while saving your profile.");
         } finally {
           setLoading(false);
         }
@@ -86,6 +85,7 @@ const ProfileSetupScreen = () => {
             setUsername={(u) => setProfile({ ...profile, username: u })}
             imageUri={profile.image}
             setImageUri={(img) => setProfile({ ...profile, image: img })}
+            setIsUsernameValid={setIsUsernameValid}
           />
         );
       case 1:
@@ -140,7 +140,12 @@ const ProfileSetupScreen = () => {
 
               {stepIndex < steps.length - 1 && !loading && (
                 <View style={{ marginTop: 20 }}>
-                  <GradientButton label="Next" onPress={handleNext} arrowEnable={true} />
+                  <GradientButton
+                    label="Next"
+                    onPress={handleNext}
+                    arrowEnable={true}
+                    disabled={stepIndex === 0 && !isUsernameValid}
+                  />
                 </View>
               )}
             </View>

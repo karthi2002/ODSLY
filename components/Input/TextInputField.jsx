@@ -8,23 +8,28 @@ const TextInputField = ({
   setValue,
   pattern,
   errorMessage,
+  isValid,
   style,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [error, setError] = useState('');
+  const [localError, setLocalError] = useState('');
 
   const validateInput = (text) => {
-    if (pattern && !new RegExp(pattern).test(text)) {
-      setError(errorMessage || 'Invalid input');
+    if (pattern && text !== '' && !new RegExp(pattern).test(text)) {
+      setLocalError('Username must be 3-15 characters (letters, numbers, or _)');
     } else {
-      setError('');
+      setLocalError('');
     }
   };
 
   const handleBlur = () => {
     setIsFocused(false);
-    validateInput(value);
+    if (!errorMessage && value !== '') {
+      validateInput(value);
+    }
   };
+
+  const hasError = (errorMessage || localError) && value !== '';
 
   return (
     <View style={styles.container}>
@@ -33,18 +38,32 @@ const TextInputField = ({
       )}
 
       <TextInput
-        style={[styles.input, isFocused && styles.inputFocused, style]}
+        style={[
+          styles.input,
+          isFocused && styles.inputFocused,
+          hasError && styles.errorInput,
+          isValid && !hasError && styles.validInput,
+          style,
+        ]}
         placeholder={isFocused ? '' : label}
         value={value}
         onChangeText={(text) => {
           setValue(text);
-          validateInput(text);
-          if (error) setError(''); 
+          if (!errorMessage) {
+            validateInput(text);
+          }
+          if (localError && text !== '') {
+            setLocalError('');
+          }
         }}
         onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
+        autoCapitalize="none"
       />
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+      {hasError ? (
+        <Text style={styles.errorText}>{errorMessage || localError}</Text>
+      ) : null}
     </View>
   );
 };
@@ -74,6 +93,12 @@ const styles = StyleSheet.create({
   },
   inputFocused: {
     borderColor: Colors.primary,
+  },
+  errorInput: {
+    borderColor: Colors.error,
+  },
+  validInput: {
+    borderColor: Colors.success,
   },
   errorText: {
     color: Colors.error,

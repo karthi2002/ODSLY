@@ -6,16 +6,16 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 const { width } = Dimensions.get('window');
 
-const GradientButton = ({ label, onPress, arrowEnable, style }) => {
+const GradientButton = ({ label, onPress, arrowEnable, style, disabled }) => {
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8} disabled={disabled}>
       <LinearGradient
         colors={['#029EFE', '#6945E2', '#E9098E']}
         locations={[0, 0.37, 1]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        style={[styles.button, style]}
+        style={[styles.button, style, disabled && { opacity: 0.6 }]}
       >
         <View style={[styles.container, style]}>
             <Text style={styles.text}>{label}</Text>

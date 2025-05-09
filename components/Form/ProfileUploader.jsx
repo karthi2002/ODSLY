@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -9,17 +9,33 @@ import axios from 'axios';
 import Colors from '../../utils/Colors';
 import { BACKEND_URL } from '../../config/url';
 
-
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dmpx9rrm4/image/upload'; 
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dmpx9rrm4/image/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'odsly_profile';
 
-const ProfileUploader = ({ username, setUsername }) => {
-  const [imageUri, setImageUri] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const [imageUrl, setImageUrl] = React.useState(null);
-  const [usernameAvailable, setUsernameAvailable] = React.useState(null);
-const [typingTimeout, setTypingTimeout] = React.useState(null);
+const ProfileUploader = ({ username, setUsername, imageUri, setImageUri, setIsUsernameValid }) => {
+  const [loading, setLoading] = useState(false);
+  const [usernameAvailable, setUsernameAvailable] = useState(null);
+  const [typingTimeout, setTypingTimeout] = useState(null);
 
+  const checkUsernameAvailability = async (name) => {
+    if (!name || name.length < 3 || !name.match(/^[a-zA-Z0-9_]{3,15}$/)) {
+      setUsernameAvailable(null);
+      setIsUsernameValid(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/v1/check-user`, { username: name });
+      const available = !response.data.exists;
+      setUsernameAvailable(available);
+      setIsUsernameValid(available);
+    } catch (err) {
+      console.error("Username check error:", err);
+      setUsernameAvailable(null);
+      setIsUsernameValid(false);
+      Alert.alert('Error', 'Failed to check username availability.');
+    }
+  };
 
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -35,7 +51,6 @@ const [typingTimeout, setTypingTimeout] = React.useState(null);
 
   const handleImageRemove = () => {
     setImageUri(null);
-    setImageUrl(null);
   };
 
   const uploadImageToCloudinary = async (uri) => {
@@ -43,7 +58,7 @@ const [typingTimeout, setTypingTimeout] = React.useState(null);
       setLoading(true);
       const uriParts = uri.split('.');
       const fileType = uriParts[uriParts.length - 1];
-  
+
       const formData = new FormData();
       formData.append('file', {
         uri,
@@ -51,15 +66,15 @@ const [typingTimeout, setTypingTimeout] = React.useState(null);
         name: `upload.${fileType}`,
       });
       formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-  
+
       const response = await axios.post(CLOUDINARY_URL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       if (response.status === 200) {
-        setImageUrl(response.data.secure_url);
+        setImageUri(response.data.secure_url);
         Alert.alert('Image Upload', 'Profile picture uploaded successfully!');
       } else {
         throw new Error('Upload failed');
@@ -70,18 +85,6 @@ const [typingTimeout, setTypingTimeout] = React.useState(null);
       setLoading(false);
     }
   };
-  
-  const checkUsernameAvailability = async (name) => {
-    if (!name || name.length < 3) return;
-  
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/v1/check-user`, { username: name });
-      setUsernameAvailable(!response.data.exists);
-    } catch (err) {
-      console.error("Username check error:", err);
-    }
-  };
-  
 
   return (
     <View style={styles.container}>
@@ -131,22 +134,25 @@ const [typingTimeout, setTypingTimeout] = React.useState(null);
           value={username}
           setValue={(val) => {
             setUsername(val);
+            setUsernameAvailable(null);
+            setIsUsernameValid(false);
             if (typingTimeout) clearTimeout(typingTimeout);
             const timeout = setTimeout(() => {
               checkUsernameAvailability(val);
-            }, 500); 
+            }, 500);
             setTypingTimeout(timeout);
           }}
           pattern="^[a-zA-Z0-9_]{3,15}$"
-          errorMessage="Username must be 3-15 characters (letters, numbers, or _)"
+          errorMessage={usernameAvailable === false ? 'Username is already taken' : null}
+          isValid={usernameAvailable === true}
         />
-        
+
         {username.length >= 3 && (
-          <Text style={{ fontSize: 12, color: usernameAvailable === false ? 'red' : 'green' }}>
-            {usernameAvailable === false
-              ? 'Username is already taken'
-              : usernameAvailable === true
+          <Text style={{ fontSize: 12, color: usernameAvailable === false ? Colors.error : Colors.success }}>
+            {usernameAvailable === true
               ? 'Username is available'
+              : usernameAvailable === false
+              ? 'Username is already taken'
               : ''}
           </Text>
         )}
@@ -200,7 +206,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Colors.background,
     borderRadius: 50,
-    padding: 2
+    padding: 2,
   },
   profileImage: {
     width: 55,
@@ -224,6 +230,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   subText: {
+    marginTop: 6,
     fontSize: 12,
     color: 'gray',
     fontStyle: 'italic',

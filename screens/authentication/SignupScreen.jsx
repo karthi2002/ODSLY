@@ -10,7 +10,6 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-
 import Google from "../../assets/icons/google.png";
 import Apple from "../../assets/icons/apple.png";
 import Logo from "../../layouts/Logo";
@@ -27,16 +26,67 @@ const SignupScreen = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [fullNameError, setFullNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
     if (confirmPassword.length > 0 && password !== confirmPassword) {
-      setError("Passwords do not match");
+      setConfirmPasswordError("Passwords do not match");
     } else {
-      setError("");
+      setConfirmPasswordError(null);
     }
   }, [password, confirmPassword]);
+
+  const onSignupPress = async () => {
+    // Client-side validation
+    let hasError = false;
+
+    if (!fullName.match(/[A-Za-z\s]+/)) {
+      setFullNameError("Invalid full name");
+      hasError = true;
+    } else {
+      setFullNameError(null);
+    }
+
+    if (!emailOrPhone.match(/^(\d{10}|[a-zA-Z0-9._%+-]+@gmail\.com)$/)) {
+      setEmailError("Invalid email or phone number");
+      hasError = true;
+    } else {
+      setEmailError(null);
+    }
+
+    if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+      setPasswordError("Password must be at least 8 characters, include uppercase, lowercase, number, and special character");
+      hasError = true;
+    } else {
+      setPasswordError(null);
+    }
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
+      hasError = true;
+    } else if (!confirmPassword.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+      setConfirmPasswordError("Invalid confirm password");
+      hasError = true;
+    } else {
+      setConfirmPasswordError(null);
+    }
+
+    if (!hasError) {
+      setLoading(true);
+      await handleSignup(fullName, emailOrPhone, password, navigation, {
+        setFullNameError,
+        setEmailError,
+        setPasswordError,
+        setConfirmPasswordError,
+      });
+      setLoading(false);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -56,48 +106,54 @@ const SignupScreen = () => {
           <TextInputField
             label="Full name"
             value={fullName}
-            setValue={setFullName}
-            pattern="[A-Za-z]+"
-            errorMessage="Invalid"
+            setValue={(text) => {
+              setFullName(text);
+              setFullNameError(null); // Clear error on typing
+            }}
+            pattern="[A-Za-z\s]+" // Allow spaces
+            errorMessage={fullNameError}
           />
 
           <TextInputField
             label="Email or Phone Number"
             value={emailOrPhone}
-            setValue={setEmailOrPhone}
+            setValue={(text) => {
+              setEmailOrPhone(text);
+              setEmailError(null); // Clear error on typing
+            }}
             pattern="^(\d{10}|[a-zA-Z0-9._%+-]+@gmail\.com)$"
-            errorMessage="Invalid"
+            errorMessage={emailError}
           />
 
           <PasswordInputField
             label="Password"
             value={password}
-            setValue={setPassword}
+            setValue={(text) => {
+              setPassword(text);
+              setPasswordError(null); // Clear error on typing
+            }}
             isPassword={true}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-            errorMessage="Invalid Password"
+            errorMessage={passwordError}
           />
 
           <PasswordInputField
             label="Confirm Password"
             value={confirmPassword}
-            setValue={setConfirmPassword}
+            setValue={(text) => {
+              setConfirmPassword(text);
+              setConfirmPasswordError(null); // Clear error on typing
+            }}
             isPassword={true}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-            errorMessage={error}
+            errorMessage={confirmPasswordError}
           />
 
           <GradientButton
             label="Continue"
-            onPress={() => {
-              if (password !== confirmPassword) {
-                setError("Passwords do not match.");
-              } else {
-                setError("");
-                handleSignup(fullName, emailOrPhone, password, navigation);
-              }
-            }}
+            onPress={onSignupPress}
             arrowEnable={true}
+            disabled={loading}
           />
 
           <LineText name="Continue with" />

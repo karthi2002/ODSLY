@@ -12,21 +12,25 @@ const PasswordInputField = ({
   isPassword = false,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [error, setError] = useState('');
+  const [localError, setLocalError] = useState('');
   const [secureText, setSecureText] = useState(isPassword);
 
   const validateInput = (text) => {
-    if (pattern && !new RegExp(pattern).test(text)) {
-      setError(errorMessage || 'Invalid input');
+    if (pattern && text !== '' && !new RegExp(pattern).test(text)) {
+      setLocalError('Password must be at least 8 characters, include uppercase, lowercase, number, and special character');
     } else {
-      setError('');
+      setLocalError('');
     }
   };
 
   const handleBlur = () => {
     setIsFocused(false);
-    validateInput(value);
+    if (!errorMessage && value !== '') {
+      validateInput(value);
+    }
   };
+
+  const hasError = (errorMessage || localError) && value !== '';
 
   return (
     <View style={styles.container}>
@@ -36,13 +40,21 @@ const PasswordInputField = ({
 
       <View style={styles.inputWrapper}>
         <TextInput
-          style={[styles.input, isFocused && styles.inputFocused]}
+          style={[
+            styles.input,
+            isFocused && styles.inputFocused,
+            hasError && styles.errorInput,
+          ]}
           placeholder={isFocused ? '' : label}
           value={value}
           onChangeText={(text) => {
             setValue(text);
-            validateInput(text);
-            if (error) setError(''); 
+            if (!errorMessage) {
+              validateInput(text);
+            }
+            if (localError && text !== '') {
+              setLocalError('');
+            }
           }}
           secureTextEntry={secureText}
           onFocus={() => setIsFocused(true)}
@@ -59,8 +71,8 @@ const PasswordInputField = ({
         )}
       </View>
 
-      {error && value ? (
-        <Text style={styles.errorText}>{error}</Text>
+      {hasError ? (
+        <Text style={styles.errorText}>{errorMessage || localError}</Text>
       ) : null}
     </View>
   );
@@ -98,6 +110,9 @@ const styles = StyleSheet.create({
   },
   inputFocused: {
     borderColor: Colors.primary,
+  },
+  errorInput: {
+    borderColor: Colors.error,
   },
   icon: {
     position: 'absolute',

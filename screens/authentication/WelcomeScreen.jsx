@@ -146,7 +146,6 @@ mainContainer: {
   },
 textWrapper: {
   alignItems: "center",
-  marginBottom: hp("3%"),
 },
   title: {
     fontSize: wp("6%"),

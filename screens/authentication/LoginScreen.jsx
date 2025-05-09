@@ -28,9 +28,22 @@ const { width, height } = Dimensions.get("window");
 const LoginScreen = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+
+  const onLoginPress = async () => {
+    setLoading(true); 
+    await handleLogin({
+      emailOrPhone,
+      password,
+      navigation,
+      setEmailError,
+      setPasswordError,
+    });
+    setLoading(false); 
+  };
 
   return (
     <KeyboardAvoidingView
@@ -72,16 +85,9 @@ const LoginScreen = () => {
 
           <GradientButton
             label="Login"
-            onPress={() =>
-              handleLogin({
-                emailOrPhone,
-                password,
-                navigation,
-                setEmailError,
-                setPasswordError,
-              })
-            }
+            onPress={onLoginPress}
             arrowEnable={true}
+            disabled={loading}
           />
 
           <LineText name="Login With" />
