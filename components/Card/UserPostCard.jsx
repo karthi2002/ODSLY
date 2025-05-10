@@ -29,6 +29,9 @@ const UserPostCard = ({
   const [likes, setLikes] = useState(likeCount);
   const [comments, setComments] = useState(commentCount);
 
+  // Debug log to confirm user prop
+  console.log('UserPostCard user prop:', user);
+
   const toggleLike = () => {
     const isNowLiked = !liked;
     setLiked(isNowLiked);
@@ -71,7 +74,7 @@ const UserPostCard = ({
             <Image source={{ uri: user.avatar }} style={styles.avatar} />
           </TouchableOpacity>
           <View style={styles.headerText}>
-            <Text style={styles.username}>{user.name}</Text>
+            <Text style={styles.username}>{user.username || 'Unknown User'}</Text>
             <Text style={styles.timeAgo}>{timeAgo}</Text>
           </View>
         </View>

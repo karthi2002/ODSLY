@@ -26,6 +26,8 @@ import {
   modifyUserUsername,
   deleteUserImage,
 } from "../../redux/profile/profileActions";
+import { fetchUserPosts } from "../../redux/posts/postsActions";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 import { BACKEND_URL } from "../../config/url";
 
@@ -61,13 +63,12 @@ const EditProfileScreen = () => {
     }
   }, [profile]);
 
-
   const getUsernameMessage = () => {
-  if (username === originalUsername) return "";
-  if (usernameAvailable === true) return "Username is available";
-  if (usernameAvailable === false) return "Username is already taken";
-  return "";
-};
+    if (username === originalUsername) return "";
+    if (usernameAvailable === true) return "Username is available";
+    if (usernameAvailable === false) return "Username is already taken";
+    return "";
+  };
 
   useEffect(() => {
     const hasChanges = username !== originalUsername;
@@ -109,10 +110,15 @@ const EditProfileScreen = () => {
         const imageUrl = await uploadImageToCloudinary(result.assets[0].uri);
         await dispatch(modifyUserImage(profile.email, imageUrl));
         setUserImage(imageUrl);
-        setOriginalImage(imageUrl); 
+        setOriginalImage(imageUrl);
+        // Clear cache and refresh posts
+        await AsyncStorage.removeItem('cached_user_posts');
+        await dispatch(fetchUserPosts());
+        console.log('Refreshed user posts after image update:', imageUrl);
         Alert.alert("Success", "Profile picture updated successfully!");
       } catch (error) {
         setUserImage(originalImage);
+        console.error('Image update error:', error);
         Alert.alert("Error", "Failed to update profile picture.");
       } finally {
         setLoading(false);
@@ -127,10 +133,15 @@ const EditProfileScreen = () => {
     try {
       await dispatch(deleteUserImage(profile.email));
       setUserImage(null);
-      setOriginalImage(null); 
+      setOriginalImage(null);
+      // Clear cache and refresh posts
+      await AsyncStorage.removeItem('cached_user_posts');
+      await dispatch(fetchUserPosts());
+      console.log('Refreshed user posts after image deletion');
       Alert.alert("Success", "Profile picture removed successfully!");
     } catch (error) {
-      setUserImage(originalImage); 
+      setUserImage(originalImage);
+      console.error('Image deletion error:', error);
       Alert.alert("Error", "Failed to remove profile picture.");
     } finally {
       setLoading(false);
@@ -183,6 +194,10 @@ const EditProfileScreen = () => {
       if (username !== originalUsername && username) {
         await dispatch(modifyUserUsername(profile.email, username));
         setOriginalUsername(username);
+        // Clear cache and refresh posts
+        await AsyncStorage.removeItem('cached_user_posts');
+        await dispatch(fetchUserPosts());
+        console.log('Refreshed user posts after username update');
       }
       setIsChanged(false);
       Alert.alert("Success", "Profile updated successfully!");
