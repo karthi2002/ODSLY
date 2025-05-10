@@ -23,8 +23,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 const CACHE_KEY = 'cached_user_posts';
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
-const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 1 * 60 * 1000; // 5 minutes in milliseconds
+const AUTO_REFRESH_INTERVAL = 1 * 60 * 1000; // 5 minutes
 
 export default function YourPostScreen() {
   const navigation = useNavigation();
@@ -32,14 +32,10 @@ export default function YourPostScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const { userPosts, userPostsLoading, userPostsError } = useSelector((state) => state.posts);
 
-  // Debugging: Log Redux state
-  console.log('Redux userPosts state:', userPosts);
-
   // Load cached posts or fetch new ones
   const loadUserPosts = useCallback(async () => {
     try {
       const cachedData = await AsyncStorage.getItem(CACHE_KEY);
-      console.log('Cached user posts:', cachedData);
       if (cachedData) {
         const { posts, timestamp } = JSON.parse(cachedData);
         const now = Date.now();
@@ -49,7 +45,6 @@ export default function YourPostScreen() {
           return;
         }
       }
-      console.log("Fetching user posts...");
       await dispatch(fetchUserPosts());
     } catch (err) {
       console.error("Error loading user posts:", err);
@@ -113,7 +108,7 @@ export default function YourPostScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />
         }
       >
-        <View style={styles.sectionContainer}>
+        <View style={styles.sectionContainer} >
           <Text style={styles.sectionTitle}>Recent Bets</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }}>
             {recentBet.map((bet, index) => (
@@ -190,7 +185,6 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingTop: 20,
-    paddingHorizontal: 15,
   },
   sectionContainer: {
     marginBottom: 20,

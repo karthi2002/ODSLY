@@ -45,8 +45,6 @@ export default function FeedScreen() {
           return;
         }
       }
-      // Cache is stale or missing, fetch new posts
-      console.log("Fetching posts...");
       await dispatch(fetchPosts());
     } catch (err) {
       console.error("Error loading posts:", err);
@@ -160,7 +158,6 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingTop: 20,
-    paddingHorizontal: 15,
   },
   sectionContainer: {
     marginBottom: 20,

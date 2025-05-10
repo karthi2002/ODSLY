@@ -18,7 +18,6 @@ const USER_CACHE_KEY = 'cached_user_posts';
 export const fetchPosts = () => async (dispatch) => {
   try {
     dispatch({ type: FETCH_POSTS_REQUEST });
-    console.log('Fetching from:', api.defaults.baseURL + '/api/v1/get-all-post');
     const token = await AsyncStorage.getItem('authToken');
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;

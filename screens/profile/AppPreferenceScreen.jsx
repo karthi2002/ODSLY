@@ -1,34 +1,48 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import Colors from "../../utils/Colors";
 import CustomHeader from "../../layouts/CustomHeader";
 import GradientToggle from "../../components/Input/GradientToggle";
 import DropdownField from "../../components/Input/DropdownField";
 import { DisplaySettingsData, LanguagesData } from "../../json/AppPreferencesData";
 import GradientButton from "../../components/Button/GradientButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const AppPreferenceScreen = () => {
-  const navigation = useNavigation();
-
+  
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [displaySetting, setDisplaySetting] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const languageOptions = LanguagesData.map(lang => `${lang.flag} ${lang.language}`);
   const displayOptions = DisplaySettingsData.map(item => item.label);
 
-  const handleNavigate = (route) => {
-    if (route === "AuthStack") {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "AuthStack" }],
-      });
-    } else {
-      navigation.navigate(route);
+  useEffect(() => {
+    const loadDarkModePreference = async () => {
+      try {
+        const savedMode = await AsyncStorage.getItem("darkMode");
+        if (savedMode !== null) {
+          setIsDarkMode(JSON.parse(savedMode)); 
+        }
+      } catch (error) {
+        console.error("Failed to load dark mode preference", error);
+      }
+    };
+
+    loadDarkModePreference();
+  }, []);
+
+  const handleDarkModeToggle = async (value) => {
+    setIsDarkMode(value);
+    try {
+      await AsyncStorage.setItem("darkMode", JSON.stringify(value)); 
+    } catch (error) {
+      console.error("Failed to save dark mode preference", error);
     }
   };
 
@@ -44,9 +58,10 @@ const AppPreferenceScreen = () => {
       
         <GradientToggle
           label="Dark Mode"
-          initial={true}
+          initial={isDarkMode}
+          onToggle={handleDarkModeToggle} 
           borderColor={Colors.secondary}
-          style={{borderWidth: 1}}
+          style={{ borderWidth: 1 }}
         />
 
         <DropdownField
