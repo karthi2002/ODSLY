@@ -1,13 +1,73 @@
+/**
+ * FeedScreen.js
+ * =============
+ *
+ * displaying trending hashtags and posts.
+ * Supports pull-to-refresh, auto-refresh, post liking, and navigation to comments and user profiles.
+ *
+ * ## Features:
+ * - Displays trending hashtags as selectable tags.
+ * - Fetches and displays trending posts from the Redux store.
+ * - Pull-to-refresh and auto-refresh (every 5 minutes) for new posts.
+ * - Like/unlike functionality for posts, with error handling for already-liked posts.
+ * - Navigates to comment screen and user profile from each post.
+ * - Shows loading indicator and error messages as needed.
+ *
+ * ## State:
+ * - tags: Array of hashtag objects (label, emoji, selected).
+ * - refreshing: Boolean for pull-to-refresh state.
+ *
+ * ## Redux:
+ * - Uses `useSelector` to get posts, loading, and error state from Redux.
+ * - Uses `useDispatch` to trigger actions: `fetchPosts`, `likePost`, `unlikePost`.
+ *
+ * ## Effects:
+ * - On mount, loads posts and sets up an interval for auto-refresh.
+ * - Cleans up interval on unmount.
+ *
+ * ## Handlers:
+ * - loadPosts: Loads posts from the API.
+ * - onRefresh: Pull-to-refresh handler.
+ * - toggleTag: Toggles selection state for hashtags.
+ * - handleAvatarPress: Navigates to user profile screen.
+ * - handleLikePress: Likes or unlikes a post, with duplicate-like error handling.
+ * - handleCommentPress: Navigates to comment screen for a post.
+ *
+ * ## UI Structure:
+ * - Trending Hashtags section (Tag components).
+ * - Divider (LineGradient).
+ * - Trending Posts section (UserPostCard components).
+ * - Loading indicator and error/no-posts messages.
+ *
+ * ## Styling:
+ * - Uses consistent padding, font weights, and color palette from `Colors`.
+ *
+ * ## Dependencies:
+ * - React, React Native
+ * - react-redux (for state management)
+ * - react-navigation (for navigation)
+ * - dayjs (for relative time display)
+ * - Custom components: Tag, UserPostCard, LineGradient
+ *
+ * ## Example Usage:
+ *   <FeedScreen />
+ *
+ * ## Notes:
+ * - Posts are auto-refreshed every 5 minutes.
+ * - All navigation is handled via React Navigation's `useNavigation`.
+ * - Handles edge cases: no posts, loading, and API errors.
+ */
+
+
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from "../../utils/Colors";
 import { LineGradient } from "../../layouts/LineGradient";
 import Tag from "../../components/List/Tag";
 import UserPostCard from "../../components/Card/UserPostCard";
-import { fetchPosts } from "../../redux/posts/postsActions";
+import { fetchPosts, likePost, unlikePost } from "../../redux/posts/postsActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -20,8 +80,6 @@ const tagsData = [
   { label: "#UnderdogBets", emoji: "⚽", selected: false },
 ];
 
-const CACHE_KEY = 'cached_posts';
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 export default function FeedScreen() {
@@ -32,19 +90,8 @@ export default function FeedScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const { posts, loading, error } = useSelector((state) => state.posts);
 
-  // Load cached posts or fetch new ones
   const loadPosts = useCallback(async () => {
     try {
-      const cachedData = await AsyncStorage.getItem(CACHE_KEY);
-      if (cachedData) {
-        const { posts, timestamp } = JSON.parse(cachedData);
-        const now = Date.now();
-        if (now - timestamp < CACHE_DURATION) {
-          console.log("Loading cached posts...");
-          dispatch({ type: "FETCH_POSTS_SUCCESS", payload: posts });
-          return;
-        }
-      }
       await dispatch(fetchPosts());
     } catch (err) {
       console.error("Error loading posts:", err);
@@ -52,7 +99,6 @@ export default function FeedScreen() {
     }
   }, [dispatch]);
 
-  // Handle pull-to-refresh
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     console.log("Pull-to-refresh triggered");
@@ -60,17 +106,14 @@ export default function FeedScreen() {
     setRefreshing(false);
   }, [dispatch]);
 
-  // Initial load and auto-refresh timer
   useEffect(() => {
     loadPosts();
 
-    // Set up auto-refresh timer
     const intervalId = setInterval(() => {
       console.log("Auto-refreshing posts...");
       dispatch(fetchPosts());
     }, AUTO_REFRESH_INTERVAL);
 
-    // Cleanup timer on unmount
     return () => clearInterval(intervalId);
   }, [dispatch, loadPosts]);
 
@@ -84,12 +127,32 @@ export default function FeedScreen() {
     navigation.navigate("CommunityStack", { screen: "PostProfile" });
   };
 
-  const handleLikePress = () => {
-    console.log("Post liked/unliked");
+  const handleLikePress = async (postId, likedBy) => {
+    try {
+      if (likedBy) {
+        await dispatch(unlikePost(postId));
+      } else {
+        try {
+          await dispatch(likePost(postId));
+        } catch (likeErr) {
+          if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
+            await dispatch(unlikePost(postId));
+          } else {
+            throw likeErr;
+          }
+        }
+      }
+      console.log(`Post ${likedBy ? 'unliked' : 'liked'}: ${postId}`);
+    } catch (err) {
+      console.error('Like post error:', err.message, err.response?.data);
+    }
   };
 
-  const handleCommentPress = () => {
-    navigation.navigate("CommunityStack", { screen: "PostComment" });
+  const handleCommentPress = (post) => {
+    navigation.navigate("CommunityStack", {
+      screen: "PostComment",
+      params: { post },
+    });
   };
 
   return (
@@ -135,10 +198,12 @@ export default function FeedScreen() {
                 hashtags={post.hashtags}
                 timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : "Unknown time"}
                 likeCount={post.likeCount || 0}
+                likedBy={post.likedBy || false}
                 commentCount={post.commentCount || 0}
                 onAvatarPress={handleAvatarPress}
-                onLikePress={handleLikePress}
-                onCommentPress={handleCommentPress}
+                onLikePress={() => handleLikePress(post._id, post.likedBy)}
+                onCommentPress={() => handleCommentPress(post)}
+                disableComment={false}
                 style={{ marginBottom: 15 }}
               />
             ))

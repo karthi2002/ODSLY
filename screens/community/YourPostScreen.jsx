@@ -1,3 +1,68 @@
+/**
+ * YourPostScreen.js
+ * =================
+ *
+ * Screen for viewing and managing the current user's posts in the social app.
+ * Also displays a horizontal list of recent bets and provides full post interaction.
+ *
+ * ## Features:
+ * - Displays a horizontally scrollable "Recent Bets" section at the top.
+ * - Fetches and displays the user's posts from Redux (userPosts).
+ * - Supports pull-to-refresh and auto-refresh (every 5 minutes) for user's posts.
+ * - Like/unlike functionality for each post, with duplicate-like error handling.
+ * - Delete button shown for user's own posts (showDelete).
+ * - Navigates to comment screen and user profile from each post.
+ * - Handles loading, error, and empty states for user posts.
+ * - Provides retry and login actions on error, with clear user feedback.
+ *
+ * ## State:
+ * - refreshing: Boolean for pull-to-refresh state.
+ *
+ * ## Redux:
+ * - Uses `useSelector` to get userPosts, loading, and error state from Redux.
+ * - Uses `useDispatch` to trigger actions: `fetchUserPosts`, `likePost`, `unlikePost`.
+ *
+ * ## Effects:
+ * - On mount, loads user posts and sets up an interval for auto-refresh.
+ * - Cleans up interval on unmount.
+ *
+ * ## Handlers:
+ * - onRefresh: Pull-to-refresh handler.
+ * - handleRetry: Retry fetching user posts after error.
+ * - handleLogin: Navigates to login screen if authentication error occurs.
+ * - handleAvatarPress: Navigates to user profile screen.
+ * - handleLikePress: Likes or unlikes a post, with duplicate-like error handling.
+ * - handleCommentPress: Navigates to comment screen for a post.
+ *
+ * ## UI Structure:
+ * - Recent Bets section (BetCard components in horizontal ScrollView).
+ * - Divider (LineGradient).
+ * - Your Posts section (UserPostCard components).
+ * - Loading indicator and error/no-posts messages.
+ * - Retry and login buttons if error occurs.
+ *
+ * ## Styling:
+ * - Uses consistent padding, font weights, and color palette from `Colors`.
+ * - Error and retry/login UI is clearly styled for user feedback.
+ *
+ * ## Dependencies:
+ * - React, React Native
+ * - react-redux (for state management)
+ * - react-navigation (for navigation)
+ * - dayjs (for relative time display)
+ * - Custom components: BetCard, UserPostCard, LineGradient
+ *
+ * ## Example Usage:
+ *   <YourPostScreen />
+ *
+ * ## Notes:
+ * - Posts are auto-refreshed every 5 minutes.
+ * - All navigation is handled via React Navigation's `useNavigation`.
+ * - Handles edge cases: no posts, loading, and API errors (including auth errors).
+ * - Only the user's own posts are shown and managed here.
+ */
+
+
 import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
@@ -10,21 +75,16 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from "../../utils/Colors";
 import { LineGradient } from "../../layouts/LineGradient";
 import { recentBet } from "../../json/RecentBetData";
 import BetCard from "../../components/Card/BetCard";
 import UserPostCard from "../../components/Card/UserPostCard";
-import { fetchUserPosts } from "../../redux/posts/postsActions";
+import { fetchUserPosts, likePost, unlikePost } from "../../redux/posts/postsActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
-
-const CACHE_KEY = 'cached_user_posts';
-const CACHE_DURATION = 1 * 60 * 1000; // 5 minutes in milliseconds
-const AUTO_REFRESH_INTERVAL = 1 * 60 * 1000; // 5 minutes
 
 export default function YourPostScreen() {
   const navigation = useNavigation();
@@ -32,27 +92,6 @@ export default function YourPostScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const { userPosts, userPostsLoading, userPostsError } = useSelector((state) => state.posts);
 
-  // Load cached posts or fetch new ones
-  const loadUserPosts = useCallback(async () => {
-    try {
-      const cachedData = await AsyncStorage.getItem(CACHE_KEY);
-      if (cachedData) {
-        const { posts, timestamp } = JSON.parse(cachedData);
-        const now = Date.now();
-        if (now - timestamp < CACHE_DURATION) {
-          console.log("Loading cached user posts...");
-          dispatch({ type: "FETCH_USER_POSTS_SUCCESS", payload: posts });
-          return;
-        }
-      }
-      await dispatch(fetchUserPosts());
-    } catch (err) {
-      console.error("Error loading user posts:", err);
-      dispatch({ type: "FETCH_USER_POSTS_FAILURE", payload: err.message });
-    }
-  }, [dispatch]);
-
-  // Handle pull-to-refresh
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     console.log("Pull-to-refresh triggered for user posts");
@@ -60,42 +99,57 @@ export default function YourPostScreen() {
     setRefreshing(false);
   }, [dispatch]);
 
-  // Handle retry button
   const handleRetry = useCallback(async () => {
     console.log("Retrying fetch user posts...");
     await dispatch(fetchUserPosts());
   }, [dispatch]);
 
-  // Handle login redirect
   const handleLogin = useCallback(() => {
     console.log("Redirecting to login...");
-    navigation.navigate("AuthStack", { screen: "Login" }); // Adjust to your login screen
+    navigation.navigate("AuthStack", { screen: "Login" });
   }, [navigation]);
 
-  // Initial load and auto-refresh timer
   useEffect(() => {
-    loadUserPosts();
+    dispatch(fetchUserPosts());
 
-    // Set up auto-refresh timer
     const intervalId = setInterval(() => {
       console.log("Auto-refreshing user posts...");
       dispatch(fetchUserPosts());
-    }, AUTO_REFRESH_INTERVAL);
+    }, 5 * 60 * 1000); // 5 minutes
 
-    // Cleanup timer on unmount
     return () => clearInterval(intervalId);
-  }, [dispatch, loadUserPosts]);
+  }, [dispatch]);
 
   const handleAvatarPress = () => {
     navigation.navigate("CommunityStack", { screen: "PostProfile" });
   };
 
-  const handleLikePress = () => {
-    console.log("Post liked/unliked");
+  const handleLikePress = async (postId, likedBy) => {
+    try {
+      if (likedBy) {
+        await dispatch(unlikePost(postId));
+      } else {
+        try {
+          await dispatch(likePost(postId));
+        } catch (likeErr) {
+          if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
+            await dispatch(unlikePost(postId));
+          } else {
+            throw likeErr;
+          }
+        }
+      }
+      console.log(`Post ${likedBy ? 'unliked' : 'liked'}: ${postId}`);
+    } catch (err) {
+      console.error('Like post error:', err.message, err.response?.data);
+    }
   };
 
-  const handleCommentPress = () => {
-    navigation.navigate("CommunityStack", { screen: "PostComment" });
+  const handleCommentPress = (post) => {
+    navigation.navigate("CommunityStack", {
+      screen: "PostComment",
+      params: { post },
+    });
   };
 
   return (
@@ -108,7 +162,7 @@ export default function YourPostScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />
         }
       >
-        <View style={styles.sectionContainer} >
+        <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Recent Bets</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }}>
             {recentBet.map((bet, index) => (
@@ -145,28 +199,27 @@ export default function YourPostScreen() {
             </View>
           )}
           {!userPostsLoading && !userPostsError && Array.isArray(userPosts) && userPosts.length > 0 ? (
-            userPosts.map((post) => {
-              console.log('Rendering post:', post._id, 'Username:', post.username); // Debug log
-              return (
-                <UserPostCard
-                  key={post._id}
-                  user={{
-                    username: post.username || 'Unknown User', // Fallback
-                    avatar: post.userImage || "https://example.com/default-avatar.jpg",
-                  }}
-                  content={post.text}
-                  hashtags={post.hashtags}
-                  timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : "Unknown time"}
-                  likeCount={post.likeCount || 0}
-                  commentCount={post.commentCount || 0}
-                  onAvatarPress={handleAvatarPress}
-                  onLikePress={handleLikePress}
-                  onCommentPress={handleCommentPress}
-                  showDelete={true}
-                  style={{ marginBottom: 15 }}
-                />
-              );
-            })
+            userPosts.map((post) => (
+              <UserPostCard
+                key={post._id}
+                user={{
+                  username: post.username || 'Unknown User',
+                  avatar: post.userImage || "https://example.com/default-avatar.jpg",
+                }}
+                content={post.text}
+                hashtags={post.hashtags}
+                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : "Unknown time"}
+                likeCount={post.likeCount || 0}
+                likedBy={post.likedBy || false}
+                commentCount={post.commentCount || 0}
+                onAvatarPress={handleAvatarPress}
+                onLikePress={() => handleLikePress(post._id, post.likedBy)}
+                onCommentPress={() => handleCommentPress(post)}
+                showDelete={true}
+                disableComment={false}
+                style={{ marginBottom: 15 }}
+              />
+            ))
           ) : (
             !userPostsLoading && !userPostsError && (
               <Text style={styles.noPostsText}>No posts available</Text>

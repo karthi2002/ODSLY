@@ -1,4 +1,68 @@
-import React, { useState } from "react";
+/**
+ * PostCommentScreen.js
+ * ====================
+ *
+ * Screen for viewing a single post and its comments, as well as posting, liking/unliking, and deleting comments.
+ * Integrates with Redux for all post and comment actions.
+ *
+ * ## Features:
+ * - Displays a single post (with up-to-date like and comment counts).
+ * - Shows all comments for the post, with support for:
+ *    - Liking/unliking comments (with error handling for duplicates and auth).
+ *    - Long-press to delete a comment (with confirmation modal).
+ *    - Posting new comments (with error handling).
+ * - Updates global post/comment state after actions (fetches posts/userPosts after comment actions).
+ * - Handles loading, error, and empty states for comments.
+ * - Disables comment button on the post card (since you’re already on the comment screen).
+ * - Keyboard-aware comment input at the bottom.
+ *
+ * ## State:
+ * - commentCount: Local state for comment count (synced with actions).
+ * - showModal: Controls visibility of the delete confirmation modal.
+ * - selectedCommentId: Stores the comment selected for deletion.
+ * - errorMessage: Displays any error messages related to comment/post actions.
+ *
+ * ## Redux:
+ * - Uses `useSelector` to get comments, loading/error states, and current post from Redux.
+ * - Uses `useDispatch` to trigger actions:
+ *   - fetchComments, postComment, deleteComment
+ *   - fetchPosts, fetchUserPosts (to update post state after comment actions)
+ *   - likePost, unlikePost, likeComment, unlikeComment
+ *
+ * ## Navigation:
+ * - Uses React Navigation for navigation and route params (`post`).
+ * - Navigates to user profile on avatar press.
+ *
+ * ## UI Structure:
+ * - CustomHeader at top.
+ * - UserPostCard for the post (with like, delete, and disabled comment button).
+ * - CountLabel for comment count.
+ * - FlatList for comments (each as CommentCard, with like and long-press delete).
+ * - DeleteConfirmationModal for comment deletion.
+ * - CommentInput at the bottom, keyboard-aware.
+ * - Loading, error, and empty state messages as appropriate.
+ *
+ * ## Styling:
+ * - Uses consistent padding, color palette, and spacing from `Colors`.
+ * - KeyboardAvoidingView for input field.
+ *
+ * ## Error Handling:
+ * - Handles API/network errors for like, comment, and delete actions.
+ * - Displays user-friendly error messages.
+ * - Handles duplicate-like errors gracefully.
+ *
+ * ## Example Usage:
+ *   navigation.navigate('PostComment', { post });
+ *
+ * ## Notes:
+ * - All actions are dispatched asynchronously and update Redux/global state.
+ * - The post card always reflects the latest like/comment counts.
+ * - Comments are fetched on mount and after posting/deleting a comment.
+ * - The comment input is always visible at the bottom.
+ */
+
+
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,35 +72,137 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../utils/Colors";
 import CustomHeader from "../../layouts/CustomHeader";
 import UserPostCard from "../../components/Card/UserPostCard";
-import { SinglePost } from "../../json/PostData";
 import CountLabel from "../../components/Input/CountLabel";
 import CommentCard from "../../components/Card/CommentCard";
-import CommentsData from "../../json/CommentsData";
 import CommentInput from "../../components/Input/CommentInput";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import {
+  fetchComments,
+  postComment,
+  deleteComment,
+  fetchPosts,
+  fetchUserPosts,
+  likePost,
+  unlikePost,
+  likeComment,
+  unlikeComment,
+} from "../../redux/posts/postsActions";
 
 const PostCommentScreen = () => {
+  console.log('PostCommentScreen component loaded'); // Debug log
+
+  const navigation = useNavigation();
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const { post } = route.params;
+  const { comments, commentsLoading, commentsError, posts, userPosts } = useSelector((state) => state.posts);
+  const [commentCount, setCommentCount] = useState(post.commentCount || 0);
   const [showModal, setShowModal] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  // Find the post in Redux state to get updated likeCount and likedBy
+  const currentPost = posts.find(p => p._id === post._id) || userPosts.find(p => p._id === post._id) || post;
+
+  useEffect(() => {
+    if (post._id) {
+      dispatch(fetchComments(post._id));
+    }
+  }, [dispatch, post._id]);
 
   const handleAvatarPress = () => {
     navigation.navigate("CommunityStack", { screen: "PostProfile" });
   };
 
-  const handleLikePress = () => {
-    console.log("Post liked/unliked");
+  const handleLikePress = async (commentId) => {
+    try {
+      setErrorMessage(null);
+      if (commentId) {
+        // Handle comment like/unlike
+        const comment = comments.find(c => c._id === commentId);
+        if (!comment) return;
+        if (comment.likedBy) {
+          await dispatch(unlikeComment(post._id, commentId));
+        } else {
+          try {
+            await dispatch(likeComment(post._id, commentId));
+          } catch (likeErr) {
+            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Comment already liked") {
+              await dispatch(unlikeComment(post._id, commentId));
+            } else {
+              throw likeErr;
+            }
+          }
+        }
+      } else {
+        // Handle post like/unlike
+        if (currentPost.likedBy) {
+          await dispatch(unlikePost(post._id));
+        } else {
+          try {
+            await dispatch(likePost(post._id));
+          } catch (likeErr) {
+            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
+              await dispatch(unlikePost(post._id));
+            } else {
+              throw likeErr;
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Like error:', err.message, err.response?.data);
+      const message = err.response?.status === 401
+        ? 'Please log in to like this content.'
+        : err.response?.data?.error || 'Failed to update like';
+      setErrorMessage(message);
+    }
   };
 
-  const handleCommentPress = () => {
-    navigation.navigate("CommunityStack", { screen: "PostComment" });
+  const handlePostComment = async (commentText) => {
+    if (!commentText.trim()) return;
+    try {
+      setErrorMessage(null);
+      await dispatch(postComment(post._id, commentText));
+      setCommentCount((prev) => prev + 1);
+      await dispatch(fetchPosts());
+      await dispatch(fetchUserPosts());
+      console.log("Posted comment:", commentText);
+    } catch (err) {
+      console.error("Post comment error:", err.message, err.response?.data);
+      const message = err.response?.status === 500
+        ? 'Server error: Unable to post comment. Please try again later.'
+        : err.response?.data?.error || 'Failed to post comment';
+      setErrorMessage(message);
+    }
   };
 
-  const handlePostComment = (comment) => {
-    console.log("Posted comment:", comment);
+  const handleDeleteComment = async () => {
+    if (selectedCommentId) {
+      try {
+        setErrorMessage(null);
+        await dispatch(deleteComment(post._id, selectedCommentId));
+        setCommentCount((prev) => prev - 1);
+        await dispatch(fetchPosts());
+        await dispatch(fetchUserPosts());
+        console.log("Deleted comment with ID:", selectedCommentId);
+      } catch (err) {
+        console.error("Delete comment error:", err.message, err.response?.data);
+        const message = err.response?.status === 500
+          ? 'Server error: Unable to delete comment. Please try again later.'
+          : err.response?.data?.error || 'Failed to delete comment';
+        setErrorMessage(message);
+      }
+      setShowModal(false);
+      setSelectedCommentId(null);
+    }
   };
 
   const handleDeletePress = () => {
@@ -45,7 +211,7 @@ const PostCommentScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CustomHeader title={"Post"} />
+      <CustomHeader title="Post" />
 
       <ScrollView
         style={styles.content}
@@ -53,44 +219,59 @@ const PostCommentScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <View>
-          {SinglePost.map((post) => (
-            <UserPostCard
-              key={post.id}
-              user={post.user}
-              content={post.content}
-              hashtags={post.hashtags}
-              timeAgo={post.timeAgo}
-              likeCount={post.likeCount}
-              commentCount={post.commentCount}
-              onAvatarPress={handleAvatarPress}
-              onLikePress={handleLikePress}
-              onCommentPress={handleCommentPress}
-              showDelete={true}
-              onDeletePress={handleDeletePress}
-            />
-          ))}
+          <UserPostCard
+            user={{
+              username: currentPost.username,
+              avatar: currentPost.userImage || "https://example.com/default-avatar.jpg",
+            }}
+            content={currentPost.text}
+            hashtags={currentPost.hashtags}
+            timeAgo={currentPost.uploadedAt ? new Date(currentPost.uploadedAt).toLocaleDateString() : "Unknown time"}
+            likeCount={currentPost.likeCount || 0}
+            likedBy={currentPost.likedBy || false}
+            commentCount={commentCount}
+            onAvatarPress={handleAvatarPress}
+            onLikePress={() => handleLikePress()}
+            onCommentPress={() => {}} // No-op, as comment button is disabled
+            showDelete={true}
+            onDeletePress={handleDeletePress}
+            disableComment={true} // Disable comment button
+          />
         </View>
 
         <View style={styles.sectionContainer}>
-          <CountLabel label="comment" count={45} style={styles.sectionTitle} />
+          <CountLabel label="comment" count={commentCount} style={styles.sectionTitle} />
+          {commentsLoading && (
+            <ActivityIndicator size="large" color={Colors.primary} style={{ marginVertical: 10 }} />
+          )}
+          {commentsError && (
+            <Text style={styles.errorText}>Error loading comments: {commentsError}</Text>
+          )}
+          {errorMessage && (
+            <Text style={styles.errorText}>{errorMessage}</Text>
+          )}
+          {!commentsLoading && !commentsError && comments.length === 0 && (
+            <Text style={styles.noCommentsText}>No comments yet</Text>
+          )}
           <FlatList
-            data={CommentsData}
-            keyExtractor={(item) => item.id}
+            data={comments}
+            keyExtractor={(item) => item._id}
             renderItem={({ item }) => (
               <TouchableOpacity
                 activeOpacity={1}
                 onLongPress={() => {
-                  setSelectedCommentId(item.id);
+                  setSelectedCommentId(item._id);
                   setShowModal(true);
                 }}
               >
                 <CommentCard
-                  avatar={item.avatar}
-                  name={item.name}
-                  timeAgo={item.timeAgo}
-                  likes={item.likes}
-                  textContent={item.textContent}
-                  onLikePress={() => handleLikePress(item.id)}
+                  avatar={item.userImage || "https://example.com/default-avatar.jpg"}
+                  name={item.username}
+                  timeAgo={item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "Unknown time"}
+                  likes={item.likes || 0}
+                  likedBy={item.likedBy || false}
+                  textContent={item.content}
+                  onLikePress={() => handleLikePress(item._id)}
                 />
               </TouchableOpacity>
             )}
@@ -99,11 +280,11 @@ const PostCommentScreen = () => {
 
         <DeleteConfirmationModal
           isVisible={showModal}
-          onCancel={() => setShowModal(false)}
-          onConfirm={() => {
-            console.log("Deleted comment with ID:", selectedCommentId);
+          onCancel={() => {
             setShowModal(false);
+            setSelectedCommentId(null);
           }}
+          onConfirm={handleDeleteComment}
           message="Are you sure you want to delete this comment?"
         />
       </ScrollView>
@@ -148,6 +329,16 @@ const styles = StyleSheet.create({
     padding: 10,
     borderTopWidth: 1,
     borderTopColor: Colors.border,
+  },
+  errorText: {
+    color: Colors.error,
+    textAlign: "center",
+    marginVertical: 10,
+  },
+  noCommentsText: {
+    color: Colors.secondary,
+    textAlign: "center",
+    marginVertical: 10,
   },
 });
 

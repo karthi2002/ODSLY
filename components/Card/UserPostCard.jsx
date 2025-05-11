@@ -1,4 +1,93 @@
-import React, { useState } from "react";
+/**
+ * UserPostCard Component
+ * ======================
+ * 
+ * A stylized card component for displaying a user's post, including avatar, username, post content, hashtags,
+ * and interactive actions (like, comment, delete). Designed for use in social feed interfaces in React Native apps.
+ * 
+ * ## Props:
+ * - user: { avatar: string, username: string }
+ *      The user object containing avatar URL and username.
+ * - content: string
+ *      The main text content of the post.
+ * - hashtags: string[] (optional)
+ *      Array of hashtags to display below the content.
+ * - timeAgo: string
+ *      Human-readable time since the post was made (e.g., "2h ago").
+ * - likeCount: number (optional, default: 0)
+ *      Number of likes on the post.
+ * - likedBy: boolean (optional, default: false)
+ *      Whether the current user has liked this post.
+ * - commentCount: number (optional, default: 0)
+ *      Number of comments on the post.
+ * - onAvatarPress: function
+ *      Callback when the user's avatar is pressed.
+ * - onLikePress: function
+ *      Callback when the like button is pressed.
+ * - onCommentPress: function
+ *      Callback when the comment button is pressed.
+ * - showDelete: boolean (optional, default: false)
+ *      Whether to show the delete button (e.g., for the post owner).
+ * - onDeletePress: function
+ *      Callback when the delete button is pressed.
+ * - disableComment: boolean (optional, default: false)
+ *      Disables the comment button when true.
+ * - style: object (optional)
+ *      Additional styles for the card's outer container.
+ * 
+ * ## Features:
+ * - Gradient border using `expo-linear-gradient`.
+ * - User avatar and username, with time-ago display.
+ * - Post content and hashtags.
+ * - Like and comment actions, with icon feedback and counts.
+ * - Like button shows a filled gradient heart if liked, outlined if not.
+ * - Comment button can be disabled.
+ * - Optional delete button for post owners.
+ * - Responsive and accessible touchable elements.
+ * 
+ * ## Usage Example:
+ * 
+ * <UserPostCard
+ *   user={{ avatar: 'https://...', username: 'JohnDoe' }}
+ *   content="This is a sample post!"
+ *   hashtags={['#reactnative', '#coding']}
+ *   timeAgo="2h ago"
+ *   likeCount={12}
+ *   likedBy={true}
+ *   commentCount={3}
+ *   onAvatarPress={() => {}}
+ *   onLikePress={() => {}}
+ *   onCommentPress={() => {}}
+ *   showDelete={true}
+ *   onDeletePress={() => {}}
+ *   disableComment={false}
+ * />
+ * 
+ * ## Styling:
+ * - Uses a combination of gradient backgrounds and custom color palette (imported from `../../utils/Colors`).
+ * - All styles are defined in the `styles` object using `StyleSheet.create`.
+ * 
+ * ## Dependencies:
+ * - react-native
+ * - @expo/vector-icons (FontAwesome)
+ * - expo-linear-gradient
+ * - @react-native-masked-view/masked-view
+ * 
+ * ## Notes:
+ * - The component includes a debug log for the `user` prop.
+ * - Handles missing props gracefully with defaults.
+ * 
+ * ## File Structure:
+ * - Imports
+ * - Component definition
+ *   - Helper: renderHeartIcon
+ *   - Render: gradient border, header, content, hashtags, actions
+ * - Styles
+ * - Export
+ */
+
+
+import React from "react";
 import {
   View,
   Text,
@@ -6,7 +95,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesome, Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons"; // Reverted to FontAwesome
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import Colors from "../../utils/Colors";
@@ -17,35 +106,20 @@ const UserPostCard = ({
   hashtags = [],
   timeAgo,
   likeCount = 0,
+  likedBy = false, // Added likedBy prop
   commentCount = 0,
   onAvatarPress,
   onLikePress,
   onCommentPress,
   showDelete = false,
   onDeletePress,
-  style
+  disableComment = false, // Added disableComment prop
+  style,
 }) => {
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(likeCount);
-  const [comments, setComments] = useState(commentCount);
 
-  // Debug log to confirm user prop
-  console.log('UserPostCard user prop:', user);
-
-  const toggleLike = () => {
-    const isNowLiked = !liked;
-    setLiked(isNowLiked);
-    setLikes((prev) => prev + (isNowLiked ? 1 : -1));
-    onLikePress?.();
-  };
-
-  const addComment = () => {
-    setComments((prev) => prev + 1);
-    onCommentPress?.();
-  };
-
+  // Renders the heart icon: filled with gradient if liked, outline if not
   const renderHeartIcon = () =>
-    liked ? (
+    likedBy ? (
       <MaskedView
         maskElement={<FontAwesome name="heart" size={20} color="black" />}
       >
@@ -68,7 +142,7 @@ const UserPostCard = ({
       style={[styles.cardOuter, style]}
     >
       <View style={styles.card}>
-        {/* Header */}
+        {/* Header: Avatar and username with time */}
         <View style={styles.header}>
           <TouchableOpacity onPress={onAvatarPress}>
             <Image source={{ uri: user.avatar }} style={styles.avatar} />
@@ -82,7 +156,7 @@ const UserPostCard = ({
         {/* Content */}
         <Text style={styles.content}>{content}</Text>
 
-        {/* Hashtags */}
+        {/* Hashtags: Render each hashtag as a styled Text */}
         <View style={styles.hashtagContainer}>
           {hashtags.map((tag, idx) => (
             <Text key={idx} style={styles.hashtag}>
@@ -91,20 +165,26 @@ const UserPostCard = ({
           ))}
         </View>
 
-        {/* Actions */}
+        {/* Actions: Like, Comment, (optional) Delete */}
         <View style={styles.actionContainer}>
           <View style={styles.actionsRow}>
-            <TouchableOpacity style={styles.action} onPress={toggleLike}>
+            <TouchableOpacity style={styles.action} onPress={onLikePress}>
               {renderHeartIcon()}
-              <Text style={styles.actionText}>{likes}</Text>
+              <Text style={styles.actionText}>{likeCount}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.action} onPress={addComment}>
+            <TouchableOpacity
+              style={[styles.action, disableComment && styles.disabled]}
+              onPress={onCommentPress}
+              disabled={disableComment}
+            >
               <FontAwesome
                 name="comment-o"
                 size={20}
-                color={Colors.secondary}
+                color={disableComment ? Colors.gray : Colors.secondary}
               />
-              <Text style={styles.actionText}>{comments}</Text>
+              <Text style={[styles.actionText, disableComment && styles.disabledText]}>
+                {commentCount}
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -204,6 +284,12 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     fontSize: 16,
     fontWeight: "500",
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  disabledText: {
+    color: Colors.gray,
   },
 });
 
