@@ -2,42 +2,45 @@
  * FeedScreen.js
  * =============
  *
- * displaying trending hashtags and posts.
- * Supports pull-to-refresh, auto-refresh, post liking, and navigation to comments and user profiles.
+ * Screen for displaying trending hashtags and posts.
+ * Supports pull-to-refresh, focus-based refresh, post liking, and navigation to comments and user profiles.
  *
  * ## Features:
  * - Displays trending hashtags as selectable tags.
  * - Fetches and displays trending posts from the Redux store.
- * - Pull-to-refresh and auto-refresh (every 5 minutes) for new posts.
- * - Like/unlike functionality for posts, with error handling for already-liked posts.
+ * - Pull-to-refresh and focus-based refresh (on screen focus) for new posts.
+ * - Like/unlike functionality for posts with debounce and loading state.
  * - Navigates to comment screen and user profile from each post.
- * - Shows loading indicator and error messages as needed.
+ * - Shows loading indicator, error messages, and retry button as needed.
  *
  * ## State:
  * - tags: Array of hashtag objects (label, emoji, selected).
  * - refreshing: Boolean for pull-to-refresh state.
+ * - likingPost: Tracks post being liked/unliked to disable button during action.
+ * - lastFetch: Timestamp of the last fetch to enforce a cooldown.
  *
  * ## Redux:
  * - Uses `useSelector` to get posts, loading, and error state from Redux.
  * - Uses `useDispatch` to trigger actions: `fetchPosts`, `likePost`, `unlikePost`.
  *
  * ## Effects:
- * - On mount, loads posts and sets up an interval for auto-refresh.
- * - Cleans up interval on unmount.
+ * - Uses `useFocusEffect` to load posts with a cooldown period.
+ * - Cleans up any resources on unmount.
  *
  * ## Handlers:
- * - loadPosts: Loads posts from the API.
+ * - loadPosts: Loads posts from the API with caching.
  * - onRefresh: Pull-to-refresh handler.
  * - toggleTag: Toggles selection state for hashtags.
  * - handleAvatarPress: Navigates to user profile screen.
- * - handleLikePress: Likes or unlikes a post, with duplicate-like error handling.
+ * - handleLikePress: Likes or unlikes a post, with debounce and error handling.
  * - handleCommentPress: Navigates to comment screen for a post.
+ * - handleRetry: Retries fetching posts on error.
  *
  * ## UI Structure:
  * - Trending Hashtags section (Tag components).
  * - Divider (LineGradient).
  * - Trending Posts section (UserPostCard components).
- * - Loading indicator and error/no-posts messages.
+ * - Loading indicator, error messages, and retry button.
  *
  * ## Styling:
  * - Uses consistent padding, font weights, and color palette from `Colors`.
@@ -47,21 +50,18 @@
  * - react-redux (for state management)
  * - react-navigation (for navigation)
  * - dayjs (for relative time display)
+ * - lodash (for debounce)
  * - Custom components: Tag, UserPostCard, LineGradient
  *
- * ## Example Usage:
- *   <FeedScreen />
- *
  * ## Notes:
- * - Posts are auto-refreshed every 5 minutes.
- * - All navigation is handled via React Navigation's `useNavigation`.
+ * - Posts are refreshed with a cooldown to reduce API calls.
+ * - Removed excessive debug logging to reduce terminal clutter.
  * - Handles edge cases: no posts, loading, and API errors.
  */
 
-
-import React, { useEffect, useState, useCallback } from "react";
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useCallback } from "react";
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../utils/Colors";
 import { LineGradient } from "../../layouts/LineGradient";
@@ -70,6 +70,7 @@ import UserPostCard from "../../components/Card/UserPostCard";
 import { fetchPosts, likePost, unlikePost } from "../../redux/posts/postsActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { debounce } from 'lodash';
 
 dayjs.extend(relativeTime);
 
@@ -80,7 +81,7 @@ const tagsData = [
   { label: "#UnderdogBets", emoji: "⚽", selected: false },
 ];
 
-const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const FETCH_COOLDOWN = 5 * 60 * 1000; // 5 minutes
 
 export default function FeedScreen() {
   const navigation = useNavigation();
@@ -88,34 +89,40 @@ export default function FeedScreen() {
 
   const [tags, setTags] = useState(tagsData);
   const [refreshing, setRefreshing] = useState(false);
+  const [likingPost, setLikingPost] = useState(null);
+  const [lastFetch, setLastFetch] = useState(0);
   const { posts, loading, error } = useSelector((state) => state.posts);
 
-  const loadPosts = useCallback(async () => {
+  const loadPosts = useCallback(async (force = false) => {
+    const now = Date.now();
+    if (!force && now - lastFetch < FETCH_COOLDOWN) {
+      console.log('Skipping fetch: within cooldown period');
+      return;
+    }
     try {
       await dispatch(fetchPosts());
+      setLastFetch(now);
     } catch (err) {
-      console.error("Error loading posts:", err);
+      console.error("Error loading posts:", err.message);
       dispatch({ type: "FETCH_POSTS_FAILURE", payload: err.message });
     }
-  }, [dispatch]);
+  }, [dispatch, lastFetch]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    console.log("Pull-to-refresh triggered");
-    await dispatch(fetchPosts());
+    await loadPosts(true); // Force fetch on pull-to-refresh
     setRefreshing(false);
-  }, [dispatch]);
+  }, [loadPosts]);
 
-  useEffect(() => {
-    loadPosts();
+  const handleRetry = useCallback(() => {
+    loadPosts(true); // Force fetch on retry
+  }, [loadPosts]);
 
-    const intervalId = setInterval(() => {
-      console.log("Auto-refreshing posts...");
-      dispatch(fetchPosts());
-    }, AUTO_REFRESH_INTERVAL);
-
-    return () => clearInterval(intervalId);
-  }, [dispatch, loadPosts]);
+  useFocusEffect(
+    useCallback(() => {
+      loadPosts();
+    }, [loadPosts])
+  );
 
   const toggleTag = (index) => {
     const updatedTags = [...tags];
@@ -127,26 +134,32 @@ export default function FeedScreen() {
     navigation.navigate("CommunityStack", { screen: "PostProfile" });
   };
 
-  const handleLikePress = async (postId, likedBy) => {
-    try {
-      if (likedBy) {
-        await dispatch(unlikePost(postId));
-      } else {
-        try {
-          await dispatch(likePost(postId));
-        } catch (likeErr) {
-          if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
-            await dispatch(unlikePost(postId));
-          } else {
-            throw likeErr;
+  const handleLikePress = useCallback(
+    debounce(async (postId, likedBy) => {
+      if (likingPost) return;
+      setLikingPost(postId);
+      try {
+        if (likedBy) {
+          await dispatch(unlikePost(postId));
+        } else {
+          try {
+            await dispatch(likePost(postId));
+          } catch (likeErr) {
+            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
+              await dispatch(unlikePost(postId));
+            } else {
+              throw likeErr;
+            }
           }
         }
+      } catch (err) {
+        console.error('Like post error:', err.message, err.response?.data);
+      } finally {
+        setLikingPost(null);
       }
-      console.log(`Post ${likedBy ? 'unliked' : 'liked'}: ${postId}`);
-    } catch (err) {
-      console.error('Like post error:', err.message, err.response?.data);
-    }
-  };
+    }, 500),
+    [dispatch, likingPost]
+  );
 
   const handleCommentPress = (post) => {
     navigation.navigate("CommunityStack", {
@@ -185,14 +198,21 @@ export default function FeedScreen() {
         <View>
           <Text style={styles.sectionTitle}>Trending Posts</Text>
           {loading && !refreshing && <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />}
-          {error && <Text style={styles.errorText}>Error: {error}</Text>}
+          {error && (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>Error: {error}</Text>
+              <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
+                <Text style={styles.retryButtonText}>Retry</Text>
+              </TouchableOpacity>
+            </View>
+          )}
           {!loading && !error && posts.length > 0 ? (
             posts.map((post) => (
               <UserPostCard
                 key={post._id}
                 user={{
                   username: post.username,
-                  avatar: post.userImage || "https://example.com/default-avatar.jpg",
+                  avatar: post.userImage || `https://ui-avatars.com/api/?name=${post.username}`,
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
@@ -203,6 +223,7 @@ export default function FeedScreen() {
                 onAvatarPress={handleAvatarPress}
                 onLikePress={() => handleLikePress(post._id, post.likedBy)}
                 onCommentPress={() => handleCommentPress(post)}
+                disabled={likingPost === post._id}
                 disableComment={false}
                 style={{ marginBottom: 15 }}
               />
@@ -241,10 +262,24 @@ const styles = StyleSheet.create({
   loader: {
     marginVertical: 20,
   },
+  errorContainer: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
   errorText: {
     color: "red",
     textAlign: "center",
-    marginVertical: 10,
+    marginBottom: 10,
+  },
+  retryButton: {
+    backgroundColor: Colors.primary,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontWeight: '600',
   },
   noPostsText: {
     color: Colors.secondary,

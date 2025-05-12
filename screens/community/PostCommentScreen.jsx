@@ -15,6 +15,7 @@
  * - Handles loading, error, and empty states for comments.
  * - Disables comment button on the post card (since you’re already on the comment screen).
  * - Keyboard-aware comment input at the bottom.
+ * - Formats post and comment timestamps as relative time (e.g., "2 hours ago").
  *
  * ## State:
  * - commentCount: Local state for comment count (synced with actions).
@@ -59,8 +60,8 @@
  * - The post card always reflects the latest like/comment counts.
  * - Comments are fetched on mount and after posting/deleting a comment.
  * - The comment input is always visible at the bottom.
+ * - Timestamps use `dayjs.fromNow()` for relative time formatting.
  */
-
 
 import React, { useState, useEffect } from "react";
 import {
@@ -94,10 +95,12 @@ import {
   likeComment,
   unlikeComment,
 } from "../../redux/posts/postsActions";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const PostCommentScreen = () => {
-  console.log('PostCommentScreen component loaded'); // Debug log
-
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
@@ -158,7 +161,7 @@ const PostCommentScreen = () => {
         }
       }
     } catch (err) {
-      console.error('Like error:', err.message, err.response?.data);
+      console.error('Like error:', err.message);
       const message = err.response?.status === 401
         ? 'Please log in to like this content.'
         : err.response?.data?.error || 'Failed to update like';
@@ -174,9 +177,8 @@ const PostCommentScreen = () => {
       setCommentCount((prev) => prev + 1);
       await dispatch(fetchPosts());
       await dispatch(fetchUserPosts());
-      console.log("Posted comment:", commentText);
     } catch (err) {
-      console.error("Post comment error:", err.message, err.response?.data);
+      console.error("Post comment error:", err.message);
       const message = err.response?.status === 500
         ? 'Server error: Unable to post comment. Please try again later.'
         : err.response?.data?.error || 'Failed to post comment';
@@ -192,9 +194,8 @@ const PostCommentScreen = () => {
         setCommentCount((prev) => prev - 1);
         await dispatch(fetchPosts());
         await dispatch(fetchUserPosts());
-        console.log("Deleted comment with ID:", selectedCommentId);
       } catch (err) {
-        console.error("Delete comment error:", err.message, err.response?.data);
+        console.error("Delete comment error:", err.message);
         const message = err.response?.status === 500
           ? 'Server error: Unable to delete comment. Please try again later.'
           : err.response?.data?.error || 'Failed to delete comment';
@@ -226,7 +227,7 @@ const PostCommentScreen = () => {
             }}
             content={currentPost.text}
             hashtags={currentPost.hashtags}
-            timeAgo={currentPost.uploadedAt ? new Date(currentPost.uploadedAt).toLocaleDateString() : "Unknown time"}
+            timeAgo={currentPost.uploadedAt ? dayjs(currentPost.uploadedAt).fromNow() : "Unknown time"}
             likeCount={currentPost.likeCount || 0}
             likedBy={currentPost.likedBy || false}
             commentCount={commentCount}
@@ -265,9 +266,9 @@ const PostCommentScreen = () => {
                 }}
               >
                 <CommentCard
-                  avatar={item.userImage || "https://example.com/default-avatar.jpg"}
+                  avatar={item.userImage || `https://ui-avatars.com/api/?name=${item.username}`}
                   name={item.username}
-                  timeAgo={item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "Unknown time"}
+                  timeAgo={item.uploadedAt ? dayjs(item.uploadedAt).fromNow() : "Unknown time"}
                   likes={item.likes || 0}
                   likedBy={item.likedBy || false}
                   textContent={item.content}

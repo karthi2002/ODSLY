@@ -83,20 +83,12 @@ const ProfileScreen = () => {
           style={styles.profileCard}
         >
           <View style={styles.imageSection}>
-            {profile.image ? (
               <Image
-                source={{ uri: profile.image }}
+                source={{
+                  uri: profile?.image || `https://ui-avatars.com/api/?name=${profile?.username || "User"}`,
+                }}
                 style={styles.avatar}
               />
-            ) : (
-              <View style={styles.avatar}>
-                <Ionicons
-                  name="person"
-                  size={32}
-                  color={Colors.secondary}
-                />
-              </View>
-            )}
             <View>
               <Text style={styles.name}>{profile.username ? profile.username : 'Loading...'}</Text>
               <Text style={styles.email}>{profile.email ? profile.email : 'Loading...'}</Text>

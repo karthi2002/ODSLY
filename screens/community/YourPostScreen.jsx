@@ -8,8 +8,8 @@
  * ## Features:
  * - Displays a horizontally scrollable "Recent Bets" section at the top.
  * - Fetches and displays the user's posts from Redux (userPosts).
- * - Supports pull-to-refresh and auto-refresh (every 5 minutes) for user's posts.
- * - Like/unlike functionality for each post, with duplicate-like error handling.
+ * - Supports pull-to-refresh and focus-based refresh (on screen focus) for user's posts.
+ * - Like/unlike functionality for each post with debounce and loading state.
  * - Delete button shown for user's own posts (showDelete).
  * - Navigates to comment screen and user profile from each post.
  * - Handles loading, error, and empty states for user posts.
@@ -17,29 +17,31 @@
  *
  * ## State:
  * - refreshing: Boolean for pull-to-refresh state.
+ * - likingPost: Tracks post being liked/unliked to disable button during action.
+ * - lastFetch: Timestamp of the last fetch to enforce a cooldown.
  *
  * ## Redux:
  * - Uses `useSelector` to get userPosts, loading, and error state from Redux.
  * - Uses `useDispatch` to trigger actions: `fetchUserPosts`, `likePost`, `unlikePost`.
  *
  * ## Effects:
- * - On mount, loads user posts and sets up an interval for auto-refresh.
- * - Cleans up interval on unmount.
+ * - Uses `useFocusEffect` to load user posts with a cooldown period.
+ * - Cleans up any resources on unmount.
  *
  * ## Handlers:
+ * - loadUserPosts: Loads user posts from the API with caching.
  * - onRefresh: Pull-to-refresh handler.
  * - handleRetry: Retry fetching user posts after error.
  * - handleLogin: Navigates to login screen if authentication error occurs.
  * - handleAvatarPress: Navigates to user profile screen.
- * - handleLikePress: Likes or unlikes a post, with duplicate-like error handling.
+ * - handleLikePress: Likes or unlikes a post with debounce and error handling.
  * - handleCommentPress: Navigates to comment screen for a post.
  *
  * ## UI Structure:
  * - Recent Bets section (BetCard components in horizontal ScrollView).
  * - Divider (LineGradient).
  * - Your Posts section (UserPostCard components).
- * - Loading indicator and error/no-posts messages.
- * - Retry and login buttons if error occurs.
+ * - Loading indicator, error messages, and retry/login buttons.
  *
  * ## Styling:
  * - Uses consistent padding, font weights, and color palette from `Colors`.
@@ -50,20 +52,20 @@
  * - react-redux (for state management)
  * - react-navigation (for navigation)
  * - dayjs (for relative time display)
+ * - lodash (for debounce)
  * - Custom components: BetCard, UserPostCard, LineGradient
  *
  * ## Example Usage:
  *   <YourPostScreen />
  *
  * ## Notes:
- * - Posts are auto-refreshed every 5 minutes.
- * - All navigation is handled via React Navigation's `useNavigation`.
+ * - Posts are refreshed with a cooldown to reduce API calls.
+ * - Removed excessive debug logging to reduce terminal clutter.
  * - Handles edge cases: no posts, loading, and API errors (including auth errors).
  * - Only the user's own posts are shown and managed here.
  */
 
-
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -73,7 +75,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../utils/Colors";
 import { LineGradient } from "../../layouts/LineGradient";
@@ -83,67 +85,84 @@ import UserPostCard from "../../components/Card/UserPostCard";
 import { fetchUserPosts, likePost, unlikePost } from "../../redux/posts/postsActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { debounce } from 'lodash';
 
 dayjs.extend(relativeTime);
+
+const FETCH_COOLDOWN = 5 * 60 * 1000; // 5 minutes
 
 export default function YourPostScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
+  const [likingPost, setLikingPost] = useState(null);
+  const [lastFetch, setLastFetch] = useState(0);
   const { userPosts, userPostsLoading, userPostsError } = useSelector((state) => state.posts);
+
+  const loadUserPosts = useCallback(async (force = false) => {
+    const now = Date.now();
+    if (!force && now - lastFetch < FETCH_COOLDOWN) {
+      console.log('Skipping fetch: within cooldown period');
+      return;
+    }
+    try {
+      await dispatch(fetchUserPosts());
+      setLastFetch(now);
+    } catch (err) {
+      console.error("Error loading user posts:", err.message);
+    }
+  }, [dispatch, lastFetch]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    console.log("Pull-to-refresh triggered for user posts");
-    await dispatch(fetchUserPosts());
+    await loadUserPosts(true); // Force fetch on pull-to-refresh
     setRefreshing(false);
-  }, [dispatch]);
+  }, [loadUserPosts]);
 
-  const handleRetry = useCallback(async () => {
-    console.log("Retrying fetch user posts...");
-    await dispatch(fetchUserPosts());
-  }, [dispatch]);
+  const handleRetry = useCallback(() => {
+    loadUserPosts(true); // Force fetch on retry
+  }, [loadUserPosts]);
 
   const handleLogin = useCallback(() => {
-    console.log("Redirecting to login...");
     navigation.navigate("AuthStack", { screen: "Login" });
   }, [navigation]);
 
-  useEffect(() => {
-    dispatch(fetchUserPosts());
-
-    const intervalId = setInterval(() => {
-      console.log("Auto-refreshing user posts...");
-      dispatch(fetchUserPosts());
-    }, 5 * 60 * 1000); // 5 minutes
-
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
+  useFocusEffect(
+    useCallback(() => {
+      loadUserPosts();
+    }, [loadUserPosts])
+  );
 
   const handleAvatarPress = () => {
     navigation.navigate("CommunityStack", { screen: "PostProfile" });
   };
 
-  const handleLikePress = async (postId, likedBy) => {
-    try {
-      if (likedBy) {
-        await dispatch(unlikePost(postId));
-      } else {
-        try {
-          await dispatch(likePost(postId));
-        } catch (likeErr) {
-          if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
-            await dispatch(unlikePost(postId));
-          } else {
-            throw likeErr;
+  const handleLikePress = useCallback(
+    debounce(async (postId, likedBy) => {
+      if (likingPost) return;
+      setLikingPost(postId);
+      try {
+        if (likedBy) {
+          await dispatch(unlikePost(postId));
+        } else {
+          try {
+            await dispatch(likePost(postId));
+          } catch (likeErr) {
+            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
+              await dispatch(unlikePost(postId));
+            } else {
+              throw likeErr;
+            }
           }
         }
+      } catch (err) {
+        console.error('Like post error:', err.message, err.response?.data);
+      } finally {
+        setLikingPost(null);
       }
-      console.log(`Post ${likedBy ? 'unliked' : 'liked'}: ${postId}`);
-    } catch (err) {
-      console.error('Like post error:', err.message, err.response?.data);
-    }
-  };
+    }, 500),
+    [dispatch, likingPost]
+  );
 
   const handleCommentPress = (post) => {
     navigation.navigate("CommunityStack", {
@@ -187,7 +206,7 @@ export default function YourPostScreen() {
                   ? 'Posts not found (404). Please try again.'
                   : `Error: ${userPostsError}`}
               </Text>
-              {(userPostsError.includes('401') || userPostsError.includes('authentication token')) ? (
+              {userPostsError.includes('401') || userPostsError.includes('authentication token') ? (
                 <TouchableOpacity style={styles.retryButton} onPress={handleLogin}>
                   <Text style={styles.retryButtonText}>Log In</Text>
                 </TouchableOpacity>
@@ -204,7 +223,7 @@ export default function YourPostScreen() {
                 key={post._id}
                 user={{
                   username: post.username || 'Unknown User',
-                  avatar: post.userImage || "https://example.com/default-avatar.jpg",
+                  avatar: post.userImage || `https://ui-avatars.com/api/?name=${post.username}`,
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
@@ -216,6 +235,7 @@ export default function YourPostScreen() {
                 onLikePress={() => handleLikePress(post._id, post.likedBy)}
                 onCommentPress={() => handleCommentPress(post)}
                 showDelete={true}
+                disabled={likingPost === post._id}
                 disableComment={false}
                 style={{ marginBottom: 15 }}
               />

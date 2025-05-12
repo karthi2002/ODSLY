@@ -25,7 +25,7 @@ export const fetchProfile = () => async (dispatch) => {
         fullName: user.fullName || null,
         email: user.email || null,
         username: user.username || null,
-        image: user.image || null,
+        image: user.image || `https://ui-avatars.com/api/?name=${user.username}` || null,
         sports: user.sports || [],
         bettingPreference: user.bettingPreference || null,
       },

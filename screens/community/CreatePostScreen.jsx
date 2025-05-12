@@ -17,17 +17,21 @@ const CreatePostScreen = () => {
     dispatch(fetchProfile());
   }, [dispatch]);
 
+  const getAvatarUri = () => {
+    return profile?.image || `https://ui-avatars.com/api/?name=${profile?.username || "User"}`;
+  };
+
   const handlePost = () => {
     if (!postContent.trim()) return;
 
     const postData = {
-      username: profile?.username, 
-      userImage: profile?.image || "https://example.com/default.jpg", 
+      username: profile?.username,
+      userImage: getAvatarUri(),
       text: postContent,
       hashtags: extractHashtags(postContent),
     };
-    console.log("Sending postData:", postData);
 
+    console.log("Sending postData:", postData);
     dispatch(addPost(postData));
     setPostContent("");
     Alert.alert("Posted", "Your post was created!");
@@ -54,7 +58,7 @@ const CreatePostScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <NewPostCard
-          avatarUri={profile?.image || "https://example.com/default.jpg"}
+          avatarUri={getAvatarUri()}
           content={postContent}
           onChangeContent={setPostContent}
         />
@@ -62,6 +66,7 @@ const CreatePostScreen = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

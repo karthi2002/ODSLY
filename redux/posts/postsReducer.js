@@ -2,59 +2,34 @@
  * postsReducer.js
  * ===============
  *
- * Redux reducer for managing the state of posts, user posts, and comments in a social feed application.
+ * Redux reducer for managing posts, user posts, and comments state in a social app.
+ * Handles actions for fetching, adding, liking, unliking, commenting, and error states.
  *
- * ## State Shape:
- * {
- *   posts: [],             // All posts in the feed
- *   postsLoading: false,   // Loading state for fetching all posts
- *   postsError: null,      // Error message for fetching all posts
- *   userPosts: [],         // Posts created by the logged-in user
- *   userPostsLoading: false, // Loading state for fetching user posts
- *   userPostsError: null,  // Error message for fetching user posts
- *   comments: [],          // Comments for the currently viewed post
- *   commentsLoading: false,// Loading state for fetching comments
- *   commentsError: null,   // Error message for fetching comments
- * }
+ * ## Features:
+ * - Manages state for posts, user posts, and comments with loading and error states.
+ * - Updates posts and userPosts arrays immutably for all actions.
+ * - Handles full post object updates for like/unlike actions, mapping `likes` to `likeCount`.
+ * - Syncs comment counts and like states across posts and userPosts.
  *
- * ## Handled Actions:
- * - FETCH_POSTS_REQUEST / SUCCESS / FAILURE:
- *     Handles fetching all posts (loading, success, error).
- * - FETCH_USER_POSTS_REQUEST / SUCCESS / FAILURE:
- *     Handles fetching posts by the current user (loading, success, error).
- * - ADD_POST_SUCCESS:
- *     Adds a new post to both the global posts list and the user's posts list.
- * - FETCH_COMMENTS_REQUEST / SUCCESS / FAILURE:
- *     Handles fetching comments for a post (loading, success, error).
- * - POST_COMMENT_SUCCESS:
- *     Adds a new comment to the comments array.
- * - DELETE_COMMENT_SUCCESS:
- *     Removes a comment from the comments array by ID.
- * - UPDATE_POST_COMMENT_COUNT:
- *     Updates the comment count for a post in both posts and userPosts arrays.
- * - LIKE_POST_SUCCESS / UNLIKE_POST_SUCCESS:
- *     Updates like count and liked status for a post in both posts and userPosts arrays.
- * - LIKE_COMMENT_SUCCESS / UNLIKE_COMMENT_SUCCESS:
- *     Updates like count and liked status for a comment in the comments array.
+ * ## State Structure:
+ * - posts: Array of all posts.
+ * - postsLoading: Boolean for posts fetching state.
+ * - postsError: Error message for posts fetching.
+ * - userPosts: Array of user's posts.
+ * - userPostsLoading: Boolean for user posts fetching state.
+ * - userPostsError: Error message for user posts fetching.
+ * - comments: Array of comments for a post.
+ * - commentsLoading: Boolean for comments fetching state.
+ * - commentsError: Error message for comments fetching.
  *
- * ## Reducer Logic:
- * - Uses immutable updates for all state changes (spreads and maps).
- * - Handles loading and error states for async actions.
- * - Keeps posts and userPosts arrays in sync when needed.
- *
- * ## Usage:
- * Import and combine this reducer in your root reducer. Connect to your Redux store for post and comment state management.
- *
- * ## Example:
- *   import postsReducer from './postsReducer';
- *   // combineReducers({ posts: postsReducer, ... })
+ * ## Dependencies:
+ * - postsActions.js (for action types)
  *
  * ## Notes:
- * - All actions should be dispatched by corresponding async action creators (see postsActions.js).
- * - The reducer expects action.payload to be shaped as described in the action creators.
- * - If adding new actions, follow the immutable update pattern for Redux.
+ * - All state updates are immutable using spread operator and array methods.
+ * - Like/unlike actions replace entire post objects in posts and userPosts.
+ * - Backend returns full post objects with `likes` field, mapped to `likeCount` in frontend.
  */
-
 
 import {
   FETCH_POSTS_REQUEST,
@@ -131,30 +106,17 @@ const postsReducer = (state = initialState, action) => {
         ),
       };
     case LIKE_POST_SUCCESS:
-      return {
-        ...state,
-        posts: state.posts.map(post =>
-          post._id === action.payload.postId
-            ? { ...post, likeCount: action.payload.likeCount, likedBy: action.payload.likedBy }
-            : post
-        ),
-        userPosts: state.userPosts.map(post =>
-          post._id === action.payload.postId
-            ? { ...post, likeCount: action.payload.likeCount, likedBy: action.payload.likedBy }
-            : post
-        ),
-      };
     case UNLIKE_POST_SUCCESS:
       return {
         ...state,
         posts: state.posts.map(post =>
-          post._id === action.payload.postId
-            ? { ...post, likeCount: action.payload.likeCount, likedBy: action.payload.likedBy }
+          post._id === action.payload._id
+            ? { ...action.payload, likeCount: action.payload.likes || 0 }
             : post
         ),
         userPosts: state.userPosts.map(post =>
-          post._id === action.payload.postId
-            ? { ...post, likeCount: action.payload.likeCount, likedBy: action.payload.likedBy }
+          post._id === action.payload._id
+            ? { ...action.payload, likeCount: action.payload.likes || 0 }
             : post
         ),
       };

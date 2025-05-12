@@ -95,7 +95,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons"; // Reverted to FontAwesome
+import { FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import Colors from "../../utils/Colors";
@@ -106,18 +106,22 @@ const UserPostCard = ({
   hashtags = [],
   timeAgo,
   likeCount = 0,
-  likedBy = false, // Added likedBy prop
+  likedBy = false,
   commentCount = 0,
   onAvatarPress,
   onLikePress,
   onCommentPress,
   showDelete = false,
   onDeletePress,
-  disableComment = false, // Added disableComment prop
+  disableComment = false,
   style,
 }) => {
+  // Remove hashtags from content
+  const cleanedContent = content.replace(
+    new RegExp(`(?:\\s|^)#(${hashtags.join("|")})(?=\\s|$)`, "gi"),
+    ""
+  ).trim();
 
-  // Renders the heart icon: filled with gradient if liked, outline if not
   const renderHeartIcon = () =>
     likedBy ? (
       <MaskedView
@@ -142,7 +146,7 @@ const UserPostCard = ({
       style={[styles.cardOuter, style]}
     >
       <View style={styles.card}>
-        {/* Header: Avatar and username with time */}
+        {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={onAvatarPress}>
             <Image source={{ uri: user.avatar }} style={styles.avatar} />
@@ -153,19 +157,19 @@ const UserPostCard = ({
           </View>
         </View>
 
-        {/* Content */}
-        <Text style={styles.content}>{content}</Text>
+        {/* Cleaned Content */}
+        <Text style={styles.content}>{cleanedContent}</Text>
 
-        {/* Hashtags: Render each hashtag as a styled Text */}
+        {/* Hashtag Section */}
         <View style={styles.hashtagContainer}>
           {hashtags.map((tag, idx) => (
             <Text key={idx} style={styles.hashtag}>
-              {tag}
+              #{tag}
             </Text>
           ))}
         </View>
 
-        {/* Actions: Like, Comment, (optional) Delete */}
+        {/* Actions */}
         <View style={styles.actionContainer}>
           <View style={styles.actionsRow}>
             <TouchableOpacity style={styles.action} onPress={onLikePress}>
