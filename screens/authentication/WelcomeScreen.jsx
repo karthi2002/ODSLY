@@ -184,7 +184,7 @@ content: {
     paddingVertical: hp("2%"),
     alignItems: "center",
     justifyContent: "center",
-    top:hp("-5%"),
+    top:hp("-1%"),
   },
 });
 
