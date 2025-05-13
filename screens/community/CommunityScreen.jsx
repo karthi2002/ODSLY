@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentBox: {
-    marginTop: 20,
+    marginTop: 5,
   },
   fixedButton: {
     position: "absolute",

@@ -95,6 +95,9 @@ import {
   likeComment,
   unlikeComment,
 } from "../../redux/posts/postsActions";
+import {
+  fetchProfile,
+} from "../../redux/profile/profileActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -110,6 +113,15 @@ const PostCommentScreen = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+    
+  
+  useEffect(() => {
+        dispatch(fetchProfile());
+      }, [dispatch]);
+
+  // Get username from profile state
+  const username = useSelector((state) => state.profile.profile.username);
+
 
   // Find the post in Redux state to get updated likeCount and likedBy
   const currentPost = posts.find(p => p._id === post._id) || userPosts.find(p => p._id === post._id) || post;
@@ -233,10 +245,10 @@ const PostCommentScreen = () => {
             commentCount={commentCount}
             onAvatarPress={handleAvatarPress}
             onLikePress={() => handleLikePress()}
-            onCommentPress={() => {}} // No-op, as comment button is disabled
-            showDelete={true}
+            onCommentPress={() => {}}
+            showDelete={currentPost.username === username}
             onDeletePress={handleDeletePress}
-            disableComment={true} // Disable comment button
+            disableComment={true} 
           />
         </View>
 

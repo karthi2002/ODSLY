@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   sectionContainer: {
-    marginBottom: 20,
+    marginBottom: 0,
   },
   sectionTitle: {
     color: Colors.secondary,
