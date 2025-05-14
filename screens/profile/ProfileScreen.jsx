@@ -20,6 +20,8 @@ import Header from "../../layouts/Header";
 import { profileData } from "../../json/ProfileData";
 import GradientButton from "../../components/Button/GradientButton";
 import { fetchProfile } from "../../redux/profile/profileActions";
+import DefaultImage from '../../assets/images/default-user-image.jpg';
+
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -85,7 +87,7 @@ const ProfileScreen = () => {
           <View style={styles.imageSection}>
               <Image
                 source={{
-                  uri: profile?.image || `https://ui-avatars.com/api/?name=${profile?.username || "User"}`,
+                  uri: profile?.image || DefaultImage,
                 }}
                 style={styles.avatar}
               />

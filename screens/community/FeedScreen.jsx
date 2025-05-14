@@ -31,7 +31,7 @@
  * - loadPosts: Loads posts from the API with caching.
  * - onRefresh: Pull-to-refresh handler.
  * - toggleTag: Toggles selection state for hashtags.
- * - handleAvatarPress: Navigates to user profile screen.
+ * - handleAvatarPress: Navigates to user profile screen with the post's username.
  * - handleLikePress: Likes or unlikes a post, with debounce and error handling.
  * - handleCommentPress: Navigates to comment screen for a post.
  * - handleRetry: Retries fetching posts on error.
@@ -71,6 +71,10 @@ import { fetchPosts, likePost, unlikePost } from "../../redux/posts/postsActions
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { debounce } from 'lodash';
+import DefaultImage from '../../assets/images/default-user-image.jpg';
+import { Image } from 'react-native';
+
+const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
 dayjs.extend(relativeTime);
 
@@ -130,9 +134,16 @@ export default function FeedScreen() {
     setTags(updatedTags);
   };
 
-  const handleAvatarPress = () => {
-    navigation.navigate("CommunityStack", { screen: "PostProfile" });
-  };
+  const handleAvatarPress = useCallback((username) => {
+    if (!username) {
+      console.warn('No username provided for profile navigation');
+      return;
+    }
+    navigation.navigate('CommunityStack', {
+      screen: 'PostProfile',
+      params: { username },
+    });
+  }, [navigation]);
 
   const handleLikePress = useCallback(
     debounce(async (postId, likedBy) => {
@@ -212,7 +223,7 @@ export default function FeedScreen() {
                 key={post._id}
                 user={{
                   username: post.username,
-                  avatar: post.userImage || `https://ui-avatars.com/api/?name=${post.username}`,
+                  avatar: post.userImage || fallbackImage,
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
@@ -220,7 +231,7 @@ export default function FeedScreen() {
                 likeCount={post.likeCount || 0}
                 likedBy={post.likedBy || false}
                 commentCount={post.commentCount || 0}
-                onAvatarPress={handleAvatarPress}
+                onAvatarPress={() => handleAvatarPress(post.username)}
                 onLikePress={() => handleLikePress(post._id, post.likedBy)}
                 onCommentPress={() => handleCommentPress(post)}
                 disabled={likingPost === post._id}

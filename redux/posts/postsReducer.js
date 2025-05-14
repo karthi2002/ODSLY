@@ -1,36 +1,3 @@
-/**
- * postsReducer.js
- * ===============
- *
- * Redux reducer for managing posts, user posts, and comments state in a social app.
- * Handles actions for fetching, adding, liking, unliking, commenting, and error states.
- *
- * ## Features:
- * - Manages state for posts, user posts, and comments with loading and error states.
- * - Updates posts and userPosts arrays immutably for all actions.
- * - Handles full post object updates for like/unlike actions, mapping `likes` to `likeCount`.
- * - Syncs comment counts and like states across posts and userPosts.
- *
- * ## State Structure:
- * - posts: Array of all posts.
- * - postsLoading: Boolean for posts fetching state.
- * - postsError: Error message for posts fetching.
- * - userPosts: Array of user's posts.
- * - userPostsLoading: Boolean for user posts fetching state.
- * - userPostsError: Error message for user posts fetching.
- * - comments: Array of comments for a post.
- * - commentsLoading: Boolean for comments fetching state.
- * - commentsError: Error message for comments fetching.
- *
- * ## Dependencies:
- * - postsActions.js (for action types)
- *
- * ## Notes:
- * - All state updates are immutable using spread operator and array methods.
- * - Like/unlike actions replace entire post objects in posts and userPosts.
- * - Backend returns full post objects with `likes` field, mapped to `likeCount` in frontend.
- */
-
 import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
@@ -38,6 +5,9 @@ import {
   FETCH_USER_POSTS_REQUEST,
   FETCH_USER_POSTS_SUCCESS,
   FETCH_USER_POSTS_FAILURE,
+  FETCH_ONE_USER_POSTS_REQUEST,
+  FETCH_ONE_USER_POSTS_SUCCESS,
+  FETCH_ONE_USER_POSTS_FAILURE,
   ADD_POST_SUCCESS,
   FETCH_COMMENTS_REQUEST,
   FETCH_COMMENTS_SUCCESS,
@@ -48,6 +18,7 @@ import {
   UNLIKE_POST_SUCCESS,
   LIKE_COMMENT_SUCCESS,
   UNLIKE_COMMENT_SUCCESS,
+  DELETE_POST_SUCCESS,
 } from './postsActions';
 
 const initialState = {
@@ -57,6 +28,9 @@ const initialState = {
   userPosts: [],
   userPostsLoading: false,
   userPostsError: null,
+  oneUserPosts: [],
+  oneUserPostsLoading: false,
+  oneUserPostsError: null,
   comments: [],
   commentsLoading: false,
   commentsError: null,
@@ -76,6 +50,12 @@ const postsReducer = (state = initialState, action) => {
       return { ...state, userPostsLoading: false, userPosts: action.payload };
     case FETCH_USER_POSTS_FAILURE:
       return { ...state, userPostsLoading: false, userPostsError: action.payload };
+    case FETCH_ONE_USER_POSTS_REQUEST:
+      return { ...state, oneUserPostsLoading: true, oneUserPostsError: null };
+    case FETCH_ONE_USER_POSTS_SUCCESS:
+      return { ...state, oneUserPostsLoading: false, oneUserPosts: action.payload };
+    case FETCH_ONE_USER_POSTS_FAILURE:
+      return { ...state, oneUserPostsLoading: false, oneUserPostsError: action.payload };
     case ADD_POST_SUCCESS:
       return { ...state, posts: [action.payload, ...state.posts], userPosts: [action.payload, ...state.userPosts] };
     case FETCH_COMMENTS_REQUEST:
@@ -104,6 +84,11 @@ const postsReducer = (state = initialState, action) => {
             ? { ...post, commentCount: action.payload.commentCount }
             : post
         ),
+        oneUserPosts: state.oneUserPosts.map(post =>
+          post._id === action.payload.postId
+            ? { ...post, commentCount: action.payload.commentCount }
+            : post
+        ),
       };
     case LIKE_POST_SUCCESS:
     case UNLIKE_POST_SUCCESS:
@@ -115,6 +100,11 @@ const postsReducer = (state = initialState, action) => {
             : post
         ),
         userPosts: state.userPosts.map(post =>
+          post._id === action.payload._id
+            ? { ...action.payload, likeCount: action.payload.likes || 0 }
+            : post
+        ),
+        oneUserPosts: state.oneUserPosts.map(post =>
           post._id === action.payload._id
             ? { ...action.payload, likeCount: action.payload.likes || 0 }
             : post
@@ -137,6 +127,13 @@ const postsReducer = (state = initialState, action) => {
             ? { ...comment, likes: action.payload.likes, likedBy: action.payload.likedBy }
             : comment
         ),
+      };
+    case DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.filter(post => post._id !== action.payload),
+        userPosts: state.userPosts.filter(post => post._id !== action.payload),
+        oneUserPosts: state.oneUserPosts.filter(post => post._id !== action.payload),
       };
     default:
       return state;

@@ -2,7 +2,7 @@
  * PostCommentScreen.js
  * ====================
  *
- * Screen for viewing a single post and its comments, as well as posting, liking/unliking, and deleting comments.
+ * Screen for viewing a single post and its comments, as well as posting, liking/unliking, and deleting comments and posts.
  * Integrates with Redux for all post and comment actions.
  *
  * ## Features:
@@ -11,7 +11,8 @@
  *    - Liking/unliking comments (with error handling for duplicates and auth).
  *    - Long-press to delete a comment (with confirmation modal).
  *    - Posting new comments (with error handling).
- * - Updates global post/comment state after actions (fetches posts/userPosts after comment actions).
+ * - Supports deleting the post (with confirmation modal).
+ * - Updates global post/comment state after actions (fetches posts/userPosts after comment or post actions).
  * - Handles loading, error, and empty states for comments.
  * - Disables comment button on the post card (since you’re already on the comment screen).
  * - Keyboard-aware comment input at the bottom.
@@ -21,14 +22,16 @@
  * - commentCount: Local state for comment count (synced with actions).
  * - showModal: Controls visibility of the delete confirmation modal.
  * - selectedCommentId: Stores the comment selected for deletion.
+ * - selectedPostId: Stores the post selected for deletion.
  * - errorMessage: Displays any error messages related to comment/post actions.
  *
  * ## Redux:
  * - Uses `useSelector` to get comments, loading/error states, and current post from Redux.
  * - Uses `useDispatch` to trigger actions:
- *   - fetchComments, postComment, deleteComment
- *   - fetchPosts, fetchUserPosts (to update post state after comment actions)
+ *   - fetchComments, postComment, deleteComment, deletePost
+ *   - fetchPosts, fetchUserPosts (to update post state after comment or post actions)
  *   - likePost, unlikePost, likeComment, unlikeComment
+ *   - fetchProfile (to get user profile data)
  *
  * ## Navigation:
  * - Uses React Navigation for navigation and route params (`post`).
@@ -39,7 +42,7 @@
  * - UserPostCard for the post (with like, delete, and disabled comment button).
  * - CountLabel for comment count.
  * - FlatList for comments (each as CommentCard, with like and long-press delete).
- * - DeleteConfirmationModal for comment deletion.
+ * - DeleteConfirmationModal for comment and post deletion.
  * - CommentInput at the bottom, keyboard-aware.
  * - Loading, error, and empty state messages as appropriate.
  *
@@ -58,7 +61,7 @@
  * ## Notes:
  * - All actions are dispatched asynchronously and update Redux/global state.
  * - The post card always reflects the latest like/comment counts.
- * - Comments are fetched on mount and after posting/deleting a comment.
+ * - Comments are fetched on mount and after posting/deleting a comment or post.
  * - The comment input is always visible at the bottom.
  * - Timestamps use `dayjs.fromNow()` for relative time formatting.
  */
@@ -94,10 +97,9 @@ import {
   unlikePost,
   likeComment,
   unlikeComment,
+  deletePost,
 } from "../../redux/posts/postsActions";
-import {
-  fetchProfile,
-} from "../../redux/profile/profileActions";
+import { fetchProfile } from "../../redux/profile/profileActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -112,21 +114,17 @@ const PostCommentScreen = () => {
   const [commentCount, setCommentCount] = useState(post.commentCount || 0);
   const [showModal, setShowModal] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [selectedPostId, setSelectedPostId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-    
-  
-  useEffect(() => {
-        dispatch(fetchProfile());
-      }, [dispatch]);
 
   // Get username from profile state
   const username = useSelector((state) => state.profile.profile.username);
-
 
   // Find the post in Redux state to get updated likeCount and likedBy
   const currentPost = posts.find(p => p._id === post._id) || userPosts.find(p => p._id === post._id) || post;
 
   useEffect(() => {
+    dispatch(fetchProfile());
     if (post._id) {
       dispatch(fetchComments(post._id));
     }
@@ -219,7 +217,28 @@ const PostCommentScreen = () => {
   };
 
   const handleDeletePress = () => {
+    setSelectedPostId(post._id);
     setShowModal(true);
+  };
+
+  const handleDeletePost = async () => {
+    if (selectedPostId) {
+      try {
+        setErrorMessage(null);
+        await dispatch(deletePost(selectedPostId));
+        await dispatch(fetchPosts());
+        await dispatch(fetchUserPosts());
+        navigation.goBack(); // Navigate back after deleting the post
+      } catch (err) {
+        console.error("Delete post error:", err.message);
+        const message = err.response?.status === 500
+          ? 'Server error: Unable to delete post. Please try again later.'
+          : err.response?.data?.error || 'Failed to delete post';
+        setErrorMessage(message);
+      }
+      setShowModal(false);
+      setSelectedPostId(null);
+    }
   };
 
   return (
@@ -235,7 +254,7 @@ const PostCommentScreen = () => {
           <UserPostCard
             user={{
               username: currentPost.username,
-              avatar: currentPost.userImage || "https://example.com/default-avatar.jpg",
+              avatar: currentPost.userImage || `https://ui-avatars.com/api/?name=${currentPost.username}`,
             }}
             content={currentPost.text}
             hashtags={currentPost.hashtags}
@@ -248,7 +267,7 @@ const PostCommentScreen = () => {
             onCommentPress={() => {}}
             showDelete={currentPost.username === username}
             onDeletePress={handleDeletePress}
-            disableComment={true} 
+            disableComment={true}
           />
         </View>
 
@@ -296,9 +315,10 @@ const PostCommentScreen = () => {
           onCancel={() => {
             setShowModal(false);
             setSelectedCommentId(null);
+            setSelectedPostId(null);
           }}
-          onConfirm={handleDeleteComment}
-          message="Are you sure you want to delete this comment?"
+          onConfirm={selectedPostId ? handleDeletePost : handleDeleteComment}
+          message={selectedPostId ? "Are you sure you want to delete this post?" : "Are you sure you want to delete this comment?"}
         />
       </ScrollView>
 

@@ -11,8 +11,8 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
+
 import * as ImagePicker from "expo-image-picker";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import CustomHeader from "../../layouts/CustomHeader";
 import TextInputField from "../../components/Input/TextInputField";
 import GradientButton from "../../components/Button/GradientButton";
@@ -30,9 +30,13 @@ import { fetchUserPosts } from "../../redux/posts/postsActions";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 import { BACKEND_URL } from "../../config/url";
+import DefaultImage from '../../assets/images/default-user-image.jpg';
+
 
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dmpx9rrm4/image/upload";
 const CLOUDINARY_UPLOAD_PRESET = "odsly_profile";
+
+const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
 const EditProfileScreen = () => {
   const dispatch = useDispatch();
@@ -53,15 +57,15 @@ const EditProfileScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (profile) {
-      setUsername(profile.username || "");
-      setUserImage(profile.image || null);
-      setOriginalUsername(profile.username || "");
-      setOriginalImage(profile.image || null);
-      checkUsernameAvailability(profile.username || "");
-      console.log("EditProfileScreen: Set userImage:", profile.image || null);
-    }
-  }, [profile]);
+  if (profile) {
+    setUsername(profile.username || "");
+    setUserImage(profile.image || fallbackImage); // Use fallbackImage if profile.image is null
+    setOriginalUsername(profile.username || "");
+    setOriginalImage(profile.image || fallbackImage);
+    checkUsernameAvailability(profile.username || "");
+    console.log("EditProfileScreen: Set userImage:", profile.image || fallbackImage);
+  }
+}, [profile]);
 
   const getUsernameMessage = () => {
     if (username === originalUsername) return "";
@@ -96,18 +100,43 @@ const EditProfileScreen = () => {
     }
   };
 
-  const handleImagePick = async () => {
-    if (loading || fetchLoading) return;
+const handleImagePick = async () => {
+  if (loading || fetchLoading) {
+    console.log("Image pick skipped: loading or fetchLoading is true");
+    return;
+  }
 
+  try {
+    console.log("Requesting media library permissions...");
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    console.log("Permission result:", permissionResult);
+
+    if (!permissionResult.granted) {
+      Alert.alert(
+        "Permission Denied",
+        "Permission to access photo library is required to select an image.",
+        [
+          { text: "OK" },
+          { text: "Open Settings", onPress: () => Linking.openSettings() },
+        ]
+      );
+      return;
+    }
+
+    console.log("Launching image library...");
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.7,
+      mediaTypes: ['images'], // Use string "image" instead of MediaType.Image
+      quality: 0.5,
+      allowsEditing: false,
     });
+    console.log("ImagePicker result:", result);
 
-    if (!result.canceled && result.assets?.[0]?.uri) {
+    if (!result.canceled && result.assets?.length > 0 && result.assets[0]?.uri) {
+      console.log("Selected image URI:", result.assets[0].uri);
       setLoading(true);
       try {
         const imageUrl = await uploadImageToCloudinary(result.assets[0].uri);
+        console.log("Cloudinary upload success:", imageUrl);
         await dispatch(modifyUserImage(profile.email, imageUrl));
         setUserImage(imageUrl);
         setOriginalImage(imageUrl);
@@ -118,35 +147,40 @@ const EditProfileScreen = () => {
         Alert.alert("Success", "Profile picture updated successfully!");
       } catch (error) {
         setUserImage(originalImage);
-        console.error('Image update error:', error);
+        console.error('Image update error:', error.message, error.response?.data);
         Alert.alert("Error", "Failed to update profile picture.");
       } finally {
         setLoading(false);
       }
+    } else {
+      console.log("Image picker canceled or no URI found:", result);
     }
-  };
+  } catch (error) {
+    console.error("Image picker error:", error.message);
+    Alert.alert("Error", "Failed to open image picker.");
+  }
+};
+const handleDeleteImage = async () => {
+  if (loading || fetchLoading) return;
 
-  const handleDeleteImage = async () => {
-    if (loading || fetchLoading) return;
-
-    setLoading(true);
-    try {
-      await dispatch(deleteUserImage(profile.email));
-      setUserImage(null);
-      setOriginalImage(null);
-      // Clear cache and refresh posts
-      await AsyncStorage.removeItem('cached_user_posts');
-      await dispatch(fetchUserPosts());
-      console.log('Refreshed user posts after image deletion');
-      Alert.alert("Success", "Profile picture removed successfully!");
-    } catch (error) {
-      setUserImage(originalImage);
-      console.error('Image deletion error:', error);
-      Alert.alert("Error", "Failed to remove profile picture.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    await dispatch(deleteUserImage(profile.email));
+    setUserImage(fallbackImage); // Explicitly set to fallbackImage
+    setOriginalImage(fallbackImage);
+    // Clear cache and refresh posts
+    await AsyncStorage.removeItem('cached_user_posts');
+    await dispatch(fetchUserPosts());
+    console.log('Refreshed user posts after image deletion');
+    Alert.alert("Success", "Profile picture removed successfully!");
+  } catch (error) {
+    setUserImage(originalImage); // Revert to original if error occurs
+    console.error('Image deletion error:', error);
+    Alert.alert("Error", "Failed to remove profile picture.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const uploadImageToCloudinary = async (uri) => {
     try {
@@ -253,20 +287,26 @@ const EditProfileScreen = () => {
           )}
           <View style={styles.profileContainer}>
             <TouchableOpacity
-              onPress={handleImagePick}
-              style={styles.imageWrapper}
-              disabled={loading || fetchLoading}
-            >
-              {userImage ? (
-                <Image
-                  source={{ uri: userImage }}
-                  style={styles.profileImage}
-                  onError={(e) => console.log("Profile image load error:", e.nativeEvent.error)}
-                />
-              ) : (
-                <Ionicons name="person" size={60} color={Colors.background} />
-              )}
-            </TouchableOpacity>
+  onPress={handleImagePick}
+  style={styles.imageWrapper}
+  disabled={loading || fetchLoading}
+>
+  {userImage && userImage !== fallbackImage ? (
+    <Image
+      source={{ uri: userImage }}
+      style={styles.profileImage}
+      onError={(e) => {
+        console.log("Profile image load error:", e.nativeEvent.error);
+        setUserImage(fallbackImage); // Fallback to default on error
+      }}
+    />
+  ) : (
+    <Image
+      source={{ uri: fallbackImage }}
+      style={styles.profileImage}
+    />
+  )}
+</TouchableOpacity>
             <View style={styles.profileRight}>
               <Text style={styles.welcomeText}>
                 Welcome, {username || "User"}!

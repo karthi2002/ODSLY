@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; 
+import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../utils/Colors';
+
+const AVATAR_SIZE = 120;
+const BORDER_WIDTH = 3;
 
 const ProfileDisplay = ({ avatar, name, joinedDate }) => {
   return (
@@ -10,7 +13,9 @@ const ProfileDisplay = ({ avatar, name, joinedDate }) => {
         colors={['#ff007f', '#7928CA']}
         style={styles.avatarBorder}
       >
-        <Image source={{ uri: avatar }} style={styles.avatar} />
+        <View style={styles.avatarContainer}>
+          <Image source={{ uri: avatar }} style={styles.avatar} />
+        </View>
       </LinearGradient>
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.joinedText}>Betting since {joinedDate}</Text>
@@ -21,18 +26,26 @@ const ProfileDisplay = ({ avatar, name, joinedDate }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginVertical: 20
+    marginVertical: 20,
   },
   avatarBorder: {
-    padding: 2,
-    borderRadius: '50%',
+    width: AVATAR_SIZE + BORDER_WIDTH * 2,
+    height: AVATAR_SIZE + BORDER_WIDTH * 2,
+    borderRadius: (AVATAR_SIZE + BORDER_WIDTH * 2) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatarContainer: {
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
+    borderRadius: AVATAR_SIZE / 2,
+    overflow: 'hidden',
+    backgroundColor: Colors.background, // fallback background
   },
   avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 2,
-    borderColor: Colors.background,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   name: {
     marginTop: 16,

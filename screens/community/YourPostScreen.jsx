@@ -10,6 +10,7 @@
  * - Fetches and displays the user's posts from Redux (userPosts).
  * - Supports pull-to-refresh and focus-based refresh (on screen focus) for user's posts.
  * - Like/unlike functionality for each post with debounce and loading state.
+ * - Delete functionality for user's own posts with confirmation modal.
  * - Delete button shown for user's own posts (showDelete).
  * - Navigates to comment screen and user profile from each post.
  * - Handles loading, error, and empty states for user posts.
@@ -18,11 +19,14 @@
  * ## State:
  * - refreshing: Boolean for pull-to-refresh state.
  * - likingPost: Tracks post being liked/unliked to disable button during action.
+ * - deletingPost: Tracks post being deleted to disable button during action.
+ * - showDeleteModal: Controls visibility of the delete confirmation modal.
+ * - selectedPostId: Tracks the post selected for deletion.
  * - lastFetch: Timestamp of the last fetch to enforce a cooldown.
  *
  * ## Redux:
  * - Uses `useSelector` to get userPosts, loading, and error state from Redux.
- * - Uses `useDispatch` to trigger actions: `fetchUserPosts`, `likePost`, `unlikePost`.
+ * - Uses `useDispatch` to trigger actions: `fetchUserPosts`, `likePost`, `unlikePost`, `deletePost`.
  *
  * ## Effects:
  * - Uses `useFocusEffect` to load user posts with a cooldown period.
@@ -35,12 +39,15 @@
  * - handleLogin: Navigates to login screen if authentication error occurs.
  * - handleAvatarPress: Navigates to user profile screen.
  * - handleLikePress: Likes or unlikes a post with debounce and error handling.
+ * - handleDeletePress: Shows the delete confirmation modal.
+ * - handleConfirmDelete: Deletes a post after confirmation.
  * - handleCommentPress: Navigates to comment screen for a post.
  *
  * ## UI Structure:
  * - Recent Bets section (BetCard components in horizontal ScrollView).
  * - Divider (LineGradient).
  * - Your Posts section (UserPostCard components).
+ * - DeleteConfirmationModal for post deletion.
  * - Loading indicator, error messages, and retry/login buttons.
  *
  * ## Styling:
@@ -53,7 +60,7 @@
  * - react-navigation (for navigation)
  * - dayjs (for relative time display)
  * - lodash (for debounce)
- * - Custom components: BetCard, UserPostCard, LineGradient
+ * - Custom components: BetCard, UserPostCard, LineGradient, DeleteConfirmationModal
  *
  * ## Example Usage:
  *   <YourPostScreen />
@@ -82,10 +89,15 @@ import { LineGradient } from "../../layouts/LineGradient";
 import { recentBet } from "../../json/RecentBetData";
 import BetCard from "../../components/Card/BetCard";
 import UserPostCard from "../../components/Card/UserPostCard";
-import { fetchUserPosts, likePost, unlikePost } from "../../redux/posts/postsActions";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import { fetchUserPosts, likePost, unlikePost, deletePost } from "../../redux/posts/postsActions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { debounce } from 'lodash';
+import DefaultImage from '../../assets/images/default-user-image.jpg';
+import { Image } from "react-native";
+
+const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
 dayjs.extend(relativeTime);
 
@@ -96,6 +108,9 @@ export default function YourPostScreen() {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
   const [likingPost, setLikingPost] = useState(null);
+  const [deletingPost, setDeletingPost] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState(null);
   const [lastFetch, setLastFetch] = useState(0);
   const { userPosts, userPostsLoading, userPostsError } = useSelector((state) => state.posts);
 
@@ -133,9 +148,16 @@ export default function YourPostScreen() {
     }, [loadUserPosts])
   );
 
-  const handleAvatarPress = () => {
-    navigation.navigate("CommunityStack", { screen: "PostProfile" });
-  };
+  const handleAvatarPress = useCallback((username) => {
+      if (!username) {
+        console.warn('No username provided for profile navigation');
+        return;
+      }
+      navigation.navigate('CommunityStack', {
+        screen: 'PostProfile',
+        params: { username },
+      });
+    }, [navigation]);
 
   const handleLikePress = useCallback(
     debounce(async (postId, likedBy) => {
@@ -163,6 +185,26 @@ export default function YourPostScreen() {
     }, 500),
     [dispatch, likingPost]
   );
+
+  const handleDeletePress = useCallback((postId) => {
+    setSelectedPostId(postId);
+    setShowDeleteModal(true);
+  }, []);
+
+  const handleConfirmDelete = useCallback(async () => {
+    if (selectedPostId && !deletingPost) {
+      setDeletingPost(selectedPostId);
+      try {
+        await dispatch(deletePost(selectedPostId));
+      } catch (err) {
+        console.error('Delete post error:', err.message, err.response?.data);
+      } finally {
+        setDeletingPost(null);
+        setShowDeleteModal(false);
+        setSelectedPostId(null);
+      }
+    }
+  }, [dispatch, selectedPostId, deletingPost]);
 
   const handleCommentPress = (post) => {
     navigation.navigate("CommunityStack", {
@@ -223,7 +265,7 @@ export default function YourPostScreen() {
                 key={post._id}
                 user={{
                   username: post.username || 'Unknown User',
-                  avatar: post.userImage || `https://ui-avatars.com/api/?name=${post.username}`,
+                  avatar: post.userImage || fallbackImage,
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
@@ -231,11 +273,12 @@ export default function YourPostScreen() {
                 likeCount={post.likeCount || 0}
                 likedBy={post.likedBy || false}
                 commentCount={post.commentCount || 0}
-                onAvatarPress={handleAvatarPress}
+                onAvatarPress={() => handleAvatarPress(post.username)}
                 onLikePress={() => handleLikePress(post._id, post.likedBy)}
+                onDeletePress={() => handleDeletePress(post._id)}
                 onCommentPress={() => handleCommentPress(post)}
                 showDelete={true}
-                disabled={likingPost === post._id}
+                disabled={likingPost === post._id || deletingPost === post._id}
                 disableComment={false}
                 style={{ marginBottom: 15 }}
               />
@@ -247,6 +290,16 @@ export default function YourPostScreen() {
           )}
         </View>
       </ScrollView>
+
+      <DeleteConfirmationModal
+        isVisible={showDeleteModal}
+        onCancel={() => {
+          setShowDeleteModal(false);
+          setSelectedPostId(null);
+        }}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to delete this post?"
+      />
     </View>
   );
 }

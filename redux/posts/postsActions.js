@@ -1,30 +1,3 @@
-/**
- * postsActions.js
- * ===============
- *
- * Redux action creators for managing posts, comments, and likes in a social app.
- * Handles fetching posts, user posts, comments, and performing actions like liking, unliking, and commenting.
- *
- * ## Features:
- * - Fetches all posts and user-specific posts with caching in AsyncStorage.
- * - Creates new posts and comments.
- * - Handles like/unlike actions for posts and comments, mapping backend `likes` to frontend `likeCount`.
- * - Supports error handling and authentication with JWT tokens.
- * - Caches posts and user posts with timestamps for offline access.
- * - Merges refetched posts with existing state to preserve recent `likedBy` changes.
- *
- * ## Dependencies:
- * - axios (via `api` utility for HTTP requests)
- * - @react-native-async-storage/async-storage (for caching)
- * - jwt-decode (for decoding JWT tokens)
- *
- * ## Notes:
- * - All actions require authentication tokens where applicable.
- * - Errors are logged with detailed information (status, response data).
- * - Backend returns full post objects for like/unlike actions, with `likes` mapped to `likeCount`.
- * - `fetchPosts` merges new data to prevent overwriting recent likes.
- */
-
 import api from '../../utils/axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
@@ -36,6 +9,9 @@ export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
 export const FETCH_USER_POSTS_REQUEST = 'FETCH_USER_POSTS_REQUEST';
 export const FETCH_USER_POSTS_SUCCESS = 'FETCH_USER_POSTS_SUCCESS';
 export const FETCH_USER_POSTS_FAILURE = 'FETCH_USER_POSTS_FAILURE';
+export const FETCH_ONE_USER_POSTS_REQUEST = 'FETCH_ONE_USER_POSTS_REQUEST';
+export const FETCH_ONE_USER_POSTS_SUCCESS = 'FETCH_ONE_USER_POSTS_SUCCESS';
+export const FETCH_ONE_USER_POSTS_FAILURE = 'FETCH_ONE_USER_POSTS_FAILURE';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const FETCH_COMMENTS_REQUEST = 'FETCH_COMMENTS_REQUEST';
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
@@ -46,15 +22,17 @@ export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
 export const UNLIKE_POST_SUCCESS = 'UNLIKE_POST_SUCCESS';
 export const LIKE_COMMENT_SUCCESS = 'LIKE_COMMENT_SUCCESS';
 export const UNLIKE_COMMENT_SUCCESS = 'UNLIKE_COMMENT_SUCCESS';
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
 
 const CACHE_KEY = 'cached_posts';
 const USER_CACHE_KEY = 'cached_user_posts';
+const ONE_USER_CACHE_KEY = 'cached_one_user_posts';
 
 export const fetchPosts = () => async (dispatch) => {
   try {
     dispatch({ type: FETCH_POSTS_REQUEST });
     const token = await AsyncStorage.getItem('authToken');
-    console.log('fetchPosts: Auth token:', token ? 'Present' : 'Missing');
+    
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;
     } else {
@@ -62,11 +40,10 @@ export const fetchPosts = () => async (dispatch) => {
     }
     const res = await api.get('/api/v1/get-all-post');
     const posts = Array.isArray(res.data) ? res.data : res.data.posts || [];
-    console.log('fetchPosts: Backend response:', posts.map(p => ({ _id: p._id, likedBy: p.likedBy })));
+    
     let userId = null;
     try {
       userId = token ? jwtDecode(token).userId : null;
-      console.log('fetchPosts: User ID:', userId);
     } catch (err) {
       console.warn('fetchPosts: Invalid token:', err.message);
     }
@@ -76,14 +53,12 @@ export const fetchPosts = () => async (dispatch) => {
           ? post.likedBy.includes(userId.toString())
           : false
         : false;
-      console.log(`fetchPosts: Post ${post._id}, likedBy: ${likedBy}, backend likedBy: ${JSON.stringify(post.likedBy)}`);
       return {
         ...post,
         likeCount: post.likes || 0,
         likedBy,
       };
     });
-    console.log('fetchPosts: Final posts:', mappedPosts.map(p => ({ _id: p._id, likedBy: p.likedBy, likeCount: p.likeCount })));
     await AsyncStorage.setItem(CACHE_KEY, JSON.stringify({
       posts: mappedPosts,
       timestamp: Date.now(),
@@ -94,6 +69,7 @@ export const fetchPosts = () => async (dispatch) => {
     dispatch({ type: FETCH_POSTS_FAILURE, payload: err.message });
   }
 };
+
 export const fetchUserPosts = () => async (dispatch, getState) => {
   try {
     dispatch({ type: FETCH_USER_POSTS_REQUEST });
@@ -103,19 +79,16 @@ export const fetchUserPosts = () => async (dispatch, getState) => {
     }
     try {
       const decoded = jwtDecode(token);
-      console.log('Decoded token:', decoded);
     } catch (decodeErr) {
       console.warn('Failed to decode token:', decodeErr.message);
     }
     api.defaults.headers.Authorization = `Bearer ${token}`;
     const res = await api.get('/api/v1/user-posts');
     const posts = Array.isArray(res.data) ? res.data : (res.data?.posts || []);
-    // Map backend `likes` to frontend `likeCount`
     const mappedPosts = posts.map(post => ({
       ...post,
       likeCount: post.likes || 0,
     }));
-    // Merge with existing state to preserve recent likes
     const currentPosts = getState().posts.userPosts;
     const mergedPosts = mappedPosts.map(newPost => {
       const existingPost = currentPosts.find(p => p._id === newPost._id);
@@ -123,7 +96,6 @@ export const fetchUserPosts = () => async (dispatch, getState) => {
         ? { ...newPost, likedBy: existingPost.likedBy }
         : newPost;
     });
-    console.log('Fetched user posts:', mergedPosts.map(p => ({ _id: p._id, likedBy: p.likedBy, likeCount: p.likeCount })));
     await AsyncStorage.setItem(USER_CACHE_KEY, JSON.stringify({
       posts: mergedPosts,
       timestamp: Date.now(),
@@ -140,6 +112,31 @@ export const fetchUserPosts = () => async (dispatch, getState) => {
   }
 };
 
+export const fetchOneUserPosts = (username) => async (dispatch) => {
+  try {
+    dispatch({ type: FETCH_ONE_USER_POSTS_REQUEST });
+    const token = await AsyncStorage.getItem('authToken');
+    if (!token) {
+      throw new Error('No authentication token found. Please log in.');
+    }
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+    const res = await api.get('/api/v1/posts/user-posts', { params: { username } });
+    const posts = Array.isArray(res.data) ? res.data : (res.data?.posts || []);
+    const mappedPosts = posts.map(post => ({
+      ...post,
+      likeCount: post.likes || 0,
+    }));
+    await AsyncStorage.setItem(`${ONE_USER_CACHE_KEY}_${username}`, JSON.stringify({
+      posts: mappedPosts,
+      timestamp: Date.now(),
+    }));
+    dispatch({ type: FETCH_ONE_USER_POSTS_SUCCESS, payload: mappedPosts });
+  } catch (err) {
+    console.error('Fetch one user posts error:', err.message, err.response?.status, err.response?.data);
+    dispatch({ type: FETCH_ONE_USER_POSTS_FAILURE, payload: err.response?.data?.error || 'Failed to fetch user posts' });
+  }
+};
+
 export const addPost = (post) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem('authToken');
@@ -149,7 +146,6 @@ export const addPost = (post) => async (dispatch) => {
       console.warn('No auth token found for addPost');
     }
     const res = await api.post('/api/v1/create-post', post);
-    // Map backend `likes` to `likeCount`
     const mappedPost = {
       ...res.data,
       likeCount: res.data.likes || 0,
@@ -169,23 +165,16 @@ export const fetchComments = (postId) => async (dispatch) => {
     }
     const res = await api.get(`/api/v1/post/${postId}/comments`);
     const comments = res.data.comments.map(comment => ({
-
       ...comment,
-
-      uploadedAt: new Date(comment.uploadedAt || comment.createdAt).toISOString(), // Normalize timestamp
-
+      uploadedAt: new Date(comment.uploadedAt || comment.createdAt).toISOString(),
     }));
-
     dispatch({ type: FETCH_COMMENTS_SUCCESS, payload: comments });
-
   } catch (err) {
-
     console.error('Fetch comments error:', err.message);
     dispatch({ type: FETCH_COMMENTS_FAILURE, payload: err.message });
-
   }
-
 };
+
 export const postComment = (postId, content) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem('authToken');
@@ -193,9 +182,7 @@ export const postComment = (postId, content) => async (dispatch) => {
       throw new Error('No authentication token found');
     }
     api.defaults.headers.Authorization = `Bearer ${token}`;
-    console.log('Posting comment:', { postId, content, headers: { Authorization: `Bearer ${token}` } });
     const res = await api.post(`/api/v1/post/${postId}/comment`, { content });
-    console.log('Post comment response:', res.data);
     dispatch({ type: POST_COMMENT_SUCCESS, payload: res.data.comment });
     dispatch({
       type: 'UPDATE_POST_COMMENT_COUNT',
@@ -225,6 +212,21 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
   }
 };
 
+export const deletePost = (postId) => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem('authToken');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+    await api.delete(`/api/v1/post/${postId}`);
+    dispatch({ type: DELETE_POST_SUCCESS, payload: postId });
+  } catch (err) {
+    console.error('Delete post error:', err.message, err.response?.status, err.response?.data);
+    throw err;
+  }
+};
+
 export const likePost = (postId) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem('authToken');
@@ -233,7 +235,6 @@ export const likePost = (postId) => async (dispatch) => {
     }
     api.defaults.headers.Authorization = `Bearer ${token}`;
     const res = await api.post(`/api/v1/post/${postId}/like`);
-    // Map backend `likes` to `likeCount`
     const mappedPost = {
       ...res.data,
       likeCount: res.data.likes || 0,
@@ -256,7 +257,6 @@ export const unlikePost = (postId) => async (dispatch) => {
     }
     api.defaults.headers.Authorization = `Bearer ${token}`;
     const res = await api.post(`/api/v1/post/${postId}/unlike`);
-    // Map backend `likes` to `likeCount`
     const mappedPost = {
       ...res.data,
       likeCount: res.data.likes || 0,

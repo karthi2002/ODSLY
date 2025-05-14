@@ -6,6 +6,7 @@ import NewPostCard from "../../components/Card/NewPostCard";
 import Colors from "../../utils/Colors";
 import { addPost } from "../../redux/posts/postsActions";
 import { fetchProfile } from "../../redux/profile/profileActions";
+import DefaultImage from '../../assets/images/default-user-image.jpg';
 
 const CreatePostScreen = () => {
   const [postContent, setPostContent] = useState("");
@@ -18,7 +19,7 @@ const CreatePostScreen = () => {
   }, [dispatch]);
 
   const getAvatarUri = () => {
-    return profile?.image || `https://ui-avatars.com/api/?name=${profile?.username || "User"}`;
+    return profile?.image || DefaultImage;
   };
 
   const handlePost = () => {
