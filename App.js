@@ -12,6 +12,9 @@ import ProfileStack from './navigations/ProfileStack';
 import NotificationScreen from './screens/NotificationScreen.jsx';
 import LiveStack from './navigations/LiveStack.jsx';
 import CommunityStack from './navigations/CommunityStack.jsx';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(); // remove and proceed to develop next version -- madhankumar
 
 const Stack = createNativeStackNavigator();
 
