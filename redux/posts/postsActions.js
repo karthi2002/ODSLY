@@ -1,6 +1,5 @@
 import api from '../../utils/axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from 'jwt-decode';
 
 // Action Types
 export const FETCH_POSTS_REQUEST = 'FETCH_POSTS_REQUEST';
@@ -43,7 +42,7 @@ export const fetchPosts = () => async (dispatch) => {
     
     let userId = null;
     try {
-      userId = token ? jwtDecode(token).userId : null;
+      userId = token;
     } catch (err) {
       console.warn('fetchPosts: Invalid token:', err.message);
     }
@@ -78,7 +77,7 @@ export const fetchUserPosts = () => async (dispatch, getState) => {
       throw new Error('No authentication token found. Please log in.');
     }
     try {
-      const decoded = jwtDecode(token);
+      const decoded = token;
     } catch (decodeErr) {
       console.warn('Failed to decode token:', decodeErr.message);
     }
@@ -105,7 +104,7 @@ export const fetchUserPosts = () => async (dispatch, getState) => {
     console.error('Fetch user posts error:', err.message, err.response?.status, err.response?.data);
     const errorMessage = err.response?.status === 401
       ? 'Authentication failed. Please log in again.'
-      : err.message.includes('jwtDecode')
+      : err.message.includes('removed jwt--decode')
       ? 'Failed to process authentication token. Please log in again.'
       : `Failed to fetch posts: ${err.message} (${err.response?.status || 'Unknown'})`;
     dispatch({ type: FETCH_USER_POSTS_FAILURE, payload: errorMessage });
