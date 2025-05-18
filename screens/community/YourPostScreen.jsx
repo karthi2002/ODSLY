@@ -1,78 +1,4 @@
-/**
- * YourPostScreen.js
- * =================
- *
- * Screen for viewing and managing the current user's posts in the social app.
- * Also displays a horizontal list of recent bets and provides full post interaction.
- *
- * ## Features:
- * - Displays a horizontally scrollable "Recent Bets" section at the top.
- * - Fetches and displays the user's posts from Redux (userPosts).
- * - Supports pull-to-refresh and focus-based refresh (on screen focus) for user's posts.
- * - Like/unlike functionality for each post with debounce and loading state.
- * - Delete functionality for user's own posts with confirmation modal.
- * - Delete button shown for user's own posts (showDelete).
- * - Navigates to comment screen and user profile from each post.
- * - Handles loading, error, and empty states for user posts.
- * - Provides retry and login actions on error, with clear user feedback.
- *
- * ## State:
- * - refreshing: Boolean for pull-to-refresh state.
- * - likingPost: Tracks post being liked/unliked to disable button during action.
- * - deletingPost: Tracks post being deleted to disable button during action.
- * - showDeleteModal: Controls visibility of the delete confirmation modal.
- * - selectedPostId: Tracks the post selected for deletion.
- * - lastFetch: Timestamp of the last fetch to enforce a cooldown.
- *
- * ## Redux:
- * - Uses `useSelector` to get userPosts, loading, and error state from Redux.
- * - Uses `useDispatch` to trigger actions: `fetchUserPosts`, `likePost`, `unlikePost`, `deletePost`.
- *
- * ## Effects:
- * - Uses `useFocusEffect` to load user posts with a cooldown period.
- * - Cleans up any resources on unmount.
- *
- * ## Handlers:
- * - loadUserPosts: Loads user posts from the API with caching.
- * - onRefresh: Pull-to-refresh handler.
- * - handleRetry: Retry fetching user posts after error.
- * - handleLogin: Navigates to login screen if authentication error occurs.
- * - handleAvatarPress: Navigates to user profile screen.
- * - handleLikePress: Likes or unlikes a post with debounce and error handling.
- * - handleDeletePress: Shows the delete confirmation modal.
- * - handleConfirmDelete: Deletes a post after confirmation.
- * - handleCommentPress: Navigates to comment screen for a post.
- *
- * ## UI Structure:
- * - Recent Bets section (BetCard components in horizontal ScrollView).
- * - Divider (LineGradient).
- * - Your Posts section (UserPostCard components).
- * - DeleteConfirmationModal for post deletion.
- * - Loading indicator, error messages, and retry/login buttons.
- *
- * ## Styling:
- * - Uses consistent padding, font weights, and color palette from `Colors`.
- * - Error and retry/login UI is clearly styled for user feedback.
- *
- * ## Dependencies:
- * - React, React Native
- * - react-redux (for state management)
- * - react-navigation (for navigation)
- * - dayjs (for relative time display)
- * - lodash (for debounce)
- * - Custom components: BetCard, UserPostCard, LineGradient, DeleteConfirmationModal
- *
- * ## Example Usage:
- *   <YourPostScreen />
- *
- * ## Notes:
- * - Posts are refreshed with a cooldown to reduce API calls.
- * - Removed excessive debug logging to reduce terminal clutter.
- * - Handles edge cases: no posts, loading, and API errors (including auth errors).
- * - Only the user's own posts are shown and managed here.
- */
-
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -81,21 +7,28 @@ import {
   RefreshControl,
   ActivityIndicator,
   TouchableOpacity,
-} from "react-native";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
+} from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { clearSession } from '../../redux/session/sessionSlice';
 import Colors from "../../utils/Colors";
-import { LineGradient } from "../../layouts/LineGradient";
-import { recentBet } from "../../json/RecentBetData";
-import BetCard from "../../components/Card/BetCard";
-import UserPostCard from "../../components/Card/UserPostCard";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import { fetchUserPosts, likePost, unlikePost, deletePost } from "../../redux/posts/postsActions";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { LineGradient } from '../../layouts/LineGradient';
+import { recentBet } from '../../json/RecentBetData';
+import BetCard from '../../components/Card/BetCard';
+import UserPostCard from '../../components/Card/UserPostCard';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import {
+  useGetUserPostsQuery,
+  useLikePostMutation,
+  useUnlikePostMutation,
+  useDeletePostMutation,
+} from '../../redux/apis/postsApi';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { debounce } from 'lodash';
 import DefaultImage from '../../assets/images/default-user-image.jpg';
-import { Image } from "react-native";
+import { Image } from 'react-native';
 
 const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
@@ -106,84 +39,131 @@ const FETCH_COOLDOWN = 5 * 60 * 1000; // 5 minutes
 export default function YourPostScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const email = useSelector((state) => state.session.userSession?.email);
+  const isValidEmail = email && typeof email === 'string' && email.includes('@');
+  const [sessionLoaded, setSessionLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [likingPost, setLikingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [lastFetch, setLastFetch] = useState(0);
-  const { userPosts, userPostsLoading, userPostsError } = useSelector((state) => state.posts);
+
+  const { data: userPosts, isLoading: userPostsLoading, error: userPostsError, refetch } = useGetUserPostsQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+  const [likePost] = useLikePostMutation();
+  const [unlikePost] = useLikePostMutation();
+  const [deletePost] = useDeletePostMutation();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const authToken = await AsyncStorage.getItem('authToken');
+        console.log('YourPostScreen: userSession from AsyncStorage:', userSession);
+        console.log('YourPostScreen: authToken from AsyncStorage:', authToken);
+        console.log('YourPostScreen: email from Redux:', email);
+        console.log('YourPostScreen: isValidEmail:', isValidEmail);
+        if (!userSession || !isValidEmail) {
+          console.log('YourPostScreen: No valid session, redirecting to Login');
+          await AsyncStorage.multiRemove(['userSession', 'authToken']);
+          dispatch(clearSession());
+          navigation.replace('AuthStack', { screen: 'Login' });
+        } else {
+          setSessionLoaded(true);
+        }
+      } catch (error) {
+        console.error('YourPostScreen: Error checking session:', error);
+        await AsyncStorage.multiRemove(['userSession', 'authToken']);
+        dispatch(clearSession());
+        navigation.replace('AuthStack', { screen: 'Login' });
+      }
+    };
+    checkSession();
+  }, [dispatch, navigation, email, isValidEmail]);
 
   const loadUserPosts = useCallback(async (force = false) => {
     const now = Date.now();
     if (!force && now - lastFetch < FETCH_COOLDOWN) {
-      console.log('Skipping fetch: within cooldown period');
+      console.log('YourPostScreen: Skipping fetch: within cooldown period');
       return;
     }
     try {
-      await dispatch(fetchUserPosts());
+      await refetch();
       setLastFetch(now);
     } catch (err) {
-      console.error("Error loading user posts:", err.message);
+      console.error('YourPostScreen: Error loading user posts:', err);
     }
-  }, [dispatch, lastFetch]);
+  }, [refetch, lastFetch]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await loadUserPosts(true); // Force fetch on pull-to-refresh
+    await loadUserPosts(true);
     setRefreshing(false);
   }, [loadUserPosts]);
 
   const handleRetry = useCallback(() => {
-    loadUserPosts(true); // Force fetch on retry
+    loadUserPosts(true);
   }, [loadUserPosts]);
 
-  const handleLogin = useCallback(() => {
-    navigation.navigate("AuthStack", { screen: "Login" });
-  }, [navigation]);
+  const handleLogin = useCallback(async () => {
+    try {
+      await AsyncStorage.multiRemove(['userSession', 'authToken']);
+      dispatch(clearSession());
+      navigation.replace('AuthStack', { screen: 'Login' });
+    } catch (err) {
+      console.error('YourPostScreen: Error clearing session:', err);
+    }
+  }, [navigation, dispatch]);
 
   useFocusEffect(
     useCallback(() => {
-      loadUserPosts();
-    }, [loadUserPosts])
+      if (sessionLoaded && isValidEmail) {
+        loadUserPosts();
+      }
+    }, [loadUserPosts, sessionLoaded, isValidEmail])
   );
 
   const handleAvatarPress = useCallback((username) => {
-      if (!username) {
-        console.warn('No username provided for profile navigation');
-        return;
-      }
-      navigation.navigate('CommunityStack', {
-        screen: 'PostProfile',
-        params: { username },
-      });
-    }, [navigation]);
+    if (!username) {
+      console.warn('YourPostScreen: No username provided for profile navigation');
+      return;
+    }
+    navigation.navigate('CommunityStack', {
+      screen: 'PostProfile',
+      params: { username },
+    });
+  }, [navigation]);
 
   const handleLikePress = useCallback(
     debounce(async (postId, likedBy) => {
-      if (likingPost) return;
+      if (likingPost || !sessionLoaded || !isValidEmail) return;
       setLikingPost(postId);
       try {
         if (likedBy) {
-          await dispatch(unlikePost(postId));
+          await unlikePost(postId).unwrap();
         } else {
           try {
-            await dispatch(likePost(postId));
+            await likePost(postId).unwrap();
           } catch (likeErr) {
-            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
-              await dispatch(unlikePost(postId));
+            if (
+              likeErr.status === 400 &&
+              likeErr.data?.error === 'Post already liked'
+            ) {
+              await unlikePost(postId).unwrap();
             } else {
               throw likeErr;
             }
           }
         }
       } catch (err) {
-        console.error('Like post error:', err.message, err.response?.data);
+        console.error('YourPostScreen: Like post error:', err.message, err.data);
       } finally {
         setLikingPost(null);
       }
     }, 500),
-    [dispatch, likingPost]
+    [likePost, unlikePost, likingPost, sessionLoaded, isValidEmail]
   );
 
   const handleDeletePress = useCallback((postId) => {
@@ -195,23 +175,36 @@ export default function YourPostScreen() {
     if (selectedPostId && !deletingPost) {
       setDeletingPost(selectedPostId);
       try {
-        await dispatch(deletePost(selectedPostId));
+        await deletePost(selectedPostId).unwrap();
       } catch (err) {
-        console.error('Delete post error:', err.message, err.response?.data);
+        console.error('YourPostScreen: Delete post error:', err.message, err.data);
       } finally {
         setDeletingPost(null);
         setShowDeleteModal(false);
         setSelectedPostId(null);
       }
     }
-  }, [dispatch, selectedPostId, deletingPost]);
+  }, [deletePost, selectedPostId, deletingPost]);
 
   const handleCommentPress = (post) => {
-    navigation.navigate("CommunityStack", {
-      screen: "PostComment",
+    if (!sessionLoaded || !isValidEmail) {
+      console.log('YourPostScreen: Invalid session, redirecting to Login');
+      navigation.replace('AuthStack', { screen: 'Login' });
+      return;
+    }
+    navigation.navigate('CommunityStack', {
+      screen: 'PostComment',
       params: { post },
     });
   };
+
+  if (!sessionLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -231,9 +224,7 @@ export default function YourPostScreen() {
             ))}
           </ScrollView>
         </View>
-
         <LineGradient />
-
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Your Posts</Text>
           {userPostsLoading && !refreshing && (
@@ -242,13 +233,13 @@ export default function YourPostScreen() {
           {userPostsError && (
             <View style={styles.errorContainer}>
               <Text style={styles.errorText}>
-                {userPostsError.includes('401') || userPostsError.includes('authentication token')
+                {userPostsError.status === 401
                   ? 'Please log in to view your posts.'
-                  : userPostsError.includes('404')
-                  ? 'Posts not found (404). Please try again.'
-                  : `Error: ${userPostsError}`}
+                  : userPostsError.status === 404
+                  ? 'No posts found.'
+                  : `Error: ${userPostsError.data?.message || 'Failed to load posts'}`}
               </Text>
-              {userPostsError.includes('401') || userPostsError.includes('authentication token') ? (
+              {userPostsError.status === 401 ? (
                 <TouchableOpacity style={styles.retryButton} onPress={handleLogin}>
                   <Text style={styles.retryButtonText}>Log In</Text>
                 </TouchableOpacity>
@@ -269,8 +260,8 @@ export default function YourPostScreen() {
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
-                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : "Unknown time"}
-                likeCount={post.likeCount || 0}
+                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : 'Unknown time'}
+                likeCount={post.likes || 0}
                 likedBy={post.likedBy || false}
                 commentCount={post.commentCount || 0}
                 onAvatarPress={() => handleAvatarPress(post.username)}
@@ -290,7 +281,6 @@ export default function YourPostScreen() {
           )}
         </View>
       </ScrollView>
-
       <DeleteConfirmationModal
         isVisible={showDeleteModal}
         onCancel={() => {
@@ -308,6 +298,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    justifyContent: 'center',
   },
   content: {
     paddingTop: 20,
@@ -318,7 +309,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: Colors.secondary,
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 20,
   },
   loader: {
@@ -329,8 +320,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   errorText: {
-    color: "red",
-    textAlign: "center",
+    color: 'red',
+    textAlign: 'center',
     marginBottom: 10,
   },
   retryButton: {
@@ -345,7 +336,7 @@ const styles = StyleSheet.create({
   },
   noPostsText: {
     color: Colors.secondary,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 10,
   },
 });

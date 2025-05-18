@@ -1,72 +1,4 @@
-/**
- * PostCommentScreen.js
- * ====================
- *
- * Screen for viewing a single post and its comments, as well as posting, liking/unliking, and deleting comments and posts.
- * Integrates with Redux for all post and comment actions.
- *
- * ## Features:
- * - Displays a single post (with up-to-date like and comment counts).
- * - Shows all comments for the post, with support for:
- *    - Liking/unliking comments (with error handling for duplicates and auth).
- *    - Long-press to delete a comment (with confirmation modal).
- *    - Posting new comments (with error handling).
- * - Supports deleting the post (with confirmation modal).
- * - Updates global post/comment state after actions (fetches posts/userPosts after comment or post actions).
- * - Handles loading, error, and empty states for comments.
- * - Disables comment button on the post card (since you’re already on the comment screen).
- * - Keyboard-aware comment input at the bottom.
- * - Formats post and comment timestamps as relative time (e.g., "2 hours ago").
- *
- * ## State:
- * - commentCount: Local state for comment count (synced with actions).
- * - showModal: Controls visibility of the delete confirmation modal.
- * - selectedCommentId: Stores the comment selected for deletion.
- * - selectedPostId: Stores the post selected for deletion.
- * - errorMessage: Displays any error messages related to comment/post actions.
- *
- * ## Redux:
- * - Uses `useSelector` to get comments, loading/error states, and current post from Redux.
- * - Uses `useDispatch` to trigger actions:
- *   - fetchComments, postComment, deleteComment, deletePost
- *   - fetchPosts, fetchUserPosts (to update post state after comment or post actions)
- *   - likePost, unlikePost, likeComment, unlikeComment
- *   - fetchProfile (to get user profile data)
- *
- * ## Navigation:
- * - Uses React Navigation for navigation and route params (`post`).
- * - Navigates to user profile on avatar press.
- *
- * ## UI Structure:
- * - CustomHeader at top.
- * - UserPostCard for the post (with like, delete, and disabled comment button).
- * - CountLabel for comment count.
- * - FlatList for comments (each as CommentCard, with like and long-press delete).
- * - DeleteConfirmationModal for comment and post deletion.
- * - CommentInput at the bottom, keyboard-aware.
- * - Loading, error, and empty state messages as appropriate.
- *
- * ## Styling:
- * - Uses consistent padding, color palette, and spacing from `Colors`.
- * - KeyboardAvoidingView for input field.
- *
- * ## Error Handling:
- * - Handles API/network errors for like, comment, and delete actions.
- * - Displays user-friendly error messages.
- * - Handles duplicate-like errors gracefully.
- *
- * ## Example Usage:
- *   navigation.navigate('PostComment', { post });
- *
- * ## Notes:
- * - All actions are dispatched asynchronously and update Redux/global state.
- * - The post card always reflects the latest like/comment counts.
- * - Comments are fetched on mount and after posting/deleting a comment or post.
- * - The comment input is always visible at the bottom.
- * - Timestamps use `dayjs.fromNow()` for relative time formatting.
- */
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -77,174 +9,202 @@ import {
   Platform,
   TouchableOpacity,
   ActivityIndicator,
-} from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import Colors from "../../utils/Colors";
-import CustomHeader from "../../layouts/CustomHeader";
-import UserPostCard from "../../components/Card/UserPostCard";
-import CountLabel from "../../components/Input/CountLabel";
-import CommentCard from "../../components/Card/CommentCard";
-import CommentInput from "../../components/Input/CommentInput";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+  Button,
+} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { clearSession } from '../../redux/session/sessionSlice';
+import Colors from '../../utils/Colors';
+import CustomHeader from '../../layouts/CustomHeader';
+import UserPostCard from '../../components/Card/UserPostCard';
+import CountLabel from '../../components/Input/CountLabel';
+import CommentCard from '../../components/Card/CommentCard';
+import CommentInput from '../../components/Input/CommentInput';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 import {
-  fetchComments,
-  postComment,
-  deleteComment,
-  fetchPosts,
-  fetchUserPosts,
-  likePost,
-  unlikePost,
-  likeComment,
-  unlikeComment,
-  deletePost,
-} from "../../redux/posts/postsActions";
-import { fetchProfile } from "../../redux/profile/profileActions";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+  useGetProfileQuery,
+} from '../../redux/apis/profileApi';
+import {
+  useGetUserPostsQuery,
+  useGetCommentsQuery,
+  useAddCommentMutation,
+  useDeleteCommentMutation,
+  useLikeCommentMutation,
+  useUnlikeCommentMutation,
+} from '../../redux/apis/postsApi';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { debounce } from 'lodash';
+import DefaultImage from '../../assets/images/default-user-image.jpg';
+import { Image } from 'react-native';
+
+const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
 dayjs.extend(relativeTime);
 
 const PostCommentScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute();
   const dispatch = useDispatch();
+  const route = useRoute();
   const { post } = route.params;
-  const { comments, commentsLoading, commentsError, posts, userPosts } = useSelector((state) => state.posts);
+  const email = useSelector((state) => state.session.userSession?.email);
+  const isValidEmail = email && typeof email === 'string' && email.includes('@');
+  const [sessionLoaded, setSessionLoaded] = useState(false);
   const [commentCount, setCommentCount] = useState(post.commentCount || 0);
   const [showModal, setShowModal] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [likingComment, setLikingComment] = useState(null);
 
-  // Get username from profile state
-  const username = useSelector((state) => state.profile.profile.username);
+  const { data: profile, isLoading: profileLoading, error: profileError, refetch: refetchProfile } = useGetProfileQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+  const { data: userPosts, isLoading: userPostsLoading, error: userPostsError, refetch: refetchUserPosts } = useGetUserPostsQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+  const { data: commentsData, isLoading: commentsLoading, error: commentsError, refetch: refetchComments } = useGetCommentsQuery(post._id, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+  const [addComment] = useAddCommentMutation();
+  const [deleteComment] = useDeleteCommentMutation();
+  const [likeComment] = useLikeCommentMutation();
+  const [unlikeComment] = useUnlikeCommentMutation();
 
-  // Find the post in Redux state to get updated likeCount and likedBy
-  const currentPost = posts.find(p => p._id === post._id) || userPosts.find(p => p._id === post._id) || post;
+  const currentUsername = profile?.username || '';
+  const currentUserImage = profile?.image || fallbackImage;
+  const currentUserId = profile?._id || '';
+
+  console.log('PostCommentScreen: Profile state:', { username: currentUsername, userId: currentUserId, image: currentUserImage });
+
+  const currentPost = userPosts?.find(p => p._id === post._id) || post;
 
   useEffect(() => {
-    dispatch(fetchProfile());
-    if (post._id) {
-      dispatch(fetchComments(post._id));
-    }
-  }, [dispatch, post._id]);
-
-  const handleAvatarPress = () => {
-    navigation.navigate("CommunityStack", { screen: "PostProfile" });
-  };
-
-  const handleLikePress = async (commentId) => {
-    try {
-      setErrorMessage(null);
-      if (commentId) {
-        // Handle comment like/unlike
-        const comment = comments.find(c => c._id === commentId);
-        if (!comment) return;
-        if (comment.likedBy) {
-          await dispatch(unlikeComment(post._id, commentId));
+    const checkSession = async () => {
+      try {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const authToken = await AsyncStorage.getItem('authToken');
+        console.log('PostCommentScreen: userSession from AsyncStorage:', userSession);
+        console.log('PostCommentScreen: authToken from AsyncStorage:', authToken);
+        console.log('PostCommentScreen: email from Redux:', email);
+        console.log('PostCommentScreen: isValidEmail:', isValidEmail);
+        if (!userSession || !isValidEmail) {
+          console.log('PostCommentScreen: No valid session, redirecting to Login');
+          await AsyncStorage.multiRemove(['userSession', 'authToken']);
+          dispatch(clearSession());
+          navigation.replace('AuthStack', { screen: 'Login' });
         } else {
-          try {
-            await dispatch(likeComment(post._id, commentId));
-          } catch (likeErr) {
-            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Comment already liked") {
-              await dispatch(unlikeComment(post._id, commentId));
-            } else {
-              throw likeErr;
-            }
-          }
+          setSessionLoaded(true);
         }
-      } else {
-        // Handle post like/unlike
-        if (currentPost.likedBy) {
-          await dispatch(unlikePost(post._id));
-        } else {
-          try {
-            await dispatch(likePost(post._id));
-          } catch (likeErr) {
-            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
-              await dispatch(unlikePost(post._id));
-            } else {
-              throw likeErr;
-            }
-          }
-        }
+      } catch (error) {
+        console.error('PostCommentScreen: Error checking session:', error);
+        await AsyncStorage.multiRemove(['userSession', 'authToken']);
+        dispatch(clearSession());
+        navigation.replace('AuthStack', { screen: 'Login' });
       }
-    } catch (err) {
-      console.error('Like error:', err.message);
-      const message = err.response?.status === 401
-        ? 'Please log in to like this content.'
-        : err.response?.data?.error || 'Failed to update like';
-      setErrorMessage(message);
+    };
+    checkSession();
+  }, [dispatch, navigation, email, isValidEmail]);
+
+  const handleAvatarPress = useCallback((username) => {
+    if (!username) {
+      console.warn('PostCommentScreen: No username provided for profile navigation');
+      return;
     }
-  };
+    navigation.navigate('CommunityStack', {
+      screen: 'PostProfile',
+      params: { username },
+    });
+  }, [navigation]);
 
   const handlePostComment = async (commentText) => {
-    if (!commentText.trim()) return;
+    if (!sessionLoaded || !isValidEmail) {
+      console.log('PostCommentScreen: Invalid session, redirecting to Login');
+      navigation.replace('AuthStack', { screen: 'Login' });
+      return;
+    }
+    if (!commentText.trim()) {
+      setErrorMessage('Comment content is required');
+      return;
+    }
     try {
       setErrorMessage(null);
-      await dispatch(postComment(post._id, commentText));
-      setCommentCount((prev) => prev + 1);
-      await dispatch(fetchPosts());
-      await dispatch(fetchUserPosts());
+      const result = await addComment({ postId: post._id, content: commentText }).unwrap();
+      setCommentCount(result.commentCount);
     } catch (err) {
-      console.error("Post comment error:", err.message);
-      const message = err.response?.status === 500
-        ? 'Server error: Unable to post comment. Please try again later.'
-        : err.response?.data?.error || 'Failed to post comment';
-      setErrorMessage(message);
+      console.error('PostCommentScreen: Post comment error:', err);
+      setErrorMessage(err.data?.error || 'Failed to post comment');
     }
   };
 
   const handleDeleteComment = async () => {
+    if (!sessionLoaded || !isValidEmail) {
+      console.log('PostCommentScreen: Invalid session, redirecting to Login');
+      navigation.replace('AuthStack', { screen: 'Login' });
+      return;
+    }
     if (selectedCommentId) {
       try {
         setErrorMessage(null);
-        await dispatch(deleteComment(post._id, selectedCommentId));
-        setCommentCount((prev) => prev - 1);
-        await dispatch(fetchPosts());
-        await dispatch(fetchUserPosts());
+        const result = await deleteComment({ postId: post._id, commentId: selectedCommentId }).unwrap();
+        setCommentCount(result.commentCount);
       } catch (err) {
-        console.error("Delete comment error:", err.message);
-        const message = err.response?.status === 500
-          ? 'Server error: Unable to delete comment. Please try again later.'
-          : err.response?.data?.error || 'Failed to delete comment';
-        setErrorMessage(message);
+        console.error('PostCommentScreen: Delete comment error:', err);
+        setErrorMessage(err.data?.error || 'Failed to delete comment');
       }
       setShowModal(false);
       setSelectedCommentId(null);
     }
   };
 
-  const handleDeletePress = () => {
-    setSelectedPostId(post._id);
-    setShowModal(true);
-  };
-
-  const handleDeletePost = async () => {
-    if (selectedPostId) {
+  const handleLikeComment = useCallback(
+    debounce(async (commentId, likedBy) => {
+      if (likingComment || !sessionLoaded || !isValidEmail) return;
+      setLikingComment(commentId);
       try {
-        setErrorMessage(null);
-        await dispatch(deletePost(selectedPostId));
-        await dispatch(fetchPosts());
-        await dispatch(fetchUserPosts());
-        navigation.goBack(); // Navigate back after deleting the post
+        if (likedBy) {
+          await unlikeComment({ postId: post._id, commentId }).unwrap();
+        } else {
+          try {
+            await likeComment({ postId: post._id, commentId }).unwrap();
+          } catch (likeErr) {
+            if (
+              likeErr.status === 400 &&
+              likeErr.data?.error === 'Comment already liked'
+            ) {
+              await unlikeComment({ postId: post._id, commentId }).unwrap();
+            } else {
+              throw likeErr;
+            }
+          }
+        }
       } catch (err) {
-        console.error("Delete post error:", err.message);
-        const message = err.response?.status === 500
-          ? 'Server error: Unable to delete post. Please try again later.'
-          : err.response?.data?.error || 'Failed to delete post';
-        setErrorMessage(message);
+        console.error('PostCommentScreen: Like comment error:', err.message, err.data);
+      } finally {
+        setLikingComment(null);
       }
-      setShowModal(false);
-      setSelectedPostId(null);
-    }
-  };
+    }, 500),
+    [likeComment, unlikeComment, likingComment, post._id, sessionLoaded, isValidEmail]
+  );
+
+  const handleRefresh = useCallback(() => {
+    refetchProfile();
+    refetchUserPosts();
+    refetchComments();
+  }, [refetchProfile, refetchUserPosts, refetchComments]);
+
+  if (!sessionLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <CustomHeader title="Post" />
-
       <ScrollView
         style={styles.content}
         contentContainerStyle={{ paddingBottom: 120 }}
@@ -253,63 +213,89 @@ const PostCommentScreen = () => {
         <View>
           <UserPostCard
             user={{
-              username: currentPost.username,
-              avatar: currentPost.userImage || `https://ui-avatars.com/api/?name=${currentPost.username}`,
+              username: currentPost.username === currentUsername ? currentUsername : currentPost.username,
+              avatar: currentPost.username === currentUsername ? currentUserImage : (currentPost.userImage || fallbackImage),
             }}
             content={currentPost.text}
             hashtags={currentPost.hashtags}
-            timeAgo={currentPost.uploadedAt ? dayjs(currentPost.uploadedAt).fromNow() : "Unknown time"}
-            likeCount={currentPost.likeCount || 0}
+            timeAgo={currentPost.uploadedAt ? dayjs(currentPost.uploadedAt).fromNow() : 'Unknown time'}
+            likeCount={currentPost.likes || 0}
             likedBy={currentPost.likedBy || false}
             commentCount={commentCount}
-            onAvatarPress={handleAvatarPress}
-            onLikePress={() => handleLikePress()}
+            onAvatarPress={() => handleAvatarPress(currentPost.username)}
+            onLikePress={() => {}}
             onCommentPress={() => {}}
-            showDelete={currentPost.username === username}
-            onDeletePress={handleDeletePress}
+            showDelete={currentPost.username === currentUsername}
+            onDeletePress={() => {
+              setSelectedPostId(post._id);
+              setShowModal(true);
+            }}
             disableComment={true}
           />
         </View>
-
         <View style={styles.sectionContainer}>
-          <CountLabel label="comment" count={commentCount} style={styles.sectionTitle} />
-          {commentsLoading && (
+          <View style={styles.sectionHeader}>
+            <CountLabel label="comment" count={commentCount} style={styles.sectionTitle} />
+            <Button title="Refresh" onPress={handleRefresh} />
+          </View>
+          {(profileLoading || userPostsLoading || commentsLoading) && (
             <ActivityIndicator size="large" color={Colors.primary} style={{ marginVertical: 10 }} />
           )}
-          {commentsError && (
-            <Text style={styles.errorText}>Error loading comments: {commentsError}</Text>
+          {(commentsError || profileError || userPostsError) && (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>
+                {commentsError?.data?.error || profileError?.data?.error || userPostsError?.data?.error || 'Error loading data'}
+              </Text>
+              <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
+                <Text style={styles.retryButtonText}>Retry</Text>
+              </TouchableOpacity>
+            </View>
           )}
           {errorMessage && (
             <Text style={styles.errorText}>{errorMessage}</Text>
           )}
-          {!commentsLoading && !commentsError && comments.length === 0 && (
+          {!commentsLoading && !commentsError && commentsData?.comments?.length === 0 && (
             <Text style={styles.noCommentsText}>No comments yet</Text>
           )}
           <FlatList
-            data={comments}
+            data={commentsData?.comments || []}
             keyExtractor={(item) => item._id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                activeOpacity={1}
-                onLongPress={() => {
-                  setSelectedCommentId(item._id);
-                  setShowModal(true);
-                }}
-              >
-                <CommentCard
-                  avatar={item.userImage || `https://ui-avatars.com/api/?name=${item.username}`}
-                  name={item.username}
-                  timeAgo={item.uploadedAt ? dayjs(item.uploadedAt).fromNow() : "Unknown time"}
-                  likes={item.likes || 0}
-                  likedBy={item.likedBy || false}
-                  textContent={item.content}
-                  onLikePress={() => handleLikePress(item._id)}
-                />
-              </TouchableOpacity>
-            )}
+            renderItem={({ item }) => {
+              const isCurrentUser = item.userId === currentUserId;
+              const displayUsername = isCurrentUser ? currentUsername : item.username;
+              const displayAvatar = isCurrentUser ? currentUserImage : (item.userImage || fallbackImage);
+              console.log('PostCommentScreen: Rendering comment:', {
+                commentUsername: item.username,
+                commentUserId: item.userId,
+                isCurrentUser,
+                displayUsername,
+                displayAvatar,
+              });
+              return (
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onLongPress={() => {
+                    if (isCurrentUser) {
+                      setSelectedCommentId(item._id);
+                      setShowModal(true);
+                    }
+                  }}
+                >
+                  <CommentCard
+                    avatar={displayAvatar}
+                    name={displayUsername}
+                    timeAgo={item.createdAt ? dayjs(item.createdAt).fromNow() : 'Unknown time'}
+                    likes={item.likes || 0}
+                    likedBy={item.likedBy || false}
+                    textContent={item.content}
+                    onLikePress={() => handleLikeComment(item._id, item.likedBy)}
+                    disabled={likingComment === item._id}
+                  />
+                </TouchableOpacity>
+              );
+            }}
           />
         </View>
-
         <DeleteConfirmationModal
           isVisible={showModal}
           onCancel={() => {
@@ -317,13 +303,12 @@ const PostCommentScreen = () => {
             setSelectedCommentId(null);
             setSelectedPostId(null);
           }}
-          onConfirm={selectedPostId ? handleDeletePost : handleDeleteComment}
-          message={selectedPostId ? "Are you sure you want to delete this post?" : "Are you sure you want to delete this comment?"}
+          onConfirm={selectedPostId ? () => {} : handleDeleteComment}
+          message={selectedPostId ? 'Are you sure you want to delete this post?' : 'Are you sure you want to delete this comment?'}
         />
       </ScrollView>
-
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={90}
         style={styles.inputContainer}
       >
@@ -337,6 +322,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    justifyContent: 'center',
   },
   content: {
     paddingTop: 80,
@@ -347,14 +333,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   sectionTitle: {
     color: Colors.secondary,
     fontSize: 18,
-    fontWeight: "400",
+    fontWeight: '400',
     marginBottom: 20,
   },
   inputContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
@@ -363,14 +354,28 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: Colors.border,
   },
+  errorContainer: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
   errorText: {
     color: Colors.error,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 10,
+  },
+  retryButton: {
+    backgroundColor: Colors.primary,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontWeight: '600',
   },
   noCommentsText: {
     color: Colors.secondary,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 10,
   },
 });

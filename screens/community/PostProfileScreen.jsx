@@ -1,64 +1,4 @@
-/**
- * PostProfileScreen.js
- * ====================
- *
- * Screen for viewing a user's profile and their posts in the social app.
- * Integrates with Redux for fetching profile data and user posts, and supports post interactions.
- *
- * ## Features:
- * - Displays user profile information (avatar, username, joined date as relative time) using ProfileDisplay.
- * - Fetches and displays the user's posts for a specific username from Redux (oneUserPosts).
- * - Supports liking/unliking posts with debounce and loading state.
- * - Allows deleting posts with a confirmation modal (for the authenticated user's own posts).
- * - Navigates to the comment screen for each post.
- * - Handles loading, error, and empty states for posts and profile.
- * - Uses relative time formatting for post timestamps and profile createdAt.
- *
- * ## State:
- * - likingPost: Tracks post being liked/unliked to disable button during action.
- * - deletingPost: Tracks post being deleted to disable button during action.
- * - showDeleteModal: Controls visibility of the delete confirmation modal.
- * - selectedPostId: Tracks the post selected for deletion.
- *
- * ## Redux:
- * - Uses `useSelector` to get oneUserPosts, oneProfileUser, loading, error states from Redux.
- * - Uses `useDispatch` to trigger actions: `fetchOneUserPosts`, `likePost`, `unlikePost`, `deletePost`, `fetchOneProfileUser`.
- *
- * ## Navigation:
- * - Uses React Navigation for navigating to PostComment screen.
- * - Expects `username` as a navigation parameter to fetch specific user data.
- *
- * ## UI Structure:
- * - CustomHeader at the top.
- * - ProfileDisplay for user information (avatar, username, joined date).
- * - LineGradient divider.
- * - Posts section with UserPostCard components.
- * - DeleteConfirmationModal for post deletion.
- * - Loading indicator, error messages, and empty state text.
- *
- * ## Styling:
- * - Uses consistent padding, font weights, and color palette from `Colors`.
- * - Error and empty state UI is clearly styled for user feedback.
- *
- * ## Dependencies:
- * - React, React Native
- * - react-redux (for state management)
- * - react-navigation (for navigation)
- * - dayjs (for relative time display)
- * - lodash (for debounce)
- * - Custom components: CustomHeader, ProfileDisplay, UserPostCard, LineGradient, DeleteConfirmationModal
- *
- * ## Example Usage:
- *   navigation.navigate('PostProfile', { username: 'Zack' });
- *
- * ## Notes:
- * - Fetches user posts and profile data for the specified username on mount.
- * - Delete button is shown only for the authenticated user's own posts.
- * - Handles edge cases: no posts, loading, and API errors (including auth errors).
- * - Uses oneUserPosts and oneProfileUser for fetching data for a specific user.
- */
-
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -68,7 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { clearSession } from '../../redux/session/sessionSlice';
 import Colors from "../../utils/Colors";
 import CustomHeader from "../../layouts/CustomHeader";
 import ProfileDisplay from "../../components/Card/ProfileDisplay";
@@ -76,12 +18,15 @@ import { LineGradient } from "../../layouts/LineGradient";
 import UserPostCard from "../../components/Card/UserPostCard";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import {
-  fetchOneUserPosts,
-  likePost,
-  unlikePost,
-  deletePost,
-} from "../../redux/posts/postsActions";
-import { fetchOneProfileUser } from "../../redux/profile/profileActions";
+  useGetOneProfileQuery,
+  useGetProfileQuery,
+} from "../../redux/apis/profileApi";
+import {
+  useOneUserPostsQuery,
+  useLikePostMutation,
+  useUnlikePostMutation,
+  useDeletePostMutation,
+} from "../../redux/apis/postsApi";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { debounce } from "lodash";
@@ -94,56 +39,108 @@ dayjs.extend(relativeTime);
 
 const PostProfileScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const route = useRoute();
   const { username } = route.params || {};
-  const dispatch = useDispatch();
-  const { oneUserPosts, oneUserPostsLoading, oneUserPostsError } = useSelector((state) => state.posts);
-  const { oneProfileUser, oneProfileUserLoading, oneProfileUserError, profile } = useSelector((state) => state.profile);
+  const email = useSelector((state) => state.session.userSession?.email);
+  const isValidEmail = email && typeof email === 'string' && email.includes('@');
+  const [sessionLoaded, setSessionLoaded] = useState(false);
   const [likingPost, setLikingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
 
+  const { data: currentProfile, isLoading: profileLoading, error: profileError, refetch: refetchProfile } = useGetProfileQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+  const {
+    data: oneProfileUser,
+    isLoading: oneProfileUserLoading,
+    error: oneProfileUserError,
+    refetch: refetchOneProfile,
+  } = useGetOneProfileQuery(username, { skip: !sessionLoaded || !username });
+  const {
+    data: oneUserPosts,
+    isLoading: oneUserPostsLoading,
+    error: oneUserPostsError,
+    refetch: refetchOneUserPosts,
+  } = useOneUserPostsQuery(username, { skip: !sessionLoaded || !username });
+  const [likePost] = useLikePostMutation();
+  const [unlikePost] = useUnlikePostMutation();
+  const [deletePost] = useDeletePostMutation();
+
   useEffect(() => {
-    if (username) {
-      dispatch(fetchOneProfileUser(username));
-      dispatch(fetchOneUserPosts(username));
-    }
-  }, [dispatch, username]);
+    const checkSession = async () => {
+      try {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const authToken = await AsyncStorage.getItem('authToken');
+        console.log('PostProfileScreen: userSession from AsyncStorage:', userSession);
+        console.log('PostProfileScreen: authToken from AsyncStorage:', authToken);
+        console.log('PostProfileScreen: email from Redux:', email);
+        console.log('PostProfileScreen: isValidEmail:', isValidEmail);
+        if (!userSession || !isValidEmail) {
+          console.log('PostProfileScreen: No valid session, redirecting to Login');
+          await AsyncStorage.multiRemove(['userSession', 'authToken']);
+          dispatch(clearSession());
+          navigation.replace('AuthStack', { screen: 'Login' });
+        } else {
+          setSessionLoaded(true);
+        }
+      } catch (error) {
+        console.error('PostProfileScreen: Error checking session:', error);
+        await AsyncStorage.multiRemove(['userSession', 'authToken']);
+        dispatch(clearSession());
+        navigation.replace('AuthStack', { screen: 'Login' });
+      }
+    };
+    checkSession();
+  }, [dispatch, navigation, email, isValidEmail]);
 
   const handleLikePress = useCallback(
     debounce(async (postId, likedBy) => {
-      if (likingPost) return;
+      if (likingPost || !sessionLoaded || !isValidEmail) return;
       setLikingPost(postId);
       try {
         if (likedBy) {
-          await dispatch(unlikePost(postId));
+          await unlikePost(postId).unwrap();
         } else {
           try {
-            await dispatch(likePost(postId));
+            await likePost(postId).unwrap();
           } catch (likeErr) {
-            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
-              await dispatch(unlikePost(postId));
+            if (
+              likeErr.status === 400 &&
+              likeErr.data?.error === "Post already liked"
+            ) {
+              await unlikePost(postId).unwrap();
             } else {
               throw likeErr;
             }
           }
         }
       } catch (err) {
-        console.error('Like post error:', err.message, err.response?.data);
+        console.error('PostProfileScreen: Like post error:', err.message, err.data);
       } finally {
         setLikingPost(null);
       }
     }, 500),
-    [dispatch, likingPost]
+    [likePost, unlikePost, likingPost, sessionLoaded, isValidEmail]
   );
 
-  const handleCommentPress = (post) => {
-    navigation.navigate("CommunityStack", {
-      screen: "PostComment",
-      params: { post },
-    });
-  };
+const handleCommentPress = useCallback((post) => {
+  if (!sessionLoaded || !isValidEmail) {
+    console.log('PostProfileScreen: Invalid session, redirecting to Login');
+    navigation.replace('AuthStack', { screen: 'Login' });
+    return;
+  }
+  if (!post || !post._id) {
+    console.warn('PostProfileScreen: Invalid post object for comment navigation', post);
+    return;
+  }
+  navigation.navigate("CommunityStack", {
+    screen: "PostComment",
+    params: { post },
+  });
+}, [navigation, sessionLoaded, isValidEmail]);
 
   const handleDeletePress = useCallback((postId) => {
     setSelectedPostId(postId);
@@ -154,50 +151,56 @@ const PostProfileScreen = () => {
     if (selectedPostId && !deletingPost) {
       setDeletingPost(selectedPostId);
       try {
-        await dispatch(deletePost(selectedPostId));
+        await deletePost(selectedPostId).unwrap();
       } catch (err) {
-        console.error('Delete post error:', err.message, err.response?.data);
+        console.error('PostProfileScreen: Delete post error:', err.message, err.data);
       } finally {
         setDeletingPost(null);
         setShowDeleteModal(false);
         setSelectedPostId(null);
       }
     }
-  }, [dispatch, selectedPostId, deletingPost]);
+  }, [deletePost, selectedPostId, deletingPost]);
 
   const handleRetry = useCallback(() => {
-    if (username) {
-      dispatch(fetchOneUserPosts(username));
-      dispatch(fetchOneProfileUser(username));
-    }
-  }, [dispatch, username]);
+    refetchProfile();
+    refetchOneProfile();
+    refetchOneUserPosts();
+  }, [refetchProfile, refetchOneProfile, refetchOneUserPosts]);
 
   const handleLogin = useCallback(() => {
-    navigation.navigate("AuthStack", { screen: "Login" });
+    navigation.replace("AuthStack", { screen: "Login" });
   }, [navigation]);
+
+  if (!sessionLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <CustomHeader title="Profile" />
-
       <ScrollView
         style={styles.content}
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-        {oneProfileUserLoading && (
+        {(oneProfileUserLoading || profileLoading) && (
           <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />
         )}
-        {oneProfileUserError && (
+        {(oneProfileUserError || profileError) && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>
-              {oneProfileUserError.includes('401') || oneProfileUserError.includes('authentication token')
+              {oneProfileUserError?.status === 401 || profileError?.status === 401
                 ? 'Please log in to view this profile.'
-                : oneProfileUserError.includes('404')
+                : oneProfileUserError?.status === 404
                 ? `User ${username} not found.`
-                : `Error: ${oneProfileUserError}`}
+                : `Error: ${oneProfileUserError?.data?.message || profileError?.data?.message || 'Failed to load profile'}`}
             </Text>
-            {oneProfileUserError.includes('401') || oneProfileUserError.includes('authentication token') ? (
+            {oneProfileUserError?.status === 401 || profileError?.status === 401 ? (
               <TouchableOpacity style={styles.retryButton} onPress={handleLogin}>
                 <Text style={styles.retryButtonText}>Log In</Text>
               </TouchableOpacity>
@@ -208,15 +211,18 @@ const PostProfileScreen = () => {
             )}
           </View>
         )}
-        {!oneProfileUserLoading && !oneProfileUserError && oneProfileUser && (
+        {oneProfileUser && (
           <ProfileDisplay
-            avatar={oneProfileUser.image || fallbackImage }
-            name={oneProfileUser.username || "Unknown User"}
-            joinedDate={oneProfileUser.createdAt || "Unknown"}
+            image={oneProfileUser.image || fallbackImage}
+            username={oneProfileUser.username || 'Unknown User'}
+            email={oneProfileUser.email || ''}
+            winRate={oneProfileUser.winRate || 0}
+            totalBets={oneProfileUser.totalBets || 0}
+            averageOdds={oneProfileUser.averageOdds || 0}
           />
         )}
         <LineGradient />
-        <View>
+        <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Posts</Text>
           {oneUserPostsLoading && (
             <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />
@@ -224,21 +230,15 @@ const PostProfileScreen = () => {
           {oneUserPostsError && (
             <View style={styles.errorContainer}>
               <Text style={styles.errorText}>
-                {oneUserPostsError.includes('401') || oneUserPostsError.includes('authentication token')
+                {oneUserPostsError.status === 401
                   ? 'Please log in to view posts.'
-                  : oneUserPostsError.includes('404')
-                  ? `No posts found for ${username}.`
-                  : `Error: ${oneUserPostsError}`}
+                  : oneUserPostsError.status === 404
+                  ? 'No posts found.'
+                  : `Error: ${oneUserPostsError.data?.message || 'Failed to load posts'}`}
               </Text>
-              {oneUserPostsError.includes('401') || oneUserPostsError.includes('authentication token') ? (
-                <TouchableOpacity style={styles.retryButton} onPress={handleLogin}>
-                  <Text style={styles.retryButtonText}>Log In</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
-                  <Text style={styles.retryButtonText}>Retry</Text>
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
+                <Text style={styles.retryButtonText}>Retry</Text>
+              </TouchableOpacity>
             </View>
           )}
           {!oneUserPostsLoading && !oneUserPostsError && Array.isArray(oneUserPosts) && oneUserPosts.length > 0 ? (
@@ -246,19 +246,20 @@ const PostProfileScreen = () => {
               <UserPostCard
                 key={post._id}
                 user={{
-                  username: post.username || "Unknown User",
-                  avatar: post.userImage || `https://ui-avatars.com/api/?name=${post.username}`,
+                  username: post.username || 'Unknown User',
+                  avatar: post.userImage || fallbackImage,
                 }}
                 content={post.text}
-                hashtags={post.hashtags}
-                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : "Unknown time"}
-                likeCount={post.likeCount || 0}
+                hashtags={post.hashtags || []}
+                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : 'Unknown time'}
+                likeCount={post.likes || 0}
                 likedBy={post.likedBy || false}
                 commentCount={post.commentCount || 0}
+                onAvatarPress={() => {}}
                 onLikePress={() => handleLikePress(post._id, post.likedBy)}
-                onDeletePress={() => handleDeletePress(post._id)}
                 onCommentPress={() => handleCommentPress(post)}
-                showDelete={profile?.username === post.username}
+                showDelete={currentProfile?.username === post.username}
+                onDeletePress={() => handleDeletePress(post._id)}
                 disabled={likingPost === post._id || deletingPost === post._id}
                 disableComment={false}
                 style={{ marginBottom: 15 }}
@@ -271,7 +272,6 @@ const PostProfileScreen = () => {
           )}
         </View>
       </ScrollView>
-
       <DeleteConfirmationModal
         isVisible={showDeleteModal}
         onCancel={() => {
@@ -289,27 +289,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    justifyContent: 'center',
   },
   content: {
     paddingTop: 80,
     paddingHorizontal: 15,
   },
+  sectionContainer: {
+    marginTop: 20,
+  },
   sectionTitle: {
     color: Colors.secondary,
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 20,
   },
   loader: {
     marginVertical: 20,
   },
   errorContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 10,
   },
   errorText: {
-    color: "red",
-    textAlign: "center",
+    color: 'red',
+    textAlign: 'center',
     marginBottom: 10,
   },
   retryButton: {
@@ -319,12 +323,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   retryButtonText: {
-    color: "#fff",
-    fontWeight: "600",
+    color: '#fff',
+    fontWeight: '600',
   },
   noPostsText: {
     color: Colors.secondary,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 10,
   },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from 'react-redux';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { LineGradient } from "../../layouts/LineGradient";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,24 +20,57 @@ import Colors from "../../utils/Colors";
 import Header from "../../layouts/Header";
 import { profileData } from "../../json/ProfileData";
 import GradientButton from "../../components/Button/GradientButton";
-import { fetchProfile } from "../../redux/profile/profileActions";
+import { useGetProfileQuery } from "../../redux/apis/profileApi";
+import { clearSession } from '../../redux/session/sessionSlice';
 import DefaultImage from '../../assets/images/default-user-image.jpg';
 
+const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
-
   const dispatch = useDispatch();
-  const { profile, error } = useSelector((state) => state.profile);
+  const navigation = useNavigation();
+  const email = useSelector((state) => state.session.userSession?.email);
+  const isValidEmail = email && typeof email === 'string' && email.includes('@');
+  const [sessionLoaded, setSessionLoaded] = useState(false);
 
+  // Check session on mount
   useEffect(() => {
-    dispatch(fetchProfile());
-  }, [dispatch]);
+    const checkSession = async () => {
+      try {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const authToken = await AsyncStorage.getItem('authToken');
+        console.log('ProfileScreen: userSession from AsyncStorage:', userSession);
+        console.log('ProfileScreen: authToken from AsyncStorage:', authToken);
+        console.log('ProfileScreen: email from Redux:', email);
+        console.log('ProfileScreen: isValidEmail:', isValidEmail);
+        if (!userSession || !isValidEmail) {
+          console.log('ProfileScreen: No valid session, redirecting to Login');
+          await AsyncStorage.multiRemove(['userSession', 'authToken']);
+          dispatch(clearSession());
+          navigation.replace('AuthStack', { screen: 'Login' });
+        } else {
+          setSessionLoaded(true);
+        }
+      } catch (error) {
+        console.error('ProfileScreen: Error checking session:', error);
+        await AsyncStorage.multiRemove(['userSession', 'authToken']);
+        dispatch(clearSession());
+        navigation.replace('AuthStack', { screen: 'Login' });
+      }
+    };
+    checkSession();
+  }, [dispatch, navigation, email, isValidEmail]);
+
+  const { data: profile, isLoading, error, refetch } = useGetProfileQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
 
   const handleNavigate = async (route) => {
     if (route === "AuthStack") {
-      await AsyncStorage.removeItem("userSession");
-      await AsyncStorage.removeItem("authToken");
+      console.log('ProfileScreen: Logging out, clearing session');
+      await AsyncStorage.multiRemove(['userSession', 'authToken']);
+      dispatch(clearSession());
+      navigation.replace("AuthStack", { screen: 'Login' });
     } else {
       navigation.navigate("ProfileStack", { screen: route });
     }
@@ -48,7 +82,6 @@ const ProfileScreen = () => {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
       style={styles.item}
-      onPress={() => handleNavigate(item.route)}
     >
       <View style={styles.itemLeft}>
         <Ionicons
@@ -68,10 +101,17 @@ const ProfileScreen = () => {
     </LinearGradient>
   );
 
+  if (!sessionLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Header />
-
       <ScrollView
         style={styles.content}
         contentContainerStyle={{ paddingBottom: 100 }}
@@ -85,18 +125,21 @@ const ProfileScreen = () => {
           style={styles.profileCard}
         >
           <View style={styles.imageSection}>
-              <Image
-                source={{
-                  uri: profile?.image || DefaultImage,
-                }}
-                style={styles.avatar}
-              />
+            <Image
+              source={{ uri: profile?.image || fallbackImage }}
+              style={styles.avatar}
+              onError={() => console.log("Profile image load error")}
+            />
             <View>
-              <Text style={styles.name}>{profile.username ? profile.username : 'Loading...'}</Text>
-              <Text style={styles.email}>{profile.email ? profile.email : 'Loading...'}</Text>
+              <Text style={styles.name}>
+                {isLoading ? "Loading..." : profile?.username || "User"}
+              </Text>
+              <Text style={styles.email}>
+                {isLoading ? "Loading..." : profile?.email || "N/A"}
+              </Text>
             </View>
           </View>
-          <LineGradient style={{marginVertical: 18}} />
+          <LineGradient style={{ marginVertical: 18 }} />
           <TouchableOpacity
             style={styles.upgradeBtn}
             onPress={() =>
@@ -109,6 +152,18 @@ const ProfileScreen = () => {
             <AntDesign name="rightcircle" size={24} color="#ffcc00" />
           </TouchableOpacity>
         </LinearGradient>
+
+        {/* Error Message */}
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>
+              {error.data?.message || error.message || "Failed to load profile"}
+            </Text>
+            <TouchableOpacity onPress={() => refetch()}>
+              <Text style={styles.retryText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {/* List Items */}
         <FlatList
@@ -126,6 +181,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    justifyContent: 'center',
   },
   content: {
     paddingTop: 80,
@@ -143,13 +199,13 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   avatar: {
-     width: 60,
-  height: 60,
-  borderWidth: 1,
-  borderColor: "rgba(255, 255, 255, 0.5)",
-  borderRadius: 30,
-  justifyContent: "center",
-  alignItems: "center",
+    width: 60,
+    height: 60,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.5)",
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
   name: {
     color: Colors.secondary,
@@ -200,6 +256,22 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 18,
     fontWeight: "500",
+  },
+  errorText: {
+    color: Colors.error,
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  errorContainer: {
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  retryText: {
+    color: Colors.primary,
+    fontSize: 16,
+    fontWeight: '600',
+    marginTop: 5,
   },
 });
 

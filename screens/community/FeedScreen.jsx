@@ -1,73 +1,22 @@
-/**
- * FeedScreen.js
- * =============
- *
- * Screen for displaying trending hashtags and posts.
- * Supports pull-to-refresh, focus-based refresh, post liking, and navigation to comments and user profiles.
- *
- * ## Features:
- * - Displays trending hashtags as selectable tags.
- * - Fetches and displays trending posts from the Redux store.
- * - Pull-to-refresh and focus-based refresh (on screen focus) for new posts.
- * - Like/unlike functionality for posts with debounce and loading state.
- * - Navigates to comment screen and user profile from each post.
- * - Shows loading indicator, error messages, and retry button as needed.
- *
- * ## State:
- * - tags: Array of hashtag objects (label, emoji, selected).
- * - refreshing: Boolean for pull-to-refresh state.
- * - likingPost: Tracks post being liked/unliked to disable button during action.
- * - lastFetch: Timestamp of the last fetch to enforce a cooldown.
- *
- * ## Redux:
- * - Uses `useSelector` to get posts, loading, and error state from Redux.
- * - Uses `useDispatch` to trigger actions: `fetchPosts`, `likePost`, `unlikePost`.
- *
- * ## Effects:
- * - Uses `useFocusEffect` to load posts with a cooldown period.
- * - Cleans up any resources on unmount.
- *
- * ## Handlers:
- * - loadPosts: Loads posts from the API with caching.
- * - onRefresh: Pull-to-refresh handler.
- * - toggleTag: Toggles selection state for hashtags.
- * - handleAvatarPress: Navigates to user profile screen with the post's username.
- * - handleLikePress: Likes or unlikes a post, with debounce and error handling.
- * - handleCommentPress: Navigates to comment screen for a post.
- * - handleRetry: Retries fetching posts on error.
- *
- * ## UI Structure:
- * - Trending Hashtags section (Tag components).
- * - Divider (LineGradient).
- * - Trending Posts section (UserPostCard components).
- * - Loading indicator, error messages, and retry button.
- *
- * ## Styling:
- * - Uses consistent padding, font weights, and color palette from `Colors`.
- *
- * ## Dependencies:
- * - React, React Native
- * - react-redux (for state management)
- * - react-navigation (for navigation)
- * - dayjs (for relative time display)
- * - lodash (for debounce)
- * - Custom components: Tag, UserPostCard, LineGradient
- *
- * ## Notes:
- * - Posts are refreshed with a cooldown to reduce API calls.
- * - Removed excessive debug logging to reduce terminal clutter.
- * - Handles edge cases: no posts, loading, and API errors.
- */
-
-import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
+import React, { useState, useCallback, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+  RefreshControl,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { clearSession } from '../../redux/session/sessionSlice';
 import Colors from "../../utils/Colors";
 import { LineGradient } from "../../layouts/LineGradient";
 import Tag from "../../components/List/Tag";
 import UserPostCard from "../../components/Card/UserPostCard";
-import { fetchPosts, likePost, unlikePost } from "../../redux/posts/postsActions";
+import { useGetPostsQuery, useLikePostMutation, useUnlikePostMutation } from "../../redux/apis/postsApi";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { debounce } from 'lodash';
@@ -90,42 +39,77 @@ const FETCH_COOLDOWN = 5 * 60 * 1000; // 5 minutes
 export default function FeedScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
+  const email = useSelector((state) => state.session.userSession?.email);
+  const isValidEmail = email && typeof email === 'string' && email.includes('@');
+  const [sessionLoaded, setSessionLoaded] = useState(false);
   const [tags, setTags] = useState(tagsData);
   const [refreshing, setRefreshing] = useState(false);
   const [likingPost, setLikingPost] = useState(null);
   const [lastFetch, setLastFetch] = useState(0);
-  const { posts, loading, error } = useSelector((state) => state.posts);
+
+  const { data: posts, isLoading, error, refetch } = useGetPostsQuery(undefined, {
+    skip: !sessionLoaded,
+  });
+  const [likePost] = useLikePostMutation();
+  const [unlikePost] = useUnlikePostMutation();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const authToken = await AsyncStorage.getItem('authToken');
+        console.log('FeedScreen: userSession from AsyncStorage:', userSession);
+        console.log('FeedScreen: authToken from AsyncStorage:', authToken);
+        console.log('FeedScreen: email from Redux:', email);
+        console.log('FeedScreen: isValidEmail:', isValidEmail);
+        if (!userSession || !isValidEmail) {
+          console.log('FeedScreen: No valid session, redirecting to Login');
+          await AsyncStorage.multiRemove(['userSession', 'authToken']);
+          dispatch(clearSession());
+          navigation.replace('AuthStack', { screen: 'Login' });
+        } else {
+          setSessionLoaded(true);
+        }
+      } catch (error) {
+        console.error('FeedScreen: Error checking session:', error);
+        await AsyncStorage.multiRemove(['userSession', 'authToken']);
+        dispatch(clearSession());
+        navigation.replace('AuthStack', { screen: 'Login' });
+      }
+    };
+    checkSession();
+  }, [dispatch, navigation, email, isValidEmail]);
 
   const loadPosts = useCallback(async (force = false) => {
     const now = Date.now();
     if (!force && now - lastFetch < FETCH_COOLDOWN) {
-      console.log('Skipping fetch: within cooldown period');
+      console.log('FeedScreen: Skipping fetch: within cooldown period');
       return;
     }
     try {
-      await dispatch(fetchPosts());
+      await refetch();
       setLastFetch(now);
     } catch (err) {
-      console.error("Error loading posts:", err.message);
-      dispatch({ type: "FETCH_POSTS_FAILURE", payload: err.message });
+      console.error("FeedScreen: Error loading posts:", err);
     }
-  }, [dispatch, lastFetch]);
+  }, [refetch, lastFetch]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await loadPosts(true); // Force fetch on pull-to-refresh
+    await loadPosts(true);
     setRefreshing(false);
   }, [loadPosts]);
 
   const handleRetry = useCallback(() => {
-    loadPosts(true); // Force fetch on retry
+    loadPosts(true);
   }, [loadPosts]);
 
   useFocusEffect(
     useCallback(() => {
-      loadPosts();
-    }, [loadPosts])
+      if (sessionLoaded) {
+        loadPosts();
+      }
+    }, [loadPosts, sessionLoaded])
   );
 
   const toggleTag = (index) => {
@@ -136,7 +120,7 @@ export default function FeedScreen() {
 
   const handleAvatarPress = useCallback((username) => {
     if (!username) {
-      console.warn('No username provided for profile navigation');
+      console.warn('FeedScreen: No username provided for profile navigation');
       return;
     }
     navigation.navigate('CommunityStack', {
@@ -147,37 +131,54 @@ export default function FeedScreen() {
 
   const handleLikePress = useCallback(
     debounce(async (postId, likedBy) => {
-      if (likingPost) return;
+      if (likingPost || !sessionLoaded || !isValidEmail) return;
       setLikingPost(postId);
       try {
         if (likedBy) {
-          await dispatch(unlikePost(postId));
+          await unlikePost(postId).unwrap();
         } else {
           try {
-            await dispatch(likePost(postId));
+            await likePost(postId).unwrap();
           } catch (likeErr) {
-            if (likeErr.response?.status === 400 && likeErr.response?.data?.error === "Post already liked") {
-              await dispatch(unlikePost(postId));
+            if (
+              likeErr.status === 400 &&
+              likeErr.data?.error === "Post already liked"
+            ) {
+              await unlikePost(postId).unwrap();
             } else {
               throw likeErr;
             }
           }
         }
       } catch (err) {
-        console.error('Like post error:', err.message, err.response?.data);
+        console.error('FeedScreen: Like post error:', err.message, err.data);
       } finally {
         setLikingPost(null);
       }
     }, 500),
-    [dispatch, likingPost]
+    [likePost, unlikePost, likingPost, sessionLoaded, isValidEmail]
   );
 
   const handleCommentPress = (post) => {
+    if (!sessionLoaded || !isValidEmail) {
+      console.log('FeedScreen: Invalid session, redirecting to Login');
+      navigation.replace('AuthStack', { screen: 'Login' });
+      return;
+    }
+    console.log(post);
     navigation.navigate("CommunityStack", {
       screen: "PostComment",
       params: { post },
     });
   };
+
+  if (!sessionLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -203,27 +204,29 @@ export default function FeedScreen() {
             ))}
           </View>
         </View>
-
         <LineGradient />
-
         <View>
           <Text style={styles.sectionTitle}>Trending Posts</Text>
-          {loading && !refreshing && <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />}
+          {isLoading && !refreshing && <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />}
           {error && (
             <View style={styles.errorContainer}>
-              <Text style={styles.errorText}>Error: {error}</Text>
+              <Text style={styles.errorText}>
+                {error.status === 401
+                  ? 'Please log in to view posts.'
+                  : error.data?.message || 'Failed to load posts'}
+              </Text>
               <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
                 <Text style={styles.retryButtonText}>Retry</Text>
               </TouchableOpacity>
             </View>
           )}
-          {!loading && !error && posts.length > 0 ? (
+          {!isLoading && !error && posts?.length > 0 ? (
             posts.map((post) => (
               <UserPostCard
                 key={post._id}
                 user={{
                   username: post.username,
-                  avatar: post.userImage || fallbackImage,
+                  avatar: post.userImage,
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
@@ -240,7 +243,7 @@ export default function FeedScreen() {
               />
             ))
           ) : (
-            !loading && <Text style={styles.noPostsText}>No posts available</Text>
+            !isLoading && !error && <Text style={styles.noPostsText}>No posts available</Text>
           )}
         </View>
       </ScrollView>
@@ -252,6 +255,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    justifyContent: 'center',
   },
   content: {
     paddingTop: 20,

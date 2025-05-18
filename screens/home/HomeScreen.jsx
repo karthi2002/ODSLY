@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import Header from "../../layouts/Header";
 import Colors from "../../utils/Colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -25,28 +28,90 @@ import BetCard from "../../components/Card/BetCard";
 import GradientButton from "../../components/Button/GradientButton";
 import { SubscriptionCard } from "../../components/Card/SubscriptionCard";
 import { LineGradient } from "../../layouts/LineGradient";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProfile } from "../../redux/profile/profileActions";
+import { useGetProfileQuery } from "../../redux/apis/profileApi";
+import { clearSession } from '../../redux/session/sessionSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
-
   const dispatch = useDispatch();
-    const { profile, error } = useSelector((state) => state.profile);
-  
-    useEffect(() => {
-      dispatch(fetchProfile());
-    }, [dispatch]);
+  const navigation = useNavigation();
+  const email = useSelector((state) => state.session.userSession?.email);
+  const isValidEmail = email && typeof email === 'string' && email.includes('@');
+  const [sessionLoaded, setSessionLoaded] = useState(false);
+
+  // Check session on mount
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const authToken = await AsyncStorage.getItem('authToken');
+        console.log('HomeScreen: userSession from AsyncStorage:', userSession);
+        console.log('HomeScreen: authToken from AsyncStorage:', authToken);
+        console.log('HomeScreen: email from Redux:', email);
+        console.log('HomeScreen: isValidEmail:', isValidEmail);
+        if (!userSession || !isValidEmail) {
+          console.log('HomeScreen: No valid session, redirecting to Login');
+          await AsyncStorage.multiRemove(['userSession', 'authToken']);
+          dispatch(clearSession());
+          navigation.replace('AuthStack', { screen: 'Login' });
+        } else {
+          setSessionLoaded(true);
+        }
+      } catch (error) {
+        console.error('HomeScreen: Error checking session:', error);
+        await AsyncStorage.multiRemove(['userSession', 'authToken']);
+        dispatch(clearSession());
+        navigation.replace('AuthStack', { screen: 'Login' });
+      }
+    };
+    checkSession();
+  }, [dispatch, navigation, email, isValidEmail]);
+
+  const { data: profile, isLoading, error, refetch } = useGetProfileQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+
+  if (!sessionLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Header />
-
       <ScrollView
         style={styles.content}
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-        <GradientText text={`Welcome back, ${profile.username}!`} style={{ fontSize: 20 }} />
+        <GradientText
+          text={`Welcome back, ${profile?.username || "User"}!`}
+          style={{ fontSize: 20 }}
+        />
+        {isLoading && (
+          <Text style={styles.loadingText}>Loading profile...</Text>
+        )}
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>
+              {error.data?.message || error.data?.error || error.message || "Failed to load profile"}
+            </Text>
+            <TouchableOpacity onPress={() => refetch()}>
+              <Text style={styles.retryText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {!isLoading && !error && !profile && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>No profile data available</Text>
+            <TouchableOpacity onPress={() => refetch()}>
+              <Text style={styles.retryText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         <View style={styles.statsGrid}>
           {statsData.map((item, index) => (
@@ -81,7 +146,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Active Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }}>
             {activeBets.map((bet, index) => (
               <BetCard key={index} data={bet} type="active" />
             ))}
@@ -92,7 +157,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Live Game Watchlist</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }}>
             {liveWatchlist.map((bet, index) => (
               <BetCard key={index} data={bet} type="live" />
             ))}
@@ -103,7 +168,6 @@ export default function HomeScreen() {
 
         <View style={styles.inSightContainer}>
           <Text style={styles.sectionTitle}>Betting Insights</Text>
-
           {BettingInsights.map((item, index) => (
             <LinearGradient
               key={index}
@@ -121,7 +185,6 @@ export default function HomeScreen() {
               </View>
             </LinearGradient>
           ))}
-
           <GradientButton
             label="View More"
             onPress={() => {}}
@@ -133,9 +196,9 @@ export default function HomeScreen() {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Upcoming Bets</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }} >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginRight: -15 }}>
             {upcomingBets.map((bet, index) => (
-              <BetCard key={index} data={bet} type={"upcoming"}/>
+              <BetCard key={index} data={bet} type="upcoming" />
             ))}
           </ScrollView>
         </View>
@@ -181,6 +244,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    justifyContent: 'center',
   },
   sectionContainer: {
     backgroundColor: Colors.background,
@@ -286,5 +350,26 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     fontWeight: "500",
   },
+  loadingText: {
+    color: Colors.secondary,
+    fontSize: 16,
+    textAlign: "center",
+    marginVertical: 10,
+  },
+  errorText: {
+    color: Colors.error,
+    fontSize: 16,
+    textAlign: "center",
+    marginVertical: 10,
+  },
+  errorContainer: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  retryText: {
+    color: Colors.primary,
+    fontSize: 16,
+    fontWeight: '600',
+    marginTop: 5,
+  },
 });
-

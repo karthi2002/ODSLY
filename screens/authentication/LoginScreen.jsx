@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Colors from "../../utils/Colors";
 import {
   View,
@@ -11,7 +11,8 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-
+import { useDispatch } from 'react-redux';
+import { setSession } from '../../redux/session/sessionSlice'; // Verify path
 import Google from "../../assets/icons/google.png";
 import Apple from "../../assets/icons/apple.png";
 import Logo from "../../layouts/Logo";
@@ -32,17 +33,20 @@ const LoginScreen = () => {
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const onLoginPress = async () => {
-    setLoading(true); 
+    setLoading(true);
+    console.log("Login Pressed");
     await handleLogin({
       emailOrPhone,
       password,
       navigation,
       setEmailError,
       setPasswordError,
+      dispatch,
     });
-    setLoading(false); 
+    setLoading(false);
   };
 
   return (

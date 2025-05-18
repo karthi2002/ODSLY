@@ -11,7 +11,7 @@ import ProfileSetupScreen from '../screens/authentication/ProfileSetupScreen.jsx
 import SuccessScreen from '../screens/authentication/SuccessScreen.jsx';
 import WelcomeScreen from '../screens/authentication/WelcomeScreen.jsx';
 import AuthScreen from '../screens/authentication/AuthScreen.jsx';
-import NotificationScreen from '../screens/NotificationScreen.jsx'
+
 
 const Stack = createNativeStackNavigator();
 
