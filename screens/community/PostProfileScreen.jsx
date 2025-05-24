@@ -18,7 +18,7 @@ import { LineGradient } from "../../layouts/LineGradient";
 import UserPostCard from "../../components/Card/UserPostCard";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import {
-  useGetOneProfileQuery,
+  useGetOneProfileUserQuery,
   useGetProfileQuery,
 } from "../../redux/apis/profileApi";
 import {
@@ -58,7 +58,7 @@ const PostProfileScreen = () => {
     isLoading: oneProfileUserLoading,
     error: oneProfileUserError,
     refetch: refetchOneProfile,
-  } = useGetOneProfileQuery(username, { skip: !sessionLoaded || !username });
+  } = useGetOneProfileUserQuery(username, { skip: !sessionLoaded || !username });
   const {
     data: oneUserPosts,
     isLoading: oneUserPostsLoading,
@@ -68,6 +68,23 @@ const PostProfileScreen = () => {
   const [likePost] = useLikePostMutation();
   const [unlikePost] = useUnlikePostMutation();
   const [deletePost] = useDeletePostMutation();
+
+  // Log route.params, oneProfileUser, and errors
+  useEffect(() => {
+    console.log('PostProfileScreen: route.params:', route.params);
+    console.log('PostProfileScreen: username:', username);
+    console.log('PostProfileScreen: sessionLoaded:', sessionLoaded);
+    if (oneProfileUser) {
+      console.log('PostProfileScreen: oneProfileUser:', {
+        createdAt: oneProfileUser.createdAt, // Fix: Log createdAt correctly
+        username: oneProfileUser.username,
+        email: oneProfileUser.email,
+      });
+    }
+    if (oneProfileUserError) {
+      console.log('PostProfileScreen: oneProfileUserError:', oneProfileUserError);
+    }
+  }, [route.params, username, sessionLoaded, oneProfileUser, oneProfileUserError]);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -213,12 +230,9 @@ const handleCommentPress = useCallback((post) => {
         )}
         {oneProfileUser && (
           <ProfileDisplay
-            image={oneProfileUser.image || fallbackImage}
-            username={oneProfileUser.username || 'Unknown User'}
-            email={oneProfileUser.email || ''}
-            winRate={oneProfileUser.winRate || 0}
-            totalBets={oneProfileUser.totalBets || 0}
-            averageOdds={oneProfileUser.averageOdds || 0}
+            avatar={oneProfileUser.image || fallbackImage }
+            name={oneProfileUser.username || "Unknown User"}
+            joinedDate={oneProfileUser.createdAt || "Unknown"}
           />
         )}
         <LineGradient />

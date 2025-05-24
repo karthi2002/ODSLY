@@ -34,15 +34,18 @@ export const profileApi = createApi({
           body: { email },
         };
       },
-      transformResponse: (response) => ({
-        _id: response._id,
-        fullName: response.fullName || null,
-        email: response.email || null,
-        username: response.username || null,
-        image: response.image || fallbackImage,
-        sports: response.sports || [],
-        bettingPreference: response.bettingPreference || null,
-      }),
+      transformResponse: (response) => {
+        console.log('getProfile: Response', response);
+        return {
+          _id: response._id || response.user?._id,
+          fullName: response.fullName || response.user?.fullName || null,
+          email: response.email || response.user?.email || null,
+          username: response.username || response.user?.username || null,
+          image: response.image || response.user?.image || fallbackImage,
+          sports: response.sports || response.user?.sports || [],
+          bettingPreference: response.bettingPreference || response.user?.bettingPreference || null,
+        };
+      },
       providesTags: ['Profile'],
     }),
     getOneProfileUser: builder.query({
@@ -51,15 +54,19 @@ export const profileApi = createApi({
         method: 'GET',
         params: { username },
       }),
-      transformResponse: (response) => ({
-        _id: response._id,
-        fullName: response.fullName || null,
-        email: response.email || null,
-        username: response.username || null,
-        image: response.image || fallbackImage,
-        sports: response.sports || [],
-        bettingPreference: response.bettingPreference || null,
-      }),
+      transformResponse: (response) => {
+        console.log('getOneProfileUser: Response', response);
+        return {
+          _id: response._id || response.user?._id,
+          fullName: response.fullName || response.user?.fullName || null,
+          email: response.email || response.user?.email || null,
+          username: response.username || response.user?.username || null,
+          image: response.image || response.user?.image || fallbackImage,
+          sports: response.sports || response.user?.sports || [],
+          bettingPreference: response.bettingPreference || response.user?.bettingPreference || null,
+          createdAt: response.createdAt || response.user?.createdAt || null,
+        };
+      },
       providesTags: ['Profile'],
     }),
     modifyUsername: builder.mutation({

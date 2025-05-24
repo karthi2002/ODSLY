@@ -22,23 +22,26 @@ export const postsApi = createApi({
   tagTypes: ['Posts', 'Comments'],
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => ({
-        url: '/get-all-post',
-        method: 'GET',
-      }),
-      transformResponse: (response) => response.map(post => ({
-        _id: post._id,
-        username: post.username || 'Unknown User',
-        userImage: post.userImage || fallbackImage,
-        text: post.text,
-        hashtags: post.hashtags || [],
-        uploadedAt: post.uploadedAt,
-        likeCount: post.likes || 0,
-        likedBy: post.likedBy || false,
-        commentCount: post.commentCount || 0,
-      })),
-      providesTags: ['Posts'],
-    }),
+  query: () => ({
+    url: '/get-all-post',
+    method: 'GET',
+  }),
+  transformResponse: (response) => {
+    console.log('postsApi: getPosts response:', response);
+    return response.map(post => ({
+      _id: post._id,
+      username: post.username || 'Unknown User',
+      userImage: post.userImage || fallbackImage,
+      text: post.text,
+      hashtags: post.hashtags || [],
+      uploadedAt: post.uploadedAt,
+      likeCount: post.likes || 0,
+      likedBy: post.likedBy || false,
+      commentCount: post.commentCount || 0,
+    }));
+  },
+  providesTags: ['Posts'],
+}),
     getUserPosts: builder.query({
       query: (email) => {
         console.log('getUserPosts: Received email', email);
@@ -132,6 +135,7 @@ export const postsApi = createApi({
       transformResponse: (response) => ({
         comments: response.comments.map(comment => ({
           _id: comment._id,
+          userId: comment.userId,
           username: comment.username || 'Unknown User',
           userImage: comment.userImage || fallbackImage,
           content: comment.content,

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,31 +7,34 @@ import {
   ActivityIndicator,
   RefreshControl,
   TouchableOpacity,
-} from "react-native";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+} from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { clearSession } from '../../redux/session/sessionSlice';
-import Colors from "../../utils/Colors";
-import { LineGradient } from "../../layouts/LineGradient";
-import Tag from "../../components/List/Tag";
-import UserPostCard from "../../components/Card/UserPostCard";
-import { useGetPostsQuery, useLikePostMutation, useUnlikePostMutation } from "../../redux/apis/postsApi";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import Colors from '../../utils/Colors';
+import { LineGradient } from '../../layouts/LineGradient';
+import Tag from '../../components/List/Tag';
+import UserPostCard from '../../components/Card/UserPostCard';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import { useGetPostsQuery, useLikePostMutation, useUnlikePostMutation, useDeletePostMutation } from '../../redux/apis/postsApi';
+import { useGetProfileQuery } from '../../redux/apis/profileApi';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { debounce } from 'lodash';
 import DefaultImage from '../../assets/images/default-user-image.jpg';
 import { Image } from 'react-native';
+import { profileApi } from '../../redux/apis/profileApi';
 
 const fallbackImage = Image.resolveAssetSource(DefaultImage).uri;
 
 dayjs.extend(relativeTime);
 
 const tagsData = [
-  { label: "#NBAWinners", emoji: "🏀", selected: false },
-  { label: "#ParlayKings", emoji: "🔥", selected: false },
-  { label: "#BigWins", emoji: "💰", selected: false },
-  { label: "#UnderdogBets", emoji: "⚽", selected: false },
+  { label: '#NBAWinners', emoji: '🏀', selected: false },
+  { label: '#ParlayKings', emoji: '🔥', selected: false },
+  { label: '#BigWins', emoji: '💰', selected: false },
+  { label: '#UnderdogBets', emoji: '⚽', selected: false },
 ];
 
 const FETCH_COOLDOWN = 5 * 60 * 1000; // 5 minutes
@@ -46,12 +49,20 @@ export default function FeedScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [likingPost, setLikingPost] = useState(null);
   const [lastFetch, setLastFetch] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState(null);
+  const [deletingPost, setDeletingPost] = useState(null);
 
+  const { data: profile, error: profileError } = useGetProfileQuery(email, {
+    skip: !sessionLoaded || !isValidEmail,
+  });
+  const currentUsername = profile?.username || '';
   const { data: posts, isLoading, error, refetch } = useGetPostsQuery(undefined, {
-    skip: !sessionLoaded,
+    skip: !sessionLoaded || !isValidEmail,
   });
   const [likePost] = useLikePostMutation();
   const [unlikePost] = useUnlikePostMutation();
+  const [deletePost] = useDeletePostMutation();
 
   useEffect(() => {
     const checkSession = async () => {
@@ -62,13 +73,22 @@ export default function FeedScreen() {
         console.log('FeedScreen: authToken from AsyncStorage:', authToken);
         console.log('FeedScreen: email from Redux:', email);
         console.log('FeedScreen: isValidEmail:', isValidEmail);
-        if (!userSession || !isValidEmail) {
+        if (!userSession || !authToken || !isValidEmail) {
           console.log('FeedScreen: No valid session, redirecting to Login');
           await AsyncStorage.multiRemove(['userSession', 'authToken']);
           dispatch(clearSession());
           navigation.replace('AuthStack', { screen: 'Login' });
         } else {
-          setSessionLoaded(true);
+          try {
+            await dispatch(profileApi.endpoints.getProfile.initiate(email)).unwrap();
+            console.log('FeedScreen: Token valid, setting sessionLoaded');
+            setSessionLoaded(true);
+          } catch (err) {
+            console.error('FeedScreen: Token invalid:', err);
+            await AsyncStorage.multiRemove(['userSession', 'authToken']);
+            dispatch(clearSession());
+            navigation.replace('AuthStack', { screen: 'Login' });
+          }
         }
       } catch (error) {
         console.error('FeedScreen: Error checking session:', error);
@@ -80,19 +100,36 @@ export default function FeedScreen() {
     checkSession();
   }, [dispatch, navigation, email, isValidEmail]);
 
-  const loadPosts = useCallback(async (force = false) => {
-    const now = Date.now();
-    if (!force && now - lastFetch < FETCH_COOLDOWN) {
-      console.log('FeedScreen: Skipping fetch: within cooldown period');
-      return;
+  useEffect(() => {
+    if (posts) {
+      console.log(
+        'FeedScreen: Posts data:',
+        posts.map((p) => ({
+          _id: p._id,
+          username: p.username,
+          likedBy: p.likedBy,
+          likeCount: p.likeCount,
+        }))
+      );
     }
-    try {
-      await refetch();
-      setLastFetch(now);
-    } catch (err) {
-      console.error("FeedScreen: Error loading posts:", err);
-    }
-  }, [refetch, lastFetch]);
+  }, [posts]);
+
+  const loadPosts = useCallback(
+    async (force = false) => {
+      const now = Date.now();
+      if (!force && now - lastFetch < FETCH_COOLDOWN) {
+        console.log('FeedScreen: Skipping fetch: within cooldown period');
+        return;
+      }
+      try {
+        await refetch();
+        setLastFetch(now);
+      } catch (err) {
+        console.error('FeedScreen: Error loading posts:', err);
+      }
+    },
+    [refetch, lastFetch]
+  );
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -118,59 +155,106 @@ export default function FeedScreen() {
     setTags(updatedTags);
   };
 
-  const handleAvatarPress = useCallback((username) => {
-    if (!username) {
-      console.warn('FeedScreen: No username provided for profile navigation');
-      return;
-    }
-    navigation.navigate('CommunityStack', {
-      screen: 'PostProfile',
-      params: { username },
-    });
-  }, [navigation]);
+  const handleAvatarPress = useCallback(
+    (username) => {
+      if (!username) {
+        console.warn('FeedScreen: No username provided for profile navigation');
+        return;
+      }
+      navigation.navigate('CommunityStack', {
+        screen: 'PostProfile',
+        params: { username },
+      });
+    },
+    [navigation]
+  );
 
   const handleLikePress = useCallback(
-    debounce(async (postId, likedBy) => {
-      if (likingPost || !sessionLoaded || !isValidEmail) return;
-      setLikingPost(postId);
-      try {
-        if (likedBy) {
-          await unlikePost(postId).unwrap();
-        } else {
-          try {
-            await likePost(postId).unwrap();
-          } catch (likeErr) {
-            if (
-              likeErr.status === 400 &&
-              likeErr.data?.error === "Post already liked"
-            ) {
-              await unlikePost(postId).unwrap();
-            } else {
-              throw likeErr;
+    debounce(
+      async (postId, likedBy) => {
+        console.log('FeedScreen: handleLikePress:', {
+          postId,
+          likedBy,
+          sessionLoaded,
+          isValidEmail,
+        });
+        if (likingPost || !sessionLoaded || !isValidEmail) {
+          console.log('FeedScreen: Like press skipped:', {
+            likingPost,
+            sessionLoaded,
+            isValidEmail,
+          });
+          return;
+        }
+        setLikingPost(postId);
+        try {
+          if (likedBy) {
+            console.log('FeedScreen: Unliking post:', postId);
+            await unlikePost(postId).unwrap();
+          } else {
+            console.log('FeedScreen: Liking post:', postId);
+            try {
+              await likePost(postId).unwrap();
+            } catch (likeErr) {
+              if (likeErr.status === 400 && likeErr.data?.error === 'Post already liked') {
+                console.log('FeedScreen: Post already liked, unliking:', postId);
+                await unlikePost(postId).unwrap();
+              } else {
+                throw likeErr;
+              }
             }
           }
+        } catch (err) {
+          console.error('FeedScreen: Like post error:', err.message, err.data);
+        } finally {
+          setLikingPost(null);
         }
-      } catch (err) {
-        console.error('FeedScreen: Like post error:', err.message, err.data);
-      } finally {
-        setLikingPost(null);
-      }
-    }, 500),
+      },
+      500
+    ),
     [likePost, unlikePost, likingPost, sessionLoaded, isValidEmail]
   );
 
-  const handleCommentPress = (post) => {
-    if (!sessionLoaded || !isValidEmail) {
-      console.log('FeedScreen: Invalid session, redirecting to Login');
-      navigation.replace('AuthStack', { screen: 'Login' });
-      return;
+  const handleCommentPress = useCallback(
+    (post) => {
+      if (!sessionLoaded || !isValidEmail) {
+        console.log('FeedScreen: Invalid session, redirecting to Login');
+        navigation.replace('AuthStack', { screen: 'Login' });
+        return;
+      }
+      console.log('FeedScreen: Navigating to PostComment with post:', post);
+      navigation.navigate('CommunityStack', {
+        screen: 'PostComment',
+        params: { post },
+      });
+    },
+    [navigation, sessionLoaded, isValidEmail]
+  );
+
+  const handleDeletePress = useCallback((postId) => {
+    setSelectedPostId(postId);
+    setShowDeleteModal(true);
+  }, []);
+
+  const handleConfirmDelete = useCallback(async () => {
+    if (selectedPostId && !deletingPost) {
+      setDeletingPost(selectedPostId);
+      try {
+        await deletePost(selectedPostId).unwrap();
+      } catch (err) {
+        console.error('FeedScreen: Delete post error:', err.message, err.data);
+      } finally {
+        setDeletingPost(null);
+        setShowDeleteModal(false);
+        setSelectedPostId(null);
+      }
     }
-    console.log(post);
-    navigation.navigate("CommunityStack", {
-      screen: "PostComment",
-      params: { post },
-    });
-  };
+  }, [deletePost, selectedPostId, deletingPost]);
+
+  const postsToRender = posts?.map((post) => ({
+    ...post,
+    showDelete: post.username === currentUsername,
+  })) || [];
 
   if (!sessionLoaded) {
     return (
@@ -207,7 +291,9 @@ export default function FeedScreen() {
         <LineGradient />
         <View>
           <Text style={styles.sectionTitle}>Trending Posts</Text>
-          {isLoading && !refreshing && <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />}
+          {isLoading && !refreshing && (
+            <ActivityIndicator size="large" color={Colors.primary} style={styles.loader} />
+          )}
           {error && (
             <View style={styles.errorContainer}>
               <Text style={styles.errorText}>
@@ -220,8 +306,8 @@ export default function FeedScreen() {
               </TouchableOpacity>
             </View>
           )}
-          {!isLoading && !error && posts?.length > 0 ? (
-            posts.map((post) => (
+          {!isLoading && !error && postsToRender.length > 0 ? (
+            postsToRender.map((post) => (
               <UserPostCard
                 key={post._id}
                 user={{
@@ -230,23 +316,35 @@ export default function FeedScreen() {
                 }}
                 content={post.text}
                 hashtags={post.hashtags}
-                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : "Unknown time"}
+                timeAgo={post.uploadedAt ? dayjs(post.uploadedAt).fromNow() : 'Unknown time'}
                 likeCount={post.likeCount || 0}
                 likedBy={post.likedBy || false}
                 commentCount={post.commentCount || 0}
                 onAvatarPress={() => handleAvatarPress(post.username)}
                 onLikePress={() => handleLikePress(post._id, post.likedBy)}
                 onCommentPress={() => handleCommentPress(post)}
+                showDelete={post.showDelete}
+                onDeletePress={() => handleDeletePress(post._id)}
                 disabled={likingPost === post._id}
                 disableComment={false}
                 style={{ marginBottom: 15 }}
               />
             ))
           ) : (
-            !isLoading && !error && <Text style={styles.noPostsText}>No posts available</Text>
+            !isLoading &&
+            !error && <Text style={styles.noPostsText}>No posts available</Text>
           )}
         </View>
       </ScrollView>
+      <DeleteConfirmationModal
+        isVisible={showDeleteModal}
+        onCancel={() => {
+          setShowDeleteModal(false);
+          setSelectedPostId(null);
+        }}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to delete this post?"
+      />
     </View>
   );
 }
@@ -266,13 +364,13 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: Colors.secondary,
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 20,
   },
   tagContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
   },
   loader: {
     marginVertical: 20,
@@ -282,8 +380,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   errorText: {
-    color: "red",
-    textAlign: "center",
+    color: 'red',
+    textAlign: 'center',
     marginBottom: 10,
   },
   retryButton: {
@@ -298,7 +396,7 @@ const styles = StyleSheet.create({
   },
   noPostsText: {
     color: Colors.secondary,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 10,
   },
 });

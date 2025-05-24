@@ -9,29 +9,34 @@ const CommentCard = ({
   timeAgo, 
   likes = 0, 
   textContent = "", 
-  onLikePress 
+  onLikePress,
+  onLongPress, // New prop
+  disabled,
 }) => {
   return (
-    <View style={styles.container}>
-      {/* Left content */}
-      <View style={styles.left}>
-        <Image source={{ uri: avatar }} style={styles.avatar} />
-        <View style={styles.textWrapper}>
-          <Text style={styles.name}>{name}</Text>
-          <View style={styles.textSection}>
-            <Text style={styles.textMessage}>{textContent}</Text>
-          </View>
-          <View style={styles.commentMeta}>
-            <Text style={styles.metaText}>{timeAgo} • {likes} Likes</Text>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onLongPress={onLongPress}
+      disabled={disabled}
+    >
+      <View style={styles.container}>
+        <View style={styles.left}>
+          <Image source={{ uri: avatar }} style={styles.avatar} />
+          <View style={styles.textWrapper}>
+            <Text style={styles.name}>{name}</Text>
+            <View style={styles.textSection}>
+              <Text style={styles.textMessage}>{textContent}</Text>
+            </View>
+            <View style={styles.commentMeta}>
+              <Text style={styles.metaText}>{timeAgo} • {likes} Likes</Text>
+            </View>
           </View>
         </View>
+        <TouchableOpacity onPress={onLikePress} style={styles.likeContainer} disabled={disabled}>
+          <AntDesign name="like2" size={18} color={Colors.text} />
+        </TouchableOpacity>
       </View>
-
-      {/* Right like button */}
-      <TouchableOpacity onPress={onLikePress} style={styles.likeContainer}>
-      <AntDesign name="like2" size={18} color={Colors.text} />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -44,19 +49,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginVertical: 8,
-    gap: 5
+    gap: 5,
   },
   left: {
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
-    gap: 10
+    gap: 10,
   },
   avatar: {
     width: 32,
     height: 32,
     borderRadius: 15,
-    alignSelf: 'start'
+    alignSelf: 'start',
   },
   textWrapper: {
     flex: 1,
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
   textMessage: {
     color: Colors.secondary,
     fontSize: 14,
-    fontWeight:'300',
+    fontWeight: '300',
     lineHeight: 18,
   },
   commentMeta: {
@@ -86,8 +91,8 @@ const styles = StyleSheet.create({
   },
   likeContainer: {
     alignSelf: 'start',
-    marginTop: 5
-  }
+    marginTop: 5,
+  },
 });
 
 export default CommentCard;

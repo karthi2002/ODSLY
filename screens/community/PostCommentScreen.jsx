@@ -7,9 +7,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
-  TouchableOpacity,
   ActivityIndicator,
-  Button,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -107,6 +105,37 @@ const PostCommentScreen = () => {
     checkSession();
   }, [dispatch, navigation, email, isValidEmail]);
 
+  useEffect(() => {
+    console.log('Navigation listeners setup');
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log('PostCommentScreen: Screen focused', { sessionLoaded, isValidEmail });
+      if (sessionLoaded && isValidEmail) {
+        console.log('PostCommentScreen: Refetching data');
+        refetchProfile();
+        refetchUserPosts();
+        refetchComments();
+      }
+    });
+    return unsubscribe;
+  }, [navigation, sessionLoaded, isValidEmail, refetchProfile, refetchUserPosts, refetchComments]);
+
+  useEffect(() => {
+    if (sessionLoaded && isValidEmail) {
+      console.log('PostCommentScreen: Initial data fetch');
+      refetchProfile();
+      refetchUserPosts();
+      refetchComments();
+    }
+  }, [sessionLoaded, isValidEmail, refetchProfile, refetchUserPosts, refetchComments]);
+
+  useEffect(() => {
+    console.log('Comments data:', commentsData);
+  }, [commentsData]);
+
+  useEffect(() => {
+    console.log('showModal changed:', { showModal, selectedCommentId, selectedPostId });
+  }, [showModal, selectedCommentId, selectedPostId]);
+
   const handleAvatarPress = useCallback((username) => {
     if (!username) {
       console.warn('PostCommentScreen: No username provided for profile navigation');
@@ -132,6 +161,7 @@ const PostCommentScreen = () => {
       setErrorMessage(null);
       const result = await addComment({ postId: post._id, content: commentText }).unwrap();
       setCommentCount(result.commentCount);
+      refetchComments();
     } catch (err) {
       console.error('PostCommentScreen: Post comment error:', err);
       setErrorMessage(err.data?.error || 'Failed to post comment');
@@ -149,6 +179,7 @@ const PostCommentScreen = () => {
         setErrorMessage(null);
         const result = await deleteComment({ postId: post._id, commentId: selectedCommentId }).unwrap();
         setCommentCount(result.commentCount);
+        refetchComments();
       } catch (err) {
         console.error('PostCommentScreen: Delete comment error:', err);
         setErrorMessage(err.data?.error || 'Failed to delete comment');
@@ -188,12 +219,6 @@ const PostCommentScreen = () => {
     [likeComment, unlikeComment, likingComment, post._id, sessionLoaded, isValidEmail]
   );
 
-  const handleRefresh = useCallback(() => {
-    refetchProfile();
-    refetchUserPosts();
-    refetchComments();
-  }, [refetchProfile, refetchUserPosts, refetchComments]);
-
   if (!sessionLoaded) {
     return (
       <View style={styles.container}>
@@ -228,6 +253,7 @@ const PostCommentScreen = () => {
             showDelete={currentPost.username === currentUsername}
             onDeletePress={() => {
               setSelectedPostId(post._id);
+              setSelectedCommentId(null);
               setShowModal(true);
             }}
             disableComment={true}
@@ -236,7 +262,6 @@ const PostCommentScreen = () => {
         <View style={styles.sectionContainer}>
           <View style={styles.sectionHeader}>
             <CountLabel label="comment" count={commentCount} style={styles.sectionTitle} />
-            <Button title="Refresh" onPress={handleRefresh} />
           </View>
           {(profileLoading || userPostsLoading || commentsLoading) && (
             <ActivityIndicator size="large" color={Colors.primary} style={{ marginVertical: 10 }} />
@@ -246,7 +271,11 @@ const PostCommentScreen = () => {
               <Text style={styles.errorText}>
                 {commentsError?.data?.error || profileError?.data?.error || userPostsError?.data?.error || 'Error loading data'}
               </Text>
-              <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
+              <TouchableOpacity style={styles.retryButton} onPress={() => {
+                refetchProfile();
+                refetchUserPosts();
+                refetchComments();
+              }}>
                 <Text style={styles.retryButtonText}>Retry</Text>
               </TouchableOpacity>
             </View>
@@ -271,27 +300,33 @@ const PostCommentScreen = () => {
                 displayUsername,
                 displayAvatar,
               });
+              console.log('Comment data:', { commentId: item._id, userId: item.userId, username: item.username });
               return (
-                <TouchableOpacity
-                  activeOpacity={1}
+                <CommentCard
+                  avatar={displayAvatar}
+                  name={displayUsername}
+                  timeAgo={item.createdAt ? dayjs(item.createdAt).fromNow() : 'Unknown time'}
+                  likes={item.likes || 0}
+                  likedBy={item.likedBy || false}
+                  textContent={item.content}
+                  onLikePress={() => handleLikeComment(item._id, item.likedBy)}
                   onLongPress={() => {
+                    console.log('Long press triggered for comment:', {
+                      commentId: item._id,
+                      isCurrentUser,
+                      currentUserId,
+                      commentUserId: item.userId,
+                    });
                     if (isCurrentUser) {
                       setSelectedCommentId(item._id);
+                      setSelectedPostId(null);
                       setShowModal(true);
+                    } else {
+                      console.log('Not current user, modal not shown');
                     }
                   }}
-                >
-                  <CommentCard
-                    avatar={displayAvatar}
-                    name={displayUsername}
-                    timeAgo={item.createdAt ? dayjs(item.createdAt).fromNow() : 'Unknown time'}
-                    likes={item.likes || 0}
-                    likedBy={item.likedBy || false}
-                    textContent={item.content}
-                    onLikePress={() => handleLikeComment(item._id, item.likedBy)}
-                    disabled={likingComment === item._id}
-                  />
-                </TouchableOpacity>
+                  disabled={likingComment === item._id}
+                />
               );
             }}
           />
@@ -303,8 +338,8 @@ const PostCommentScreen = () => {
             setSelectedCommentId(null);
             setSelectedPostId(null);
           }}
-          onConfirm={selectedPostId ? () => {} : handleDeleteComment}
-          message={selectedPostId ? 'Are you sure you want to delete this post?' : 'Are you sure you want to delete this comment?'}
+          onConfirm={selectedCommentId ? handleDeleteComment : () => console.log('Post deletion not implemented')}
+          message={selectedCommentId ? 'Are you sure you want to delete this comment?' : 'Are you sure you want to delete this post?'}
         />
       </ScrollView>
       <KeyboardAvoidingView

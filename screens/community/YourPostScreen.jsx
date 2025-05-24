@@ -53,7 +53,7 @@ export default function YourPostScreen() {
     skip: !sessionLoaded || !isValidEmail,
   });
   const [likePost] = useLikePostMutation();
-  const [unlikePost] = useLikePostMutation();
+  const [unlikePost] = useUnlikePostMutation();
   const [deletePost] = useDeletePostMutation();
 
   useEffect(() => {
@@ -137,32 +137,48 @@ export default function YourPostScreen() {
   }, [navigation]);
 
   const handleLikePress = useCallback(
-    debounce(async (postId, likedBy) => {
-      if (likingPost || !sessionLoaded || !isValidEmail) return;
-      setLikingPost(postId);
-      try {
-        if (likedBy) {
-          await unlikePost(postId).unwrap();
-        } else {
-          try {
-            await likePost(postId).unwrap();
-          } catch (likeErr) {
-            if (
-              likeErr.status === 400 &&
-              likeErr.data?.error === 'Post already liked'
-            ) {
-              await unlikePost(postId).unwrap();
-            } else {
-              throw likeErr;
+    debounce(
+      async (postId, likedBy) => {
+        console.log('FeedScreen: handleLikePress:', {
+          postId,
+          likedBy,
+          sessionLoaded,
+          isValidEmail,
+        });
+        if (likingPost || !sessionLoaded || !isValidEmail) {
+          console.log('FeedScreen: Like press skipped:', {
+            likingPost,
+            sessionLoaded,
+            isValidEmail,
+          });
+          return;
+        }
+        setLikingPost(postId);
+        try {
+          if (likedBy) {
+            console.log('FeedScreen: Unliking post:', postId);
+            await unlikePost(postId).unwrap();
+          } else {
+            console.log('FeedScreen: Liking post:', postId);
+            try {
+              await likePost(postId).unwrap();
+            } catch (likeErr) {
+              if (likeErr.status === 400 && likeErr.data?.error === 'Post already liked') {
+                console.log('FeedScreen: Post already liked, unliking:', postId);
+                await unlikePost(postId).unwrap();
+              } else {
+                throw likeErr;
+              }
             }
           }
+        } catch (err) {
+          console.error('FeedScreen: Like post error:', err.message, err.data);
+        } finally {
+          setLikingPost(null);
         }
-      } catch (err) {
-        console.error('YourPostScreen: Like post error:', err.message, err.data);
-      } finally {
-        setLikingPost(null);
-      }
-    }, 500),
+      },
+      500
+    ),
     [likePost, unlikePost, likingPost, sessionLoaded, isValidEmail]
   );
 
