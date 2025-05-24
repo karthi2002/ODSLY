@@ -1,0 +1,15 @@
+| Branch   | Purpose                                             |
+| -------- | --------------------------------------------------- |
+| `master` | 🔥 **Main production branch** (now mirrors `ghost`) |
+| `ghost`  | Development/experimental source                     |
+| `main`   | Old branch, retained for reference/history          |
+
+
+Set master as the default branch on GitHub
+Go to your repo settings on GitHub:
+
+**Navigate to Settings > Branches**
+
+**Under Default branch, click Change default branch**
+
+**Select master and confirm**
