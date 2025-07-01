@@ -276,12 +276,6 @@ const PostCommentScreen = () => {
           {commentsLoading && (
             <ActivityIndicator size="large" color={Colors.primary} style={{ marginVertical: 10 }} />
           )}
-          {commentsError && (
-            <Text style={styles.errorText}>Error loading comments: {commentsError}</Text>
-          )}
-          {errorMessage && (
-            <Text style={styles.errorText}>{errorMessage}</Text>
-          )}
           {!commentsLoading && !commentsError && comments.length === 0 && (
             <Text style={styles.noCommentsText}>No comments yet</Text>
           )}

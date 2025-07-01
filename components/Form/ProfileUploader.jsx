@@ -150,10 +150,7 @@ const ProfileUploader = ({ username, setUsername, imageUri, setImageUri, setIsUs
         {username.length >= 3 && (
           <Text style={{ fontSize: 12, color: usernameAvailable === false ? Colors.error : Colors.success }}>
             {usernameAvailable === true
-              ? 'Username is available'
-              : usernameAvailable === false
-              ? 'Username is already taken'
-              : ''}
+              ? 'Username is available': ''}
           </Text>
         )}
 

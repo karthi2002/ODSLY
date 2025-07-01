@@ -33,6 +33,7 @@ const OptionsFlatList = ({ data, selectedItem, onSelect }) => {
               showTextGradient={!isSelected}
               disabled={false}
               paddingVertical={8}
+              style={{ width: '100%' }}
             />
           );
         }}
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   listContainer: {
-    width: '100%',
+    paddingHorizontal: 20,
   },
 });
 
