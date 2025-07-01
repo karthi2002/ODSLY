@@ -61,6 +61,7 @@ export default function LiveScreen() {
             label="Sync Sportsbook Accounts"
             onPress={() => {}}
             arrowEnable={true}
+            style={{width: '100%'}}
           />
         </View>
 
@@ -103,7 +104,7 @@ export default function LiveScreen() {
         >
           <Icon
             name="pluscircle"
-            size={20}
+            size={22}
             color={Colors.secondary}
             style={{ marginRight: 8 }}
           />
@@ -161,18 +162,16 @@ const styles = StyleSheet.create({
   fixedButton: {
     position: "absolute",
     bottom: 15,
-    right: -30,
+    right: 10,
     alignItems: "center",
     zIndex: 10,
   },
   fixedButtonGradient: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    paddingVertical: 15,
-    paddingHorizontal: 5,
+    padding: 15,
     borderRadius: 30,
     alignItems: "center",
-    width: "62%",
   },
   fixedButtonText: {
     color: Colors.secondary,

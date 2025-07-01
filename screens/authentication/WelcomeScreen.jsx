@@ -87,7 +87,7 @@ const WelcomeScreen = () => {
       
       <View style={styles.topBar}>
         {stepIndex === 0 ? (
-          <GradientButton label="Skip" onPress={() => navigation.navigate("Auth")} arrowEnable={true} style={styles.skipbtn} />
+          <GradientButton label="Skip" onPress={() => navigation.navigate("Auth")} arrowEnable={true} style={styles.skipbtn}  />
         ) : (
           <GradientSkipButton label="Skip" onPress={() => navigation.navigate("Auth")}  arrowEnable={true} style={styles.skipbtn} />
         )}
@@ -103,7 +103,7 @@ const WelcomeScreen = () => {
 
       {stepIndex <= steps - 1 && (
         <View style={styles.bottom}>
-          <GradientButton label="Start Now" onPress={handleNext} arrowEnable />
+          <GradientButton label="Start Now" onPress={handleNext} arrowEnable style={{ width: width * 0.85 - 0 }} />
         </View>
       )}
     </SafeAreaView>
@@ -134,7 +134,7 @@ mainContainer: {
   flex: 1,
   width: "100%",
   justifyContent: "space-between",
-  paddingBottom: hp("3%"),
+  paddingBottom: hp("2%"),
   zIndex: 1,
 },
   image: {
@@ -154,14 +154,15 @@ textWrapper: {
     textTransform: "uppercase",
   },
   secondtitle: {
-    fontSize: wp("6%"),
+    fontSize: wp("5%"),
     fontWeight: "bold",
     color: Colors.secondary,
+    textAlign: "center",
     textTransform: "uppercase",
     marginBottom: hp("1%"),
   },
   subtitle: {
-    fontSize: wp("4.5%"),
+    fontSize: wp("4%"),
     color: Colors.LightGray,
     textAlign: "center",
   },
@@ -184,7 +185,7 @@ content: {
     paddingVertical: hp("2%"),
     alignItems: "center",
     justifyContent: "center",
-    top:hp("-1%"),
+    top:hp("-2%"),
   },
 });
 

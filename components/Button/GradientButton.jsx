@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../utils/Colors';
@@ -7,7 +6,6 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 const { width } = Dimensions.get('window');
 
 const GradientButton = ({ label, onPress, arrowEnable, style, disabled }) => {
-
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} disabled={disabled}>
       <LinearGradient
@@ -18,8 +16,8 @@ const GradientButton = ({ label, onPress, arrowEnable, style, disabled }) => {
         style={[styles.button, style, disabled && { opacity: 0.6 }]}
       >
         <View style={[styles.container, style]}>
-            <Text style={styles.text}>{label}</Text>
-            {arrowEnable && ( <FontAwesome6 name="arrow-right-long" size={18} color={Colors.secondary} /> )}
+          <Text style={styles.text}>{label}</Text>
+          {arrowEnable && <FontAwesome6 name="arrow-right-long" size={18} color={Colors.secondary} />}
         </View>
       </LinearGradient>
     </TouchableOpacity>
@@ -28,24 +26,24 @@ const GradientButton = ({ label, onPress, arrowEnable, style, disabled }) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    width: width * 0.85 - 40, 
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10
+    justifyContent: 'center',
+    alignSelf: 'center',
+    gap: 10,
   },
   button: {
-    width: width - 100,
+    width: width * 0.85 - 40,
+    alignSelf: 'center',
     paddingVertical: 14,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
     shadowColor: Colors.primary,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 6,
     elevation: 3,
-    marginVertical: 10
+    marginVertical: 10,
   },
   text: {
     color: Colors.secondary,

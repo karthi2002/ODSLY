@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    height: 60,
+    height: 65,
     backgroundColor: Colors.background,
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   logoText: {
     color: Colors.secondary,
-    fontSize: 36,
+    fontSize: 30,
     fontWeight: "bold",
   },
   iconsContainer: {

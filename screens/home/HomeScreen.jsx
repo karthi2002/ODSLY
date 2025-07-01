@@ -126,6 +126,7 @@ export default function HomeScreen() {
             label="View More"
             onPress={() => {}}
             arrowEnable={false}
+            style={{width: '100%'}}
           />
         </View>
 

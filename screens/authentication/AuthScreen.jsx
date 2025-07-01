@@ -22,6 +22,7 @@ export default function AuthScreen() {
           label="Sign Up"
           onPress={() => navigation.navigate("Signup")}
           arrowEnable={false}
+          style={{ width: width * 0.85 - 0 }}
         />
         <GradientBorderButton
           title="Login"

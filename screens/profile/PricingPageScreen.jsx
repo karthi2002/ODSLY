@@ -118,6 +118,7 @@ const PricingPlans = () => {
             label="Upgrade Now"
             onPress={() => {}}
             arrowEnable={true}
+
           />
         )}
 
