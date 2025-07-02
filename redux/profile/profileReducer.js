@@ -23,6 +23,9 @@ const initialState = {
     image: null,
     sports: [],
     bettingPreference: null,
+    membership: null,
+    membershipExpiry: null,
+    
   },
   error: null,
   oneProfileUser: null,

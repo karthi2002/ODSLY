@@ -143,9 +143,6 @@ const styles = StyleSheet.create({
     width: '100%', 
     textAlign: 'center',
   },
-  contentBox: {
-    marginTop: 5,
-  },
   fixedButton: {
     position: "absolute",
     bottom: 15,

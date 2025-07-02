@@ -33,6 +33,8 @@ export const fetchProfile = () => async (dispatch) => {
         image: user.image || fallbackImage  || null,
         sports: user.sports || [],
         bettingPreference: user.bettingPreference || null,
+        membership: user.membership || 'free',
+        membershipExpiry: user.membershipExpiry || null,
       },
     });
   } catch (err) {

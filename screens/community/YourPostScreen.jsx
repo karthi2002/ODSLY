@@ -117,7 +117,6 @@ export default function YourPostScreen() {
   const loadUserPosts = useCallback(async (force = false) => {
     const now = Date.now();
     if (!force && now - lastFetch < FETCH_COOLDOWN) {
-      console.log('Skipping fetch: within cooldown period');
       return;
     }
     try {
@@ -310,10 +309,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
   },
   content: {
-    paddingTop: 20,
-  },
-  sectionContainer: {
-    marginBottom: 20,
+    paddingTop: 10,
   },
   sectionTitle: {
     color: Colors.secondary,

@@ -59,11 +59,10 @@ const EditProfileScreen = () => {
   useEffect(() => {
   if (profile) {
     setUsername(profile.username || "");
-    setUserImage(profile.image || fallbackImage); // Use fallbackImage if profile.image is null
+    setUserImage(profile.image || fallbackImage); 
     setOriginalUsername(profile.username || "");
     setOriginalImage(profile.image || fallbackImage);
     checkUsernameAvailability(profile.username || "");
-    console.log("EditProfileScreen: Set userImage:", profile.image || fallbackImage);
   }
 }, [profile]);
 

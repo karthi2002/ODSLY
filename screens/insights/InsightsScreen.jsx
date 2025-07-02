@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   gradientContainer: {
     borderRadius: 12,
-    width: '35%',
+    width: '40%',
     borderWidth: 0.5,
     borderColor: "rgba(255, 255, 255, 0.5)",
   },

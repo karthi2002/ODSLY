@@ -22,7 +22,7 @@ export default function AuthScreen() {
           label="Sign Up"
           onPress={() => navigation.navigate("Signup")}
           arrowEnable={false}
-          style={{ width: width * 0.85 - 0 }}
+          style={{ width: width * 0.85 - 40 }}
         />
         <GradientBorderButton
           title="Login"
@@ -33,6 +33,7 @@ export default function AuthScreen() {
           showTextGradient={false}
           disabled={false}
           paddingVertical={12}
+          style={{ width: width * 0.85 - 40 }}
         />
       </View>
     </View>

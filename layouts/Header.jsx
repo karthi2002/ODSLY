@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    height: 65,
+    height: 60,
     backgroundColor: Colors.background,
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 35,
-    height: 35,
+    width: 40,
+    height: 40,
   },
   logoText: {
     color: Colors.secondary,

@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   topSection: {
-    marginBottom: 30,
+    marginBottom: 20,
   },
   searchRow: {
     flexDirection: "row",

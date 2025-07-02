@@ -1,11 +1,10 @@
-import React from 'react';
 import { Text, View } from 'react-native';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const GradientText = ({ text = '', style }) => {
   const fontSize = style?.fontSize || 32;
-  const calculatedWidth = Math.max(text.length * fontSize * 0.6, 100); // Ensure minimum width
+  const calculatedWidth = Math.max(text.length * fontSize * 0.6, 100);
 
   return (
     <MaskedView

@@ -18,7 +18,6 @@ import {
   liveWatchlist,
   BettingInsights,
   CommunityHighlights,
-  activeSubscriptions,
   upcomingBets,
 } from "../../json/data";
 import BetCard from "../../components/Card/BetCard";
@@ -169,9 +168,10 @@ export default function HomeScreen() {
 
         <View>
           <Text style={styles.sectionTitle}>Subscription</Text>
-          {activeSubscriptions.map((plan) => (
-            <SubscriptionCard key={plan.id} plan={plan} />
-          ))}
+           <SubscriptionCard
+            membership={profile.membership}
+            membershipExpiry={profile.membershipExpiry}
+          />
         </View>
       </ScrollView>
     </View>
@@ -185,8 +185,6 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     backgroundColor: Colors.background,
-    marginTop: 20,
-    marginBottom: 10,
   },
   content: {
     paddingTop: 80,

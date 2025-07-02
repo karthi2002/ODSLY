@@ -4,6 +4,9 @@ import Colors from '../../utils/Colors';
 import { GradientText } from "../Button/GradientText";
 import GradientButton from "../Button/GradientButton";
 import { LineGradient } from "../../layouts/LineGradient";
+import { plans } from "../../json/subscriptionPlan";
+import { useNavigation } from "@react-navigation/native";
+
 
 const RowItem = ({ label, value }) => (
   <View style={styles.row}>
@@ -12,38 +15,72 @@ const RowItem = ({ label, value }) => (
   </View>
 );
 
-export const SubscriptionCard = ({ plan }) => (
-  <View style={styles.betCard}>
+export const SubscriptionCard = ({ membership, membershipExpiry }) => {
+  
+  const navigation = useNavigation();
 
-    <GradientButton label="SUBSCRIPTION" onPress={() => {}} arrowEnable={false} style={{ borderRadius: 50 }} />
+ const selectedMembership = membership || 'free';
 
-    <View style={{marginVertical: 10}}>
-        <RowItem label="Plan:" value={plan.title} />
-        <RowItem label="Next Billing:" value={plan.billingDate} />
-        <RowItem label="Perks:" value={plan.perks} />
+  // Correctly find the plan from the array
+  const plan = plans.find((p) => p.id === selectedMembership) || {
+    name: "Free",
+    features: ["No Perks Available"],
+  };
+
+  return (
+    <View style={styles.betCard}>
+      <GradientButton
+        label="SUBSCRIPTION"
+        onPress={() => {}}
+        arrowEnable={false}
+        style={{ borderRadius: 50 }}
+      />
+
+      <View style={{ marginVertical: 10 }}>
+       <RowItem
+          label="Plan:"
+          value={
+            membership === plan.id
+              ? `${plan.name} (Active)`
+              : plan.name
+          }
+        />
+        <RowItem
+          label="Next Billing:"
+        value={
+          membership === "free"
+            ? "No Billing"
+            : membershipExpiry
+            ? new Date(membershipExpiry).toLocaleDateString("en-US", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : "N/A"
+        }
+        />
+        <RowItem label="Perks:" value={plan.features.join(", ")} />
+      </View>
+
+      <LineGradient style={{ marginVertical: 10 }} />
+
+      <View style={styles.betActions}>
+        <TouchableOpacity onPress={() => navigation.navigate("ProfileStack", { screen: 'Upgrade' })}>
+          <GradientText text="Manage Plan" style={{ fontSize: 18 }} />
+        </TouchableOpacity>
+        <Text style={styles.separator}>|</Text>
+        <TouchableOpacity>
+          <GradientText text="Refer & Earn" style={{ fontSize: 18 }} />
+        </TouchableOpacity>
+      </View>
+
+      {/* Decorative Circles */}
+      <View style={[styles.circle1, styles.topRight]} />
+      <View style={[styles.circle2, styles.bottomRight]} />
+      <View style={[styles.circle3, styles.centerLeft]} />
     </View>
-    <LineGradient style={{marginVertical: 10}} />
-    <View style={styles.betActions}>
-      <TouchableOpacity>
-        <GradientText text="Manage Plan" style={{ fontSize: 18 }} />
-      </TouchableOpacity>
-      <Text style={styles.separator}>|</Text>
-      <TouchableOpacity>
-        <GradientText text="Refer & Earn" style={{ fontSize: 18 }} />
-      </TouchableOpacity>
-    </View>
-
-    {/* Top Right Circle */}
-    <View style={[styles.circle1, styles.topRight]} />
-    
-    {/* Bottom Right Circle */}
-    <View style={[styles.circle2, styles.bottomRight]} />
-    
-    {/* Center left Circle */}
-    <View style={[styles.circle3, styles.centerLeft]} />
-
-  </View>
-);
+  );
+};
 
 
 const styles = StyleSheet.create({
@@ -75,11 +112,6 @@ const styles = StyleSheet.create({
       textAlign: "Right",
       fontSize: 16,
       fontWeight: "600",
-    },
-    divider: {
-      height: 1,
-      backgroundColor: "#6A54B1",
-      marginVertical: 10,
     },
     betActions: {
       flexDirection: "row",

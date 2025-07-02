@@ -9,14 +9,20 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/icons/Logo.png",
+      "image": "./assets/icons/splashLogo.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#000A34"
     },
-    "ios": {
-      "supportsTablet": false
-    },
-    "android": {
+      "ios": {
+          "supportsTablet": false,
+          "splash": {
+              "image": "./assets/icons/splashLogo.jpg"
+            }
+        },
+      "android": {
+        "splash": {
+        "image": "./assets/icons/splashLogo.jpg"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/Logo.png",
         "backgroundColor": "#000A34"

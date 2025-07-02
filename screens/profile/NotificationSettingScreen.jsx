@@ -13,7 +13,8 @@ import GradientToggle from '../../components/Input/GradientToggle';
 import { notificationSettings } from '../../json/ProfileData';
 
 const NotificationSettingScreen = () => {
-  const [selectedMethod, setSelectedMethod] = useState('Push');
+  
+  const [selectedMethod, setSelectedMethod] = useState('In-app only');
 
   return (
     <View style={styles.container}>

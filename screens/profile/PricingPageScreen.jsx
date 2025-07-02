@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,53 +7,36 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import CustomHeader from "../../layouts/CustomHeader";
 import Colors from "../../utils/Colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import GradientButton from "../../components/Button/GradientButton";
 import GradientBorderButton from "../../components/Button/GradientBorderButton";
-
-// Define the pricing plans
-const plans = [
-  {
-    id: "free",
-    name: "Free",
-    price: "--",
-    features: [
-      "Bet Tracking",
-      "Community Engagement and Educational Content",
-      "Limited AI Insights",
-      "Preview Access to Leaderboards",
-    ],
-  },
-  {
-    id: "premium",
-    name: "Premium",
-    price: "~$15",
-    features: [
-      "5 Team Members",
-      "2500+ UI Blocks",
-      "50 GB Cloud Storage",
-      "Individual Email Account",
-    ],
-  },
-  {
-    id: "platinum",
-    name: "Platinum",
-    price: "~$22",
-    features: [
-      "Unlimited Team Members",
-      "5000+ UI Blocks",
-      "200 GB Cloud Storage",
-      "Individual Email Account",
-      "Premium Support",
-    ],
-  },
-];
+import { fetchProfile } from "../../redux/profile/profileActions";
+import { plans } from "../../json/subscriptionPlan";
 
 const PricingPlans = () => {
+  const dispatch = useDispatch();
+
+  const membership = useSelector((state) => state.profile.profile.membership);
   const [selectedPlanId, setSelectedPlanId] = useState("free");
+
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (membership) {
+      setSelectedPlanId(membership);
+    }
+  }, [membership]);
+
   const selectedPlan = plans.find((plan) => plan.id === selectedPlanId);
+
+  const handleUpgrade = () => {
+    console.log("Upgrade to:", selectedPlanId);
+  };
 
   return (
     <View style={styles.container}>
@@ -94,35 +77,37 @@ const PricingPlans = () => {
             }
             renderItem={({ item }) => (
               <View style={styles.featurePoint}>
-                <AntDesign name="checkcircleo" size={22} color="white" />
+                <AntDesign name="checkcircleo" size={20} color="white" />
                 <Text style={styles.featureItem}> {item}</Text>
               </View>
             )}
           />
         </View>
+      </ScrollView>
 
-        {selectedPlanId === "free" ? (
+      {/* Fixed Bottom Button */}
+      <View style={styles.buttonWrapper}>
+        {selectedPlanId === membership ? (
           <GradientBorderButton
-          title="Your Current Plan"
-          onPress={() => {}}
-          showBorderGradient={false}
-          backgroundColor={Colors.LightGray}
-          borderColor={Colors.background}
-          textColor={Colors.secondary}
-          showTextGradient={false}
-          disabled={false}
-          paddingVertical={12}
-        />
+            title="Your Current Plan"
+            onPress={() => {}}
+            showBorderGradient={false}
+            backgroundColor={Colors.LightGray}
+            borderColor={Colors.background}
+            textColor={Colors.secondary}
+            showTextGradient={false}
+            disabled={true}
+            paddingVertical={12}
+          />
         ) : (
           <GradientButton
             label="Upgrade Now"
-            onPress={() => {}}
+            onPress={handleUpgrade}
             arrowEnable={true}
-
+            style={{ widht: "100%" }}
           />
         )}
-
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -136,6 +121,13 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingHorizontal: 2,
   },
+  buttonWrapper: {
+    position: "absolute",
+    bottom: 60,
+    left: 20,
+    right: 20,
+  },
+
   plansRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -143,7 +135,7 @@ const styles = StyleSheet.create({
   },
   planContainer: {
     flex: 1,
-    margin: 8,
+    margin: 6,
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
@@ -168,7 +160,7 @@ const styles = StyleSheet.create({
   },
   planName: {
     marginTop: 28,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
   },
   planPrice: {
@@ -186,7 +178,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   featuresTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "500",
     marginBottom: 25,
     color: Colors.secondary,
@@ -194,11 +186,11 @@ const styles = StyleSheet.create({
   featurePoint: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 5,
     marginBottom: 10,
   },
   featureItem: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "400",
     textAlign: "start",
     color: Colors.secondary,
